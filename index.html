@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRS Racing - Campeonato F1 Virtual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-glow: rgba(0, 243, 255, 0.3);
+            --dark-bg: #111316;
+            --panel-bg: #1a1d21;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+        }
+
+        body {
+            font-family: 'Titillium Web', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.03) 0%, transparent 20%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Logo */
+        .header-container {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-width: 350px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.3));
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover { transform: scale(1.02); }
+
+        .hero-info {
+            margin-top: 0.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem 0;
+            width: 100%;
+            max-width: 800px;
+        }
+        .hero-info h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .hero-info p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; }
+
+        /* Navigation */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem 1rem;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .nav-btn {
+            background: rgba(26, 29, 33, 0.8);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.1);
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; }
+        .section { display: none; animation: fadeUp 0.4s ease-out; }
+        .section.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Cards & Panels */
+        .panel-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 900px) { .panel-grid { grid-template-columns: 1fr 1fr; } }
+
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 12px;
+            padding: 2px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .card-inner {
+            background: var(--panel-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            height: 100%;
+            position: relative;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+        .card-header h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: #fff; text-transform: uppercase; }
+        .header-labels { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; display: flex; gap: 1rem; }
+
+        /* Tables */
+        .table-container { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 300px; }
+        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .pos-col { width: 40px; font-weight: 700; text-align: center; }
+        .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); font-size: 1.2rem; }
+        .rank-2 { color: var(--silver); font-size: 1.1rem; }
+        .rank-3 { color: var(--bronze); font-size: 1.1rem; }
+        .rank-other { color: var(--text-muted); }
+        .name-col { font-weight: 600; color: #fff; }
+        .team-col { color: var(--text-muted); font-size: 0.9rem; }
+        .pts-col { font-weight: 700; color: var(--neon-cyan); text-align: right; }
+
+        /* Calendar Specific */
+        .cal-round { color: var(--neon-cyan); font-weight: 700; width: 40px; }
+        .cal-track { font-weight: 600; }
+        .cal-date { color: var(--text-muted); font-size: 0.9rem; text-align: right; }
+        .cal-type { font-size: 0.75rem; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; text-align: center; width: 80px; display: inline-block; }
+        .type-oficial { border: 1px solid #00ff88; color: #00ff88; background: rgba(0, 255, 136, 0.1); }
+        .type-extra { border: 1px solid #ff4444; color: #ff4444; background: rgba(255, 68, 68, 0.1); }
+
+        /* Drivers Grid (Novo Layout com Fotos) */
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .driver-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .driver-box:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .driver-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+        }
+        .driver-rank { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; }
+        .driver-points { color: var(--neon-cyan); font-weight: 700; font-size: 1.2rem; }
+
+        .driver-content {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            gap: 1rem;
+            flex-grow: 1;
+        }
+
+        .driver-photo-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-cyan);
+            overflow: hidden;
+            background: #000;
+            flex-shrink: 0;
+        }
+        .driver-photo-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .driver-info h3 { font-size: 1.2rem; margin-bottom: 0.2rem; line-height: 1.2; }
+        .driver-info span { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; }
+
+        .team-car-display {
+            width: 100%;
+            height: 100px;
+            position: relative;
+            margin-top: auto;
+            overflow: hidden;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.02));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-car-img {
+            width: 90%;
+            height: auto;
+            max-height: 90px;
+            object-fit: contain;
+            opacity: 0.9;
+            transition: 0.3s;
+        }
+
+        .driver-box:hover .team-car-img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Rules Styles */
+        .rules-content { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
+        .rules-content h3 { color: var(--neon-cyan); font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; border-left: 3px solid var(--neon-cyan); padding-left: 15px; text-transform: uppercase; }
+        .rules-content h4 { color: #fff; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem; }
+        .rules-content ul { list-style: none; padding-left: 0; margin-bottom: 1rem; }
+        .rules-content li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+        .rules-content li::before { content: '›'; color: var(--neon-cyan); position: absolute; left: 0; font-weight: bold; font-size: 1.2rem; line-height: 1; }
+        .rules-table { width: 100%; margin: 1rem 0; border: 1px solid rgba(255,255,255,0.1); }
+        .rules-table th { background: rgba(0, 243, 255, 0.1); }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
+        @media (max-width: 600px) { .nav-btn { flex: 1 1 40%; font-size: 0.9rem; padding: 0.6rem; } .card-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; } .header-labels { width: 100%; justify-content: flex-end; } .hero-info h1 { font-size: 1.4rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <img src="logo-brs.png" alt="BRS Racing Logo" class="logo-img">
+        <div class="hero-info">
+            <h1>Campeonato F1 Virtual 2026</h1>
+            <p>3 Campeonatos • 36 Etapas • 20 Pilotos • 10 Equipes</p>
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <button class="nav-btn active" onclick="showSection('classificacao', this)">🏆 Classificação</button>
+        <button class="nav-btn" onclick="showSection('calendario', this)">📅 Calendário</button>
+        <button class="nav-btn" onclick="showSection('regras', this)">📜 Regras</button>
+        <button class="nav-btn" onclick="showSection('pilotos', this)">👤 Pilotos</button>
+    </div>
+
+    <div class="container">
+
+        <!-- CLASSIFICAÇÃO -->
+        <div id="classificacao" class="section active">
+            <div class="panel-grid">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-header">
+                            <h2>🏆 Classificação de Pilotos</h2>
+                            <div class="header-labels"><span>Equipe</span><span>Pts</span></div>
+                        </div>
+                        <div class="table-container">
+                            <table><tbody id="tbody-pilotos"></tbody></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-header">
+                            <h2>🏁 Classificação de Equipes</h2>
+                            <div class="header-labels"><span>Pts</span></div>
+                        </div>
+                        <div class="table-container">
+                            <table><tbody id="tbody-equipes"></tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CALENDÁRIO -->
+        <div id="calendario" class="section">
+            <div class="panel-grid">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-header"><h2>📅 Camp. 1</h2></div>
+                        <div class="table-container"><table><tbody id="tbody-camp1"></tbody></table></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-header"><h2>📅 Camp. 2</h2></div>
+                        <div class="table-container"><table><tbody id="tbody-camp2"></tbody></table></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-header"><h2>📅 Camp. 3</h2></div>
+                        <div class="table-container"><table><tbody id="tbody-camp3"></tbody></table></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGRAS -->
+        <div id="regras" class="section">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <h2>📜 Regulamento Desportivo 2026</h2>
+                        <div class="header-labels">Versão 1.0</div>
+                    </div>
+                    <div class="rules-content">
+                        <h3>Capítulo 1: Disposições Gerais</h3>
+                        <h4>1.1. Definição</h4>
+                        <p>Este documento rege todas as competições oficiais organizadas pela BRS Racing, estabelecendo os direitos e deveres de pilotos, chefes de equipe e organização.</p>
+                        <h4>1.2. Plataforma e Jogo</h4>
+                        <p>As competições serão realizadas no simulador F1 2026 (ou versão vigente), com a funcionalidade Crossplay (PC, Xbox, PlayStation) ativada.</p>
+                        <h4>1.3. Espírito da Liga</h4>
+                        <p>O campeonato preza pela competitividade aliada ao respeito mútuo. Atitudes antidesportivas, racismo, homofobia ou ofensas pessoais resultarão em banimento imediato e irreversível.</p>
+                        <h4>1.4. Canais Oficiais</h4>
+                        <ul>
+                            <li><strong>Discord:</strong> Canal oficial obrigatório para briefings e direção de prova.</li>
+                            <li><strong>WhatsApp:</strong> Canal secundário para interação social.</li>
+                            <li><strong>Instagram:</strong> Canal de divulgação e marketing.</li>
+                        </ul>
+                        <h3>Capítulo 2: Inscrições e Equipes</h3>
+                        <h4>2.1. Elegibilidade</h4>
+                        <ul>
+                            <li>Vagas limitadas a 20 pilotos titulares por grid.</li>
+                            <li>Inscrição confirmada somente após pagamento da taxa.</li>
+                        </ul>
+                        <h4>2.2. Reembolso</h4>
+                        <ul>
+                            <li>Até 7 dias antes da estreia: 100% de reembolso.</li>
+                            <li>Após sorteio/início: Sem reembolso.</li>
+                        </ul>
+                        <h4>2.3. Estrutura de Equipes</h4>
+                        <ul>
+                            <li>Cada equipe deve ter 2 pilotos titulares.</li>
+                            <li>Proibido "equipes satélites" ou gestão compartilhada.</li>
+                            <li><strong>Obrigação:</strong> Postagem de "Raceday" no Instagram da equipe no dia da etapa (Pena: -5 pts nos Construtores).</li>
+                        </ul>
+                        <h3>Capítulo 3: Formato</h3>
+                        <h4>3.1. Estrutura de Séries</h4>
+                        <p>Sistema de acesso e descenso (Série A1 Elite e Séries de Acesso). Sobem 3, caem 3.</p>
+                        <h4>3.2. Pontuação</h4>
+                        <ul>
+                            <li>Pontos: 25-18-15-12-10-8-6-4-2-1.</li>
+                            <li>Volta Mais Rápida: +1 ponto (se terminar no Top 10).</li>
+                            <li>Descarte: 1 pior resultado (exceto na Grande Final).</li>
+                        </ul>
+                        <h3>Capítulo 4: O Evento (Race Day)</h3>
+                        <h4>4.1. Cronograma</h4>
+                        <ul>
+                            <li>20:50: Briefing (Obrigatório)</li>
+                            <li>21:00: Qualificação (Curta - 18min)</li>
+                            <li>21:20: Corrida (50%)</li>
+                        </ul>
+                        <h4>4.2. Configurações</h4>
+                        <ul>
+                            <li>Clima: Dinâmico</li>
+                            <li>Parque Fechado: Ligado</li>
+                            <li>Safety Car: Ligado</li>
+                            <li>Danos: Padrão</li>
+                            <li>Corte de Caminho: Rígido (Strict)</li>
+                        </ul>
+                        <h4>4.3. Restrições</h4>
+                        <p>Obrigatório uso de cabo de rede (LAN). Proibido uso de teclado (apenas Volante ou Gamepad).</p>
+                        <h3>Capítulo 5: Procedimentos Técnicos</h3>
+                        <h4>5.2. Colapso do Lobby (Bandeira Vermelha)</h4>
+                        <ul>
+                            <li><strong>< 15% da corrida:</strong> Reinício total (Novo Lobby).</li>
+                            <li><strong>15% a 50%:</strong> Novo lobby Sprint (25% ou 35%).</li>
+                            <li><strong>> 50% da corrida:</strong> Corrida encerrada com pontuação total.</li>
+                        </ul>
+                        <h3>Capítulo 6: Conduta em Pista</h3>
+                        <ul>
+                            <li><strong>Defesa:</strong> Apenas uma mudança de direção permitida. Proibido mudar na frenagem.</li>
+                            <li><strong>Retorno à Pista:</strong> Responsabilidade total de quem saiu. Retorno perigoso é infração gravíssima.</li>
+                            <li><strong>Bandeira Azul:</strong> Facilitar ultrapassagem na primeira oportunidade.</li>
+                            <li><strong>Resetar:</strong> Proibido usar "Resetar para a Pista".</li>
+                        </ul>
+                        <h3>Capítulo 7: Punições e Superlicença</h3>
+                        <p>Os pontos na carteira zeram a cada 2 temporadas.</p>
+                        <ul>
+                            <li><strong>8 Pontos:</strong> QualyBan (Larga em último).</li>
+                            <li><strong>12 Pontos:</strong> RaceBan (Suspenso de uma etapa).</li>
+                        </ul>
+                        <table class="rules-table">
+                            <thead><tr><th>Infração</th><th>Punição</th><th>Pts</th></tr></thead>
+                            <tbody>
+                                <tr><td>Toque Leve / Corte</td><td>+5s</td><td>-2</td></tr>
+                                <tr><td>Colisão com Danos</td><td>+10s</td><td>-4</td></tr>
+                                <tr><td>Retorno Perigoso</td><td>+10s</td><td>-4</td></tr>
+                                <tr><td>Colisão Proposital</td><td>Exclusão</td><td>-12</td></tr>
+                            </tbody>
+                        </table>
+                        <h3>Capítulo 8: Protestos</h3>
+                        <ul>
+                            <li>Prazo: Até 24h após a corrida via Discord.</li>
+                            <li>Obrigatório vídeo onboard do denunciante.</li>
+                            <li>O denunciado tem 24h para apresentar defesa.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PILOTOS (NOVO LAYOUT) -->
+        <div id="pilotos" class="section">
+            <div class="drivers-grid" id="drivers-grid"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 BRS Racing League. All rights reserved. <br>
+        <span id="last-update" style="color: var(--neon-cyan); font-size: 0.75rem; margin-top: 5px; display: block;"></span>
+    </footer>
+
+    <!-- CARREGA OS DADOS E AS IMAGENS -->
+    <script src="dados.js"></script>
+    <script src="imagens.js"></script>
+
+    <script>
+        // FUNÇÕES DE RENDERIZAÇÃO
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function getRankClass(index) {
+            if (index === 0) return 'rank-1';
+            if (index === 1) return 'rank-2';
+            if (index === 2) return 'rank-3';
+            return 'rank-other';
+        }
+
+        function renderPilotos() {
+            const tbody = document.getElementById('tbody-pilotos');
+            const sorted = [...db.drivers].sort((a, b) => b.points - a.points);
+
+            tbody.innerHTML = sorted.map((d, i) => `
+                <tr>
+                    <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
+                    <td class="name-col">${d.name}</td>
+                    <td class="team-col">${d.team}</td>
+                    <td class="pts-col">${d.points}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderEquipes() {
+            const tbody = document.getElementById('tbody-equipes');
+            const teams = {};
+            db.drivers.forEach(d => {
+                if (!teams[d.team]) teams[d.team] = 0;
+                teams[d.team] += d.points;
+            });
+
+            const sorted = Object.entries(teams)
+                .map(([name, points]) => ({ name, points }))
+                .sort((a, b) => b.points - a.points);
+
+            tbody.innerHTML = sorted.map((t, i) => `
+                <tr>
+                    <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
+                    <td class="name-col" style="width: 75%">${t.name}</td>
+                    <td class="pts-col">${t.points}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderCalendar(id, data) {
+            const tbody = document.getElementById(id);
+            tbody.innerHTML = data.map(r => `
+                <tr>
+                    <td class="cal-round">${r.r}</td>
+                    <td class="cal-track">${r.track}</td>
+                    <td class="cal-date">${r.date}</td>
+                    <td class="cal-type ${r.type === 'Extra' ? 'type-extra' : 'type-oficial'}">${r.type}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderDriversGrid() {
+            const grid = document.getElementById('drivers-grid');
+            const sorted = [...db.drivers].sort((a, b) => b.points - a.points);
+
+            grid.innerHTML = sorted.map((d, i) => {
+                // Busca a imagem no arquivo imagens.js (variável midia)
+                // Se não achar, usa um placeholder
+                const driverImg = midia.pilotos[d.name] || 'https://via.placeholder.com/80?text=Piloto';
+                const carImg = midia.carros[d.team] || 'https://via.placeholder.com/300x100?text=Carro';
+
+                return `
+                <div class="driver-box">
+                    <div class="driver-header">
+                        <div class="driver-rank ${getRankClass(i)}">${i + 1}º</div>
+                        <div class="driver-points">${d.points} PTS</div>
+                    </div>
+                    <div class="driver-content">
+                        <div class="driver-photo-container">
+                            <img src="${driverImg}" alt="${d.name}" class="driver-photo-img" onerror="this.src='https://via.placeholder.com/80?text=?'">
+                        </div>
+                        <div class="driver-info">
+                            <h3>${d.name}</h3>
+                            <span>${d.team}</span>
+                        </div>
+                    </div>
+                    <div class="team-car-display">
+                        <img src="${carImg}" alt="Carro ${d.team}" class="team-car-img" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function updateFooterDate() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            document.getElementById('last-update').innerHTML = 
+                `Atualizado em ${day}/${month}/${year}`;
+        }
+
+        // INICIALIZAÇÃO
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof db !== 'undefined' && typeof midia !== 'undefined') {
+                renderPilotos();
+                renderEquipes();
+                renderCalendar('tbody-camp1', db.camp1);
+                renderCalendar('tbody-camp2', db.camp2);
+                renderCalendar('tbody-camp3', db.camp3);
+                renderDriversGrid();
+                updateFooterDate();
+            } else {
+                alert("Erro: Os arquivos dados.js ou imagens.js não foram carregados.");
+            }
+        });
+    </script>
+</body>
+</html>
