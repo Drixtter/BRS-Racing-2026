@@ -1,6 +1,6 @@
 const db = {
     "drivers": [
-        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 450 },
+        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 455 },
         { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 285 },
         { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 380 },
         { "name": "George Russell", "team": "Mercedes-AMG", "points": 295 },
