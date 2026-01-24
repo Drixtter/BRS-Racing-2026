@@ -58,7 +58,7 @@ const db = {
         { "r": 6, "track": "México", "date": "02/11", "type": "Oficial" },
         { "r": 7, "track": "Brasil", "date": "09/11", "type": "Oficial" },
         { "r": 8, "track": "Arábia Saudita", "date": "16/11", "type": "Extra" },
-        { "r": 9, "track": "Las Vegas", "date": "22/11", "type": "Oficial" },
+        { "r": 9, "track": "Las Vegas", "date": "23/11", "type": "Oficial" },
         { "r": 10, "track": "Qatar", "date": "30/11", "type": "Oficial" },
         { "r": 11, "track": "Grã-Bretanha", "date": "07/09", "type": "Extra" },
         { "r": 12, "track": "Abu Dhabi", "date": "14/12", "type": "Oficial" }
