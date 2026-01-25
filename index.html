@@ -9,6 +9,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --neon-cyan: #00f3ff;
+            --neon-red: #ff4444; /* Nova variável para SR negativo */
+            --neon-green: #00ff88; /* Nova variável para SR positivo */
             --neon-glow: rgba(0, 243, 255, 0.3);
             --dark-bg: #111316;
             --panel-bg: #1a1d21;
@@ -35,7 +37,6 @@
         .hero-info { margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1rem 0; width: 100%; max-width: 800px; }
         .hero-info h1 { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; text-transform: uppercase; font-style: italic; margin-bottom: 0.5rem; color: #fff; }
         .hero-info p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; }
-
         .nav-container { display: flex; justify-content: center; gap: 0.8rem; padding: 1.5rem 1rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
         .nav-btn {
             background: rgba(26, 29, 33, 0.8);
@@ -56,23 +57,18 @@
             box-shadow: 0 0 5px rgba(0, 243, 255, 0.1);
             font-size: 0.85rem;
         }
-
         .nav-btn:hover, .nav-btn.active { background: rgba(0, 243, 255, 0.1); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); transform: translateY(-2px); }
-
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; }
         .section { display: none; animation: fadeUp 0.4s ease-out; }
         .section.active { display: block; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
         .panel-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
         @media (min-width: 900px) { .panel-grid { grid-template-columns: 1fr 1fr; } }
-
         .card { background: var(--panel-bg); border: 1px solid var(--neon-cyan); border-radius: 12px; padding: 2px; position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); margin-bottom: 20px; }
         .card-inner { background: var(--panel-bg); border-radius: 10px; padding: 1.5rem; height: 100%; position: relative; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
         .card-header h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: #fff; text-transform: uppercase; }
         .header-labels { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; display: flex; gap: 1rem; }
-
         table { width: 100%; border-collapse: collapse; min-width: 300px; }
         th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .pos-col { width: 40px; font-weight: 700; text-align: center; }
@@ -83,14 +79,12 @@
         .name-col { font-weight: 600; color: #fff; }
         .team-col { color: var(--text-muted); font-size: 0.9rem; }
         .pts-col { font-weight: 700; color: var(--neon-cyan); text-align: right; }
-
         .cal-round { color: var(--neon-cyan); font-weight: 700; width: 40px; }
         .cal-track { font-weight: 600; }
         .cal-date { color: var(--text-muted); font-size: 0.9rem; text-align: right; }
         .cal-type { font-size: 0.75rem; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; text-align: center; width: 80px; display: inline-block; }
         .type-oficial { border: 1px solid #00ff88; color: #00ff88; background: rgba(0, 255, 136, 0.1); }
         .type-extra { border: 1px solid #ff4444; color: #ff4444; background: rgba(255, 68, 68, 0.1); }
-
         .drivers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
         .driver-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; transition: 0.3s; position: relative; display: flex; flex-direction: column; }
         .driver-box:hover { border-color: var(--neon-cyan); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
@@ -101,11 +95,22 @@
         .driver-photo-container { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--neon-cyan); overflow: hidden; background: #000; flex-shrink: 0; }
         .driver-photo-img { width: 100%; height: 100%; object-fit: cover; }
         .driver-info h3 { font-size: 1.2rem; margin-bottom: 0.2rem; line-height: 1.2; }
-        .driver-info span { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; }
+        .driver-info span { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; display: block; }
+
+        /* ESTILOS DO SAFETY RATING (SR) */
+        .driver-sr { 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            margin-top: 4px; 
+            display: inline-block;
+        }
+        .sr-neg { color: var(--neon-red); text-shadow: 0 0 5px rgba(255, 68, 68, 0.4); }
+        .sr-pos { color: var(--neon-green); }
+        .sr-neu { color: var(--text-muted); }
+
         .team-car-display { width: 100%; height: 100px; position: relative; margin-top: auto; overflow: hidden; background: linear-gradient(to right, transparent, rgba(255,255,255,0.02)); display: flex; align-items: center; justify-content: center; }
         .team-car-img { width: 90%; height: auto; max-height: 90px; object-fit: contain; opacity: 0.9; transition: 0.3s; }
         .driver-box:hover .team-car-img { opacity: 1; transform: scale(1.05); }
-
         .rules-content { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
         .rules-content h3 { color: var(--neon-cyan); font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; border-left: 3px solid var(--neon-cyan); padding-left: 15px; text-transform: uppercase; }
         .rules-content h4 { color: #fff; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem; }
@@ -115,7 +120,6 @@
         .rules-table { width: 100%; margin: 1rem 0; border: 1px solid rgba(255,255,255,0.1); border-collapse: collapse; }
         .rules-table th { background: rgba(0, 243, 255, 0.1); color: #fff; padding: 0.8rem; text-align: left; }
         .rules-table td { padding: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
         @media (max-width: 600px) { .nav-btn { flex: 1 1 45%; font-size: 0.75rem; min-width: 120px; } .hero-info h1 { font-size: 1.4rem; } }
     </style>
@@ -128,7 +132,6 @@
             <p>3 Campeonatos • 36 Etapas • 20 Pilotos • 10 Equipes</p>
         </div>
     </div>
-
     <div class="nav-container">
         <button class="nav-btn active" onclick="showSection('section-ignition', this)">🏆 Ignition CUP</button>
         <button class="nav-btn" onclick="showSection('pilotos', this)">👤 Pilotos</button>
@@ -140,7 +143,6 @@
         <button class="nav-btn" onclick="showSection('videos', this)">📜 Videos</button>        
         <button class="nav-btn" onclick="showSection('regras', this)">📜 Regras</button>
     </div>
-
     <div class="container">
         <!-- COPA IGNITION -->
         <div id="section-ignition" class="section active">
@@ -149,7 +151,6 @@
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Ignition: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-ignition-equipes"></tbody></table></div></div></div>
             </div>
         </div>
-
         <!-- COPA EVOLUTION -->
         <div id="section-evolution" class="section">
             <div class="panel-grid">
@@ -157,7 +158,6 @@
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Evolution: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-evolution-equipes"></tbody></table></div></div></div>
             </div>
         </div>
-
         <!-- COPA LEGACY -->
         <div id="section-legacy" class="section">
             <div class="panel-grid">
@@ -165,7 +165,6 @@
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Legacy: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-legacy-equipes"></tbody></table></div></div></div>
             </div>
         </div>
-
         <!-- CALENDÁRIO -->
         <div id="calendario" class="section">
             <div class="panel-grid">
@@ -174,7 +173,6 @@
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>📅 Legacy</h2></div><div class="table-container"><table><tbody id="tbody-camp3"></tbody></table></div></div></div>
             </div>
         </div>
-
         <!-- ESTATÍSTICAS -->
         <div id="estatisticas" class="section">
             <div class="panel-grid">
@@ -182,7 +180,6 @@
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>⏱️ Pole Positions</h2><div class="header-labels"><span>Poles</span></div></div><div class="table-container"><table><tbody id="tbody-stats-poles"></tbody></table></div></div></div>
             </div>
         </div>
-
         <!-- REGRAS -->
         <div id="regras" class="section">
             <div class="card"><div class="card-inner">
@@ -205,23 +202,19 @@
                 </div>
             </div></div>
         </div>
-
         <!-- PISTAS (Placeholder) -->
         <div id="pistas" class="section">
              <div class="card"><div class="card-inner"><div class="card-header"><h2>📜 Informações das Pistas</h2></div><p style="color:var(--text-muted)">Selecione um campeonato para ver detalhes específicos.</p></div></div>
         </div>
-
         <!-- PILOTOS (Grid Visual) -->
         <div id="pilotos" class="section">
             <div class="drivers-grid" id="drivers-grid"></div>
         </div>
     </div>
-
     <footer>
         © 2026 BRS Racing League. All rights reserved. <br>
         <span id="last-update" style="color: var(--neon-cyan); font-size: 0.75rem; margin-top: 5px; display: block;"></span>
     </footer>
-
     <script src="dados.js"></script>
     <script src="imagens.js"></script>
     <script>
@@ -231,24 +224,20 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             if(btn) btn.classList.add('active');
         }
-
         function getRankClass(index) {
             if (index === 0) return 'rank-1';
             if (index === 1) return 'rank-2';
             if (index === 2) return 'rank-3';
             return 'rank-other';
         }
-
         function renderStandings(driversData, pilotsId, teamsId) {
             const pBody = document.getElementById(pilotsId);
             const tBody = document.getElementById(teamsId);
             if(!pBody || !tBody || !driversData) return;
-
             const sortedPilots = [...driversData].sort((a, b) => b.points - a.points);
             pBody.innerHTML = sortedPilots.map((d, i) => `
                 <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${d.points}</td></tr>
             `).join('');
-
             const teams = {};
             driversData.forEach(d => { teams[d.team] = (teams[d.team] || 0) + d.points; });
             const sortedTeams = Object.entries(teams).map(([name, points]) => ({ name, points })).sort((a, b) => b.points - a.points);
@@ -256,29 +245,21 @@
                 <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col" style="width: 75%">${t.name}</td><td class="pts-col">${t.points}</td></tr>
             `).join('');
         }
-
         function renderStats() {
-            // Usando Ignition como base para stats por enquanto, ou você pode somar todos
+            // Usando Ignition como base para stats por enquanto
             const vBody = document.getElementById('tbody-stats-vitorias');
             const pBody = document.getElementById('tbody-stats-poles');
             if(!vBody || !pBody) return;
-
-            // Exemplo: Pegando dados da Ignition para stats
             const drivers = db.drivers_ignition; 
-
-            // Simulação de vitórias/poles baseada nos pontos (apenas para preencher visualmente se não houver campo wins/poles no JSON)
-            // Se você adicionar "wins" e "poles" no JSON, use d.wins e d.poles
             const vitoriosos = [...drivers].sort((a, b) => b.points - a.points).slice(0, 5);
             vBody.innerHTML = vitoriosos.map((d, i) => `
                 <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${Math.floor(d.points/25)}</td></tr>
             `).join('');
-
             const polemen = [...drivers].sort((a, b) => b.points - a.points).slice(0, 5);
             pBody.innerHTML = polemen.map((d, i) => `
                 <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${Math.floor(d.points/40)}</td></tr>
             `).join('');
         }
-
         function renderCalendar(id, data) {
             const tbody = document.getElementById(id);
             if(!tbody || !data) return;
@@ -286,23 +267,50 @@
                 <tr><td class="cal-round">${r.r}</td><td class="cal-track">${r.track}</td><td class="cal-date">${r.date}</td><td class="cal-type ${r.type === 'Extra' ? 'type-extra' : 'type-oficial'}">${r.type}</td></tr>
             `).join('');
         }
-
         function renderDriversGrid(data) {
             const grid = document.getElementById('drivers-grid');
             if(!grid) return;
-            const sorted = [...data].sort((a, b) => b.points - a.points);
+            const sorted = [...data].sort((a,b)=>b.points-a.points);
+
             grid.innerHTML = sorted.map((d, i) => {
-                const dImg = midia.pilotos[d.name] || 'https://via.placeholder.com/80?text=Piloto';
-                const cImg = midia.carros[d.team] || 'https://via.placeholder.com/300x100?text=Carro';
+                const dImg = (typeof midia !== 'undefined' && midia.pilotos && midia.pilotos[d.name]) ? midia.pilotos[d.name] : 'https://via.placeholder.com/80?text=Piloto';
+                const cImg = (typeof midia !== 'undefined' && midia.carros && midia.carros[d.team]) ? midia.carros[d.team] : 'https://via.placeholder.com/300x100?text=Carro';
+
+                const srValue = (typeof d.sr === 'number') ? d.sr : 0;
+                const srDisplay = srValue > 0 ? `+${srValue}` : `${srValue}`;
+                const srClass = srValue < 0 ? 'sr-neg' : (srValue > 0 ? 'sr-pos' : 'sr-neu');
+
                 return `
                 <div class="driver-box">
-                    <div class="driver-header"><div class="driver-rank ${getRankClass(i)}">${i+1}º</div><div class="driver-points">${d.points} PTS</div></div>
-                    <div class="driver-content">
-                        <div class="driver-photo-container"><img src="${dImg}" class="driver-photo-img" onerror="this.src='https://via.placeholder.com/80?text=?'"></div>
-                        <div class="driver-info"><h3>${d.name}</h3><span>${d.team}</span></div>
+                    <div class="driver-header">
+                        <div class="driver-rank ${getRankClass(i)}">${i+1}º</div>
+
+                        <!-- Aqui PTS e SR aparecem na mesma linha -->
+                        <div class="driver-meta">
+                            <div class="driver-points">${d.points} PTS</div>
+                            <div class="driver-sr-inline">
+                                SR:&nbsp;<span class="${srClass}">${srDisplay}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="team-car-display"><img src="${cImg}" class="team-car-img" onerror="this.style.display='none'"></div>
-                </div>`;
+
+                    <div class="driver-content">
+                        <div class="driver-photo-container">
+                            <img src="${dImg}" class="driver-photo-img" onerror="this.src='https://via.placeholder.com/80?text=?'">
+                        </div>
+                        <div class="driver-info">
+                            <h3>${d.name}</h3>
+                            <div class="team-and-meta">
+                                <span style="text-transform:uppercase;">${d.team}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-car-display">
+                        <img src="${cImg}" class="team-car-img" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                `;
             }).join('');
         }
 
@@ -312,23 +320,17 @@
             const m = String(t.getMonth() + 1).padStart(2, '0');
             document.getElementById('last-update').innerHTML = `Atualizado em ${d}/${m}/${t.getFullYear()}`;
         }
-
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof db !== 'undefined' && typeof midia !== 'undefined') {
-                // Renderiza cada campeonato com sua lista independente
                 renderStandings(db.drivers_ignition, 'tbody-ignition-pilotos', 'tbody-ignition-equipes');
                 renderStandings(db.drivers_evolution, 'tbody-evolution-pilotos', 'tbody-evolution-equipes');
                 renderStandings(db.drivers_legacy, 'tbody-legacy-pilotos', 'tbody-legacy-equipes');
-
                 renderCalendar('tbody-camp1', db.camp1);
                 renderCalendar('tbody-camp2', db.camp2);
                 renderCalendar('tbody-camp3', db.camp3);
-
                 renderStats();
-
                 // Por padrão, mostra o grid da Ignition na aba Pilotos
                 renderDriversGrid(db.drivers_ignition);
-
                 updateFooterDate();
             }
         });
