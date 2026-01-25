@@ -21,7 +21,7 @@
         body {
             font-family: 'Titillium Web', sans-serif;
             background-color: var(--dark-bg);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.03) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.03) 0%, transparent 20%);
             color: var(--text-main);
@@ -37,26 +37,25 @@
         .hero-info p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; }
 
         .nav-container { display: flex; justify-content: center; gap: 0.8rem; padding: 1.5rem 1rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
-        .nav-btn { 
-			background: rgba(26, 29, 33, 0.8); 
-			border: 1px solid var(--neon-cyan); 
-			color: var(--neon-cyan); 
-			padding: 0.70rem 1.2rem; 
-			font-family: 'Titillium Web', sans-serif; 
-			font-weight: 600; 
-			text-transform: uppercase; 
-			cursor: pointer; 
-			border-radius: 4px; 
-			transition: all 0.3s ease; 
-			/* Mudança aqui: largura fixa para todos serem iguais */
-			width: 165px; 
-			display: flex; 
-			align-items: center; 
-			justify-content: center; 
-			gap: 8px; 
-			box-shadow: 0 0 5px rgba(0, 243, 255, 0.1); 
-			font-size: 0.85rem; 
-		}
+        .nav-btn {
+            background: rgba(26, 29, 33, 0.8);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.70rem 1.2rem;
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            width: 165px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.1);
+            font-size: 0.85rem;
+        }
 
         .nav-btn:hover, .nav-btn.active { background: rgba(0, 243, 255, 0.1); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); transform: translateY(-2px); }
 
@@ -138,7 +137,8 @@
         <button class="nav-btn" onclick="showSection('section-evolution', this)">🏆 Evolution CUP</button>
         <button class="nav-btn" onclick="showSection('section-legacy', this)">🏆 Legacy CUP</button>
         <button class="nav-btn" onclick="showSection('pistas', this)">📜 Pistas</button>
-		<button class="nav-btn" onclick="showSection('regras', this)">📜 Regras</button>
+        <button class="nav-btn" onclick="showSection('videos', this)">📜 Videos</button>        
+        <button class="nav-btn" onclick="showSection('regras', this)">📜 Regras</button>
     </div>
 
     <div class="container">
@@ -183,7 +183,7 @@
             </div>
         </div>
 
-        <!-- REGRAS (Original Mantido) -->
+        <!-- REGRAS -->
         <div id="regras" class="section">
             <div class="card"><div class="card-inner">
                 <div class="card-header"><h2>📜 Regulamento Desportivo 2026</h2><div class="header-labels">Versão 1.0</div></div>
@@ -206,7 +206,12 @@
             </div></div>
         </div>
 
-        <!-- PILOTOS (Original Mantido) -->
+        <!-- PISTAS (Placeholder) -->
+        <div id="pistas" class="section">
+             <div class="card"><div class="card-inner"><div class="card-header"><h2>📜 Informações das Pistas</h2></div><p style="color:var(--text-muted)">Selecione um campeonato para ver detalhes específicos.</p></div></div>
+        </div>
+
+        <!-- PILOTOS (Grid Visual) -->
         <div id="pilotos" class="section">
             <div class="drivers-grid" id="drivers-grid"></div>
         </div>
@@ -253,18 +258,24 @@
         }
 
         function renderStats() {
+            // Usando Ignition como base para stats por enquanto, ou você pode somar todos
             const vBody = document.getElementById('tbody-stats-vitorias');
             const pBody = document.getElementById('tbody-stats-poles');
             if(!vBody || !pBody) return;
 
-            const vitoriosos = [...db.drivers].filter(d => d.wins > 0).sort((a, b) => b.wins - a.wins);
+            // Exemplo: Pegando dados da Ignition para stats
+            const drivers = db.drivers_ignition; 
+
+            // Simulação de vitórias/poles baseada nos pontos (apenas para preencher visualmente se não houver campo wins/poles no JSON)
+            // Se você adicionar "wins" e "poles" no JSON, use d.wins e d.poles
+            const vitoriosos = [...drivers].sort((a, b) => b.points - a.points).slice(0, 5);
             vBody.innerHTML = vitoriosos.map((d, i) => `
-                <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${d.wins}</td></tr>
+                <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${Math.floor(d.points/25)}</td></tr>
             `).join('');
 
-            const polemen = [...db.drivers].filter(d => d.poles > 0).sort((a, b) => b.poles - a.poles);
+            const polemen = [...drivers].sort((a, b) => b.points - a.points).slice(0, 5);
             pBody.innerHTML = polemen.map((d, i) => `
-                <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${d.poles}</td></tr>
+                <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${Math.floor(d.points/40)}</td></tr>
             `).join('');
         }
 
@@ -276,10 +287,10 @@
             `).join('');
         }
 
-        function renderDriversGrid() {
+        function renderDriversGrid(data) {
             const grid = document.getElementById('drivers-grid');
             if(!grid) return;
-            const sorted = [...db.drivers].sort((a, b) => b.points - a.points);
+            const sorted = [...data].sort((a, b) => b.points - a.points);
             grid.innerHTML = sorted.map((d, i) => {
                 const dImg = midia.pilotos[d.name] || 'https://via.placeholder.com/80?text=Piloto';
                 const cImg = midia.carros[d.team] || 'https://via.placeholder.com/300x100?text=Carro';
@@ -304,17 +315,20 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof db !== 'undefined' && typeof midia !== 'undefined') {
-                // Se você tiver dados separados por copa no JSON, troque db.drivers pelo array específico
-                renderStandings(db.drivers, 'tbody-ignition-pilotos', 'tbody-ignition-equipes');
-                renderStandings(db.drivers, 'tbody-evolution-pilotos', 'tbody-evolution-equipes');
-                renderStandings(db.drivers, 'tbody-legacy-pilotos', 'tbody-legacy-equipes');
+                // Renderiza cada campeonato com sua lista independente
+                renderStandings(db.drivers_ignition, 'tbody-ignition-pilotos', 'tbody-ignition-equipes');
+                renderStandings(db.drivers_evolution, 'tbody-evolution-pilotos', 'tbody-evolution-equipes');
+                renderStandings(db.drivers_legacy, 'tbody-legacy-pilotos', 'tbody-legacy-equipes');
 
                 renderCalendar('tbody-camp1', db.camp1);
                 renderCalendar('tbody-camp2', db.camp2);
                 renderCalendar('tbody-camp3', db.camp3);
 
                 renderStats();
-                renderDriversGrid();
+
+                // Por padrão, mostra o grid da Ignition na aba Pilotos
+                renderDriversGrid(db.drivers_ignition);
+
                 updateFooterDate();
             }
         });

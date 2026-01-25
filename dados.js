@@ -1,5 +1,5 @@
 const db = {
-    "drivers": [
+    "drivers_ignition": [
         { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 460 },
         { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 285 },
         { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 380 },
@@ -20,6 +20,50 @@ const db = {
         { "name": "Logan Sargeant", "team": "Williams", "points": 25 },
         { "name": "Kevin Magnussen", "team": "Haas", "points": 40 },
         { "name": "Nico Hulkenberg", "team": "Haas", "points": 35 }
+    ],
+    "drivers_evolution": [
+        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 0 },
+        { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 0 },
+        { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 0 },
+        { "name": "George Russell", "team": "Mercedes-AMG", "points": 0 },
+        { "name": "Charles Leclerc", "team": "Scuderia Ferrari", "points": 0 },
+        { "name": "Carlos Sainz", "team": "Scuderia Ferrari", "points": 0 },
+        { "name": "Lando Norris", "team": "McLaren", "points": 0 },
+        { "name": "Oscar Piastri", "team": "McLaren", "points": 0 },
+        { "name": "Fernando Alonso", "team": "Aston Martin", "points": 0 },
+        { "name": "Lance Stroll", "team": "Aston Martin", "points": 0 },
+        { "name": "Pierre Gasly", "team": "Alpine", "points": 0 },
+        { "name": "Esteban Ocon", "team": "Alpine", "points": 0 },
+        { "name": "Valtteri Bottas", "team": "Kick Sauber", "points": 0 },
+        { "name": "Zhou Guanyu", "team": "Kick Sauber", "points": 0 },
+        { "name": "Yuki Tsunoda", "team": "RB", "points": 0 },
+        { "name": "Daniel Ricciardo", "team": "RB", "points": 0 },
+        { "name": "Alex Albon", "team": "Williams", "points": 0 },
+        { "name": "Logan Sargeant", "team": "Williams", "points": 0 },
+        { "name": "Kevin Magnussen", "team": "Haas", "points": 0 },
+        { "name": "Nico Hulkenberg", "team": "Haas", "points": 0 }
+    ],
+    "drivers_legacy": [
+        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 0 },
+        { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 0 },
+        { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 0 },
+        { "name": "George Russell", "team": "Mercedes-AMG", "points": 0 },
+        { "name": "Charles Leclerc", "team": "Scuderia Ferrari", "points": 0 },
+        { "name": "Carlos Sainz", "team": "Scuderia Ferrari", "points": 0 },
+        { "name": "Lando Norris", "team": "McLaren", "points": 0 },
+        { "name": "Oscar Piastri", "team": "McLaren", "points": 0 },
+        { "name": "Fernando Alonso", "team": "Aston Martin", "points": 0 },
+        { "name": "Lance Stroll", "team": "Aston Martin", "points": 0 },
+        { "name": "Pierre Gasly", "team": "Alpine", "points": 0 },
+        { "name": "Esteban Ocon", "team": "Alpine", "points": 0 },
+        { "name": "Valtteri Bottas", "team": "Kick Sauber", "points": 0 },
+        { "name": "Zhou Guanyu", "team": "Kick Sauber", "points": 0 },
+        { "name": "Yuki Tsunoda", "team": "RB", "points": 0 },
+        { "name": "Daniel Ricciardo", "team": "RB", "points": 0 },
+        { "name": "Alex Albon", "team": "Williams", "points": 0 },
+        { "name": "Logan Sargeant", "team": "Williams", "points": 0 },
+        { "name": "Kevin Magnussen", "team": "Haas", "points": 0 },
+        { "name": "Nico Hulkenberg", "team": "Haas", "points": 0 }
     ],
     "camp1": [
         { "r": 1, "track": "Austrália", "date": "09/03", "type": "Oficial" },
