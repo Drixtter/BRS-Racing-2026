@@ -82,7 +82,7 @@
         .cal-round { color: var(--neon-cyan); font-weight: 700; width: 40px; }
         .cal-track { font-weight: 600; }
         .cal-date { color: var(--text-muted); font-size: 0.9rem; text-align: right; }
-        .cal-type { font-size: 0.75rem; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; text-align: center; width: 80px; display: inline-block; }
+        .cal-type { font-size: 0.75rem; text-transform: uppercase; padding: 14px 8px; border-radius: 4px; text-align: center; width: 80px; display: inline-block; }
         .type-oficial { border: 1px solid #00ff88; color: #00ff88; background: rgba(0, 255, 136, 0.1); }
         .type-extra { border: 1px solid #ff4444; color: #ff4444; background: rgba(255, 68, 68, 0.1); }
         .drivers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -271,10 +271,8 @@
                                         <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
                                         <td class="name-col">${res.piloto}</td>
                                         <td class="team-col">${res.equipe}</td>
-
-<td class="pos-col">${res.pontos || 0}</td>
-<td class="pos-col">${res.bestlap || '--'}</td>
-
+                                        <td class="pos-col">${res.pontos || 0}</td>
+                                        <td class="pos-col">${res.bestlap || '--'}</td>
                                         <td class="pos-col">${res.tempo}</td>
                                     </tr>
                                 `).join('')}
