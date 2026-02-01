@@ -260,7 +260,9 @@
                                     <th class="pos-col">Pos</th>
                                     <th>Piloto</th>
                                     <th>Equipe</th>
-                                    <th class="pts-col">Tempo/Dif</th>
+                                    <th>Pontos</th>
+                                    <th>Volta</th>
+                                    <th>Tempo/Dif</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -269,7 +271,9 @@
                                         <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
                                         <td class="name-col">${res.piloto}</td>
                                         <td class="team-col">${res.equipe}</td>
-                                        <td class="pts-col">${res.tempo}</td>
+                                        <td class="pos-col">${res.pontos}</td>
+                                        <td class="pos-col">${res.bestlap}</td>
+                                        <td class="pos-col">${res.tempo}</td>
                                     </tr>
                                 `).join('')}
                             </tbody>
