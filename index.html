@@ -271,8 +271,10 @@
                                         <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
                                         <td class="name-col">${res.piloto}</td>
                                         <td class="team-col">${res.equipe}</td>
-                                        <td class="pos-col">${res.pontos}</td>
-                                        <td class="pos-col">${res.bestlap}</td>
+
+<td class="pos-col">${res.pontos || 0}</td>
+<td class="pos-col">${res.bestlap || '--'}</td>
+
                                         <td class="pos-col">${res.tempo}</td>
                                     </tr>
                                 `).join('')}
