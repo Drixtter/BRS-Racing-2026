@@ -106,5 +106,67 @@ const db = {
         { "r": 10, "track": "Qatar", "date": "30/11", "type": "Oficial" },
         { "r": 11, "track": "Grã-Bretanha", "date": "07/09", "type": "Extra" },
         { "r": 12, "track": "Abu Dhabi", "date": "14/12", "type": "Oficial" }
+    ],
+    "pistas": [
+        {
+            nome: "Austin",
+            pais: "Estados Unidos",
+            imagem: "img/tracks/2026trackaustindetailed.avif",
+            comprimento: "5.513 km",
+            curvas: 20,
+            drs: 2,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", tempo: "+2.500" }
+            ]
+        },
+                {
+            nome: "Austin",
+            pais: "Estados Unidos",
+            imagem: "img/tracks/2026trackaustindetailed.avif",
+            comprimento: "5.513 km",
+            curvas: 20,
+            drs: 2,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", tempo: "+2.500" }
+            ]
+        },
+                {
+            nome: "Austin",
+            pais: "Estados Unidos",
+            imagem: "img/tracks/2026trackaustindetailed.avif",
+            comprimento: "5.513 km",
+            curvas: 20,
+            drs: 2,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", tempo: "+2.500" }
+            ]
+        },
+                {
+            nome: "Austin",
+            pais: "Estados Unidos",
+            imagem: "img/tracks/2026trackaustindetailed.avif",
+            comprimento: "5.513 km",
+            curvas: 20,
+            drs: 2,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", tempo: "+2.500" }
+            ]
+        },
+                {
+            nome: "Austin",
+            pais: "Estados Unidos",
+            imagem: "img/tracks/2026trackaustindetailed.avif",
+            comprimento: "5.513 km",
+            curvas: 20,
+            drs: 2,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", tempo: "+2.500" }
+            ]
+        }
     ]
 };

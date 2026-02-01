@@ -202,10 +202,18 @@
                 </div>
             </div></div>
         </div>
-        <!-- PISTAS (Placeholder) -->
-        <div id="pistas" class="section">
-             <div class="card"><div class="card-inner"><div class="card-header"><h2>📜 Informações das Pistas</h2></div><p style="color:var(--text-muted)">Selecione um campeonato para ver detalhes específicos.</p></div></div>
-        </div>
+
+
+
+<!-- PISTAS -->
+<div id="pistas" class="section">
+    <div id="pistas-container" class="panel-grid" style="grid-template-columns: 1fr;">
+        <!-- O JS vai popular os cards aqui -->
+    </div>
+</div>
+
+
+
         <!-- PILOTOS (Grid Visual) -->
         <div id="pilotos" class="section">
             <div class="drivers-grid" id="drivers-grid"></div>
@@ -218,6 +226,55 @@
     <script src="dados.js"></script>
     <script src="imagens.js"></script>
     <script>
+
+        function renderPistas() {
+            const container = document.getElementById('pistas-container');
+            if (!container || !db.pistas) return;
+
+            container.innerHTML = db.pistas.map(pista => `
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-header">
+                            <h2>${pista.nome}</h2>
+                            <div class="header-labels">${pista.pais}</div>
+                        </div>
+                        <div style="text-align:center; padding: 1rem;">
+                            <img src="${pista.imagem}" style="max-width: 800px; width:100%; filter: drop-shadow(0 0 10px var(--neon-cyan));">
+                        </div>
+                        <div class="rules-content" style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                            <p><strong>Comprimento:</strong> ${pista.comprimento}</p>
+                            <p><strong>Curvas:</strong> ${pista.curvas}</p>
+                            <p><strong>Zonas DRS:</strong> ${pista.drs}</p>
+                        </div>
+                        <div class="card-header"><h3>🏁 Resultados</h3></div>
+                        <table>
+                            <thead>
+                                <tr style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">
+                                    <th class="pos-col">Pos</th>
+                                    <th>Piloto</th>
+                                    <th>Equipe</th>
+                                    <th class="pts-col">Tempo/Dif</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${pista.resultados.map(res => `
+                                    <tr>
+                                        <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
+                                        <td class="name-col">${res.piloto}</td>
+                                        <td class="team-col">${res.equipe}</td>
+                                        <td class="pts-col">${res.tempo}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+
+
+
         function showSection(id, btn) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -332,6 +389,7 @@
                 // Por padrão, mostra o grid da Ignition na aba Pilotos
                 renderDriversGrid(db.drivers_ignition);
                 updateFooterDate();
+                renderPistas(); 
             }
         });
     </script>
