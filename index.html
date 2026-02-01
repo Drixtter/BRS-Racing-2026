@@ -203,11 +203,10 @@
             </div></div>
         </div>
 
-
-
 <!-- PISTAS -->
 <div id="pistas" class="section">
-    <div id="pistas-container" class="panel-grid" style="grid-template-columns: 1fr; max-width: 400px; margin: 0 auto;">
+    <!-- Removendo estilos fixos e usando a grid responsiva que já existe no seu CSS -->
+    <div id="pistas-container" class="drivers-grid">
         <!-- O JS vai popular os cards aqui -->
     </div>
 </div>
@@ -261,8 +260,6 @@
                                     <th>Piloto</th>
                                     <th>Equipe</th>
                                     <th>Pontos</th>
-                                    <th>Volta</th>
-                                    <th>Tempo/Dif</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -272,8 +269,8 @@
                                         <td class="name-col">${res.piloto}</td>
                                         <td class="team-col">${res.equipe}</td>
                                         <td class="pos-col">${res.pontos || 0}</td>
-                                        <td class="pos-col">${res.bestlap || '--'}</td>
-                                        <td class="pos-col">${res.tempo}</td>
+                                        
+                                        
                                     </tr>
                                 `).join('')}
                             </tbody>
