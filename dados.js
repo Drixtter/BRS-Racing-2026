@@ -167,6 +167,22 @@ const db = {
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", tempo: "1:35.123" },
                 { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", tempo: "+2.500" }
             ]
+        },
+        
+    ],
+
+    "videos": [
+        {
+            titulo: "GP de Interlagos - Melhores Momentos",
+            data: "20/01/2026",
+            youtubeId: "L2Wg9yx7lsk" // Apenas o código final do link do YouTube
+        },
+        {
+            titulo: "Copa Ignition - Round 1",
+            data: "15/01/2026",
+            youtubeId: "L2Wg9yx7lsk"
         }
     ]
+
+    
 };
