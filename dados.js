@@ -155,7 +155,8 @@ const db = {
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
                 { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
             ]
-        },{
+        },
+        {
             nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
             pais: "Estados Unidos",
             imagem: "img/tracks/2026trackaustindetailed.avif",
