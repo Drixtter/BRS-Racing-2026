@@ -1,6 +1,6 @@
 const db = {
     "drivers_ignition": [
-        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 460, "sr": 0 },
+        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 999, "sr": 0 },
         { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 285, "sr": -5 },
         { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 380, "sr": 10 },
         { "name": "George Russell", "team": "Mercedes-AMG", "points": 295, "sr": -2 },
@@ -109,15 +109,26 @@ const db = {
     ],
     "pistas": [
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
-            drs: 2,
+            nome: "Próxima Etapa Albert Park - 09/03/2026 21:45h",
+            pais: "Austrália",
+            imagem: "img/tracks/2026trackmelbournedetailed.avif",
+            comprimento: "5.278 km",
+            curvas: 14,
+            drs: 4,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
                 { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
+            ]
+        },
+        {
+            nome: "Próxima Etapa Shanghai - 16/03/2026 21:45h",
+            pais: "China",
+            imagem: "img/tracks/2026trackshanghaidetailed.avif",
+            comprimento: "5.451 km",
+            curvas: 16,
+            drs: 2,
+            resultados: [
+               
             ]
         },
         {
@@ -133,11 +144,11 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
+            nome: "Próxima Etapa Suzuka - 02/02/2026 21:45h",
+            pais: "Japão",
+            imagem: "img/tracks/2026tracksuzukadetailed.avif",
+            comprimento: "5.807 km",
+            curvas: 18,
             drs: 2,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
@@ -145,11 +156,11 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
+            nome: "Próxima Sakhir - 02/02/2026 21:45h",
+            pais: "Bahrain",
+            imagem: "img/tracks/Bahrain_Circuit.avif",
+            comprimento: "5.412 km",
+            curvas: 15,
             drs: 2,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
@@ -157,11 +168,35 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
+            nome: "Próxima Etapa Jeddah - 02/02/2026 21:45h",
+            pais: "Arábia Saudita",
+            imagem: "img/tracks/2026trackjeddahdetailed.avif",
+            comprimento: "6.174 km",
+            curvas: 27,
+            drs: 3,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
+            ]
+        },
+        {
+            nome: "Próxima Etapa Las Vegas - 02/02/2026 21:45h",
             pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
+            imagem: "img/tracks/2026tracklasvegasdetailed.avif",
+            comprimento: "6.012 km",
+            curvas: 17,
+            drs: 3,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
+            ]
+        },
+        {
+            nome: "Próxima Etapa Miami - 02/02/2026 21:45h",
+            pais: "Estados Unidos",
+            imagem: "img/tracks/2026trackmiamidetailed.avif",
+            comprimento: "5.041 km",
+            curvas: 19,
             drs: 2,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
@@ -169,11 +204,11 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
+            nome: "Próxima Etapa Interlagos - 02/02/2026 21:45h",
+            pais: "Brasil",
+            imagem: "img/tracks/2026trackinterlagosdetailed.avif",
+            comprimento: "4.309 km",
+            curvas: 15,
             drs: 2,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
@@ -181,11 +216,23 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
+            nome: "Próxima Etapa Monza - 02/02/2026 21:45h",
+            pais: "Itália",
+            imagem: "img/tracks/2026trackmonzadetailed.avif",
+            comprimento: "5.793 km",
+            curvas: 11,
+            drs: 3,
+            resultados: [
+                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
+                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
+            ]
+        },
+        {
+            nome: "Próxima Etapa Montreal - 02/02/2026 21:45h",
+            pais: "Canadá",
+            imagem: "img/tracks/2026trackmontrealdetailed.avif",
+            comprimento: "4.361 km",
+            curvas: 14,
             drs: 2,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
@@ -193,71 +240,23 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
-            drs: 2,
+            nome: "Próxima Etapa Monte Carlo - 02/02/2026 21:45h",
+            pais: "Mônaco",
+            imagem: "img/tracks/2026trackmontecarlodetailed.avif",
+            comprimento: "3.337 km",
+            curvas: 19,
+            drs: 1,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
                 { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
-            drs: 2,
-            resultados: [
-                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
-                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
-            ]
-        },
-        {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
-            drs: 2,
-            resultados: [
-                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
-                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
-            ]
-        },
-        {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
-            drs: 2,
-            resultados: [
-                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
-                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
-            ]
-        },
-        {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
-            drs: 2,
-            resultados: [
-                { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
-                { pos: 2, piloto: "Outro Piloto", equipe: "Mercedes", pontos: "26", bestlap: "1:35.123", tempo: "+2.500" }
-            ]
-        },
-        {
-            nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
-            pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
-            comprimento: "5.513 km",
-            curvas: 20,
+            nome: "Próxima Barcelona-Catalunya - 02/02/2026 21:45h",
+            pais: "Espanha",
+            imagem: "img/tracks/2026trackcatalunyadetailed.avif",
+            comprimento: "4.657 km",
+            curvas: 16,
             drs: 2,
             resultados: [
                 { pos: 1, piloto: "Adriano", equipe: "Ferrari", pontos: "35", bestlap: "1:35.123", tempo: "1:35.123" },
