@@ -266,7 +266,7 @@ const db = {
         {
             nome: "Próxima Etapa Austin - 02/02/2026 21:45h",
             pais: "Estados Unidos",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
+            imagem: "img/tracks/2026trackinterlagosdetailed.avif",
             comprimento: "5.513 km",
             curvas: 20,
             drs: 2,
