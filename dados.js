@@ -1,7 +1,7 @@
 const db = {
     "drivers_ignition": [
-        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 999, "sr": 0 },
-        { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 285, "sr": -5 },
+        { "name": "Nathan Quintal", "team": "Red Bull Racing", "points": 999, "sr": 0 },
+        { "name": "Sergio Pere", "team": "Red Bull Racing", "points": 285, "sr": -5 },
         { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 380, "sr": 10 },
         { "name": "George Russell", "team": "Mercedes-AMG", "points": 295, "sr": -2 },
         { "name": "Charles Leclerc", "team": "Scuderia Ferrari", "points": 360, "sr": 5 },
