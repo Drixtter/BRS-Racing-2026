@@ -287,7 +287,7 @@ const db = {
         {
             nome: "Próxima Etapa Imola - 02/02/2026 21:45h",
             pais: "Itália",
-            imagem: "img/tracks/2026trackaustindetailed.avif",
+            imagem: "img/tracks/Emilia_Romagna_Circuit.avif",
             comprimento: "5.513 km",
             curvas: 20,
             drs: 2,
