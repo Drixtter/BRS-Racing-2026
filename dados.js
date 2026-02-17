@@ -511,20 +511,10 @@ const db = {
             titulo: "GP de Interlagos - Melhores Momentos",
             data: "20/01/2026",
             youtubeId: "L2Wg9yx7lsk" // Apenas o código final do link do YouTube
-        },
-        {
-            titulo: "Copa Ignition - Round 1",
-            data: "15/01/2026",
-            youtubeId: "L2Wg9yx7lsk"
         }
     ],
 
    galeria: [
-    {
-      titulo: "Largada da pré-temporada",
-      data: "Fev/2026",
-      url: "img/galeria/F1_25_photo_20260216_075812.png"
-    },
     {
       titulo: "McLaren Team",
       data: "Fev/2026",
@@ -539,7 +529,12 @@ const db = {
       titulo: "Sauber Team",
       data: "Fev/2026",
       url: "img/galeria/Sauber_Team.png"
-    }
+    },
+    {
+      titulo: "Largada da pré-temporada",
+      data: "Fev/2026",
+      url: "img/galeria/F1_25_photo_20260216_075812.png"
+    }    
   ]   
     
 };
