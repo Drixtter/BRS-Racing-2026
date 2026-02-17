@@ -6,7 +6,7 @@ const midia = {
         "McLaren": "img/cars/2026mclarencarright.avif",
         "Aston Martin": "img/cars/2026astonmartincarright.avif",
         "Alpine": "img/cars/2026alpinecarright.avif",
-        "Kick Sauber": "img/cars/2026audicarright.avif",
+        "Kick Sauber": "img/cars/2025kicksaubercarright.avif",
         "RB": "img/cars/2026racingbullscarright.avif",
         "Williams": "img/cars/2026williamscarright.avif",
         "Haas": "img/cars/2026haasf1teamcarright.avif"

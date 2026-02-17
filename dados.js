@@ -1,7 +1,7 @@
 const db = {
     "drivers_ignition": [
-        { "name": "Nathan Quintal", "team": "Red Bull Racing", "points": 999, "sr": 0 },
-        { "name": "Sergio Pere", "team": "Red Bull Racing", "points": 285, "sr": -5 },
+        { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 999, "sr": 0 },
+        { "name": "Sergio Pérez", "team": "Red Bull Racing", "points": 285, "sr": -5 },
         { "name": "Lewis Hamilton", "team": "Mercedes-AMG", "points": 380, "sr": 10 },
         { "name": "George Russell", "team": "Mercedes-AMG", "points": 295, "sr": -2 },
         { "name": "Charles Leclerc", "team": "Scuderia Ferrari", "points": 360, "sr": 5 },
@@ -517,7 +517,24 @@ const db = {
             data: "15/01/2026",
             youtubeId: "L2Wg9yx7lsk"
         }
-    ]
+    ],
 
+   galeria: [
+    {
+      titulo: "Largada da pré-temporada",
+      data: "Fev/2026",
+      url: "img/galeria/F1_25_photo_20260216_075812.png"
+    },
+    {
+      titulo: "Largada da pré-temporada",
+      data: "Fev/2026",
+      url: "img/galeria/F1_25_photo_20260216_075812.png"
+    },
+    {
+      titulo: "Largada da pré-temporada",
+      data: "Fev/2026",
+      url: "img/galeria/F1_25_photo_20260216_075812.png"
+    }
+  ]   
     
 };
