@@ -526,14 +526,19 @@ const db = {
       url: "img/galeria/F1_25_photo_20260216_075812.png"
     },
     {
-      titulo: "Largada da pré-temporada",
+      titulo: "McLaren Team",
       data: "Fev/2026",
-      url: "img/galeria/F1_25_photo_20260216_075812.png"
+      url: "img/galeria/McLaren_Team.png"
     },
     {
-      titulo: "Largada da pré-temporada",
+      titulo: "Red Bull Team",
       data: "Fev/2026",
-      url: "img/galeria/F1_25_photo_20260216_075812.png"
+      url: "img/galeria/Red_Bull_Team.png"
+    },
+    {
+      titulo: "Sauber Team",
+      data: "Fev/2026",
+      url: "img/galeria/Sauber_Team.png"
     }
   ]   
     
