@@ -30,7 +30,7 @@ const midia = {
         "Daniel Ricciardo": "img/drivers/max.png",
         "Alex Albon": "img/drivers/max.png",
         "Logan Sargeant": "img/drivers/max.png",
-        "Kevin Magnussen": "img/drivers/max.png",
+        "Gabriel Cruzss": "img/drivers/max.png",
         "Nico Hulkenberg": "img/drivers/max.png"
     }
 };
