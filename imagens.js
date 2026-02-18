@@ -21,16 +21,16 @@ const midia = {
         "Adriano Drixtter": "img/drivers/adriano.png",
         "Renato Renato.R2Oliveira": "img/drivers/renato.png",
         "Lucas LucasCarnevali": "img/drivers/max.png",
+        "Gabriel Cruz": "img/drivers/max.png",
+        "Léo Flushh": "img/drivers/max.png",                
         "Lance Stroll": "img/drivers/max.png",
         "Pierre Gasly": "img/drivers/max.png",
         "Esteban Ocon": "img/drivers/max.png",
-        "Léo Flushh": "img/drivers/max.png",        
         "Valtteri Bottas": "img/drivers/max.png",
         "Yuki Tsunoda": "img/drivers/max.png",
         "Daniel Ricciardo": "img/drivers/max.png",
         "Alex Albon": "img/drivers/max.png",
         "Logan Sargeant": "img/drivers/max.png",
-        "Gabriel Cruz": "img/drivers/max.png",
         "Nico Hulkenberg": "img/drivers/max.png"
     }
 };

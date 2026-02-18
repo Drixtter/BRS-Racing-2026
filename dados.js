@@ -9,16 +9,16 @@ const db = {
         { "name": "Adriano Drixtter", "team": "McLaren", "points": 0, "sr": 0 },
         { "name": "Renato Renato.R2Oliveira", "team": "McLaren", "points": 0, "sr": 0 },
         { "name": "Lucas LucasCarnevali", "team": "Aston Martin", "points": 0, "sr": 0 },
+        { "name": "Gabriel Cruz", "team": "Haas", "points": 0, "sr": 0 },
+        { "name": "Léo Flushh", "team": "Kick Sauber", "points": 0, "sr": 0 },                
         { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
         { "name": "Pierre Gasly", "team": "Alpine", "points": 0, "sr": 0 },
         { "name": "Esteban Ocon", "team": "Alpine", "points": 0, "sr": 0 },
-        { "name": "Léo Flushh", "team": "Kick Sauber", "points": 0, "sr": 0 },
         { "name": "Valtteri Bottas", "team": "Kick Sauber", "points": 0, "sr": 0 },
         { "name": "Yuki Tsunoda", "team": "RB", "points": 0, "sr": 0 },
         { "name": "Daniel Ricciardo", "team": "RB", "points": 0, "sr": 0 },
         { "name": "Alex Albon", "team": "Williams", "points": 0, "sr": 0 },
         { "name": "Logan Sargeant", "team": "Williams", "points": 0, "sr": 0 },
-        { "name": "Gabriel Cruz", "team": "Haas", "points": 0, "sr": 0 },
         { "name": "Nico Hulkenberg", "team": "Haas", "points": 0, "sr": 0 }
     ],
     "drivers_evolution": [
