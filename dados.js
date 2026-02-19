@@ -513,7 +513,7 @@ const db = {
             youtubeId: "L2Wg9yx7lsk" // Apenas o código final do link do YouTube
         },
         {
-            titulo: "Pré-temporada 2026 - Disputa Drixtter X Guga",
+            titulo: "Pré-temporada 2026 - Drixtter X Guga",
             data: "09/02/2026",
             youtubeId: "s5EN-WnPhIg" // Apenas o código final do link do YouTube
         }
