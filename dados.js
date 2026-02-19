@@ -16,13 +16,13 @@ const db = {
         { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },                 
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "Lucas LucasCarnevali", "team": "Aston Martin", "points": 1, "sr": 0 },
+        { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },         
         { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Williams", "points": 0, "sr": 0 }       
+        { "name": "Logan Sargeant", "team": "Aston Martin", "points": 0, "sr": 0 }       
     ],
     "drivers_evolution": [
-        { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 2, "sr": 0 },
+        { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 1, "sr": 0 },
         { "name": "João Ferrigno", "team": "Red Bull Racing", "points": 1, "sr": 0 },
         { "name": "Nathan Nadadanad03", "team": "Mercedes-AMG", "points": 1, "sr": 0 },
         { "name": "Cristian Cris", "team": "Mercedes-AMG", "points": 1, "sr": 0 },
@@ -38,13 +38,13 @@ const db = {
         { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },                 
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "Lucas LucasCarnevali", "team": "Aston Martin", "points": 1, "sr": 0 },
+        { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },         
         { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Williams", "points": 0, "sr": 0 }     
+        { "name": "Logan Sargeant", "team": "Aston Martin", "points": 0, "sr": 0 }      
     ],
     "drivers_legacy": [
-        { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 3, "sr": 0 },
+        { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 1, "sr": 0 },
         { "name": "João Ferrigno", "team": "Red Bull Racing", "points": 1, "sr": 0 },
         { "name": "Nathan Nadadanad03", "team": "Mercedes-AMG", "points": 1, "sr": 0 },
         { "name": "Cristian Cris", "team": "Mercedes-AMG", "points": 1, "sr": 0 },
@@ -60,10 +60,10 @@ const db = {
         { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },                 
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "Lucas LucasCarnevali", "team": "Aston Martin", "points": 1, "sr": 0 },
+        { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },         
         { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Williams", "points": 0, "sr": 0 }     
+        { "name": "Logan Sargeant", "team": "Aston Martin", "points": 0, "sr": 0 }     
     ],
     "camp1": [
         { "r": 1, "track": "Austrália", "date": "08/03", "type": "Oficial" },
