@@ -513,9 +513,9 @@ const db = {
             youtubeId: "L2Wg9yx7lsk" // Apenas o código final do link do YouTube
         },
         {
-            titulo: "Testes de pré temporada 2026 - Disputa Drixtter X Guga",
+            titulo: "Pré-temporada 2026 - Disputa Drixtter X Guga",
             data: "09/02/2026",
-            youtubeId: "eXR6rwaFHPQ" // Apenas o código final do link do YouTube
+            youtubeId: "s5EN-WnPhIg" // Apenas o código final do link do YouTube
         }
     ],
 
