@@ -14,12 +14,12 @@ const db = {
         { "name": "Rafael Rafael94_Sam", "team": "RB", "points": 1, "sr": 0 },
         { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },                        
+        { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
+        { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
+        { "name": "Frank Violets", "team": "Kick Sauber", "points": 1, "sr": 0 },
+        { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Pierre Gasly", "team": "Alpine", "points": 0, "sr": 0 },
-        { "name": "Esteban Ocon", "team": "Alpine", "points": 0, "sr": 0 },
-        { "name": "Valtteri Bottas", "team": "Kick Sauber", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Williams", "points": 0, "sr": 0 },
-        { "name": "Nico Hulkenberg", "team": "Haas", "points": 0, "sr": 0 }
+        { "name": "Logan Sargeant", "team": "Williams", "points": 0, "sr": 0 }       
     ],
     "drivers_evolution": [
         { "name": "Max Verstappen", "team": "Red Bull Racing", "points": 0, "sr": 0 },

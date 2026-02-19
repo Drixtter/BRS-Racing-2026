@@ -25,12 +25,12 @@ const midia = {
         "Leal Flushh": "img/drivers/max.png",
         "Diego Dominguesdc13": "img/drivers/max.png",                        
         "Lance Stroll": "img/drivers/max.png",
-        "Pierre Gasly": "img/drivers/max.png",
-        "Esteban Ocon": "img/drivers/max.png",
-        "Valtteri Bottas": "img/drivers/max.png",
+        "Luis Syaazz1": "img/drivers/max.png",
+        "Rodrigo Pio197": "img/drivers/max.png",
+        "Frank Violets": "img/drivers/max.png",
         "Rafael Rafael94_Sam": "img/drivers/max.png",
         "Filipi filipialves": "img/drivers/max.png",
         "Logan Sargeant": "img/drivers/max.png",
-        "Nico Hulkenberg": "img/drivers/max.png"
+        "Vitor Hugo": "img/drivers/max.png"
     }
 };
