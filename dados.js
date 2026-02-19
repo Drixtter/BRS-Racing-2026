@@ -511,6 +511,11 @@ const db = {
             titulo: "GP de Interlagos - Melhores Momentos",
             data: "20/01/2026",
             youtubeId: "L2Wg9yx7lsk" // Apenas o código final do link do YouTube
+        },
+        {
+            titulo: "Testes de pré temporada 2026 - Disputa Drixtter X Guga",
+            data: "09/02/2026",
+            youtubeId: "eXR6rwaFHPQ" // Apenas o código final do link do YouTube
         }
     ],
 
