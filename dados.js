@@ -521,6 +521,21 @@ const db = {
 
    galeria: [
     {
+      titulo: "Aston Martin Team",
+      data: "Fev/2026",
+      url: "img/galeria/Aston_Team.png"
+    },
+    {
+      titulo: "Mercedes Team",
+      data: "Fev/2026",
+      url: "img/galeria/Mercedes_Team.png"
+    },
+    {
+      titulo: "Ferrari Team",
+      data: "Fev/2026",
+      url: "img/galeria/Ferrari_Team.png"
+    },
+    {
       titulo: "McLaren Team",
       data: "Fev/2026",
       url: "img/galeria/McLaren_Team.png"
