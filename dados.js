@@ -12,14 +12,14 @@ const db = {
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Leal Flushh", "team": "Kick Sauber", "points": 1, "sr": 0 },
         { "name": "Frank Violets", "team": "Kick Sauber", "points": 1, "sr": 0 },
-        { "name": "Rafael Rafael94_Sam", "team": "RB", "points": 1, "sr": 0 },
-        { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },                 
+        { "name": "Rafael Rafael94_Sam", "team": "Aston Martin", "points": 1, "sr": 0 },
+        { "name": "Filipi filipialves", "team": "Aston Martin", "points": 1, "sr": 0 },                 
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },         
-        { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Aston Martin", "points": 0, "sr": 0 }       
+        { "name": "Vaga 19", "team": "RB", "points": 0, "sr": 0 },
+        { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }       
     ],
     "drivers_evolution": [
         { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 1, "sr": 0 },
@@ -34,14 +34,14 @@ const db = {
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Leal Flushh", "team": "Kick Sauber", "points": 1, "sr": 0 },
         { "name": "Frank Violets", "team": "Kick Sauber", "points": 1, "sr": 0 },
-        { "name": "Rafael Rafael94_Sam", "team": "RB", "points": 1, "sr": 0 },
-        { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },                 
+        { "name": "Rafael Rafael94_Sam", "team": "Aston Martin", "points": 1, "sr": 0 },
+        { "name": "Filipi filipialves", "team": "Aston Martin", "points": 1, "sr": 0 },                 
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },         
-        { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Aston Martin", "points": 0, "sr": 0 }      
+        { "name": "Vaga 19", "team": "RB", "points": 0, "sr": 0 },
+        { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }       
     ],
     "drivers_legacy": [
         { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 1, "sr": 0 },
@@ -56,14 +56,14 @@ const db = {
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Leal Flushh", "team": "Kick Sauber", "points": 1, "sr": 0 },
         { "name": "Frank Violets", "team": "Kick Sauber", "points": 1, "sr": 0 },
-        { "name": "Rafael Rafael94_Sam", "team": "RB", "points": 1, "sr": 0 },
-        { "name": "Filipi filipialves", "team": "RB", "points": 1, "sr": 0 },                 
+        { "name": "Rafael Rafael94_Sam", "team": "Aston Martin", "points": 1, "sr": 0 },
+        { "name": "Filipi filipialves", "team": "Aston Martin", "points": 1, "sr": 0 },                 
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },         
-        { "name": "Lance Stroll", "team": "Aston Martin", "points": 0, "sr": 0 },
-        { "name": "Logan Sargeant", "team": "Aston Martin", "points": 0, "sr": 0 }     
+        { "name": "Vaga 19", "team": "RB", "points": 0, "sr": 0 },
+        { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }       
     ],
     "camp1": [
         { "r": 1, "track": "Austrália", "date": "08/03", "type": "Oficial" },
