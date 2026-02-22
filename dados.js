@@ -296,7 +296,7 @@ const db = {
             ]
         },
         {
-            nome: "Etapa Spa-Francorchamps - 19/07/2026 21:30h",
+            nome: "Etapa Spa - 19/07/2026 21:30h",
             pais: "Bélgica",
             imagem: "img/tracks/2026trackspafrancorchampsdetailed.avif",
             comprimento: "7.004 km",
@@ -384,7 +384,7 @@ const db = {
             ]
         },
         {
-            nome: "Etapa Spa-Francorchamps - 04/10/2026 21:30h",
+            nome: "Etapa Spa - 04/10/2026 21:30h",
             pais: "Bélgica",
             imagem: "img/tracks/2026trackspafrancorchampsdetailed.avif",
             comprimento: "7.004 km",

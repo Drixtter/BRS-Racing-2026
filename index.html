@@ -133,8 +133,8 @@
         </div>
     </div>
     <div class="nav-container">
-        <button class="nav-btn active" onclick="showSection('section-ignition', this)">🏆 Ignition CUP</button>
-        <button class="nav-btn" onclick="showSection('pilotos', this)">👤 Pilotos</button>
+        <button class="nav-btn" onclick="showSection('section-ignition', this)">🏆 Ignition CUP</button>
+        <button class="nav-btn active" onclick="showSection('pilotos', this)">👤 Pilotos</button>
         <button class="nav-btn" onclick="showSection('section-evolution', this)">🏆 Evolution CUP</button>
         <button class="nav-btn" onclick="showSection('calendario', this)">📅 Calendário</button>
         <button class="nav-btn" onclick="showSection('section-legacy', this)">🏆 Legacy CUP</button>
@@ -148,7 +148,7 @@
     </div>
     <div class="container">
         <!-- COPA IGNITION -->
-        <div id="section-ignition" class="section active">
+        <div id="section-ignition" class="section">
             <div class="panel-grid">
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>🏆 Ignition: Pilotos</h2><div class="header-labels"><span>Equipe</span><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-ignition-pilotos"></tbody></table></div></div></div>
                 <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Ignition: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-ignition-equipes"></tbody></table></div></div></div>
@@ -360,7 +360,7 @@
 </div>
 
 <!-- PILOTOS (Grid Visual) -->
-<div id="pilotos" class="section">
+<div id="pilotos" class="section active">
     <!-- Título Fixo que você pode mudar manualmente conforme a necessidade -->
     <div style="margin-bottom: 2rem; border-left: 4px solid var(--neon-cyan); padding-left: 15px;">
         <h2 style="font-family: 'Rajdhani', sans-serif; text-transform: uppercase; color: #fff; letter-spacing: 2px;">
@@ -579,6 +579,7 @@
         }
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof db !== 'undefined' && typeof midia !== 'undefined') {
+                // 1. Renderiza todos os dados em background
                 renderStandings(db.drivers_ignition, 'tbody-ignition-pilotos', 'tbody-ignition-equipes');
                 renderStandings(db.drivers_evolution, 'tbody-evolution-pilotos', 'tbody-evolution-equipes');
                 renderStandings(db.drivers_legacy, 'tbody-legacy-pilotos', 'tbody-legacy-equipes');
@@ -586,12 +587,17 @@
                 renderCalendar('tbody-camp2', db.camp2);
                 renderCalendar('tbody-camp3', db.camp3);
                 renderStats();
-                // Por padrão, mostra o grid da Ignition na aba Pilotos
-                renderDriversGrid(db.drivers_ignition);
-                updateFooterDate();
                 renderPistas(); 
                 renderVideos();
                 renderGaleria();
+                updateFooterDate();
+
+                // 2. Garante que o Grid de Pilotos seja preenchido
+                renderDriversGrid(db.drivers_ignition);
+
+                // 3. Força a aba Pilotos a ser a inicial (opcional, mas garante o foco)
+                const btnPilotos = document.querySelector('button[onclick*="pilotos"]');
+                showSection('pilotos', btnPilotos);
             }
         });
     </script>
