@@ -361,6 +361,14 @@
 
 <!-- PILOTOS (Grid Visual) -->
 <div id="pilotos" class="section">
+    <!-- Título Fixo que você pode mudar manualmente conforme a necessidade -->
+    <div style="margin-bottom: 2rem; border-left: 4px solid var(--neon-cyan); padding-left: 15px;">
+        <h2 style="font-family: 'Rajdhani', sans-serif; text-transform: uppercase; color: #fff; letter-spacing: 2px;">
+            🏆 CAMPEONATO ATUAL: <span style="color: var(--neon-cyan)">IGNITION CUP</span>
+        </h2>
+    </div>
+
+    <!-- Onde os cards serão gerados -->
     <div class="drivers-grid" id="drivers-grid"></div>
 </div>
 
@@ -517,8 +525,11 @@
         function renderDriversGrid(data) {
             const grid = document.getElementById('drivers-grid');
             if(!grid) return;
-            const sorted = [...data].sort((a,b)=>b.points-a.points);
 
+            // Organiza por pontos
+            const sorted = [...data].sort((a,b) => b.points - a.points);
+
+            // Gera apenas a lista de cards
             grid.innerHTML = sorted.map((d, i) => {
                 const dImg = (typeof midia !== 'undefined' && midia.pilotos && midia.pilotos[d.name]) ? midia.pilotos[d.name] : 'https://via.placeholder.com/80?text=Piloto';
                 const cImg = (typeof midia !== 'undefined' && midia.carros && midia.carros[d.team]) ? midia.carros[d.team] : 'https://via.placeholder.com/300x100?text=Carro';
@@ -531,8 +542,6 @@
                 <div class="driver-box">
                     <div class="driver-header">
                         <div class="driver-rank ${getRankClass(i)}">${i+1}º</div>
-
-                        <!-- Aqui PTS e SR aparecem na mesma linha -->
                         <div class="driver-meta">
                             <div class="driver-points">${d.points} PTS</div>
                             <div class="driver-sr-inline">
@@ -560,6 +569,7 @@
                 `;
             }).join('');
         }
+
 
         function updateFooterDate() {
             const t = new Date();

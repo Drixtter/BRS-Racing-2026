@@ -109,7 +109,7 @@ const db = {
     ],
     "pistas": [
         {
-            nome: "Próxima Etapa Albert Park - 08/03/2026 21:30h",
+            nome: "Etapa Albert Park - 08/03/2026 21:30h",
             pais: "Austrália",
             imagem: "img/tracks/2026trackmelbournedetailed.avif",
             comprimento: "5.278 km",
@@ -120,7 +120,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Shanghai - 15/03/2026 21:30h",
+            nome: "Etapa Shanghai - 15/03/2026 21:30h",
             pais: "China",
             imagem: "img/tracks/2026trackshanghaidetailed.avif",
             comprimento: "5.451 km",
@@ -131,7 +131,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 22/03/2026 21:30h",
+            nome: "Etapa Austin - 22/03/2026 21:30h",
             pais: "Estados Unidos",
             imagem: "img/tracks/2026trackaustindetailed.avif",
             comprimento: "5.513 km",
@@ -142,7 +142,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Suzuka - 29/03/2026 21:30h",
+            nome: "Etapa Suzuka - 29/03/2026 21:30h",
             pais: "Japão",
             imagem: "img/tracks/2026tracksuzukadetailed.avif",
             comprimento: "5.807 km",
@@ -153,7 +153,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Sakhir - 12/04/2026 21:30h",
+            nome: "Etapa Sakhir - 12/04/2026 21:30h",
             pais: "Bahrain",
             imagem: "img/tracks/Bahrain_Circuit.avif",
             comprimento: "5.412 km",
@@ -164,7 +164,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Jeddah - 19/04/2026 21:30h",
+            nome: "Etapa Jeddah - 19/04/2026 21:30h",
             pais: "Arábia Saudita",
             imagem: "img/tracks/2026trackjeddahdetailed.avif",
             comprimento: "6.174 km",
@@ -175,7 +175,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Las Vegas - 26/04/2026 21:30h",
+            nome: "Etapa Las Vegas - 26/04/2026 21:30h",
             pais: "Estados Unidos",
             imagem: "img/tracks/2026tracklasvegasdetailed.avif",
             comprimento: "6.012 km",
@@ -186,7 +186,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Miami - 03/05/2026 21:30h",
+            nome: "Etapa Miami - 03/05/2026 21:30h",
             pais: "Estados Unidos",
             imagem: "img/tracks/2026trackmiamidetailed.avif",
             comprimento: "5.041 km",
@@ -197,7 +197,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Interlagos - 10/05/2026 21:30h",
+            nome: "Etapa Interlagos - 10/05/2026 21:30h",
             pais: "Brasil",
             imagem: "img/tracks/2026trackinterlagosdetailed.avif",
             comprimento: "4.309 km",
@@ -208,7 +208,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Monza - 17/05/2026 21:30h",
+            nome: "Etapa Monza - 17/05/2026 21:30h",
             pais: "Itália",
             imagem: "img/tracks/2026trackmonzadetailed.avif",
             comprimento: "5.793 km",
@@ -219,7 +219,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Montreal - 24/05/2026 21:30h",
+            nome: "Etapa Montreal - 24/05/2026 21:30h",
             pais: "Canadá",
             imagem: "img/tracks/2026trackmontrealdetailed.avif",
             comprimento: "4.361 km",
@@ -230,7 +230,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Monte Carlo - 01/06/2026 21:30h",
+            nome: "Etapa Monte Carlo - 01/06/2026 21:30h",
             pais: "Mônaco",
             imagem: "img/tracks/2026trackmontecarlodetailed.avif",
             comprimento: "3.337 km",
@@ -241,7 +241,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Barcelona-Catalunya - 14/06/2026 21:30h",
+            nome: "Etapa Barcelona - 14/06/2026 21:30h",
             pais: "Espanha",
             imagem: "img/tracks/2026trackcatalunyadetailed.avif",
             comprimento: "4.657 km",
@@ -252,7 +252,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Suzuka - 21/06/2026 21:30h",
+            nome: "Etapa Suzuka - 21/06/2026 21:30h",
             pais: "Japão",
             imagem: "img/tracks/2026tracksuzukadetailed.avif",
             comprimento: "5.807 km",
@@ -263,7 +263,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Red Bull Ring - 28/06/2026 21:30h",
+            nome: "Etapa Red Bull Ring - 28/06/2026 21:30h",
             pais: "Áustria",
             imagem: "img/tracks/2026trackspielbergdetailed.avif",
             comprimento: "4.318 km",
@@ -274,7 +274,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Silverstone - 05/07/2026 21:30h",
+            nome: "Etapa Silverstone - 05/07/2026 21:30h",
             pais: "Grâ-Bretanha",
             imagem: "img/tracks/2026tracksilverstonedetailed.avif",
             comprimento: "5.891 km",
@@ -285,7 +285,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Imola - 12/07/2026 21:30h",
+            nome: "Etapa Imola - 12/07/2026 21:30h",
             pais: "Itália",
             imagem: "img/tracks/Emilia_Romagna_Circuit.avif",
             comprimento: "4.909 km",
@@ -296,7 +296,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Spa-Francorchamps - 19/07/2026 21:30h",
+            nome: "Etapa Spa-Francorchamps - 19/07/2026 21:30h",
             pais: "Bélgica",
             imagem: "img/tracks/2026trackspafrancorchampsdetailed.avif",
             comprimento: "7.004 km",
@@ -307,7 +307,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Hungaroring - 26/07/2026 21:30h",
+            nome: "Etapa Hungaroring - 26/07/2026 21:30h",
             pais: "Hungria",
             imagem: "img/tracks/2026trackhungaroringdetailed.avif",
             comprimento: "4.381 km",
@@ -318,7 +318,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Shakir - 09/08/2026 21:30h",
+            nome: "Etapa Shakir - 09/08/2026 21:30h",
             pais: "Bahrein",
             imagem: "img/tracks/Bahrain_Circuit.avif",
             comprimento: "5.412 km",
@@ -329,7 +329,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Zandvoort - 23/08/2026 21:30h",
+            nome: "Etapa Zandvoort - 23/08/2026 21:30h",
             pais: "Holanda",
             imagem: "img/tracks/2026trackzandvoortdetailed.avif",
             comprimento: "4.226 km",
@@ -340,7 +340,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Montreal - 30/08/2026 21:30h",
+            nome: "Etapa Montreal - 30/08/2026 21:30h",
             pais: "Canadá",
             imagem: "img/tracks/2026trackmontrealdetailed.avif",
             comprimento: "4.361 km",
@@ -351,7 +351,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Monza - 06/09/2026 21:30h",
+            nome: "Etapa Monza - 06/09/2026 21:30h",
             pais: "Itália",
             imagem: "img/tracks/2026trackmonzadetailed.avif",
             comprimento: "5.793 km",
@@ -362,7 +362,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Interlagos - 13/09/2026 21:30h",
+            nome: "Etapa Interlagos - 13/09/2026 21:30h",
             pais: "Brasil",
             imagem: "img/tracks/2026trackinterlagosdetailed.avif",
             comprimento: "4.309 km",
@@ -373,7 +373,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Baku - 27/09/2026 21:30h",
+            nome: "Etapa Baku - 27/09/2026 21:30h",
             pais: "Azerbaijão",
             imagem: "img/tracks/2026trackbakudetailed.avif",
             comprimento: "6.003 km",
@@ -384,7 +384,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Spa-Francorchamps - 04/10/2026 21:30h",
+            nome: "Etapa Spa-Francorchamps - 04/10/2026 21:30h",
             pais: "Bélgica",
             imagem: "img/tracks/2026trackspafrancorchampsdetailed.avif",
             comprimento: "7.004 km",
@@ -395,7 +395,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Marina Bay - 11/10/2026 21:30h",
+            nome: "Etapa Marina Bay - 11/10/2026 21:30h",
             pais: "Singapura",
             imagem: "img/tracks/2026tracksingaporedetailed.avif",
             comprimento: "5.513 km",
@@ -406,7 +406,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Red Bull Ring - 18/10/2026 21:30h",
+            nome: "Etapa Red Bull Ring - 18/10/2026 21:30h",
             pais: "Áustria",
             imagem: "img/tracks/2026trackspielbergdetailed.avif",
             comprimento: "4.318 km",
@@ -416,7 +416,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Austin - 25/10/2026 21:30h",
+            nome: "Etapa Austin - 25/10/2026 21:30h",
             pais: "Estados Unidos",
             imagem: "img/tracks/2026trackaustindetailed.avif",
             comprimento: "5.513 km",
@@ -427,7 +427,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Cidade Do México - 01/11/2026 21:30h",
+            nome: "Etapa Cidade Do México - 01/11/2026 21:30h",
             pais: "México",
             imagem: "img/tracks/2026trackmexicocitydetailed.avif",
             comprimento: "4.304 km",
@@ -438,7 +438,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Interlagos - 08/11/2026 21:30h",
+            nome: "Etapa Interlagos - 08/11/2026 21:30h",
             pais: "Brasil",
             imagem: "img/tracks/2026trackinterlagosdetailed.avif",
             comprimento: "4.309 km",
@@ -449,7 +449,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Jeddah - 15/11/2026 21:30h",
+            nome: "Etapa Jeddah - 15/11/2026 21:30h",
             pais: "Arábia Saudita",
             imagem: "img/tracks/2026trackjeddahdetailed.avif",
             comprimento: "6.1711 km",
@@ -460,7 +460,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Las Vegas - 22/11/2026 21:30h",
+            nome: "Etapa Las Vegas - 22/11/2026 21:30h",
             pais: "Estados Unidos",
             imagem: "img/tracks/2026tracklasvegasdetailed.avif",
             comprimento: "6.202 km",
@@ -471,7 +471,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Losail - 29/11/2026 21:30h",
+            nome: "Etapa Losail - 29/11/2026 21:30h",
             pais: "Qatar",
             imagem: "img/tracks/2026tracklusaildetailed.avif",
             comprimento: "5.419 km",
@@ -482,7 +482,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Etapa Silverstone - 06/12/2026 21:30h",
+            nome: "Etapa Silverstone - 06/12/2026 21:30h",
             pais: "Grã-Bretanha",
             imagem: "img/tracks/2026tracksilverstonedetailed.avif",
             comprimento: "5.891 km",
@@ -493,7 +493,7 @@ const db = {
             ]
         },
         {
-            nome: "Próxima Yas Marina - 13/12/2026 21:30h",
+            nome: "Etapa Yas Marina - 13/12/2026 21:30h",
             pais: "Abu Dhabi",
             imagem: "img/tracks/2026trackyasmarinacircuitdetailed.avif",
             comprimento: "5.554 km",
