@@ -521,6 +521,11 @@ const db = {
 
    galeria: [
     {
+      titulo: "Troféus 2026",
+      data: "Fev/2026",
+      url: "img/galeria/cups.png"
+    },
+    {
       titulo: "Alpine Team",
       data: "Fev/2026",
       url: "img/galeria/Alpine_Team.png"
