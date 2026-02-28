@@ -521,9 +521,24 @@ const db = {
 
    galeria: [
     {
-      titulo: "Troféus de 2026",
+      titulo: "Troféus 2026",
       data: "Fev/2026",
       url: "img/galeria/cups.png"
+    },
+    {
+      titulo: "Alpine Team",
+      data: "Fev/2026",
+      url: "img/galeria/Alpine_Team.png"
+    },
+    {
+      titulo: "Haas Team",
+      data: "Fev/2026",
+      url: "img/galeria/Haas_Team.png"
+    },
+    {
+      titulo: "Williams Team",
+      data: "Fev/2026",
+      url: "img/galeria/Williams_Team.png"
     },
     {
       titulo: "Aston Martin Team",
