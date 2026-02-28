@@ -521,6 +521,11 @@ const db = {
 
    galeria: [
     {
+      titulo: "Troféus de 2026",
+      data: "Fev/2026",
+      url: "img/galeria/cups.png"
+    },
+    {
       titulo: "Aston Martin Team",
       data: "Fev/2026",
       url: "img/galeria/Aston_Team.png"
