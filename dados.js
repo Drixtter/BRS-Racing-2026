@@ -521,6 +521,11 @@ const db = {
 
    galeria: [
     {
+      titulo: "Chefe - Estratégia alinhada",
+      data: "Fev/2026",
+      url: "img/galeria/McLaren_Team_01.png"
+    },    
+    {
       titulo: "Troféus 2026",
       data: "Fev/2026",
       url: "img/galeria/cups.png"
