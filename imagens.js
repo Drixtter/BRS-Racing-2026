@@ -30,7 +30,7 @@ const midia = {
         "Rafael Rafael94_Sam": "img/drivers/rafael.png",
         "Filipi filipialves": "img/drivers/filipi.png",
         "Vitor Hugo": "img/drivers/vitor.png",
-        "Vaga 19": "img/drivers/max.png",
+        "João Victor": "img/drivers/joaovictor.png",
         "Vaga 20": "img/drivers/max.png"
     }
 };

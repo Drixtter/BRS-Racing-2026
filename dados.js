@@ -18,7 +18,7 @@ const db = {
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "Vaga 19", "team": "RB", "points": 0, "sr": 0 },
+        { "name": "João Victor", "team": "RB", "points": 0, "sr": 0 },
         { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }      
     ],
     "drivers_evolution": [
@@ -40,7 +40,7 @@ const db = {
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "Vaga 19", "team": "RB", "points": 0, "sr": 0 },
+        { "name": "João Victor", "team": "RB", "points": 0, "sr": 0 },
         { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }   
     ],
     "drivers_legacy": [
@@ -62,7 +62,7 @@ const db = {
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "Vaga 19", "team": "RB", "points": 0, "sr": 0 },
+        { "name": "João Victor", "team": "RB", "points": 0, "sr": 0 },
         { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }      
     ],
     "camp1": [
