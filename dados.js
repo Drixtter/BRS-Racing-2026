@@ -16,10 +16,11 @@ const db = {
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Gabriel Cruz", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
-        { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
+        { "name": "Fabio", "team": "Alpine", "points": 1, "sr": 0 },            
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "João Victor", "team": "RB", "points": 1, "sr": 0 },
-        { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }      
+        { "name": "Luis Syaazz1", "team": "RB", "points": 1, "sr": 0 },
+        { "name": "João Victor", "team": "RB", "points": 1, "sr": 0 }
+
     ],
     "drivers_evolution": [
         { "name": "Nathan Nadadanad03", "team": "Mercedes-AMG", "points": 1, "sr": 0 },
@@ -38,10 +39,10 @@ const db = {
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Gabriel Cruz", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
-        { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
+        { "name": "Fabio", "team": "Alpine", "points": 1, "sr": 0 },            
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "João Victor", "team": "RB", "points": 1, "sr": 0 },
-        { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }   
+        { "name": "Luis Syaazz1", "team": "RB", "points": 1, "sr": 0 },
+        { "name": "João Victor", "team": "RB", "points": 1, "sr": 0 } 
     ],
     "drivers_legacy": [
         { "name": "Nathan Nadadanad03", "team": "Mercedes-AMG", "points": 1, "sr": 0 },
@@ -60,10 +61,10 @@ const db = {
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 1, "sr": 0 },
         { "name": "Gabriel Cruz", "team": "Haas", "points": 1, "sr": 0 },
         { "name": "Vitor Hugo", "team": "Haas", "points": 1, "sr": 0 },
-        { "name": "Luis Syaazz1", "team": "Alpine", "points": 1, "sr": 0 },
+        { "name": "Fabio", "team": "Alpine", "points": 1, "sr": 0 },            
         { "name": "Rodrigo Pio197", "team": "Alpine", "points": 1, "sr": 0 },
-        { "name": "João Victor", "team": "RB", "points": 1, "sr": 0 },
-        { "name": "Vaga 20", "team": "RB", "points": 0, "sr": 0 }      
+        { "name": "Luis Syaazz1", "team": "RB", "points": 1, "sr": 0 },
+        { "name": "João Victor", "team": "RB", "points": 1, "sr": 0 } 
     ],
     "camp1": [
         { "r": 1, "track": "Austrália", "date": "08/03", "type": "Oficial" },

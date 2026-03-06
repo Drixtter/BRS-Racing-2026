@@ -31,6 +31,6 @@ const midia = {
         "Filipi filipialves": "img/drivers/filipi.png",
         "Vitor Hugo": "img/drivers/vitor.png",
         "João Victor": "img/drivers/joaovictor.png",
-        "Vaga 20": "img/drivers/max.png"
+        "Fabio": "img/drivers/fabio.png"
     }
 };
