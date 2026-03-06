@@ -522,6 +522,11 @@ const db = {
 
    galeria: [
     {
+      titulo: "RB Team",
+      data: "Fev/2026",
+      url: "img/galeria/RB_Team.png"
+    },        
+    {
       titulo: "Chefe - Estratégia alinhada",
       data: "Fev/2026",
       url: "img/galeria/McLaren_Team_01.png"
