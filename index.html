@@ -385,6 +385,9 @@
             const container = document.getElementById('pistas-container');
             if (!container || !db.pistas) return;
 
+            // Sobrescreve o grid somente para o container de pistas
+            container.style.gridTemplateColumns = 'repeat(2, 1fr)';
+
             container.innerHTML = db.pistas.map(pista => `
                 <div class="card">
                     <div class="card-inner">
@@ -393,7 +396,7 @@
                             <div class="header-labels">${pista.pais}</div>
                         </div>
                         <div style="text-align:center; padding: 1rem;">
-                            <img src="${pista.imagem}" style="max-width: 400px; width:100%; filter: drop-shadow(0 0 10px var(--neon-cyan));">
+                            <img src="${pista.imagem}" style="max-width: 700px; width:100%; filter: drop-shadow(0 0 10px var(--neon-cyan));">
                         </div>
                         <div class="rules-content" style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                             <p><strong>Comprimento:</strong> ${pista.comprimento}</p>
@@ -417,8 +420,6 @@
                                         <td class="name-col">${res.piloto}</td>
                                         <td class="team-col">${res.equipe}</td>
                                         <td class="pos-col">${res.pontos || 0}</td>
-                                        
-                                        
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -501,19 +502,43 @@
             `).join('');
         }
         function renderStats() {
-            // Usando Ignition como base para stats por enquanto
             const vBody = document.getElementById('tbody-stats-vitorias');
             const pBody = document.getElementById('tbody-stats-poles');
-            if(!vBody || !pBody) return;
-            const drivers = db.drivers_ignition; 
-            const vitoriosos = [...drivers].sort((a, b) => b.points - a.points).slice(0, 5);
+            if (!vBody || !pBody) return;
+
+            const drivers = db.drivers_ignition;
+
+            // Tabela de Vitórias — estimativa via pontos, somente quem tem ao menos 1
+            const vitoriosos = [...drivers]
+                .filter(d => Math.floor(d.points / 30) >= 1)
+                .sort((a, b) => b.points - a.points)
+                .slice(0, 5);
+
             vBody.innerHTML = vitoriosos.map((d, i) => `
-                <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${Math.floor(d.points/25)}</td></tr>
+                <tr>
+                    <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
+                    <td class="name-col">${d.name}</td>
+                    <td class="team-col">${d.team}</td>
+                    <td class="pts-col">${Math.floor(d.points / 30)}</td>
+                </tr>
             `).join('');
-            const polemen = [...drivers].sort((a, b) => b.points - a.points).slice(0, 5);
-            pBody.innerHTML = polemen.map((d, i) => `
-                <tr><td class="pos-col ${getRankClass(i)}">${i+1}</td><td class="name-col">${d.name}</td><td class="team-col">${d.team}</td><td class="pts-col">${Math.floor(d.points/40)}</td></tr>
-            `).join('');
+
+            // Tabela de Poles — lê diretamente do campo "poles", somente quem tem ao menos 1
+            const polemen = [...drivers]
+                .filter(d => d.poles >= 1)
+                .sort((a, b) => b.poles - a.poles)
+                .slice(0, 5);
+
+            pBody.innerHTML = polemen.length > 0
+                ? polemen.map((d, i) => `
+                    <tr>
+                        <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
+                        <td class="name-col">${d.name}</td>
+                        <td class="team-col">${d.team}</td>
+                        <td class="pts-col">${d.poles}</td>
+                    </tr>
+                `).join('')
+                : `<tr><td colspan="4" style="text-align:center; opacity:.5;">Nenhuma pole registrada</td></tr>`;
         }
         function renderCalendar(id, data) {
             const tbody = document.getElementById(id);
