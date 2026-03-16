@@ -148,13 +148,13 @@ const db = {
             resultados: [
                 { "pos": 1,  "piloto": "Frank Violets",           "equipe": "Kick Sauber",      "pontos": 30 },
                 { "pos": 2,  "piloto": "Leal Flushh",             "equipe": "Kick Sauber",      "pontos": 25 },
-                { "pos": 3,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 21  },
+                { "pos": 3,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 21 },
                 { "pos": 4, "piloto": "João Victor",             "equipe": "RB",               "pontos": 18  } 
                 { "pos": 5, "piloto": "Gustavo Guga",            "equipe": "Red Bull Racing",  "pontos": 16  },
                 { "pos": 6, "piloto": "Cristian Cris",           "equipe": "Mercedes-AMG",     "pontos": 14  },
                 { "pos": 7, "piloto": "Renato Renato.R2Oliveira","equipe": "McLaren",          "pontos": 12  },
-                { "pos": 8, "piloto": "Luis Syaazz1",             "equipe": "RB",               "pontos": 10  },
-                { "pos": 9, "piloto": "Lucas LucasCarnevali",    "equipe": "Williams",         "pontos": 8  },
+                { "pos": 8, "piloto": "Luis Syaazz1",             "equipe": "RB",               "pontos": 10 },
+                { "pos": 9, "piloto": "Lucas LucasCarnevali",    "equipe": "Williams",         "pontos": 8   },
                 { "pos": 10,  "piloto": "Adriano Drixtter",        "equipe": "McLaren",          "pontos": 7 },
                 { "pos": 11,  "piloto": "Fabio",                   "equipe": "Alpine",           "pontos": 6 },
                 { "pos": 12, "piloto": "Fernando procopiodearruda","equipe": "Scuderia Ferrari","pontos": 5  },
