@@ -508,10 +508,10 @@
 
             const drivers = db.drivers_ignition;
 
-            // Tabela de Vitórias — estimativa via pontos, somente quem tem ao menos 1
+            // Tabela de Vitórias — contando as vitórias reais, somente quem tem ao menos 1
             const vitoriosos = [...drivers]
-                .filter(d => Math.floor(d.points / 30) >= 1)
-                .sort((a, b) => b.points - a.points)
+                .filter(d => d.wins >= 1) // Filtra pilotos com ao menos 1 vitória real
+                .sort((a, b) => b.wins - a.wins) // Ordena pelo número de vitórias reais (descendente)
                 .slice(0, 5);
 
             vBody.innerHTML = vitoriosos.map((d, i) => `
@@ -519,7 +519,7 @@
                     <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
                     <td class="name-col">${d.name}</td>
                     <td class="team-col">${d.team}</td>
-                    <td class="pts-col">${Math.floor(d.points / 30)}</td>
+                    <td class="pts-col">${d.wins}</td>
                 </tr>
             `).join('');
 
