@@ -9,7 +9,7 @@ const db = {
     { "name": "Julian JuScata",            "team": "Scuderia Ferrari", "points": 18,  "sr": 0, "poles": 0, "wins": 0 },
     { "name": "Fernando procopiodearruda", "team": "Scuderia Ferrari", "points": 5,   "sr": 0, "poles": 0, "wins": 0 },
     { "name": "Rafael Rafael94_Sam",       "team": "Aston Martin",     "points": 0,   "sr": 0, "poles": 0, "wins": 0 },
-    { "name": "Filipi filipialves",        "team": "Aston Martin",     "points": 21,  "sr": 0, "poles": 0, "wins": 0 },
+    { "name": "Filipi filipialves",        "team": "Aston Martin",     "points": 21,  "sr": -10, "poles": 0, "wins": 0 },
     { "name": "Leal Flushh",               "team": "Kick Sauber",      "points": 50,  "sr": 0, "poles": 0, "wins": 0 },
     { "name": "Frank Violets",             "team": "Kick Sauber",      "points": 60,  "sr": 0, "poles": 1, "wins": 2 },
     { "name": "Lucas LucasCarnevali",      "team": "Williams",         "points": 8,   "sr": 0, "poles": 0, "wins": 0 },
