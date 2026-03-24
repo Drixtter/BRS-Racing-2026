@@ -68,7 +68,7 @@ const db = {
     "camp1": [
         { "r": 1, "track": "Austrália", "date": "Realizado em 08/03", "type": "Oficial" },
         { "r": 2, "track": "China", "date": "Realizado em 15/03", "type": "Oficial" },
-        { "r": 3, "track": "EUA - Austin", "date": "22/03", "type": "Extra" },
+        { "r": 3, "track": "EUA - Austin", "date": "Realizado em 22/03", "type": "Extra" },
         { "r": 4, "track": "Japão", "date": "29/03", "type": "Oficial" },
         { "r": 5, "track": "Bahrein", "date": "12/04", "type": "Oficial" },
         { "r": 6, "track": "Arábia Saudita", "date": "19/04", "type": "Oficial" },
@@ -123,19 +123,7 @@ const db = {
                 { "pos": 5,  "piloto": "João Ferrigno",           "equipe": "Red Bull Racing",  "pontos": 16 },
                 { "pos": 6,  "piloto": "Adriano Drixtter",        "equipe": "McLaren",          "pontos": 14 },
                 { "pos": 7,  "piloto": "Diego Dominguesdc13",     "equipe": "Williams",         "pontos": 12 },
-                { "pos": 8,  "piloto": "Fabio",                   "equipe": "Alpine",           "pontos": 10 },
-                { "pos": 9,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 0  },
-                { "pos": 10, "piloto": "Cristian Cris",           "equipe": "Mercedes-AMG",     "pontos": 0  },
-                { "pos": 11, "piloto": "Renato Renato.R2Oliveira","equipe": "McLaren",          "pontos": 0  },
-                { "pos": 12, "piloto": "Gustavo Guga",            "equipe": "Red Bull Racing",  "pontos": 0  },
-                { "pos": 13, "piloto": "Fernando procopiodearruda","equipe": "Scuderia Ferrari","pontos": 0  },
-                { "pos": 14, "piloto": "Rafael Rafael94_Sam",     "equipe": "Aston Martin",     "pontos": 0  },
-                { "pos": 15, "piloto": "Lucas LucasCarnevali",    "equipe": "Williams",         "pontos": 0  },
-                { "pos": 16, "piloto": "Gabriel Cruz",            "equipe": "Haas",             "pontos": 0  },
-                { "pos": 17, "piloto": "Vitor Hugo",              "equipe": "Haas",             "pontos": 0  },
-                { "pos": 18, "piloto": "Rodrigo Pio197",          "equipe": "Alpine",           "pontos": 0  },
-                { "pos": 19, "piloto": "Luis Syaazz1",            "equipe": "RB",               "pontos": 0  },
-                { "pos": 20, "piloto": "João Victor",             "equipe": "RB",               "pontos": 0  }
+                { "pos": 8,  "piloto": "Fabio",                   "equipe": "Alpine",           "pontos": 10 }
             ]
         },
         {
@@ -148,8 +136,8 @@ const db = {
             resultados: [
                 { "pos": 1,  "piloto": "Frank Violets",           "equipe": "Kick Sauber",      "pontos": 30 },
                 { "pos": 2,  "piloto": "Leal Flushh",             "equipe": "Kick Sauber",      "pontos": 25 },
-                { "pos": 3,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 21 },           
-                { "pos": 4,  "piloto": "João Victor",             "equipe": "RB",               "pontos": 18 },   
+                { "pos": 3,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 21 },
+                { "pos": 4,  "piloto": "João Victor",             "equipe": "RB",               "pontos": 18 },
                 { "pos": 5,  "piloto": "Gustavo Guga",            "equipe": "Red Bull Racing",  "pontos": 16 },
                 { "pos": 6,  "piloto": "Cristian Cris",           "equipe": "Mercedes-AMG",     "pontos": 14 },
                 { "pos": 7,  "piloto": "Renato Renato.R2Oliveira","equipe": "McLaren",          "pontos": 12 },
@@ -157,16 +145,7 @@ const db = {
                 { "pos": 9,  "piloto": "Lucas LucasCarnevali",    "equipe": "Williams",         "pontos":  8 },
                 { "pos": 10, "piloto": "Adriano Drixtter",        "equipe": "McLaren",          "pontos":  7 },
                 { "pos": 11, "piloto": "Fabio",                   "equipe": "Alpine",           "pontos":  6 },
-                { "pos": 12, "piloto": "Fernando procopiodearruda","equipe": "Scuderia Ferrari","pontos":  5 }, 
-                { "pos": 3,  "piloto": "Filipi filipialves",      "equipe": "Aston Martin",     "pontos":  0 },
-                { "pos": 4,  "piloto": "Julian JuScata",          "equipe": "Scuderia Ferrari", "pontos":  0 },
-                { "pos": 5,  "piloto": "João Ferrigno",           "equipe": "Red Bull Racing",  "pontos":  0 },
-                { "pos": 7,  "piloto": "Diego Dominguesdc13",     "equipe": "Williams",         "pontos":  0 },
-                { "pos": 14, "piloto": "Rafael Rafael94_Sam",     "equipe": "Aston Martin",     "pontos":  0 },
-                { "pos": 16, "piloto": "Gabriel Cruz",            "equipe": "Haas",             "pontos":  0 },
-                { "pos": 17, "piloto": "Vitor Hugo",              "equipe": "Haas",             "pontos":  0 },
-                { "pos": 18, "piloto": "Rodrigo Pio197",          "equipe": "Alpine",           "pontos":  0 },
-                { "pos": 20, "piloto": "João Victor",             "equipe": "RB",               "pontos":  0 }
+                { "pos": 12, "piloto": "Fernando procopiodearruda","equipe": "Scuderia Ferrari","pontos":  5 }
             ]
         },
         {
@@ -177,7 +156,18 @@ const db = {
             curvas: 20,
             drs: 2,
             resultados: [
-                
+                { "pos": 1,  "piloto": "Frank Violets",           "equipe": "Kick Sauber",      "pontos": 30 },
+                { "pos": 2,  "piloto": "Renato Renato.R2Oliveira","equipe": "McLaren",          "pontos": 25 },
+                { "pos": 3,  "piloto": "Cristian Cris",           "equipe": "Mercedes-AMG",     "pontos": 21 },
+                { "pos": 4,  "piloto": "Leal Flushh",             "equipe": "Kick Sauber",      "pontos": 18 },
+                { "pos": 5,  "piloto": "Gustavo Guga",            "equipe": "Red Bull Racing",  "pontos": 16 },
+                { "pos": 6,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 14 },
+                { "pos": 7,  "piloto": "João Ferrigno",           "equipe": "Red Bull Racing",  "pontos": 12 },
+                { "pos": 8, "piloto": "Rafael Rafael94_Sam",     "equipe": "Aston Martin",      "pontos": 10 },
+                { "pos": 9,  "piloto": "Julian JuScata",          "equipe": "Scuderia Ferrari", "pontos":  8 },
+                { "pos": 10,  "piloto": "Lucas LucasCarnevali",    "equipe": "Williams",        "pontos":  7 },
+                { "pos": 11, "piloto": "Adriano Drixtter",        "equipe": "McLaren",          "pontos":  6 },
+                { "pos": 12, "piloto": "Fernando procopiodearruda","equipe": "Scuderia Ferrari","pontos":  5 }
             ]
         },
         {
