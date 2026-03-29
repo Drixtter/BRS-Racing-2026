@@ -259,7 +259,7 @@ const db = {
             ]
         },
         {
-            nome: "Etapa Monte Carlo - 01/06/2026 21:30h",
+            nome: "Etapa Monte Carlo - 31/05/2026 21:30h",
             pais: "Mônaco",
             imagem: "img/tracks/2026trackmontecarlodetailed.avif",
             comprimento: "3.337 km",
