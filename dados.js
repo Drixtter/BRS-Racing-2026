@@ -21,6 +21,7 @@ const db = {
         { "name": "Luis Syaazz1", "team": "RB", "points": 10, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "João Victor", "team": "RB", "points": 18, "sr": 0, "poles": 1, "wins": 0 }
     ],
+
     "drivers_evolution": [
         { "name": "Nathan Nadadanad03", "team": "Mercedes-AMG", "points": 0, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Cristian Cris", "team": "Mercedes-AMG", "points": 0, "sr": 0, "poles": 0, "wins": 0 },
@@ -68,7 +69,7 @@ const db = {
     "camp1": [
         { "r": 1, "track": "Austrália", "date": "Realizado em 08/03", "type": "Oficial" },
         { "r": 2, "track": "China", "date": "Realizado em 15/03", "type": "Oficial" },
-        { "r": 3, "track": "EUA - Austin", "date": "22/03", "type": "Extra" },
+        { "r": 3, "track": "EUA - Austin", "date": "Realizado em 22/03", "type": "Extra" },
         { "r": 4, "track": "Japão", "date": "29/03", "type": "Oficial" },
         { "r": 5, "track": "Bahrein", "date": "12/04", "type": "Oficial" },
         { "r": 6, "track": "Arábia Saudita", "date": "19/04", "type": "Oficial" },
@@ -77,7 +78,7 @@ const db = {
         { "r": 9, "track": "Brasil", "date": "10/05", "type": "Extra" },
         { "r": 10, "track": "Itália - Monza", "date": "17/05", "type": "Extra" },
         { "r": 11, "track": "Canadá", "date": "24/05", "type": "Oficial" },
-        { "r": 12, "track": "Mônaco", "date": "01/06", "type": "Oficial" }
+        { "r": 12, "track": "Mônaco", "date": "31/05", "type": "Oficial" }
     ],
     "camp2": [
         { "r": 1, "track": "Espanha", "date": "14/06", "type": "Oficial" },
@@ -146,19 +147,18 @@ const db = {
             curvas: 16,
             drs: 2,
             resultados: [
-                { "pos": 1, "piloto": "Frank Violets", "equipe": "Kick Sauber", "pontos": 30 },
-                { "pos": 2, "piloto": "Leal Flushh", "equipe": "Kick Sauber", "pontos": 25 },
-                { "pos": 3, "piloto": "Nathan Nadadanad03", "equipe": "Mercedes-AMG", "pontos": 21 },
-                { "pos": 4, "piloto": "João Victor", "equipe": "RB", "pontos": 18 },
-                { "pos": 5, "piloto": "Gustavo Guga", "equipe": "Red Bull Racing", "pontos": 16 },
-                { "pos": 6, "piloto": "Cristian Cris", "equipe": "Mercedes-AMG", "pontos": 14 },
-                { "pos": 7, "piloto": "Renato Renato.R2Oliveira", "equipe": "McLaren", "pontos": 12 },
-                { "pos": 8, "piloto": "Luis Syaazz1", "equipe": "RB", "pontos": 10 },
-                { "pos": 9, "piloto": "Lucas LucasCarnevali", "equipe": "Williams", "pontos": 8 },
-                { "pos": 10, "piloto": "Adriano Drixtter", "equipe": "McLaren", "pontos": 7 },
-                { "pos": 11, "piloto": "Fabio", "equipe": "Alpine", "pontos": 6 },
-                { "pos": 12, "piloto": "Fernando procopiodearruda", "equipe": "Scuderia Ferrari", "pontos": 5 },
-
+                { "pos": 1,  "piloto": "Frank Violets",           "equipe": "Kick Sauber",      "pontos": 30 },
+                { "pos": 2,  "piloto": "Leal Flushh",             "equipe": "Kick Sauber",      "pontos": 25 },
+                { "pos": 3,  "piloto": "Nathan Nadadanad03",      "equipe": "Mercedes-AMG",     "pontos": 21 },
+                { "pos": 4,  "piloto": "João Victor",             "equipe": "RB",               "pontos": 18 },
+                { "pos": 5,  "piloto": "Gustavo Guga",            "equipe": "Red Bull Racing",  "pontos": 16 },
+                { "pos": 6,  "piloto": "Cristian Cris",           "equipe": "Mercedes-AMG",     "pontos": 14 },
+                { "pos": 7,  "piloto": "Renato Renato.R2Oliveira","equipe": "McLaren",          "pontos": 12 },
+                { "pos": 8,  "piloto": "Luis Syaazz1",            "equipe": "RB",               "pontos": 10 },
+                { "pos": 9,  "piloto": "Lucas LucasCarnevali",    "equipe": "Williams",         "pontos":  8 },
+                { "pos": 10, "piloto": "Adriano Drixtter",        "equipe": "McLaren",          "pontos":  7 },
+                { "pos": 11, "piloto": "Fabio",                   "equipe": "Alpine",           "pontos":  6 },
+                { "pos": 12, "piloto": "Fernando procopiodearruda","equipe": "Scuderia Ferrari","pontos":  5 }
             ]
         },
         {
@@ -188,9 +188,7 @@ const db = {
                 { "pos": 17, "piloto": "João Victor", "equipe": "RB", "pontos": 0 },
                 { "pos": 18, "piloto": "Luis Syaazz1", "equipe": "RB", "pontos": 0 },
                 { "pos": 19, "piloto": "Diego Dominguesdc13", "equipe": "Williams", "pontos": 0 },
-                { "pos": 20, "piloto": "Fabio", "equipe": "Alpine", "pontos": 0 },
-
-
+                { "pos": 20, "piloto": "Fabio", "equipe": "Alpine", "pontos": 0 }
             ]
         },
         {
@@ -294,7 +292,7 @@ const db = {
             ]
         },
         {
-            nome: "Etapa Monte Carlo - 01/06/2026 21:30h",
+            nome: "Etapa Monte Carlo - 31/05/2026 21:30h",
             pais: "Mônaco",
             imagem: "img/tracks/2026trackmontecarlodetailed.avif",
             comprimento: "3.337 km",
