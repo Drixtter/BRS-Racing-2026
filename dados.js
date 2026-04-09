@@ -1,7 +1,7 @@
 const db = {
     "drivers_ignition": [
         { "name": "Nathan Nadadanad03", "team": "Mercedes-AMG", "points": 35, "sr": 0, "poles": 1, "wins": 0 },
-        { "name": "Cristian Cris", "team": "Mercedes-AMG", "points": 56, "sr": 0, "poles": 0, "wins": 0 },
+        { "name": "Cristian Cris", "team": "Mercedes-AMG", "points": 60, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Renato Renato.R2Oliveira", "team": "McLaren", "points": 67, "sr": 0, "poles": 0, "wins": 1 },
         { "name": "Adriano Drixtter", "team": "McLaren", "points": 43, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Gustavo Guga", "team": "Red Bull Racing", "points": 32, "sr": 0, "poles": 0, "wins": 0 },
@@ -10,7 +10,7 @@ const db = {
         { "name": "Fernando procopiodearruda", "team": "Scuderia Ferrari", "points": 10, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Rafael Rafael94_Sam", "team": "Aston Martin", "points": 18, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Filipi filipialves", "team": "Aston Martin", "points": 31, "sr": -10, "poles": 0, "wins": 0 },
-        { "name": "Leal Flushh", "team": "Kick Sauber", "points": 93, "sr": -5, "poles": 0, "wins": 0 },
+        { "name": "Leal Flushh", "team": "Kick Sauber", "points": 89, "sr": -5, "poles": 0, "wins": 0 },
         { "name": "Frank Violets", "team": "Kick Sauber", "points": 108, "sr": -5, "poles": 2, "wins": 3 },
         { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 29, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 12, "sr": 0, "poles": 0, "wins": 0 },
@@ -194,8 +194,8 @@ const db = {
             drs: 1,
             resultados: [
                 { "pos": 1, "piloto": "Renato Renato.R2Oliveira",   "equipe": "McLaren",            "pontos": 30 },
-                { "pos": 2, "piloto": "Leal Flushh",                "equipe": "Kick Sauber",        "pontos": 25 },
-                { "pos": 3, "piloto": "Cristian Cris",              "equipe": "Mercedes-AMG",       "pontos": 21 },
+                { "pos": 2, "piloto": "Cristian Cris",              "equipe": "Kick Sauber",        "pontos": 25 },
+                { "pos": 3, "piloto": "Leal Flushh",                "equipe": "Mercedes-AMG",       "pontos": 21 },
                 { "pos": 4, "piloto": "Frank Violets",              "equipe": "Kick Sauber",        "pontos": 18 },
                 { "pos": 5, "piloto": "Adriano Drixtter",           "equipe": "McLaren",            "pontos": 16 },
                 { "pos": 6, "piloto": "Lucas LucasCarnevali",       "equipe": "Williams",           "pontos": 14 },
