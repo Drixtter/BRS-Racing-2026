@@ -204,8 +204,6 @@ const db = {
                 { "pos": 9, "piloto": "Rafael Rafael94_Sam",        "equipe": "Aston Martin",       "pontos": 8 },
                 { "pos": 10, "piloto": "Nathan Nadadanad03",        "equipe": "Mercedes-AMG",       "pontos": 0 },
                 { "pos": 11, "piloto": "Gustavo Guga",              "equipe": "Red Bull Racing",    "pontos": 0 },
-
-
             ]
         },
         {
@@ -216,7 +214,13 @@ const db = {
             curvas: 15,
             drs: 2,
             resultados: [
-
+                { "pos": 1, "piloto": "Frank Violets",              "equipe": "Kick Sauber",        "pontos": 30 },
+                { "pos": 2, "piloto": "Nathan Nadadanad03",         "equipe": "Mercedes-AMG",       "pontos": 25 },
+                { "pos": 3, "piloto": "Leal Flushh",                "equipe": "Mercedes-AMG",       "pontos": 21 },
+                { "pos": 4, "piloto": "Renato Renato.R2Oliveira",   "equipe": "McLaren",            "pontos": 18 },
+                { "pos": 5, "piloto": "Adriano Drixtter",           "equipe": "McLaren",            "pontos": 16 },
+                { "pos": 6, "piloto": "Filipi filipialves",         "equipe": "Aston Martin",       "pontos": 14 },
+                { "pos": 7, "piloto": "Rafael Rafael94_Sam",        "equipe": "Aston Martin",       "pontos": 12 },
             ]
         },
         {
