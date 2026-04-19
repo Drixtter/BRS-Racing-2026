@@ -71,7 +71,7 @@ const db = {
         { "r": 2, "track": "China", "date": "Realizado em 15/03", "type": "Oficial" },
         { "r": 3, "track": "EUA - Austin", "date": "Realizado em 22/03", "type": "Extra" },
         { "r": 4, "track": "Japão", "date": "Realizado em 29/03", "type": "Oficial" },
-        { "r": 5, "track": "Bahrein", "date": "12/04", "type": "Oficial" },
+        { "r": 5, "track": "Bahrein", "date": "Realizado em 12/04", "type": "Oficial" },
         { "r": 6, "track": "Arábia Saudita", "date": "19/04", "type": "Oficial" },
         { "r": 7, "track": "Las Vegas", "date": "26/04", "type": "Extra" },
         { "r": 8, "track": "Miami", "date": "03/05", "type": "Oficial" },
