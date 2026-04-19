@@ -11,7 +11,7 @@ const db = {
         { "name": "Rafael Rafael94_Sam", "team": "Aston Martin", "points": 30, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Filipi filipialves", "team": "Aston Martin", "points": 45, "sr": -10, "poles": 0, "wins": 0 },
         { "name": "Leal Flushh", "team": "Kick Sauber", "points": 114, "sr": -5, "poles": 0, "wins": 0 },
-        { "name": "Frank Violets", "team": "Kick Sauber", "points": 138, "sr": -5, "poles": 2, "wins": 3 },
+        { "name": "Frank Violets", "team": "Kick Sauber", "points": 138, "sr": -5, "poles": 3, "wins": 4 },
         { "name": "Lucas LucasCarnevali", "team": "Williams", "points": 29, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Diego Dominguesdc13", "team": "Williams", "points": 12, "sr": 0, "poles": 0, "wins": 0 },
         { "name": "Gabriel Cruz", "team": "Haas", "points": 0, "sr": 0, "poles": 0, "wins": 0 },
