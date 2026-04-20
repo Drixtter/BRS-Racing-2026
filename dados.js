@@ -240,8 +240,8 @@ const db = {
                 { "pos": 5, "piloto": "Adriano Drixtter",           "equipe": "McLaren",            "pontos": 16 },
                 { "pos": 6, "piloto": "Fernando procopiodearruda",  "equipe": "Scuderia Ferrari",   "pontos": 14 },
                 { "pos": 7, "piloto": "Rafael Rafael94_Sam",        "equipe": "Aston Martin",       "pontos": 12 },
-                { "pos": 1, "piloto": "Frank Violets",              "equipe": "Kick Sauber",        "pontos":  0 },
-                { "pos": 6, "piloto": "Filipi filipialves",         "equipe": "Aston Martin",       "pontos":  0 }
+                { "pos": 8, "piloto": "Frank Violets",              "equipe": "Kick Sauber",        "pontos":  0 },
+                { "pos": 9, "piloto": "Filipi filipialves",         "equipe": "Aston Martin",       "pontos":  0 }
             ]
         },
         {
