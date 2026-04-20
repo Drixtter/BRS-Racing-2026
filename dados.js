@@ -233,7 +233,7 @@ const db = {
             curvas: 27,
             drs: 3,
             resultados: [
-                { "pos": 1, "piloto": "João Victor",                "equipe": "Red Bull Racing",    "pontos": 30 },
+                { "pos": 1, "piloto": "João Victor",                "equipe": "RB",                 "pontos": 30 },
                 { "pos": 2, "piloto": "Cristian Cris",              "equipe": "Mercedes-AMG",       "pontos": 25 },
                 { "pos": 3, "piloto": "Renato Renato.R2Oliveira",   "equipe": "McLaren",            "pontos": 21 },
                 { "pos": 4, "piloto": "Gustavo Guga",               "equipe": "Red Bull Racing",    "pontos": 18 },
