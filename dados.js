@@ -74,7 +74,7 @@ const db = {
         { "r": 3, "track": "EUA - Austin", "date": "Realizado em 22/03", "type": "Extra" },
         { "r": 4, "track": "Japão", "date": "Realizado em 29/03", "type": "Oficial" },
         { "r": 5, "track": "Bahrein", "date": "Realizado em 12/04", "type": "Oficial" },
-        { "r": 6, "track": "Arábia Saudita", "date": "19/04", "type": "Oficial" },
+        { "r": 6, "track": "Arábia Saudita", "date": "Realizado em 19/04", "type": "Oficial" },
         { "r": 7, "track": "Las Vegas", "date": "26/04", "type": "Extra" },
         { "r": 8, "track": "Miami", "date": "03/05", "type": "Oficial" },
         { "r": 9, "track": "Brasil", "date": "10/05", "type": "Extra" },
@@ -233,7 +233,13 @@ const db = {
             curvas: 27,
             drs: 3,
             resultados: [
-
+                { "pos": 1, "piloto": "João Victor",                "equipe": "Red Bull Racing",    "pontos": 30 },
+                { "pos": 2, "piloto": "Cristian Cris",              "equipe": "Mercedes-AMG",       "pontos": 25 },
+                { "pos": 3, "piloto": "Renato Renato.R2Oliveira",   "equipe": "McLaren",            "pontos": 21 },
+                { "pos": 4, "piloto": "Gustavo Guga",               "equipe": "Red Bull Racing",    "pontos": 18 },
+                { "pos": 5, "piloto": "Adriano Drixtter",           "equipe": "McLaren",            "pontos": 16 },
+                { "pos": 6, "piloto": "Fernando procopiodearruda",  "equipe": "Scuderia Ferrari",   "pontos": 14 },
+                { "pos": 7, "piloto": "Rafael Rafael94_Sam",        "equipe": "Aston Martin",       "pontos": 12 },
             ]
         },
         {
