@@ -239,7 +239,9 @@ const db = {
                 { "pos": 4, "piloto": "Gustavo Guga",               "equipe": "Red Bull Racing",    "pontos": 18 },
                 { "pos": 5, "piloto": "Adriano Drixtter",           "equipe": "McLaren",            "pontos": 16 },
                 { "pos": 6, "piloto": "Fernando procopiodearruda",  "equipe": "Scuderia Ferrari",   "pontos": 14 },
-                { "pos": 7, "piloto": "Rafael Rafael94_Sam",        "equipe": "Aston Martin",       "pontos": 12 }
+                { "pos": 7, "piloto": "Rafael Rafael94_Sam",        "equipe": "Aston Martin",       "pontos": 12 },
+                { "pos": 1, "piloto": "Frank Violets",              "equipe": "Kick Sauber",        "pontos":  0 },
+                { "pos": 6, "piloto": "Filipi filipialves",         "equipe": "Aston Martin",       "pontos":  0 }
             ]
         },
         {
