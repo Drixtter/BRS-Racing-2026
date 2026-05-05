@@ -1,7 +1,7 @@
 const db = {
   "drivers_ignition": [
-    { "name": "Frank Violets",              "team": "Kick Sauber",       "points": 168,  "sr": -5,  "poles": 5, "wins": 5 },
-    { "name": "Leal Flushh",                "team": "Kick Sauber",       "points": 164,  "sr": -5,  "poles": 0, "wins": 0 },
+    { "name": "Frank Violets",              "team": "Kick Sauber",       "points": 168,  "sr": 0,   "poles": 5, "wins": 5 },
+    { "name": "Leal Flushh",                "team": "Kick Sauber",       "points": 164,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Renato Renato.R2Oliveira",   "team": "McLaren",           "points": 143,  "sr": 0,   "poles": 0, "wins": 1 },
     { "name": "Cristian Cris",              "team": "Mercedes-AMG",      "points": 116,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Gustavo Guga",               "team": "Red Bull Racing",   "points":  96,  "sr": 0,   "poles": 1, "wins": 1 },
@@ -10,7 +10,7 @@ const db = {
     { "name": "Rafael Rafael94_Sam",        "team": "Aston Martin",      "points":  72,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "João Victor",                "team": "RB",                "points":  48,  "sr": 0,   "poles": 1, "wins": 1 },
     { "name": "João Ferrigno",              "team": "Red Bull Racing",   "points":  47,  "sr": 0,   "poles": 0, "wins": 0 },
-    { "name": "Filipi filipialves",         "team": "Aston Martin",      "points":  45,  "sr": -10, "poles": 0, "wins": 0 },
+    { "name": "Filipi filipialves",         "team": "Aston Martin",      "points":  45,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Lucas LucasCarnevali",       "team": "Williams",          "points":  37,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Julian JuScata",             "team": "Scuderia Ferrari",  "points":  26,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Fernando procopiodearruda",  "team": "Scuderia Ferrari",  "points":  24,  "sr": 0,   "poles": 0, "wins": 0 },
