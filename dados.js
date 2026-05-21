@@ -1,13 +1,13 @@
 const db = {
   "drivers_ignition": [
-    { "name": "Frank Violets",              "team": "Kick Sauber",       "points": 168,  "sr": 0,   "poles": 5, "wins": 5 },
-    { "name": "Leal Flushh",                "team": "Kick Sauber",       "points": 164,  "sr": 0,   "poles": 0, "wins": 0 },
-    { "name": "Renato Renato.R2Oliveira",   "team": "McLaren",           "points": 143,  "sr": 0,   "poles": 0, "wins": 1 },
+    { "name": "Frank Violets",              "team": "Kick Sauber",       "points": 228,  "sr": 0,   "poles": 7, "wins": 7 },
+    { "name": "Renato Renato.R2Oliveira",   "team": "McLaren",           "points": 184,  "sr": 0,   "poles": 0, "wins": 1 },    
+    { "name": "Leal Flushh",                "team": "Kick Sauber",       "points": 182,  "sr": 0,   "poles": 0, "wins": 0 },
+    { "name": "Adriano Drixtter",           "team": "McLaren",           "points": 120,  "sr": 0,   "poles": 0, "wins": 0 },
+    { "name": "Gustavo Guga",               "team": "Red Bull Racing",   "points": 117,  "sr": 0,   "poles": 1, "wins": 1 },    
     { "name": "Cristian Cris",              "team": "Mercedes-AMG",      "points": 116,  "sr": 0,   "poles": 0, "wins": 0 },
-    { "name": "Gustavo Guga",               "team": "Red Bull Racing",   "points":  96,  "sr": 0,   "poles": 1, "wins": 1 },
-    { "name": "Adriano Drixtter",           "team": "McLaren",           "points":  85,  "sr": 0,   "poles": 0, "wins": 0 },
-    { "name": "Nathan Nadadanad03",         "team": "Mercedes-AMG",      "points":  78,  "sr": 0,   "poles": 1, "wins": 0 },
-    { "name": "Rafael Rafael94_Sam",        "team": "Aston Martin",      "points":  72,  "sr": 0,   "poles": 0, "wins": 0 },
+    { "name": "Nathan Nadadanad03",         "team": "Mercedes-AMG",      "points": 103,  "sr": 0,   "poles": 1, "wins": 0 },
+    { "name": "Rafael Rafael94_Sam",        "team": "Aston Martin",      "points":  84,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "João Victor",                "team": "RB",                "points":  48,  "sr": 0,   "poles": 1, "wins": 1 },
     { "name": "João Ferrigno",              "team": "Red Bull Racing",   "points":  47,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Filipi filipialves",         "team": "Aston Martin",      "points":  45,  "sr": 0,   "poles": 0, "wins": 0 },
@@ -77,8 +77,8 @@ const db = {
         { "r": 6, "track": "Arábia Saudita", "date": "Realizado em 19/04", "type": "Oficial" },
         { "r": 7, "track": "Las Vegas", "date": "Realizado em 26/04", "type": "Extra" },
         { "r": 8, "track": "Miami", "date": "Realizado em 03/05", "type": "Oficial" },
-        { "r": 9, "track": "Brasil", "date": "10/05", "type": "Extra" },
-        { "r": 10, "track": "Itália - Monza", "date": "17/05", "type": "Extra" },
+        { "r": 9, "track": "Brasil", "date": "Realizado em 10/05", "type": "Extra" },
+        { "r": 10, "track": "Itália - Monza", "date": "Realizado em 17/05", "type": "Extra" },
         { "r": 11, "track": "Canadá", "date": "24/05", "type": "Oficial" },
         { "r": 12, "track": "Mônaco", "date": "31/05", "type": "Oficial" }
     ],
@@ -290,7 +290,16 @@ const db = {
             curvas: 15,
             drs: 2,
             resultados: [
-
+                { "pos": 1, "piloto": "Frank Violets",                  "equipe": "Kick Sauber",     "pontos": 30 },
+                { "pos": 2, "piloto": "Leal Flushh",                    "equipe": "Kick Sauber",     "pontos": 25 },
+                { "pos": 3, "piloto": "Renato Renato.R2Oliveira",       "equipe": "McLaren",         "pontos": 21 },         
+                { "pos": 4, "piloto": "Nathan Nadadanad03",             "equipe": "Mercedes-AMG",    "pontos": 18 },
+                { "pos": 5, "piloto": "Gustavo Guga",                   "equipe": "Red Bull Racing", "pontos": 16 },
+                { "pos": 6, "piloto": "Cristian Cris",                  "equipe": "Mercedes-AMG",    "pontos": 14 },
+                { "pos": 7, "piloto": "Rafael Rafael94_Sam",            "equipe": "Aston Martin",    "pontos": 12 },
+                { "pos": 8, "piloto": "Adriano Drixtter",               "equipe": "McLaren",         "pontos": 10 },
+                { "pos": 9, "piloto": "Lucas LucasCarnevali",           "equipe": "Williams",        "pontos":  8 },
+                { "pos": 10, "piloto": "João Ferrigno",                 "equipe": "Red Bull Racing", "pontos":  7 },
             ]
         },
         {
@@ -301,7 +310,16 @@ const db = {
             curvas: 11,
             drs: 3,
             resultados: [
-
+                { "pos": 1, "piloto": "Frank Violets",                  "equipe": "Kick Sauber",     "pontos": 30 },
+                { "pos": 2, "piloto": "Leal Flushh",                    "equipe": "Kick Sauber",     "pontos": 25 },
+                { "pos": 3, "piloto": "Renato Renato.R2Oliveira",       "equipe": "McLaren",         "pontos": 21 },         
+                { "pos": 4, "piloto": "Nathan Nadadanad03",             "equipe": "Mercedes-AMG",    "pontos": 18 },
+                { "pos": 5, "piloto": "Gustavo Guga",                   "equipe": "Red Bull Racing", "pontos": 16 },
+                { "pos": 6, "piloto": "Cristian Cris",                  "equipe": "Mercedes-AMG",    "pontos": 14 },
+                { "pos": 7, "piloto": "Rafael Rafael94_Sam",            "equipe": "Aston Martin",    "pontos": 12 },
+                { "pos": 8, "piloto": "Adriano Drixtter",               "equipe": "McLaren",         "pontos": 10 },
+                { "pos": 9, "piloto": "Lucas LucasCarnevali",           "equipe": "Williams",        "pontos":  8 },
+                { "pos": 10, "piloto": "João Ferrigno",                 "equipe": "Red Bull Racing", "pontos":  7 },
             ]
         },
         {
