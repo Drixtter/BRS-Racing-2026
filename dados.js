@@ -1,8 +1,8 @@
 const db = {
   "drivers_ignition": [
     { "name": "Frank Violets",              "team": "Kick Sauber",       "points": 258,  "sr": 0,   "poles": 8, "wins": 8 },
-    { "name": "Renato Renato.R2Oliveira",   "team": "McLaren",           "points": 207,  "sr": 0,   "poles": 0, "wins": 1 },    
-    { "name": "Leal Flushh",                "team": "Kick Sauber",       "points": 205,  "sr": 0,   "poles": 0, "wins": 0 },
+    { "name": "Leal Flushh",                "team": "Kick Sauber",       "points": 207,  "sr": 0,   "poles": 0, "wins": 0 },
+    { "name": "Renato Renato.R2Oliveira",   "team": "McLaren",           "points": 205,  "sr": 0,   "poles": 0, "wins": 1 },    
     { "name": "Adriano Drixtter",           "team": "McLaren",           "points": 138,  "sr": 0,   "poles": 0, "wins": 0 },
     { "name": "Nathan Nadadanad03",         "team": "Mercedes-AMG",      "points": 119,  "sr": 0,   "poles": 1, "wins": 0 },    
     { "name": "Gustavo Guga",               "team": "Red Bull Racing",   "points": 117,  "sr": 0,   "poles": 1, "wins": 1 },    
