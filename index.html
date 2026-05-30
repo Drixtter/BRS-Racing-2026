@@ -8,63 +8,28 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --neon-cyan: #00f3ff;
-            --neon-red: #ff4444;
-            --neon-green: #00ff88;
-            --neon-glow: rgba(0, 243, 255, 0.3);
-            --dark-bg: #111316;
-            --panel-bg: #1a1d21;
-            --text-main: #ffffff;
-            --text-muted: #8b9bb4;
-            --gold: #ffd700;
-            --silver: #c0c0c0;
-            --bronze: #cd7f32;
+            --neon-cyan: #00f3ff; --neon-red: #ff4444; --neon-green: #00ff88;
+            --neon-glow: rgba(0,243,255,0.3); --dark-bg: #111316; --panel-bg: #1a1d21;
+            --text-main: #ffffff; --text-muted: #8b9bb4;
+            --gold: #ffd700; --silver: #c0c0c0; --bronze: #cd7f32;
         }
-        body {
-            font-family: 'Titillium Web', sans-serif;
-            background-color: var(--dark-bg);
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.03) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.03) 0%, transparent 20%);
-            color: var(--text-main);
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Titillium Web', sans-serif; background-color: var(--dark-bg); background-image: radial-gradient(circle at 10% 20%, rgba(0,243,255,0.03) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(0,243,255,0.03) 0%, transparent 20%); color: var(--text-main); min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
         .header-container { text-align: center; padding: 2rem 1rem 1rem; display: flex; flex-direction: column; align-items: center; }
-        .logo-img { max-width: 350px; width: 100%; height: auto; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.3)); transition: transform 0.3s ease; }
+        .logo-img { max-width: 350px; width: 100%; height: auto; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(0,243,255,0.3)); transition: transform 0.3s ease; }
         .logo-img:hover { transform: scale(1.02); }
         .hero-info { margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1rem 0; width: 100%; max-width: 800px; }
         .hero-info h1 { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; text-transform: uppercase; font-style: italic; margin-bottom: 0.5rem; color: #fff; }
         .hero-info p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; }
         .nav-container { display: flex; justify-content: center; gap: 0.8rem; padding: 1.5rem 1rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
-        .nav-btn {
-            background: rgba(26, 29, 33, 0.8);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 0.70rem 1.2rem;
-            font-family: 'Titillium Web', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            width: 165px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 0 5px rgba(0, 243, 255, 0.1);
-            font-size: 0.85rem;
-        }
-        .nav-btn:hover, .nav-btn.active { background: rgba(0, 243, 255, 0.1); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); transform: translateY(-2px); }
+        .nav-btn { background: rgba(26,29,33,0.8); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); padding: 0.70rem 1.2rem; font-family: 'Titillium Web', sans-serif; font-weight: 600; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; width: 165px; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 0 5px rgba(0,243,255,0.1); font-size: 0.85rem; }
+        .nav-btn:hover, .nav-btn.active { background: rgba(0,243,255,0.1); box-shadow: 0 0 15px rgba(0,243,255,0.2); transform: translateY(-2px); }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem 3rem; }
         .section { display: none; animation: fadeUp 0.4s ease-out; }
         .section.active { display: block; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .panel-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
         @media (min-width: 900px) { .panel-grid { grid-template-columns: 1fr 1fr; } }
-        .card { background: var(--panel-bg); border: 1px solid var(--neon-cyan); border-radius: 12px; padding: 2px; position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); margin-bottom: 20px; }
+        .card { background: var(--panel-bg); border: 1px solid var(--neon-cyan); border-radius: 12px; padding: 2px; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.5); margin-bottom: 20px; }
         .card-inner { background: var(--panel-bg); border-radius: 10px; padding: 1.5rem; height: 100%; position: relative; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
         .card-header h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: #fff; text-transform: uppercase; }
@@ -72,7 +37,7 @@
         table { width: 100%; border-collapse: collapse; min-width: 300px; }
         th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .pos-col { width: 40px; font-weight: 700; text-align: center; }
-        .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); font-size: 1.2rem; }
+        .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,0,0.5); font-size: 1.2rem; }
         .rank-2 { color: var(--silver); font-size: 1.1rem; }
         .rank-3 { color: var(--bronze); font-size: 1.1rem; }
         .rank-other { color: var(--text-muted); }
@@ -83,9 +48,9 @@
         .cal-track { font-weight: 600; }
         .cal-date { color: var(--text-muted); font-size: 0.9rem; text-align: right; }
         .cal-type { font-size: 0.75rem; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; text-align: center; width: 80px; display: inline-block; }
-        .type-oficial { border: 1px solid #00ff88; color: #00ff88; background: rgba(0, 255, 136, 0.1); }
-        .type-extra { border: 1px solid #ff4444; color: #ff4444; background: rgba(255, 68, 68, 0.1); }
-        .drivers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .type-oficial { border: 1px solid #00ff88; color: #00ff88; background: rgba(0,255,136,0.1); }
+        .type-extra { border: 1px solid #ff4444; color: #ff4444; background: rgba(255,68,68,0.1); }
+        .drivers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.5rem; }
         .driver-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; transition: 0.3s; position: relative; display: flex; flex-direction: column; }
         .driver-box:hover { border-color: var(--neon-cyan); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .driver-header { display: flex; justify-content: space-between; padding: 1rem; background: rgba(0,0,0,0.2); }
@@ -96,10 +61,8 @@
         .driver-photo-img { width: 100%; height: 100%; object-fit: cover; }
         .driver-info h3 { font-size: 1.2rem; margin-bottom: 0.2rem; line-height: 1.2; }
         .driver-info span { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; display: block; }
-        .driver-sr { font-size: 0.85rem; font-weight: 700; margin-top: 4px; display: inline-block; }
-        .sr-neg { color: var(--neon-red); text-shadow: 0 0 5px rgba(255, 68, 68, 0.4); }
-        .sr-pos { color: var(--neon-green); }
-        .sr-neu { color: var(--text-muted); }
+        .sr-neg { color: var(--neon-red); text-shadow: 0 0 5px rgba(255,68,68,0.4); }
+        .sr-pos { color: var(--neon-green); } .sr-neu { color: var(--text-muted); }
         .team-car-display { width: 100%; height: 100px; position: relative; margin-top: auto; overflow: hidden; background: linear-gradient(to right, transparent, rgba(255,255,255,0.02)); display: flex; align-items: center; justify-content: center; }
         .team-car-img { width: 90%; height: auto; max-height: 90px; object-fit: contain; opacity: 0.9; transition: 0.3s; }
         .driver-box:hover .team-car-img { opacity: 1; transform: scale(1.05); }
@@ -110,171 +73,56 @@
         .rules-content li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
         .rules-content li::before { content: '›'; color: var(--neon-cyan); position: absolute; left: 0; font-weight: bold; font-size: 1.2rem; line-height: 1; }
         .rules-table { width: 100%; margin: 1rem 0; border: 1px solid rgba(255,255,255,0.1); border-collapse: collapse; }
-        .rules-table th { background: rgba(0, 243, 255, 0.1); color: #fff; padding: 0.8rem; text-align: left; }
+        .rules-table th { background: rgba(0,243,255,0.1); color: #fff; padding: 0.8rem; text-align: left; }
         .rules-table td { padding: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
         @media (max-width: 600px) { .nav-btn { flex: 1 1 45%; font-size: 0.75rem; min-width: 120px; } .hero-info h1 { font-size: 1.4rem; } }
 
+        /* ── CABEÇALHO DE SEÇÃO ──────────────────────────────── */
+        .section-title { margin-bottom: 1.5rem; border-left: 4px solid var(--neon-cyan); padding-left: 15px; }
+        .section-title h2 { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
+        .section-title p { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
         /* ── GRADE DE RESULTADOS ─────────────────────────────── */
-        .grade-controles {
-            display: flex;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .grade-tab {
-            background: rgba(26,29,33,0.8);
-            border: 1px solid rgba(0,243,255,0.4);
-            color: var(--text-muted);
-            padding: 0.5rem 1.2rem;
-            font-family: 'Titillium Web', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-        .grade-tab:hover, .grade-tab.active {
-            background: rgba(0,243,255,0.1);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0,243,255,0.15);
-        }
-        .grade-wrapper {
-            overflow-x: auto;
-            border: 1px solid rgba(0,243,255,0.2);
-            border-radius: 10px;
-            background: var(--panel-bg);
-        }
-        .grade-table {
-            border-collapse: collapse;
-            min-width: 100%;
-            table-layout: fixed;
-        }
-        .grade-table th,
-        .grade-table td {
-            border: 1px solid rgba(255,255,255,0.07);
-            padding: 0;
-            text-align: center;
-            vertical-align: middle;
-        }
-        /* Coluna de posição (primeira coluna) */
-        .grade-table .col-pos {
-            width: 42px;
-            min-width: 42px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            background: rgba(0,0,0,0.3);
-            position: sticky;
-            left: 0;
-            z-index: 2;
-        }
-        /* Cabeçalho de posição (canto) */
-        .grade-table thead .col-pos {
-            background: rgba(0,0,0,0.5);
-            z-index: 3;
-        }
-        /* Colunas de etapa */
-        .grade-table .col-etapa {
-            width: 70px;
-            min-width: 70px;
-        }
-        /* Cabeçalho das etapas */
-        .grade-table thead th.col-etapa {
-            padding: 0.6rem 0.3rem;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: rgba(0,0,0,0.4);
-            line-height: 1.2;
-        }
-        .grade-table thead th.col-etapa.realizado {
-            color: var(--neon-cyan);
-        }
-        /* Linhas de posição */
+        .grade-controles { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .grade-tab { background: rgba(26,29,33,0.8); border: 1px solid rgba(0,243,255,0.4); color: var(--text-muted); padding: 0.5rem 1.2rem; font-family: 'Titillium Web', sans-serif; font-weight: 600; text-transform: uppercase; cursor: pointer; border-radius: 4px; font-size: 0.85rem; transition: all 0.2s; }
+        .grade-tab:hover, .grade-tab.active { background: rgba(0,243,255,0.1); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.15); }
+        .grade-wrapper { overflow-x: auto; border: 1px solid rgba(0,243,255,0.2); border-radius: 10px; background: var(--panel-bg); }
+        .grade-table { border-collapse: collapse; min-width: 100%; table-layout: fixed; }
+        .grade-table th, .grade-table td { border: 1px solid rgba(255,255,255,0.07); padding: 0; text-align: center; vertical-align: middle; }
+        .grade-table .col-pos { width: 42px; min-width: 42px; font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; background: rgba(0,0,0,0.3); position: sticky; left: 0; z-index: 2; }
+        .grade-table thead .col-pos { background: rgba(0,0,0,0.5); z-index: 3; }
+        .grade-table .col-etapa { width: 70px; min-width: 70px; }
+        .grade-table thead th.col-etapa { padding: 0.6rem 0.3rem; font-family: 'Rajdhani', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.4); line-height: 1.2; }
+        .grade-table thead th.col-etapa.realizado { color: var(--neon-cyan); }
         .grade-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.015); }
         .grade-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.1); }
-        /* Célula de posição */
-        .grade-table tbody .col-pos {
-            color: var(--text-muted);
-            padding: 0.5rem 0;
-        }
+        .grade-table tbody .col-pos { color: var(--text-muted); padding: 0.5rem 0; }
         .grade-table tbody tr:first-child .col-pos { color: var(--gold); }
         .grade-table tbody tr:nth-child(2) .col-pos { color: var(--silver); }
         .grade-table tbody tr:nth-child(3) .col-pos { color: var(--bronze); }
-        /* Célula de piloto na grade */
-        .grade-cell {
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 52px;
-        }
-        .grade-cell-inner {
-            position: relative;
-            width: 44px;
-            height: 44px;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: default;
-        }
-        .grade-cell-inner:hover {
-            transform: scale(1.15);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-            z-index: 10;
-        }
-        .grade-cell-inner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        /* Tooltip do nome ao hover */
-        .grade-cell-inner::after {
-            content: attr(data-nome);
-            position: absolute;
-            bottom: calc(100% + 6px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.92);
-            color: #fff;
-            font-size: 0.7rem;
-            white-space: nowrap;
-            padding: 3px 7px;
-            border-radius: 4px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-            border: 1px solid rgba(255,255,255,0.15);
-            z-index: 20;
-        }
+        .grade-cell { padding: 4px; display: flex; align-items: center; justify-content: center; height: 52px; }
+        .grade-cell-inner { position: relative; width: 44px; height: 44px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+        .grade-cell-inner:hover { transform: scale(1.15); box-shadow: 0 4px 16px rgba(0,0,0,0.6); z-index: 10; }
+        .grade-cell-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .grade-cell-inner::after { content: attr(data-nome); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.92); color: #fff; font-size: 0.7rem; white-space: nowrap; padding: 3px 7px; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.2s; border: 1px solid rgba(255,255,255,0.15); z-index: 20; }
         .grade-cell-inner:hover::after { opacity: 1; }
-        /* Célula vazia */
-        .grade-cell-empty {
-            width: 44px;
-            height: 44px;
-            border-radius: 6px;
-            background: rgba(255,255,255,0.03);
-            border: 1px dashed rgba(255,255,255,0.07);
-        }
-        /* Pontos na célula */
-        .grade-pts {
-            position: absolute;
-            bottom: 1px;
-            right: 2px;
-            font-size: 0.58rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 0 3px #000, 0 0 6px #000;
-            line-height: 1;
-        }
+        .grade-cell-empty { width: 44px; height: 44px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.07); }
+        .grade-pts { position: absolute; bottom: 1px; right: 2px; font-size: 0.58rem; font-weight: 700; color: #fff; text-shadow: 0 0 3px #000, 0 0 6px #000; line-height: 1; }
+
+        /* ── EVOLUÇÃO DE PONTOS ──────────────────────────────── */
+        .evolucao-wrap { background: var(--panel-bg); border: 1px solid rgba(0,243,255,0.2); border-radius: 12px; padding: 1.5rem 1rem 1rem; position: relative; }
+        #evolucao-canvas { width: 100%; display: block; cursor: crosshair; }
+        .evolucao-legenda { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.07); }
+        .evolucao-leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; cursor: pointer; opacity: 1; transition: opacity 0.2s; user-select: none; padding: 3px 8px; border-radius: 4px; }
+        .evolucao-leg-item:hover { background: rgba(255,255,255,0.05); }
+        .evolucao-leg-item.oculto { opacity: 0.2; }
+        .evolucao-leg-cor { width: 24px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+        .evolucao-tooltip { position: fixed; background: rgba(8,10,14,0.97); border: 1px solid rgba(0,243,255,0.4); border-radius: 8px; padding: 0.7rem 1rem; font-size: 0.78rem; pointer-events: none; display: none; z-index: 9999; min-width: 200px; max-width: 260px; box-shadow: 0 4px 24px rgba(0,0,0,0.8); }
+        .evolucao-tt-titulo { color: var(--neon-cyan); font-weight: 700; font-size: 0.83rem; margin-bottom: 6px; padding-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .evolucao-tt-linha { display: flex; align-items: center; gap: 7px; line-height: 1.9; }
+        .evolucao-tt-cor { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .evolucao-tt-pts { margin-left: auto; font-weight: 700; color: var(--neon-cyan); padding-left: 12px; }
     </style>
 </head>
 <body>
@@ -286,84 +134,41 @@
         </div>
     </div>
 
-    <div class="nav-container">
-        <button class="nav-btn" onclick="showSection('section-ignition', this)">🏆 Ignition CUP</button>
-        <button class="nav-btn active" onclick="showSection('pilotos', this)">👤 Pilotos</button>
-        <button class="nav-btn" onclick="showSection('section-evolution', this)">🏆 Evolution CUP</button>
-        <button class="nav-btn" onclick="showSection('calendario', this)">📅 Calendário</button>
-        <button class="nav-btn" onclick="showSection('section-legacy', this)">🏆 Legacy CUP</button>
-        <button class="nav-btn" onclick="showSection('estatisticas', this)">📊 Estatísticas</button>
-        <button class="nav-btn" onclick="showSection('pistas', this)">📅 Etapas</button>
-        <button class="nav-btn" onclick="showSection('grade-resultados', this)">📋 Grade</button>
-        <button class="nav-btn" onclick="showSection('videos', this)">🎬 Videos</button>
-        <button class="nav-btn" onclick="showSection('galeria', this)">📸 Galeria</button>
-        <button class="nav-btn" onclick="showSection('regras', this)">📜 Regras</button>
-        <button class="nav-btn" onclick="showSection('inscricoes', this)">📜 Inscrições</button>
-    </div>
+    <nav class="nav-container" id="nav-container"></nav>
 
     <div class="container">
 
-        <!-- COPA IGNITION -->
-        <div id="section-ignition" class="section">
-            <div class="panel-grid">
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏆 Ignition: Pilotos</h2><div class="header-labels"><span>Equipe</span><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-ignition-pilotos"></tbody></table></div></div></div>
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Ignition: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-ignition-equipes"></tbody></table></div></div></div>
-            </div>
-        </div>
+        <!-- COPAS: geradas via JS -->
+        <div id="section-ignition"  class="section"></div>
+        <div id="section-evolution" class="section"></div>
+        <div id="section-legacy"    class="section"></div>
 
-        <!-- COPA EVOLUTION -->
-        <div id="section-evolution" class="section">
-            <div class="panel-grid">
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏆 Evolution: Pilotos</h2><div class="header-labels"><span>Equipe</span><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-evolution-pilotos"></tbody></table></div></div></div>
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Evolution: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-evolution-equipes"></tbody></table></div></div></div>
-            </div>
-        </div>
+        <!-- CALENDÁRIO: gerado via JS -->
+        <div id="calendario" class="section"></div>
 
-        <!-- COPA LEGACY -->
-        <div id="section-legacy" class="section">
-            <div class="panel-grid">
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏆 Legacy: Pilotos</h2><div class="header-labels"><span>Equipe</span><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-legacy-pilotos"></tbody></table></div></div></div>
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏁 Legacy: Equipes</h2><div class="header-labels"><span>Pts</span></div></div><div class="table-container"><table><tbody id="tbody-legacy-equipes"></tbody></table></div></div></div>
-            </div>
-        </div>
-
-        <!-- CALENDÁRIO -->
-        <div id="calendario" class="section">
-            <div class="panel-grid">
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>📅 Ignition</h2></div><div class="table-container"><table><tbody id="tbody-camp1"></tbody></table></div></div></div>
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>📅 Evolution</h2></div><div class="table-container"><table><tbody id="tbody-camp2"></tbody></table></div></div></div>
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>📅 Legacy</h2></div><div class="table-container"><table><tbody id="tbody-camp3"></tbody></table></div></div></div>
-            </div>
-        </div>
-
-        <!-- ESTATÍSTICAS -->
-        <div id="estatisticas" class="section">
-            <div class="panel-grid">
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>🏆 Maiores Vencedores</h2><div class="header-labels"><span>Vitórias</span></div></div><div class="table-container"><table><tbody id="tbody-stats-vitorias"></tbody></table></div></div></div>
-                <div class="card"><div class="card-inner"><div class="card-header"><h2>⏱️ Pole Positions</h2><div class="header-labels"><span>Poles</span></div></div><div class="table-container"><table><tbody id="tbody-stats-poles"></tbody></table></div></div></div>
-            </div>
-        </div>
+        <!-- ESTATÍSTICAS: gerada via JS -->
+        <div id="estatisticas" class="section"></div>
 
         <!-- INSCRIÇÕES -->
         <div id="inscricoes" class="section">
-            <div class="panel-grid" style="grid-template-columns: 1fr;">
+            <div class="panel-grid" style="grid-template-columns:1fr;">
                 <div class="card">
-                    <div class="card-inner" style="text-align: center; padding: 3rem 1rem;">
-                        <div class="card-header" style="justify-content: center;"><h2>📝 Faça sua Inscrição</h2></div>
-                        <div class="rules-content" style="max-width: 700px; margin: 0 auto 2rem;">
-                            <p style="font-size: 1.1rem; color: #fff; margin-bottom: 1.5rem;">
+                    <div class="card-inner" style="text-align:center; padding:3rem 1rem;">
+                        <div class="card-header" style="justify-content:center;"><h2>📝 Faça sua Inscrição</h2></div>
+                        <div class="rules-content" style="max-width:700px; margin:0 auto 2rem;">
+                            <p style="font-size:1.1rem; color:#fff; margin-bottom:1.5rem;">
                                 Junte-se à <strong>BRS Racing</strong> para a temporada 2026!
                                 Buscamos pilotos comprometidos, limpos e que buscam o mais alto nível de simulação no F1.
                             </p>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; text-align: left;">
-                                <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--neon-cyan);"><strong>Plataforma:</strong><br>PC, Xbox e PlayStation</div>
-                                <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--neon-cyan);"><strong>Formato:</strong><br>Corridas 50%</div>
-                                <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--neon-cyan);"><strong>Regras:</strong><br>Danos Reais / Sem Assistências</div>
+                            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:2rem; text-align:left;">
+                                <div style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:8px; border-left:3px solid var(--neon-cyan);"><strong>Plataforma:</strong><br>PC, Xbox e PlayStation</div>
+                                <div style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:8px; border-left:3px solid var(--neon-cyan);"><strong>Formato:</strong><br>Corridas 50%</div>
+                                <div style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:8px; border-left:3px solid var(--neon-cyan);"><strong>Regras:</strong><br>Danos Reais / Sem Assistências</div>
                             </div>
                         </div>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdqGvQUhGbu-4bvySE3gaGU1jXZSBG54WnR1fJQYtXiBQIqTg/viewform"
                            target="_blank" class="nav-btn"
-                           style="display: inline-flex; width: auto; padding: 1.5rem 3rem; font-size: 1.2rem; background: var(--neon-cyan); color: #000; text-decoration: none; border: none; box-shadow: 0 0 20px var(--neon-glow);">
+                           style="display:inline-flex; width:auto; padding:1.5rem 3rem; font-size:1.2rem; background:var(--neon-cyan); color:#000; text-decoration:none; border:none; box-shadow:0 0 20px var(--neon-glow);">
                             ACESSAR FORMULÁRIO DE INSCRIÇÃO
                         </a>
                     </div>
@@ -446,33 +251,33 @@
             <div id="pistas-container" class="drivers-grid"></div>
         </div>
 
-        <!-- GRADE DE RESULTADOS (nova tela) -->
+        <!-- GRADE DE RESULTADOS -->
         <div id="grade-resultados" class="section">
-            <div style="margin-bottom: 1.5rem; border-left: 4px solid var(--neon-cyan); padding-left: 15px;">
-                <h2 style="font-family:'Rajdhani',sans-serif; text-transform:uppercase; color:#fff; letter-spacing:2px;">
-                    📋 Grade de Resultados por Etapa
-                </h2>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-top:4px;">
-                    Passe o mouse sobre a foto para ver o nome do piloto. A borda indica a equipe.
-                </p>
+            <div class="section-title">
+                <h2>📋 Grade de Resultados por Etapa</h2>
+                <p>Passe o mouse sobre a foto para ver o nome do piloto. A borda indica a equipe.</p>
             </div>
-
-            <!-- Seletor de campeonato -->
-            <div class="grade-controles">
-                <button class="grade-tab active" onclick="renderGrade('ignition', this)">🏆 Ignition CUP</button>
-                <button class="grade-tab" onclick="renderGrade('evolution', this)">🏆 Evolution CUP</button>
-                <button class="grade-tab" onclick="renderGrade('legacy', this)">🏆 Legacy CUP</button>
-            </div>
-
-            <!-- Legenda de equipes -->
+            <div class="grade-controles" id="grade-tabs"></div>
             <div id="grade-legenda" style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:1.2rem;"></div>
-
-            <!-- Tabela -->
             <div class="grade-wrapper">
-                <table class="grade-table" id="grade-table">
+                <table class="grade-table">
                     <thead id="grade-thead"></thead>
                     <tbody id="grade-tbody"></tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- EVOLUÇÃO DE PONTOS -->
+        <div id="evolucao-pontos" class="section">
+            <div class="section-title">
+                <h2>📈 Evolução de Pontos por Etapa</h2>
+                <p>Clique em um piloto na legenda para mostrar/ocultar. Passe o mouse sobre o gráfico para ver os valores.</p>
+            </div>
+            <div class="grade-controles" id="evolucao-tabs"></div>
+            <div class="evolucao-wrap">
+                <div class="evolucao-tooltip" id="evolucao-tooltip"></div>
+                <canvas id="evolucao-canvas"></canvas>
+                <div class="evolucao-legenda" id="evolucao-legenda"></div>
             </div>
         </div>
 
@@ -486,12 +291,10 @@
             <div id="galeria-container" class="panel-grid"></div>
         </div>
 
-        <!-- PILOTOS (Grid Visual) -->
+        <!-- PILOTOS -->
         <div id="pilotos" class="section active">
-            <div style="margin-bottom: 2rem; border-left: 4px solid var(--neon-cyan); padding-left: 15px;">
-                <h2 style="font-family:'Rajdhani',sans-serif; text-transform:uppercase; color:#fff; letter-spacing:2px;">
-                    🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)">IGNITION CUP</span>
-                </h2>
+            <div class="section-title" style="margin-bottom:2rem;">
+                <h2>🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)">IGNITION CUP</span></h2>
             </div>
             <div class="drivers-grid" id="drivers-grid"></div>
         </div>
@@ -507,12 +310,26 @@
     <script src="engine.js"></script>
     <script>
 
+        // ── CONFIGURAÇÃO DA NAVEGAÇÃO ────────────────────────────
+        const NAV_ITEMS = [
+            { label: '🏆 Ignition CUP',  target: 'section-ignition'  },
+            { label: '👤 Pilotos',        target: 'pilotos',          active: true },
+            { label: '🏆 Evolution CUP', target: 'section-evolution' },
+            { label: '📅 Calendário',    target: 'calendario'        },
+            { label: '🏆 Legacy CUP',    target: 'section-legacy'    },
+            { label: '📊 Estatísticas',  target: 'estatisticas'      },
+            { label: '📅 Etapas',        target: 'pistas'            },
+            { label: '📋 Grade',         target: 'grade-resultados'  },
+            { label: '📈 Evolução',      target: 'evolucao-pontos'   },
+            { label: '🎬 Videos',        target: 'videos'            },
+            { label: '📸 Galeria',       target: 'galeria'           },
+            { label: '📜 Regras',        target: 'regras'            },
+            { label: '📜 Inscrições',    target: 'inscricoes'        },
+        ];
+
         // ── UTILITÁRIOS ──────────────────────────────────────────
-        function getRankClass(index) {
-            if (index === 0) return 'rank-1';
-            if (index === 1) return 'rank-2';
-            if (index === 2) return 'rank-3';
-            return 'rank-other';
+        function getRankClass(i) {
+            return ['rank-1','rank-2','rank-3'][i] ?? 'rank-other';
         }
 
         function showSection(id, btn) {
@@ -524,44 +341,97 @@
 
         function updateFooterDate() {
             const t = new Date();
-            const d = String(t.getDate()).padStart(2, '0');
-            const m = String(t.getMonth() + 1).padStart(2, '0');
-            document.getElementById('last-update').innerHTML =
+            const d = String(t.getDate()).padStart(2,'0');
+            const m = String(t.getMonth()+1).padStart(2,'0');
+            document.getElementById('last-update').textContent =
                 `Atualizado em ${d}/${m}/${t.getFullYear()}`;
         }
 
+        function cardTable(title, labels, tbodyId) {
+            return `<div class="card"><div class="card-inner">
+                <div class="card-header">
+                    <h2>${title}</h2>
+                    <div class="header-labels">${labels.map(l=>`<span>${l}</span>`).join('')}</div>
+                </div>
+                <table><tbody id="${tbodyId}"></tbody></table>
+            </div></div>`;
+        }
+
+        // ── NAVEGAÇÃO ────────────────────────────────────────────
+        function buildNav() {
+            const nav = document.getElementById('nav-container');
+            nav.innerHTML = NAV_ITEMS.map(item => `
+                <button class="nav-btn${item.active ? ' active' : ''}"
+                        data-target="${item.target}">${item.label}</button>
+            `).join('');
+            nav.addEventListener('click', e => {
+                const btn = e.target.closest('.nav-btn[data-target]');
+                if (btn) showSection(btn.dataset.target, btn);
+            });
+        }
+
+        // ── COPAS: geração das seções ────────────────────────────
+        const CUPS = [
+            { id: 'ignition',  label: 'Ignition'  },
+            { id: 'evolution', label: 'Evolution' },
+            { id: 'legacy',    label: 'Legacy'    },
+        ];
+
+        function buildCupSections() {
+            CUPS.forEach(cup => {
+                document.getElementById(`section-${cup.id}`).innerHTML =
+                    `<div class="panel-grid">
+                        ${cardTable(`🏆 ${cup.label}: Pilotos`, ['Equipe','Pts'], `tbody-${cup.id}-pilotos`)}
+                        ${cardTable(`🏁 ${cup.label}: Equipes`, ['Pts'],          `tbody-${cup.id}-equipes`)}
+                    </div>`;
+            });
+        }
+
+        function buildCalendario() {
+            document.getElementById('calendario').innerHTML =
+                `<div class="panel-grid">
+                    ${CUPS.map((cup, i) =>
+                        cardTable(`📅 ${cup.label}`, [], `tbody-camp${i+1}`)
+                    ).join('')}
+                </div>`;
+        }
+
+        function buildEstatisticas() {
+            document.getElementById('estatisticas').innerHTML =
+                `<div class="panel-grid">
+                    ${cardTable('🏆 Maiores Vencedores', ['Vitórias'], 'tbody-stats-vitorias')}
+                    ${cardTable('⏱️ Pole Positions',     ['Poles'],    'tbody-stats-poles')}
+                </div>`;
+        }
+
         // ── CLASSIFICAÇÃO DE PILOTOS E EQUIPES ──────────────────
-        function renderStandings(cup, pilotsId, teamsId) {
+        function renderStandings(cup) {
             const pilots = BRS.drivers[cup]();
             const teams  = BRS.teams[cup]();
-            const pBody  = document.getElementById(pilotsId);
-            const tBody  = document.getElementById(teamsId);
-            if (!pBody || !tBody) return;
 
-            pBody.innerHTML = pilots.map((d, i) => `
-                <tr>
-                    <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
-                    <td class="name-col">${d.nome}</td>
-                    <td class="team-col">${d.equipe}</td>
-                    <td class="pts-col">${d.points}</td>
-                </tr>
-            `).join('');
+            document.getElementById(`tbody-${cup}-pilotos`).innerHTML =
+                pilots.map((d, i) => `
+                    <tr>
+                        <td class="pos-col ${getRankClass(i)}">${i+1}</td>
+                        <td class="name-col">${d.nome}</td>
+                        <td class="team-col">${d.equipe}</td>
+                        <td class="pts-col">${d.points}</td>
+                    </tr>`).join('');
 
-            tBody.innerHTML = teams.map((t, i) => `
-                <tr>
-                    <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
-                    <td class="name-col" style="width:75%">${t.nome}</td>
-                    <td class="pts-col">${t.points}</td>
-                </tr>
-            `).join('');
+            document.getElementById(`tbody-${cup}-equipes`).innerHTML =
+                teams.map((t, i) => `
+                    <tr>
+                        <td class="pos-col ${getRankClass(i)}">${i+1}</td>
+                        <td class="name-col" style="width:75%">${t.nome}</td>
+                        <td class="pts-col">${t.points}</td>
+                    </tr>`).join('');
         }
 
         // ── CALENDÁRIO ───────────────────────────────────────────
         function renderCalendar(tbodyId, cup) {
-            const tbody  = document.getElementById(tbodyId);
+            const tbody = document.getElementById(tbodyId);
             if (!tbody) return;
-            const etapas = BRS.calendario(cup);
-            tbody.innerHTML = etapas.map(e => `
+            tbody.innerHTML = BRS.calendario(cup).map(e => `
                 <tr>
                     <td class="cal-round">${e.r}</td>
                     <td class="cal-track">
@@ -571,68 +441,50 @@
                             : ''}
                     </td>
                     <td class="cal-date">${e.date}</td>
-                    <td><span class="cal-type ${e.type === 'Extra' ? 'type-extra' : 'type-oficial'}">${e.type}</span></td>
-                </tr>
-            `).join('');
+                    <td><span class="cal-type ${e.type==='Extra' ? 'type-extra' : 'type-oficial'}">${e.type}</span></td>
+                </tr>`).join('');
         }
 
         // ── ESTATÍSTICAS ─────────────────────────────────────────
         function renderStats() {
-            const vBody = document.getElementById('tbody-stats-vitorias');
-            const pBody = document.getElementById('tbody-stats-poles');
-            if (!vBody || !pBody) return;
             const stats = BRS.stats();
+            const empty = msg => `<tr><td colspan="4" style="text-align:center;opacity:.5;">${msg}</td></tr>`;
+            const row   = (d, i) => `
+                <tr>
+                    <td class="pos-col ${getRankClass(i)}">${i+1}</td>
+                    <td class="name-col">${d.nome}</td>
+                    <td class="team-col">${d.equipe}</td>
+                    <td class="pts-col">${d.count}</td>
+                </tr>`;
 
-            vBody.innerHTML = stats.wins.length > 0
-                ? stats.wins.map((d, i) => `
-                    <tr>
-                        <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
-                        <td class="name-col">${d.nome}</td>
-                        <td class="team-col">${d.equipe}</td>
-                        <td class="pts-col">${d.count}</td>
-                    </tr>`).join('')
-                : `<tr><td colspan="4" style="text-align:center;opacity:.5;">Nenhuma vitória registrada</td></tr>`;
-
-            pBody.innerHTML = stats.poles.length > 0
-                ? stats.poles.map((d, i) => `
-                    <tr>
-                        <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
-                        <td class="name-col">${d.nome}</td>
-                        <td class="team-col">${d.equipe}</td>
-                        <td class="pts-col">${d.count}</td>
-                    </tr>`).join('')
-                : `<tr><td colspan="4" style="text-align:center;opacity:.5;">Nenhuma pole registrada</td></tr>`;
+            document.getElementById('tbody-stats-vitorias').innerHTML =
+                stats.wins.length  ? stats.wins.map(row).join('')  : empty('Nenhuma vitória registrada');
+            document.getElementById('tbody-stats-poles').innerHTML =
+                stats.poles.length ? stats.poles.map(row).join('') : empty('Nenhuma pole registrada');
         }
 
         // ── GRID DE PILOTOS ──────────────────────────────────────
         function renderDriversGrid() {
             const grid = document.getElementById('drivers-grid');
             if (!grid) return;
-            const drivers = BRS.drivers.ignition();
-
-            grid.innerHTML = drivers.map((d, i) => {
+            grid.innerHTML = BRS.drivers.ignition().map((d, i) => {
                 const piloto = BRS.piloto(d.nome);
                 const equipe = BRS.equipe(d.equipe);
-                const dImg   = piloto ? piloto.foto  : 'https://via.placeholder.com/80?text=?';
-                const cImg   = equipe ? equipe.carro : 'https://via.placeholder.com/300x100?text=Carro';
-
+                const dImg   = piloto?.foto  ?? '';
+                const cImg   = equipe?.carro ?? '';
                 return `
                 <div class="driver-box">
                     <div class="driver-header">
-                        <div class="driver-rank ${getRankClass(i)}">${i + 1}º</div>
-                        <div class="driver-meta">
-                            <div class="driver-points">${d.points} PTS</div>
-                            <div class="driver-sr-inline">SR&nbsp;<span class="sr-neu">0</span></div>
-                        </div>
+                        <div class="driver-rank ${getRankClass(i)}">${i+1}º</div>
+                        <div class="driver-points">${d.points} PTS</div>
                     </div>
                     <div class="driver-content">
                         <div class="driver-photo-container">
-                            <img src="${dImg}" class="driver-photo-img"
-                                 onerror="this.src='https://via.placeholder.com/80?text=?'">
+                            <img src="${dImg}" class="driver-photo-img" onerror="this.style.display='none'">
                         </div>
                         <div class="driver-info">
                             <h3>${d.nome}</h3>
-                            <span style="text-transform:uppercase;">${d.equipe}</span>
+                            <span>${d.equipe}</span>
                         </div>
                     </div>
                     <div class="team-car-display">
@@ -646,21 +498,17 @@
         function renderPistas() {
             const container = document.getElementById('pistas-container');
             if (!container) return;
-            container.style.gridTemplateColumns = 'repeat(2, 1fr)';
-            const pistas = BRS.pistas();
-
-            container.innerHTML = pistas.map(pista => `
+            container.style.gridTemplateColumns = 'repeat(2,1fr)';
+            container.innerHTML = BRS.pistas().map(pista => `
                 <div class="card"><div class="card-inner">
                     <div class="card-header">
                         <h2>${pista.nome}</h2>
                         <div class="header-labels">${pista.pais}</div>
                     </div>
                     <div style="text-align:center; padding:1rem;">
-                        <img src="${pista.imagem}"
-                             style="max-width:700px; width:100%; filter:drop-shadow(0 0 10px var(--neon-cyan));">
+                        <img src="${pista.imagem}" style="max-width:700px; width:100%; filter:drop-shadow(0 0 10px var(--neon-cyan));">
                     </div>
-                    <div class="rules-content"
-                         style="display:flex; gap:2rem; justify-content:center; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:1rem;">
+                    <div class="rules-content" style="display:flex; gap:2rem; justify-content:center; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:1rem;">
                         <p><strong>Comprimento:</strong> ${pista.comprimento}</p>
                         <p><strong>Curvas:</strong> ${pista.curvas}</p>
                         <p><strong>Zonas DRS:</strong> ${pista.drs}</p>
@@ -676,19 +524,17 @@
                             ${pista.resultados.length > 0
                                 ? pista.resultados.map(res => `
                                     <tr>
-                                        <td class="pos-col ${getRankClass(res.pos - 1)}">${res.pos}</td>
+                                        <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
                                         <td class="name-col">${res.piloto}</td>
                                         <td class="team-col">${res.equipe}</td>
                                         <td class="pts-col">${res.pontos}</td>
                                     </tr>`).join('')
-                                : `<tr><td colspan="4" style="text-align:center;opacity:.5;padding:1rem;">
-                                       Corrida ainda não realizada
-                                   </td></tr>`
+                                : `<tr><td colspan="4" style="text-align:center;opacity:.5;padding:1rem;">Corrida ainda não realizada</td></tr>`
                             }
                         </tbody>
                     </table>
-                </div></div>
-            `).join('');
+                </div></div>`
+            ).join('');
         }
 
         // ── VÍDEOS ───────────────────────────────────────────────
@@ -709,8 +555,8 @@
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                         </iframe>
                     </div>
-                </div></div>
-            `).join('');
+                </div></div>`
+            ).join('');
         }
 
         // ── GALERIA ──────────────────────────────────────────────
@@ -727,119 +573,396 @@
                         <img src="${item.url}" alt="${item.titulo || 'Imagem'}"
                              style="max-width:100%; border-radius:8px; box-shadow:0 0 10px rgba(0,243,255,0.2);">
                     </div>
-                </div></div>
+                </div></div>`
+            ).join('');
+        }
+
+        // ── EVOLUÇÃO DE PONTOS ────────────────────────────────────
+        // Cores por equipe (definidas no CONFIG); fallback para paleta genérica
+        function corDoPiloto(nome) {
+            const piloto = BRS.piloto(nome);
+            if (!piloto) return '#8b9bb4';
+            const equipe = BRS.equipe(piloto.equipe);
+            return equipe ? equipe.cor : '#8b9bb4';
+        }
+
+        let evolucaoEstado = { cup: 'ignition', ocultos: new Set() };
+
+        function buildEvolucaoTabs() {
+            const el = document.getElementById('evolucao-tabs');
+            if (!el) return;
+            el.innerHTML = CUPS.map((cup, i) => `
+                <button class="grade-tab${i===0?' active':''}" data-ecup="${cup.id}">🏆 ${cup.label} CUP</button>
             `).join('');
+            el.addEventListener('click', e => {
+                const btn = e.target.closest('.grade-tab[data-ecup]');
+                if (!btn) return;
+                el.querySelectorAll('.grade-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                evolucaoEstado.cup = btn.dataset.ecup;
+                evolucaoEstado.ocultos.clear();
+                renderEvolucao();
+            });
+        }
+
+        function calcEvolucao(cup) {
+            const etapas  = CONFIG.calendario[cup];
+            const pistas  = BRS.pistas();
+            const pilotos = CONFIG.campeonatos[cup].pilotos;
+
+            // Acumula pontos etapa a etapa
+            const acc = {};
+            pilotos.forEach(n => { acc[n] = 0; });
+
+            const labels = [];
+            const series = {}; // piloto -> [pts acum por etapa]
+            pilotos.forEach(n => { series[n] = []; });
+
+            etapas.forEach(e => {
+                const pista = pistas[e.pistasIdx];
+                if (!pista || !pista.resultados.length) return;
+                labels.push(e.track);
+                pista.resultados.forEach(r => {
+                    if (acc[r.piloto] !== undefined) acc[r.piloto] += r.pontos;
+                });
+                pilotos.forEach(n => { series[n].push(acc[n]); });
+            });
+
+            // Ordena pelo total final desc
+            const ordenados = [...pilotos].sort((a,b) => (acc[b]||0) - (acc[a]||0));
+            return { labels, series, ordenados, totais: acc };
+        }
+
+        function renderEvolucao() {
+            const canvas  = document.getElementById('evolucao-canvas');
+            const tooltip = document.getElementById('evolucao-tooltip');
+            const legenda = document.getElementById('evolucao-legenda');
+            if (!canvas) return;
+
+            const { cup, ocultos } = evolucaoEstado;
+            const { labels, series, ordenados, totais } = calcEvolucao(cup);
+
+            if (!labels.length) {
+                canvas.style.display = 'none';
+                legenda.innerHTML = '<span style="color:var(--text-muted);font-size:0.85rem;">Nenhuma etapa realizada neste campeonato.</span>';
+                return;
+            }
+            canvas.style.display = 'block';
+
+            // Cor por piloto (ordem final)
+            const cores = {};
+            ordenados.forEach(n => { cores[n] = corDoPiloto(n); });
+
+            // ── LEGENDA ──────────────────────────────────────────
+            legenda.innerHTML = ordenados.map(nome => `
+                <div class="evolucao-leg-item${ocultos.has(nome)?' oculto':''}" data-piloto="${nome}">
+                    <div class="evolucao-leg-cor" style="background:${cores[nome]};"></div>
+                    <span style="color:${ocultos.has(nome)?'var(--text-muted)':cores[nome]}; font-weight:600;">
+                        ${totais[nome]} ${nome}
+                    </span>
+                </div>`).join('');
+
+            legenda.querySelectorAll('.evolucao-leg-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const n = item.dataset.piloto;
+                    if (ocultos.has(n)) ocultos.delete(n); else ocultos.add(n);
+                    renderEvolucao();
+                });
+            });
+
+            // ── CANVAS ───────────────────────────────────────────
+            const DPR    = window.devicePixelRatio || 1;
+            const W_CSS  = canvas.parentElement.clientWidth - 32;
+            const PAD    = { top: 20, right: 130, bottom: 72, left: 52 };
+            const plotW  = W_CSS - PAD.left - PAD.right;
+
+            // Calcula max pts visíveis
+            let maxPts = 0;
+            ordenados.forEach(n => {
+                if (!ocultos.has(n)) {
+                    const pts = series[n];
+                    if (pts.length) maxPts = Math.max(maxPts, pts[pts.length-1]);
+                }
+            });
+            maxPts = Math.ceil(maxPts / 50) * 50 || 50;
+            const H_CSS  = Math.max(620, Math.min(1100, maxPts * 2.8));
+            const plotH  = H_CSS - PAD.top - PAD.bottom;
+
+            canvas.width  = W_CSS  * DPR;
+            canvas.height = H_CSS  * DPR;
+            canvas.style.width  = W_CSS  + 'px';
+            canvas.style.height = H_CSS  + 'px';
+
+            const ctx = canvas.getContext('2d');
+            ctx.scale(DPR, DPR);
+            ctx.clearRect(0, 0, W_CSS, H_CSS);
+
+            const xStep = labels.length > 1 ? plotW / (labels.length - 1) : plotW;
+            const xOf   = i  => PAD.left + i * xStep;
+            const yOf   = pt => PAD.top  + plotH - (pt / maxPts) * plotH;
+
+            // Grade horizontal
+            const nLinhas = 5;
+            ctx.font = '11px Titillium Web, sans-serif';
+            for (let i = 0; i <= nLinhas; i++) {
+                const v = (maxPts / nLinhas) * i;
+                const y = yOf(v);
+                ctx.beginPath();
+                ctx.strokeStyle = i === 0 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)';
+                ctx.lineWidth = i === 0 ? 1 : 0.5;
+                ctx.moveTo(PAD.left, y);
+                ctx.lineTo(PAD.left + plotW, y);
+                ctx.stroke();
+                ctx.fillStyle = 'rgba(139,155,180,0.8)';
+                ctx.textAlign = 'right';
+                ctx.fillText(Math.round(v), PAD.left - 6, y + 4);
+            }
+
+            // Rótulos eixo X (inclinados)
+            ctx.save();
+            ctx.fillStyle = 'rgba(139,155,180,0.9)';
+            ctx.font = '10px Titillium Web, sans-serif';
+            labels.forEach((lbl, i) => {
+                const x = xOf(i);
+                ctx.save();
+                ctx.translate(x, PAD.top + plotH + 8);
+                ctx.rotate(-Math.PI / 4);
+                ctx.textAlign = 'right';
+                ctx.fillText(lbl, 0, 0);
+                ctx.restore();
+                // tick
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(x, PAD.top);
+                ctx.lineTo(x, PAD.top + plotH);
+                ctx.stroke();
+            });
+            ctx.restore();
+
+            // Linhas dos pilotos (ocultos por baixo para não obstruir)
+            const endLabels = [];
+            [...ordenados].reverse().forEach(nome => {
+                if (ocultos.has(nome)) return;
+                const pts  = series[nome];
+                const cor  = cores[nome];
+                if (!pts.length) return;
+
+                ctx.beginPath();
+                ctx.strokeStyle = cor;
+                ctx.lineWidth   = 3;
+                ctx.lineJoin    = 'round';
+                ctx.lineCap     = 'round';
+                pts.forEach((v, i) => {
+                    i === 0 ? ctx.moveTo(xOf(i), yOf(v)) : ctx.lineTo(xOf(i), yOf(v));
+                });
+                ctx.stroke();
+
+                // Pontos
+                pts.forEach((v, i) => {
+                    ctx.beginPath();
+                    ctx.arc(xOf(i), yOf(v), 5.5, 0, Math.PI*2);
+                    ctx.fillStyle = cor;
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                });
+
+                // Label final — posição ideal registrada para anti-colisão posterior
+                if (pts.length) {
+                    const last = pts[pts.length - 1];
+                    endLabels.push({ nome: nome.split(' ')[0], cor: cores[nome], x: xOf(pts.length - 1), yIdeal: yOf(last) });
+                }
+            });
+
+            // ── LABELS FINAIS com anti-colisão ───────────────────
+            const LINE_H = 14;
+            const MARGIN = 4;
+
+            // Salva yIdeal original antes de qualquer ajuste
+            endLabels.sort((a, b) => a.yIdeal - b.yIdeal);
+            endLabels.forEach(lbl => { lbl.yAnchor = lbl.yIdeal; lbl.yFinal = lbl.yIdeal; });
+
+            // Passa para baixo
+            for (let i = 1; i < endLabels.length; i++) {
+                if (endLabels[i].yFinal < endLabels[i-1].yFinal + LINE_H + MARGIN) {
+                    endLabels[i].yFinal = endLabels[i-1].yFinal + LINE_H + MARGIN;
+                }
+            }
+
+            // Passa para cima (corrige overflow inferior)
+            const yMax = PAD.top + plotH;
+            for (let i = endLabels.length - 1; i >= 0; i--) {
+                if (endLabels[i].yFinal > yMax) endLabels[i].yFinal = yMax;
+                if (i < endLabels.length - 1 && endLabels[i].yFinal > endLabels[i+1].yFinal - LINE_H - MARGIN) {
+                    endLabels[i].yFinal = endLabels[i+1].yFinal - LINE_H - MARGIN;
+                }
+            }
+
+            // Desenha conector tracejado + label
+            ctx.font = 'bold 11px Titillium Web, sans-serif';
+            endLabels.forEach(lbl => {
+                // conector só quando o label foi deslocado significativamente
+                if (Math.abs(lbl.yFinal - lbl.yAnchor) > 3) {
+                    ctx.beginPath();
+                    ctx.setLineDash([3, 3]);
+                    ctx.strokeStyle = 'rgba(139,155,180,0.35)';
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(lbl.x + 7, lbl.yAnchor);
+                    ctx.lineTo(lbl.x + 18, lbl.yFinal + 1);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+                ctx.fillStyle = lbl.cor;
+                ctx.textAlign = 'left';
+                ctx.fillText(lbl.nome, lbl.x + 10, lbl.yFinal + 4);
+            });
+
+            // ── TOOLTIP interativo ────────────────────────────────
+            function onMouseMove(e) {
+                const rect = canvas.getBoundingClientRect();
+                const mx   = e.clientX - rect.left;
+                const my   = e.clientY - rect.top;
+
+                if (mx < PAD.left || mx > PAD.left + plotW || my < PAD.top || my > PAD.top + plotH) {
+                    tooltip.style.display = 'none';
+                    return;
+                }
+
+                const idx = Math.round((mx - PAD.left) / xStep);
+                if (idx < 0 || idx >= labels.length) { tooltip.style.display = 'none'; return; }
+
+                const visíveis = ordenados.filter(n => !ocultos.has(n) && series[n][idx] !== undefined);
+                visíveis.sort((a,b) => (series[b][idx]||0) - (series[a][idx]||0));
+
+                tooltip.innerHTML = `
+                    <div class="evolucao-tt-titulo">${labels[idx]}</div>
+                    ${visíveis.map(n => `
+                        <div class="evolucao-tt-linha">
+                            <div class="evolucao-tt-cor" style="background:${cores[n]};"></div>
+                            <span>${n}</span>
+                            <span class="evolucao-tt-pts">${series[n][idx]} pts</span>
+                        </div>`).join('')}`;
+
+                const ttW = 240;
+                const ttH = tooltip.offsetHeight || 40;
+                let tx = e.clientX + 14;
+                let ty = e.clientY - ttH / 2;
+                if (tx + ttW > window.innerWidth - 8) tx = e.clientX - ttW - 14;
+                if (ty < 8) ty = 8;
+                if (ty + ttH > window.innerHeight - 8) ty = window.innerHeight - ttH - 8;
+
+                tooltip.style.left    = tx + 'px';
+                tooltip.style.top     = ty + 'px';
+                tooltip.style.display = 'block';
+            }
+
+            canvas.removeEventListener('mousemove', canvas._mmHandler);
+            canvas.removeEventListener('mouseleave', canvas._mlHandler);
+            canvas._mmHandler = onMouseMove;
+            canvas._mlHandler = () => { tooltip.style.display = 'none'; };
+            canvas.addEventListener('mousemove', canvas._mmHandler);
+            canvas.addEventListener('mouseleave', canvas._mlHandler);
         }
 
         // ── GRADE DE RESULTADOS ──────────────────────────────────
-        // Tabela: linhas = posições (1º ao Nº máx), colunas = etapas do campeonato
+        function buildGradeTabs() {
+            document.getElementById('grade-tabs').innerHTML = CUPS.map((cup, i) => `
+                <button class="grade-tab${i===0 ? ' active' : ''}"
+                        data-cup="${cup.id}">🏆 ${cup.label} CUP</button>
+            `).join('');
+            document.getElementById('grade-tabs').addEventListener('click', e => {
+                const btn = e.target.closest('.grade-tab[data-cup]');
+                if (btn) renderGrade(btn.dataset.cup, btn);
+            });
+        }
+
         function renderGrade(cup, btn) {
-            // Atualiza tab ativa
             document.querySelectorAll('.grade-tab').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
 
-            const calendario = BRS.calendario(cup);
-            const pistas     = BRS.pistas();
+            const etapasCup = CONFIG.calendario[cup];
+            const pistas    = BRS.pistas();
 
-            // Só mostra etapas que pertencem a este cup
-            const etapasCup = CONFIG.calendario[cup]; // array com pistasIdx
+            let maxPos = etapasCup.reduce((max, e) => {
+                const r = pistas[e.pistasIdx]?.resultados.length ?? 0;
+                return r > max ? r : max;
+            }, 0) || 12;
 
-            // Descobre o máximo de participantes em qualquer etapa
-            let maxPos = 0;
-            etapasCup.forEach(e => {
-                const pista = pistas[e.pistasIdx];
-                if (pista && pista.resultados.length > maxPos) {
-                    maxPos = pista.resultados.length;
-                }
-            });
-            if (maxPos === 0) maxPos = 12; // mínimo visual se nenhuma etapa ocorreu
-
-            // ── CABEÇALHO ────────────────────────────────────────
-            const thead = document.getElementById('grade-thead');
-            thead.innerHTML = `
+            // Cabeçalho
+            document.getElementById('grade-thead').innerHTML = `
                 <tr>
                     <th class="col-pos" style="padding:0.6rem 0; font-size:0.7rem; color:var(--text-muted);">POS</th>
                     ${etapasCup.map(e => {
-                        const pista    = pistas[e.pistasIdx];
-                        const feita    = pista && pista.resultados.length > 0;
-                        // Nome curto: pega o país da pista ou o track do calendário
-                        const nomeExib = e.track;
-                        return `<th class="col-etapa ${feita ? 'realizado' : ''}">${nomeExib}</th>`;
+                        const feita = (pistas[e.pistasIdx]?.resultados.length ?? 0) > 0;
+                        return `<th class="col-etapa${feita ? ' realizado' : ''}">${e.track}</th>`;
                     }).join('')}
                 </tr>`;
 
-            // ── CORPO ────────────────────────────────────────────
-            const tbody = document.getElementById('grade-tbody');
+            // Corpo
+            const emptyCell = `<td><div class="grade-cell"><div class="grade-cell-empty"></div></div></td>`;
             let rows = '';
-
             for (let pos = 1; pos <= maxPos; pos++) {
-                rows += `<tr>
-                    <td class="col-pos">${pos}º</td>
+                rows += `<tr><td class="col-pos">${pos}º</td>
                     ${etapasCup.map(e => {
                         const pista = pistas[e.pistasIdx];
-                        if (!pista || pista.resultados.length === 0) {
-                            // Etapa não realizada
-                            return `<td><div class="grade-cell"><div class="grade-cell-empty"></div></div></td>`;
-                        }
+                        if (!pista?.resultados.length) return emptyCell;
                         const res = pista.resultados.find(r => r.pos === pos);
-                        if (!res) {
-                            // Etapa realizada, mas essa posição não existe (menos pilotos)
-                            return `<td><div class="grade-cell"><div class="grade-cell-empty"></div></div></td>`;
-                        }
-                        // Piloto encontrado
-                        const pilotoData = BRS.piloto(res.piloto);
-                        const equipeData = BRS.equipe(res.equipe);
-                        const foto       = pilotoData ? pilotoData.foto : '';
-                        const cor        = equipeData ? equipeData.cor  : '#555';
-                        const pontos     = res.pontos > 0 ? res.pontos : '';
-                        const nomeExib   = res.piloto;
-
-                        return `
-                            <td>
-                                <div class="grade-cell">
-                                    <div class="grade-cell-inner"
-                                         style="border-color: ${cor}; box-shadow: 0 0 6px ${cor}55;"
-                                         data-nome="${nomeExib}">
-                                        <img src="${foto}" alt="${nomeExib}"
-                                             onerror="this.style.background='#333'; this.style.display='block';">
-                                        ${pontos !== '' ? `<span class="grade-pts">${pontos}</span>` : ''}
-                                    </div>
-                                </div>
-                            </td>`;
+                        if (!res) return emptyCell;
+                        const cor    = BRS.equipe(res.equipe)?.cor ?? '#555';
+                        const foto   = BRS.piloto(res.piloto)?.foto ?? '';
+                        const pontos = res.pontos > 0 ? `<span class="grade-pts">${res.pontos}</span>` : '';
+                        return `<td><div class="grade-cell">
+                            <div class="grade-cell-inner"
+                                 style="border-color:${cor}; box-shadow:0 0 6px ${cor}55;"
+                                 data-nome="${res.piloto}">
+                                <img src="${foto}" alt="${res.piloto}" onerror="this.style.display='none'">
+                                ${pontos}
+                            </div></div></td>`;
                     }).join('')}
                 </tr>`;
             }
-            tbody.innerHTML = rows;
+            document.getElementById('grade-tbody').innerHTML = rows;
 
-            // ── LEGENDA ──────────────────────────────────────────
-            const legenda = document.getElementById('grade-legenda');
-            legenda.innerHTML = BRS.equipes().map(eq => `
+            // Legenda
+            document.getElementById('grade-legenda').innerHTML = BRS.equipes().map(eq => `
                 <div style="display:flex; align-items:center; gap:5px; font-size:0.75rem; color:var(--text-muted);">
-                    <div style="width:12px; height:12px; border-radius:3px; background:${eq.cor};
-                                box-shadow:0 0 5px ${eq.cor}88; flex-shrink:0;"></div>
+                    <div style="width:12px; height:12px; border-radius:3px; background:${eq.cor}; box-shadow:0 0 5px ${eq.cor}88; flex-shrink:0;"></div>
                     <span>${eq.nome}</span>
-                </div>
-            `).join('');
+                </div>`).join('');
         }
 
         // ── INICIALIZAÇÃO ─────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
-            renderStandings('ignition',  'tbody-ignition-pilotos',  'tbody-ignition-equipes');
-            renderStandings('evolution', 'tbody-evolution-pilotos', 'tbody-evolution-equipes');
-            renderStandings('legacy',    'tbody-legacy-pilotos',    'tbody-legacy-equipes');
-            renderCalendar('tbody-camp1', 'ignition');
-            renderCalendar('tbody-camp2', 'evolution');
-            renderCalendar('tbody-camp3', 'legacy');
+            buildNav();
+            buildCupSections();
+            buildCalendario();
+            buildEstatisticas();
+            buildGradeTabs();
+            buildEvolucaoTabs();
+
+            CUPS.forEach((cup, i) => {
+                renderStandings(cup.id);
+                renderCalendar(`tbody-camp${i+1}`, cup.id);
+            });
+
             renderStats();
             renderDriversGrid();
             renderPistas();
             renderVideos();
             renderGaleria();
-            renderGrade('ignition', null); // pré-renderiza a grade no Ignition
+            renderGrade('ignition', document.querySelector('.grade-tab'));
+            renderEvolucao();
             updateFooterDate();
 
-            const btnPilotos = document.querySelector('button[onclick*="pilotos"]');
-            showSection('pilotos', btnPilotos);
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(renderEvolucao, 120);
+            });
+
+            showSection('pilotos', document.querySelector('[data-target="pilotos"]'));
         });
 
     </script>
