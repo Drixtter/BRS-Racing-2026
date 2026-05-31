@@ -498,7 +498,7 @@
         function renderPistas() {
             const container = document.getElementById('pistas-container');
             if (!container) return;
-            container.style.gridTemplateColumns = 'repeat(2,1fr)';
+            container.style.gridTemplateColumns = '';   // deixa o CSS responsivo do drivers-grid agir
             container.innerHTML = BRS.pistas().map(pista => `
                 <div class="card"><div class="card-inner">
                     <div class="card-header">
@@ -506,33 +506,39 @@
                         <div class="header-labels">${pista.pais}</div>
                     </div>
                     <div style="text-align:center; padding:1rem;">
-                        <img src="${pista.imagem}" style="max-width:700px; width:100%; filter:drop-shadow(0 0 10px var(--neon-cyan));">
+                        <img src="${pista.imagem}" style="max-width:100%; width:100%; filter:drop-shadow(0 0 10px var(--neon-cyan));">
                     </div>
-                    <div class="rules-content" style="display:flex; gap:2rem; justify-content:center; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:1rem;">
+                    <div style="display:flex; flex-wrap:wrap; gap:0.5rem 1.5rem; justify-content:center; margin-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:1rem; font-size:0.85rem;">
                         <p><strong>Comprimento:</strong> ${pista.comprimento}</p>
                         <p><strong>Curvas:</strong> ${pista.curvas}</p>
                         <p><strong>Zonas DRS:</strong> ${pista.drs}</p>
                     </div>
                     <div class="card-header"><h3>🏁 Resultados</h3></div>
-                    <table>
-                        <thead>
-                            <tr style="color:var(--text-muted); font-size:0.8rem; text-transform:uppercase;">
-                                <th class="pos-col">Pos</th><th>Piloto</th><th>Equipe</th><th>Pontos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${pista.resultados.length > 0
-                                ? pista.resultados.map(res => `
-                                    <tr>
-                                        <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
-                                        <td class="name-col">${res.piloto}</td>
-                                        <td class="team-col">${res.equipe}</td>
-                                        <td class="pts-col">${res.pontos}</td>
-                                    </tr>`).join('')
-                                : `<tr><td colspan="4" style="text-align:center;opacity:.5;padding:1rem;">Corrida ainda não realizada</td></tr>`
-                            }
-                        </tbody>
-                    </table>
+                    <div style="overflow-x:auto;">
+                        <table style="min-width:0; width:100%;">
+                            <thead>
+                                <tr style="color:var(--text-muted); font-size:0.8rem; text-transform:uppercase;">
+                                    <th class="pos-col">Pos</th>
+                                    <th>Piloto</th>
+                                    <th class="pts-col" style="text-align:right;">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${pista.resultados.length > 0
+                                    ? pista.resultados.map(res => `
+                                        <tr>
+                                            <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
+                                            <td class="name-col" style="font-size:0.85rem;">
+                                                ${res.piloto}
+                                                <span style="display:block; font-size:0.75rem; color:var(--text-muted); font-weight:400;">${res.equipe}</span>
+                                            </td>
+                                            <td class="pts-col">${res.pontos}</td>
+                                        </tr>`).join('')
+                                    : `<tr><td colspan="3" style="text-align:center;opacity:.5;padding:1rem;">Corrida ainda não realizada</td></tr>`
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div></div>`
             ).join('');
         }
