@@ -386,10 +386,10 @@ const CONFIG = {
       comprimento: "3.337 km", curvas: 19, drs: 1,
       resultados: [
         { pos: 1, piloto: "Frank Violets",            equipe: "Kick Sauber",  pontos: 30 },
-        { pos: 5, piloto: "Nathan Nadadanad03",       equipe: "Mercedes-AMG", pontos: 25 },        
-        { pos: 2, piloto: "Leal Flushh",              equipe: "Kick Sauber",  pontos: 21 },
+        { pos: 2, piloto: "Nathan Nadadanad03",       equipe: "Mercedes-AMG", pontos: 25 },        
+        { pos: 3, piloto: "Leal Flushh",              equipe: "Kick Sauber",  pontos: 21 },
         { pos: 4, piloto: "Adriano Drixtter",         equipe: "McLaren",      pontos: 18 },
-        { pos: 3, piloto: "Renato Renato.R2Oliveira", equipe: "McLaren",      pontos:  0 }     
+        { pos: 5, piloto: "Renato Renato.R2Oliveira", equipe: "McLaren",      pontos:  0 }     
       ]
       // ✅ Preencha após a corrida
     },
