@@ -31,7 +31,7 @@ const CONFIG = {
     { nome: "Gustavo Guga",              equipe: "Red Bull Racing",  foto: "img/drivers/gustavo.png"    },
     { nome: "João Ferrigno",             equipe: "Red Bull Racing",  foto: "img/drivers/joao.png"       },
     { nome: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", foto: "img/drivers/nathan.png"     },
-    { nome: "Cristian Cris",             equipe: "Red Bull Racing",     foto: "img/drivers/cristian.png"   },
+    { nome: "Cristian Cris",             equipe: "Red Bull Racing",  foto: "img/drivers/cristian.png"},
     { nome: "Julian JuScata",            equipe: "Williams",         foto: "img/drivers/julian.png"     },
     { nome: "Fernando procopiodearruda", equipe: "Williams",         foto: "img/drivers/fernando.png"   },
     { nome: "Adriano Drixtter",          equipe: "McLaren",          foto: "img/drivers/adriano.png"    },
@@ -84,13 +84,13 @@ const CONFIG = {
         "Frank Violets",
         "Leal Flushh",
         "Renato Renato.R2Oliveira",
-         "Adriano Drixtter",
+        "Adriano Drixtter",
         "Nathan Nadadanad03",
-        "Cristian Cris",
-        "Rafael Rafael94_Sam",
+        "Luis Syaazz1",
         "Julian JuScata", 
-        "Fernando procopiodearruda", 
-        "Luis Syaazz1"
+        "Fernando procopiodearruda",
+        "Cristian Cris",
+        "Rafael Rafael94_Sam"               
       ]
     },
     legacy: {
@@ -150,35 +150,35 @@ const CONFIG = {
       { r:  9, track: "Brasil",         date: "Realizado em 10/05", type: "Extra",   pistasIdx: 8  },
       { r: 10, track: "Itália - Monza", date: "Realizado em 17/05", type: "Extra",   pistasIdx: 9  },
       { r: 11, track: "Canadá",         date: "Realizado em 24/05", type: "Oficial", pistasIdx: 10 },
-      { r: 12, track: "Mônaco",         date: "31/05",              type: "Oficial", pistasIdx: 11 }
+      { r: 12, track: "Mônaco",         date: "Realizado em 31/05",              type: "Oficial", pistasIdx: 11 }
     ],
     evolution: [
       { r:  1, track: "Espanha",        date: "14/06", type: "Oficial", pistasIdx: 12 },
-      { r:  2, track: "Japão",          date: "21/06", type: "Extra",  pistasIdx: 13 },
-      { r:  3, track: "Áustria",        date: "28/06", type: "Oficial", pistasIdx: 14 },
-      { r:  4, track: "Grã-Bretanha",   date: "05/07", type: "Oficial", pistasIdx: 15 },
-      { r:  5, track: "Itália - Imola", date: "12/07", type: "Extra",  pistasIdx: 16 },
-      { r:  6, track: "Bélgica",        date: "19/07", type: "Oficial", pistasIdx: 17 },
-      { r:  7, track: "Hungria",        date: "26/07", type: "Oficial", pistasIdx: 18 },
-      { r:  8, track: "Bahrein",        date: "09/08", type: "Extra",  pistasIdx: 19 },
-      { r:  9, track: "Países Baixos",  date: "23/08", type: "Oficial", pistasIdx: 20 },
-      { r: 10, track: "Canadá",         date: "30/08", type: "Extra",  pistasIdx: 21 },
-      { r: 11, track: "Itália - Monza", date: "06/09", type: "Oficial", pistasIdx: 22 },
-      { r: 12, track: "Brasil",         date: "13/09", type: "Oficial", pistasIdx: 23 }
+      //{ r:  2, track: "Japão",          date: "21/06", type: "Extra",  pistasIdx: 13 },
+      { r:  2, track: "Áustria",        date: "28/06", type: "Oficial", pistasIdx: 14 },
+      { r:  3, track: "Grã-Bretanha",   date: "05/07", type: "Oficial", pistasIdx: 15 },
+      //{ r:  5, track: "Itália - Imola", date: "12/07", type: "Extra",  pistasIdx: 16 },
+      { r:  4, track: "Bélgica",        date: "19/07", type: "Oficial", pistasIdx: 17 },
+      { r:  5, track: "Hungria",        date: "26/07", type: "Oficial", pistasIdx: 18 },
+      //{ r:  8, track: "Bahrein",        date: "09/08", type: "Extra",  pistasIdx: 19 },
+      { r:  6, track: "Países Baixos",  date: "23/08", type: "Oficial", pistasIdx: 20 },
+      //{ r: 10, track: "Canadá",         date: "30/08", type: "Extra",  pistasIdx: 21 },
+      { r: 7, track: "Itália - Monza", date: "06/09", type: "Oficial", pistasIdx: 22 },
+      { r: 8, track: "Brasil",         date: "13/09", type: "Oficial", pistasIdx: 23 }
     ],
     legacy: [
       { r:  1, track: "Azerbaijão",     date: "27/09", type: "Oficial", pistasIdx: 24 },
-      { r:  2, track: "Bélgica",        date: "04/10", type: "Extra",  pistasIdx: 25 },
-      { r:  3, track: "Singapura",      date: "11/10", type: "Oficial", pistasIdx: 26 },
-      { r:  4, track: "Áustria",        date: "18/10", type: "Extra",  pistasIdx: 27 },
-      { r:  5, track: "EUA - Austin",   date: "25/10", type: "Oficial", pistasIdx: 28 },
-      { r:  6, track: "México",         date: "01/11", type: "Oficial", pistasIdx: 29 },
-      { r:  7, track: "Brasil",         date: "08/11", type: "Oficial", pistasIdx: 30 },
-      { r:  8, track: "Arábia Saudita", date: "15/11", type: "Extra",  pistasIdx: 31 },
-      { r:  9, track: "Las Vegas",      date: "22/11", type: "Oficial", pistasIdx: 32 },
-      { r: 10, track: "Qatar",          date: "29/11", type: "Oficial", pistasIdx: 33 },
-      { r: 11, track: "Grã-Bretanha",   date: "06/12", type: "Extra",  pistasIdx: 34 },
-      { r: 12, track: "Abu Dhabi",      date: "13/12", type: "Oficial", pistasIdx: 35 }
+      //{ r:  2, track: "Bélgica",        date: "04/10", type: "Extra",  pistasIdx: 25 },
+      { r:  2, track: "Singapura",      date: "11/10", type: "Oficial", pistasIdx: 26 },
+      //{ r:  4, track: "Áustria",        date: "18/10", type: "Extra",  pistasIdx: 27 },
+      { r:  3, track: "EUA - Austin",   date: "25/10", type: "Oficial", pistasIdx: 28 },
+      { r:  4, track: "México",         date: "01/11", type: "Oficial", pistasIdx: 29 },
+      { r:  5, track: "Brasil",         date: "08/11", type: "Oficial", pistasIdx: 30 },
+      //{ r:  8, track: "Arábia Saudita", date: "15/11", type: "Extra",  pistasIdx: 31 },
+      { r:  6, track: "Las Vegas",      date: "22/11", type: "Oficial", pistasIdx: 32 },
+      { r: 7, track: "Qatar",          date: "29/11", type: "Oficial", pistasIdx: 33 },
+      //{ r: 11, track: "Grã-Bretanha",   date: "06/12", type: "Extra",  pistasIdx: 34 },
+      { r: 8, track: "Abu Dhabi",      date: "13/12", type: "Oficial", pistasIdx: 35 }
     ]
   },
 

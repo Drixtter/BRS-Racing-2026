@@ -66,9 +66,14 @@ const BRS = (() => {
         if (acc[p.piloto]) acc[p.piloto].poles += 1;
       });
 
-    // Ordena: pontos desc → vitórias desc → nome asc
+    // Ordena: pontos desc → vitórias desc → ordem do array de pilotos do campeonato
+    // (quando todos têm 0 pontos, mantém a ordem definida em CONFIG.campeonatos[cup].pilotos)
+    const ordemCup = {};
+    pilotos.forEach((nome, i) => { ordemCup[nome] = i; });
+
     return Object.values(acc).sort((a, b) =>
-      b.points - a.points || b.wins - a.wins || a.nome.localeCompare(b.nome)
+      b.points - a.points || b.wins - a.wins ||
+      (ordemCup[a.nome] ?? 999) - (ordemCup[b.nome] ?? 999)
     );
   }
 
