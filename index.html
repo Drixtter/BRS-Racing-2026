@@ -294,7 +294,7 @@
         <!-- PILOTOS -->
         <div id="pilotos" class="section active">
             <div class="section-title" style="margin-bottom:2rem;">
-                <h2>🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)">IGNITION CUP</span></h2>
+                <h2>🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)">EVOLUTION CUP</span></h2>
             </div>
             <div class="drivers-grid" id="drivers-grid"></div>
         </div>
@@ -313,7 +313,7 @@
         // ── CONFIGURAÇÃO DA NAVEGAÇÃO ────────────────────────────
         const NAV_ITEMS = [
             { label: '🏆 Ignition CUP',  target: 'section-ignition'  },
-            { label: '👤 Pilotos',        target: 'pilotos',          active: true },
+            { label: '👤 Pilotos',       target: 'pilotos',          active: true },
             { label: '🏆 Evolution CUP', target: 'section-evolution' },
             { label: '📅 Calendário',    target: 'calendario'        },
             { label: '🏆 Legacy CUP',    target: 'section-legacy'    },
@@ -467,7 +467,7 @@
         function renderDriversGrid() {
             const grid = document.getElementById('drivers-grid');
             if (!grid) return;
-            grid.innerHTML = BRS.drivers.ignition().map((d, i) => {
+            grid.innerHTML = BRS.drivers.evolution().map((d, i) => {
                 const piloto = BRS.piloto(d.nome);
                 const equipe = BRS.equipe(d.equipe);
                 const dImg   = piloto?.foto  ?? '';
@@ -592,7 +592,7 @@
             return equipe ? equipe.cor : '#8b9bb4';
         }
 
-        let evolucaoEstado = { cup: 'ignition', ocultos: new Set() };
+        let evolucaoEstado = { cup: 'evolution', ocultos: new Set() };
 
         function buildEvolucaoTabs() {
             const el = document.getElementById('evolucao-tabs');
@@ -958,7 +958,7 @@
             renderPistas();
             renderVideos();
             renderGaleria();
-            renderGrade('ignition', document.querySelector('.grade-tab'));
+            renderGrade('evolution', document.querySelector('.grade-tab'));
             renderEvolucao();
             updateFooterDate();
 

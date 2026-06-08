@@ -18,22 +18,22 @@ const BRS = (() => {
     const pilotos  = CONFIG.campeonatos[cup].pilotos;
     const indices  = CONFIG.calendario[cup].map(c => c.pistasIdx);
 
-    // Inicializa acumuladores
+    // Inicializa acumuladores sem equipe ainda — será resolvida pelo histórico
     const acc = {};
     pilotos.forEach(nome => {
       const p = _pilotoMap[nome] || {};
       acc[nome] = {
         nome,
-        equipe: p.equipe || "—",
-        foto:   p.foto   || "",
-        cor:    _equipeMap[p.equipe]?.cor || "#888",
+        equipe: "—",   // preenchida abaixo pelo último resultado deste cup
+        foto:   p.foto || "",
+        cor:    "#888",
         points: 0,
         wins:   0,
         poles:  0
       };
     });
 
-    // Soma pontos e vitórias das etapas deste cup
+    // Soma pontos e vitórias; captura a equipe mais recente neste cup
     indices.forEach(idx => {
       const pista = CONFIG.pistas[idx];
       if (!pista) return;
@@ -41,7 +41,22 @@ const BRS = (() => {
         if (!acc[r.piloto]) return;
         acc[r.piloto].points += r.pontos;
         if (r.pos === 1) acc[r.piloto].wins += 1;
+        // Atualiza equipe e cor com o dado histórico desta etapa
+        // (a última etapa processada vence — reflete a equipe mais recente no cup)
+        if (r.equipe) {
+          acc[r.piloto].equipe = r.equipe;
+          acc[r.piloto].cor    = _equipeMap[r.equipe]?.cor || "#888";
+        }
       });
+    });
+
+    // Fallback: pilotos sem nenhuma etapa disputada ainda usam o cadastro atual
+    pilotos.forEach(nome => {
+      if (acc[nome].equipe === "—") {
+        const p = _pilotoMap[nome] || {};
+        acc[nome].equipe = p.equipe || "—";
+        acc[nome].cor    = _equipeMap[p.equipe]?.cor || "#888";
+      }
     });
 
     // Soma poles deste cup

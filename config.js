@@ -1,7 +1,7 @@
 // ╔══════════════════════════════════════════════════════════════╗
-// ║         BRS RACING 2026 — ARQUIVO DE CONFIGURAÇÃO           ║
+// ║         BRS RACING 2026 — ARQUIVO DE CONFIGURAÇÃO            ║
 // ║                                                              ║
-// ║  ✅ COMO ATUALIZAR APÓS CADA ETAPA:                         ║
+// ║  ✅ COMO ATUALIZAR APÓS CADA ETAPA:                          ║
 // ║  1. Encontre a pista pelo nome no array CONFIG.pistas        ║
 // ║  2. Preencha o array "resultados" com pos, piloto, pontos    ║
 // ║  3. Se houve pole, adicione em CONFIG.poles                  ║
@@ -30,19 +30,19 @@ const CONFIG = {
   pilotos: [
     { nome: "Gustavo Guga",              equipe: "Red Bull Racing",  foto: "img/drivers/gustavo.png"    },
     { nome: "João Ferrigno",             equipe: "Red Bull Racing",  foto: "img/drivers/joao.png"       },
-    { nome: "Nathan Nadadanad03",        equipe: "Mercedes-AMG",     foto: "img/drivers/nathan.png"     },
-    { nome: "Cristian Cris",             equipe: "Mercedes-AMG",     foto: "img/drivers/cristian.png"   },
-    { nome: "Julian JuScata",            equipe: "Scuderia Ferrari", foto: "img/drivers/julian.png"     },
-    { nome: "Fernando procopiodearruda", equipe: "Scuderia Ferrari", foto: "img/drivers/fernando.png"   },
+    { nome: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", foto: "img/drivers/nathan.png"     },
+    { nome: "Cristian Cris",             equipe: "Red Bull Racing",     foto: "img/drivers/cristian.png"   },
+    { nome: "Julian JuScata",            equipe: "Williams",         foto: "img/drivers/julian.png"     },
+    { nome: "Fernando procopiodearruda", equipe: "Williams",         foto: "img/drivers/fernando.png"   },
     { nome: "Adriano Drixtter",          equipe: "McLaren",          foto: "img/drivers/adriano.png"    },
     { nome: "Renato Renato.R2Oliveira",  equipe: "McLaren",          foto: "img/drivers/renato.png"     },
     { nome: "Lucas LucasCarnevali",      equipe: "Williams",         foto: "img/drivers/lucas.png"      },
     { nome: "Diego Dominguesdc13",       equipe: "Williams",         foto: "img/drivers/diego.png"      },
     { nome: "Gabriel Cruz",              equipe: "Haas",             foto: "img/drivers/gabriel.png"    },
     { nome: "Vitor Hugo",                equipe: "Haas",             foto: "img/drivers/vitor.png"      },
-    { nome: "Leal Flushh",               equipe: "Kick Sauber",      foto: "img/drivers/leal.png"       },
-    { nome: "Frank Violets",             equipe: "Kick Sauber",      foto: "img/drivers/frank.png"      },
-    { nome: "Luis Syaazz1",              equipe: "RB",               foto: "img/drivers/luis.png"       },
+    { nome: "Leal Flushh",               equipe: "Mercedes-AMG",     foto: "img/drivers/leal.png"       },
+    { nome: "Frank Violets",             equipe: "Mercedes-AMG",     foto: "img/drivers/frank.png"      },
+    { nome: "Luis Syaazz1",              equipe: "Scuderia Ferrari", foto: "img/drivers/luis.png"       },
     { nome: "João Victor",               equipe: "RB",               foto: "img/drivers/joaovictor.png" },
     { nome: "Rafael Rafael94_Sam",       equipe: "Aston Martin",     foto: "img/drivers/rafael.png"     },
     { nome: "Filipi filipialves",        equipe: "Aston Martin",     foto: "img/drivers/filipi.png"     },
@@ -56,31 +56,66 @@ const CONFIG = {
     ignition: {
       nome: "Ignition CUP",
       pilotos: [
-        "Frank Violets", "Leal Flushh", "Renato Renato.R2Oliveira", "Adriano Drixtter",
-        "Nathan Nadadanad03", "Gustavo Guga", "Cristian Cris", "Rafael Rafael94_Sam",
-        "João Victor", "João Ferrigno", "Filipi filipialves", "Lucas LucasCarnevali",
-        "Julian JuScata", "Fernando procopiodearruda", "Fabio", "Diego Dominguesdc13",
-        "Luis Syaazz1", "Gabriel Cruz", "Vitor Hugo", "Rodrigo Pio197"
+        "Frank Violets", 
+        "Leal Flushh", 
+        "Renato Renato.R2Oliveira", 
+        "Adriano Drixtter",
+        "Nathan Nadadanad03", 
+        "Gustavo Guga", 
+        "Cristian Cris", 
+        "Rafael Rafael94_Sam",
+        "João Victor", 
+        "João Ferrigno", 
+        "Filipi filipialves", 
+        "Lucas LucasCarnevali",
+        "Julian JuScata", 
+        "Fernando procopiodearruda", 
+        "Fabio", 
+        "Diego Dominguesdc13",
+        "Luis Syaazz1", 
+        "Gabriel Cruz", 
+        "Vitor Hugo", 
+        "Rodrigo Pio197"
       ]
     },
     evolution: {
       nome: "Evolution CUP",
       pilotos: [
-        "Nathan Nadadanad03", "Cristian Cris", "Renato Renato.R2Oliveira", "Adriano Drixtter",
-        "Gustavo Guga", "João Ferrigno", "Julian JuScata", "Fernando procopiodearruda",
-        "Rafael Rafael94_Sam", "Filipi filipialves", "Leal Flushh", "Frank Violets",
-        "Lucas LucasCarnevali", "Diego Dominguesdc13", "Gabriel Cruz", "Vitor Hugo",
-        "Fabio", "Rodrigo Pio197", "Luis Syaazz1", "João Victor"
+        "Frank Violets",
+        "Leal Flushh",
+        "Renato Renato.R2Oliveira",
+         "Adriano Drixtter",
+        "Nathan Nadadanad03",
+        "Cristian Cris",
+        "Rafael Rafael94_Sam",
+        "Julian JuScata", 
+        "Fernando procopiodearruda", 
+        "Luis Syaazz1"
       ]
     },
     legacy: {
       nome: "Legacy CUP",
       pilotos: [
-        "Nathan Nadadanad03", "Cristian Cris", "Renato Renato.R2Oliveira", "Adriano Drixtter",
-        "Gustavo Guga", "João Ferrigno", "Julian JuScata", "Fernando procopiodearruda",
-        "Rafael Rafael94_Sam", "Filipi filipialves", "Leal Flushh", "Frank Violets",
-        "Lucas LucasCarnevali", "Diego Dominguesdc13", "Gabriel Cruz", "Vitor Hugo",
-        "Fabio", "Rodrigo Pio197", "Luis Syaazz1", "João Victor"
+        "Nathan Nadadanad03", 
+        "Cristian Cris", 
+        "Renato Renato.R2Oliveira", 
+        "Adriano Drixtter",
+        "Gustavo Guga", 
+        "João Ferrigno", 
+        "Julian JuScata", 
+        "Fernando procopiodearruda",
+        "Rafael Rafael94_Sam", 
+        "Filipi filipialves", 
+        "Leal Flushh", 
+        "Frank Violets",
+        "Lucas LucasCarnevali", 
+        "Diego Dominguesdc13", 
+        "Gabriel Cruz", 
+        "Vitor Hugo",
+        "Fabio", 
+        "Rodrigo Pio197", 
+        "Luis Syaazz1", 
+        "João Victor"
       ]
     }
   },
