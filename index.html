@@ -52,6 +52,13 @@
         .header-labels { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; display: flex; gap: 1rem; }
         table { width: 100%; border-collapse: collapse; }
         .col-vp { display: none; }
+        @media (max-width: 600px) {
+            th, td { padding: 0.5rem 0.3rem; font-size: 0.78rem; }
+            .pos-col { width: 28px; }
+            .team-col { max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .gap-col { font-size: 0.72rem; }
+            .card-inner { padding: 1rem 0.7rem; }
+        }
         th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .pos-col { width: 40px; font-weight: 700; text-align: center; }
         .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,0,0.5); font-size: 1.2rem; }
