@@ -50,7 +50,12 @@
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
         .card-header h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: #fff; text-transform: uppercase; }
         .header-labels { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; display: flex; gap: 1rem; }
-        table { width: 100%; border-collapse: collapse; min-width: 300px; }
+        table { width: 100%; border-collapse: collapse; }
+        @media (max-width: 600px) {
+            .col-vp { display: none; }
+            th, td { padding: 0.6rem 0.4rem; font-size: 0.82rem; }
+            .pts-col { min-width: 36px; }
+        }
         th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .pos-col { width: 40px; font-weight: 700; text-align: center; }
         .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,0,0.5); font-size: 1.2rem; }
@@ -447,10 +452,11 @@
         }
 
         function cardTable(title, labels, tbodyId) {
+            const colClasses = { 'V/P': 'col-vp', 'Gap': 'col-gap' };
             return `<div class="card"><div class="card-inner">
                 <div class="card-header">
                     <h2>${title}</h2>
-                    <div class="header-labels">${labels.map(l=>`<span>${l}</span>`).join('')}</div>
+                    <div class="header-labels">${labels.map(l => `<span class="${colClasses[l] ?? ''}">${l}</span>`).join('')}</div>
                 </div>
                 <table><tbody id="${tbodyId}"></tbody></table>
             </div></div>`;
@@ -673,9 +679,9 @@
                         <td class="pos-col ${getRankClass(i)}">${i+1}</td>
                         <td class="name-col">${d.nome}</td>
                         <td class="team-col" style="font-size:0.8rem;">${d.equipe}</td>
-                        <td style="text-align:center; font-size:0.8rem; white-space:nowrap; gap:4px; display:flex; align-items:center; justify-content:center; border:none; padding:0.8rem 0.4rem;">${vit}${pole}</td>
+                        <td class="col-vp" style="text-align:center; font-size:0.8rem; white-space:nowrap; gap:4px; display:flex; align-items:center; justify-content:center; border:none; padding:0.8rem 0.4rem;">${vit}${pole}</td>
                         <td class="pts-col">${d.points}</td>
-                        <td class="gap-col">${gap}</td>
+                        <td class="gap-col col-gap">${gap}</td>
                     </tr>`;
                 }).join('');
 
