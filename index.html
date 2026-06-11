@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRS Racing - Campeonato F1 Virtual</title>
+    <title>BRS Racing — Campeonato F1 Virtual 2026</title>
+
+    <!-- SEO -->
+    <meta name="description" content="BRS Racing: campeonato de F1 virtual 2026 com 3 divisões, 20 pilotos e 36 etapas. Acompanhe classificações, resultados e calendário.">
+    <meta name="theme-color" content="#00f3ff">
+
+    <!-- Open Graph (WhatsApp, redes sociais) -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="BRS Racing — F1 Virtual 2026">
+    <meta property="og:description" content="Acompanhe o campeonato de F1 virtual: classificações ao vivo, grade de resultados, evolução de pontos e calendário completo.">
+    <meta property="og:image"       content="https://drixtter.github.io/BRS-Racing-2026/logo-brs.png">
+    <meta property="og:url"         content="https://brsracingvirtual.neocities.org/">
+    <meta name="twitter:card"       content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo-brs.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -57,7 +73,7 @@
         .driver-rank { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; }
         .driver-points { color: var(--neon-cyan); font-weight: 700; font-size: 1.2rem; }
         .driver-content { display: flex; align-items: center; padding: 1rem; gap: 1rem; flex-grow: 1; }
-        .driver-photo-container { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--neon-cyan); overflow: hidden; background: #000; flex-shrink: 0; }
+        .driver-photo-container { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #888; overflow: hidden; background: #000; flex-shrink: 0; }
         .driver-photo-img { width: 100%; height: 100%; object-fit: cover; }
         .driver-info h3 { font-size: 1.2rem; margin-bottom: 0.2rem; line-height: 1.2; }
         .driver-info span { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; display: block; }
@@ -110,6 +126,68 @@
         .grade-cell-empty { width: 44px; height: 44px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.07); }
         .grade-pts { position: absolute; bottom: 1px; right: 2px; font-size: 0.58rem; font-weight: 700; color: #fff; text-shadow: 0 0 3px #000, 0 0 6px #000; line-height: 1; }
 
+        /* ── PRÓXIMA CORRIDA (BANNER) ────────────────────────── */
+        .next-race-banner { background: linear-gradient(135deg, rgba(0,243,255,0.06) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(0,243,255,0.3); border-radius: 10px; padding: 0.8rem 1.4rem; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.2rem; margin: 0 auto; max-width: 860px; width: calc(100% - 2rem); text-align: center; }
+        .next-race-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-cyan); font-weight: 700; margin-bottom: 2px; }
+        .next-race-track { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.1; }
+        .next-race-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+        .next-race-right { text-align: center; }
+        .next-race-cup { font-size: 0.75rem; text-transform: uppercase; color: var(--neon-cyan); letter-spacing: 1px; }
+        .next-race-countdown { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
+        @media (max-width: 600px) { .next-race-banner { flex-direction: column; } }
+
+        /* ── ANIMAÇÃO ESCALONADA NAS LINHAS DE TABELA ────────── */
+        @keyframes rowIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+        tbody tr { animation: rowIn 0.3s ease-out both; }
+        tbody tr:nth-child(1)  { animation-delay: 0.03s; }
+        tbody tr:nth-child(2)  { animation-delay: 0.06s; }
+        tbody tr:nth-child(3)  { animation-delay: 0.09s; }
+        tbody tr:nth-child(4)  { animation-delay: 0.12s; }
+        tbody tr:nth-child(5)  { animation-delay: 0.15s; }
+        tbody tr:nth-child(6)  { animation-delay: 0.18s; }
+        tbody tr:nth-child(7)  { animation-delay: 0.21s; }
+        tbody tr:nth-child(8)  { animation-delay: 0.24s; }
+        tbody tr:nth-child(9)  { animation-delay: 0.27s; }
+        tbody tr:nth-child(10) { animation-delay: 0.30s; }
+        tbody tr:nth-child(n+11) { animation-delay: 0.33s; }
+
+        /* ── MODAL DE PERFIL DO PILOTO ───────────────────────── */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 0.4rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .modal-box { background: var(--panel-bg); border: 1px solid var(--neon-cyan); border-radius: 14px; width: 100%; max-width: 620px; max-height: 98vh; overflow-y: auto; box-shadow: 0 0 40px rgba(0,243,255,0.15); transform: translateY(20px); transition: transform 0.25s; }
+        .modal-overlay.open .modal-box { transform: translateY(0); }
+        .modal-header { display: flex; align-items: center; gap: 1.2rem; padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; }
+        .modal-foto { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--neon-cyan); object-fit: cover; background: #000; flex-shrink: 0; }
+        .modal-titulo h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: #fff; }
+        .modal-titulo span { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 4px 8px; border-radius: 4px; }
+        .modal-close:hover { color: #fff; background: rgba(255,255,255,0.08); }
+        .modal-body { padding: 1.2rem 1.5rem 1.5rem; }
+        .modal-stats { display: flex; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+        .modal-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.6rem 1rem; text-align: center; flex: 1; min-width: 80px; }
+        .modal-stat-val { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--neon-cyan); }
+        .modal-stat-lbl { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        .modal-cup-title { font-family: 'Rajdhani', sans-serif; color: var(--neon-cyan); font-size: 1rem; text-transform: uppercase; margin: 1rem 0 0.5rem; border-left: 3px solid var(--neon-cyan); padding-left: 10px; }
+        .modal-cup-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .modal-cup-table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .modal-cup-table td:last-child { text-align: right; color: var(--neon-cyan); font-weight: 700; }
+        .modal-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .modal-tab-btn { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 0.5rem 0.4rem; font-family: 'Titillium Web', sans-serif; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
+        .modal-tab-btn:hover { border-color: var(--neon-cyan); color: #fff; }
+        .modal-tab-btn.active { background: rgba(0,243,255,0.1); border-color: var(--neon-cyan); color: var(--neon-cyan); }
+        .modal-tab-panel { display: none; }
+        .modal-tab-panel.active { display: block; }
+        .driver-box { cursor: pointer; }
+
+        /* ── DIFERENÇA PARA O LÍDER ──────────────────────────── */
+        .gap-col { font-size: 0.78rem; color: var(--text-muted); text-align: right; white-space: nowrap; }
+        .gap-leader { color: var(--neon-cyan); font-weight: 700; }
+
+        /* ── DESTAQUE ÚLTIMA ETAPA NO CALENDÁRIO ─────────────── */
+        .cal-last { background: rgba(0,243,255,0.05) !important; }
+        .cal-last td { border-top: 1px solid rgba(0,243,255,0.2); border-bottom: 1px solid rgba(0,243,255,0.2); }
+        .cal-last td:first-child { border-left: 3px solid var(--neon-cyan); }
+
         /* ── EVOLUÇÃO DE PONTOS ──────────────────────────────── */
         .evolucao-wrap { background: var(--panel-bg); border: 1px solid rgba(0,243,255,0.2); border-radius: 12px; padding: 1.5rem 1rem 1rem; position: relative; }
         #evolucao-canvas { width: 100%; display: block; cursor: crosshair; }
@@ -133,6 +211,8 @@
             <p>3 Campeonatos • 36 Etapas • 20 Pilotos • 10 Equipes</p>
         </div>
     </div>
+
+    <div id="next-race-banner" class="next-race-banner"></div>
 
     <nav class="nav-container" id="nav-container"></nav>
 
@@ -301,6 +381,25 @@
 
     </div><!-- /container -->
 
+    <!-- MODAL PERFIL PILOTO -->
+    <div class="modal-overlay" id="modal-perfil">
+        <div class="modal-box">
+            <div class="modal-header">
+                <img class="modal-foto" id="modal-foto" src="" alt="">
+                <div class="modal-titulo">
+                    <h2 id="modal-nome"></h2>
+                    <span id="modal-equipe"></span>
+                </div>
+                <button class="modal-close" id="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-stats" id="modal-stats"></div>
+                <div class="modal-tabs" id="modal-tabs"></div>
+                <div id="modal-historico"></div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         © 2026 BRS Racing League. All rights reserved.<br>
         <span id="last-update" style="color:var(--neon-cyan); font-size:0.75rem; margin-top:5px; display:block;"></span>
@@ -357,6 +456,157 @@
             </div></div>`;
         }
 
+        // ── BANNER: PRÓXIMA CORRIDA ───────────────────────────────
+        function buildNextRaceBanner() {
+            const banner = document.getElementById('next-race-banner');
+            if (!banner) return;
+
+            // Percorre todos os cups em ordem cronológica para achar a próxima
+            const ordem = ['ignition', 'evolution', 'legacy'];
+            let proxima = null;
+
+            for (const cup of ordem) {
+                const etapas = BRS.calendario(cup);
+                const naoFeita = etapas.find(e => !e.realizado);
+                if (naoFeita) { proxima = { ...naoFeita, cup }; break; }
+            }
+
+            if (!proxima) {
+                banner.innerHTML = `
+                    <div>
+                        <div class="next-race-label">Temporada</div>
+                        <div class="next-race-track">Temporada Encerrada</div>
+                    </div>
+                    <div class="next-race-right">
+                        <div class="next-race-cup">BRS Racing 2026</div>
+                    </div>`;
+                return;
+            }
+
+            const cupLabel = { ignition: 'Ignition CUP', evolution: 'Evolution CUP', legacy: 'Legacy CUP' }[proxima.cup];
+
+            banner.innerHTML = `
+                <div>
+                    <div class="next-race-label">⏳ Próxima Corrida</div>
+                    <div class="next-race-track">R${proxima.r} — ${proxima.track}</div>
+                    <div class="next-race-meta">${proxima.date} · Tipo: ${proxima.type}</div>
+                </div>
+                <div class="next-race-right">
+                    <div class="next-race-cup">${cupLabel}</div>
+                    <div class="next-race-countdown" id="nr-countdown"></div>
+                </div>`;
+        }
+
+        // ── MODAL: PERFIL DO PILOTO ───────────────────────────────
+        function abrirPerfil(nome) {
+            const piloto = BRS.piloto(nome);
+            const equipe = piloto ? BRS.equipe(piloto.equipe) : null;
+
+            document.getElementById('modal-foto').src           = piloto?.foto ?? '';
+            document.getElementById('modal-nome').textContent   = nome;
+            document.getElementById('modal-equipe').textContent = piloto?.equipe ?? '—';
+
+            // Totais por cup + dados
+            let totalEtapas = 0;
+            const cupData = [];
+
+            CUPS.forEach(cup => {
+                const drivers = BRS.drivers[cup.id]();
+                const d = drivers.find(x => x.nome === nome);
+                if (!d) { cupData.push({ cup, d: null, rows: '', pts: 0, wins: 0, poles: 0, etapas: 0 }); return; }
+
+                const etapas = BRS.calendario(cup.id).filter(e => e.realizado);
+                totalEtapas += etapas.length;
+
+                const pos  = drivers.indexOf(d) + 1;
+                const rows = etapas.map(e => {
+                    const pista = BRS.pistas()[e.pistasIdx];
+                    const res   = pista?.resultados.find(r => r.piloto === nome);
+                    if (!res) return '';
+                    return `<tr>
+                        <td style="color:var(--text-muted);">R${e.r} ${e.track}</td>
+                        <td class="pos-col ${getRankClass(res.pos-1)}" style="text-align:center;">${res.pos}º</td>
+                        <td>${res.pontos}</td>
+                    </tr>`;
+                }).join('');
+
+                cupData.push({ cup, d, pos, rows, pts: d.points, wins: d.wins, poles: d.poles, etapas: etapas.length });
+            });
+
+            function renderModalStats(idx) {
+                const item = cupData[idx];
+                const pts   = item?.d ? item.pts   : 0;
+                const wins  = item?.d ? item.wins  : 0;
+                const poles = item?.d ? item.poles : 0;
+                const et    = item?.d ? item.etapas : 0;
+                document.getElementById('modal-stats').innerHTML = `
+                    <div class="modal-stat"><div class="modal-stat-val">${pts}</div><div class="modal-stat-lbl">Pontos</div></div>
+                    <div class="modal-stat"><div class="modal-stat-val">${wins}</div><div class="modal-stat-lbl">Vitórias</div></div>
+                    <div class="modal-stat"><div class="modal-stat-val">${poles}</div><div class="modal-stat-lbl">Poles</div></div>
+                    <div class="modal-stat"><div class="modal-stat-val">${et}</div><div class="modal-stat-lbl">Corridas</div></div>`;
+            }
+
+            renderModalStats(0);
+
+            // Tabs
+            document.getElementById('modal-tabs').innerHTML = cupData.map((item, i) => {
+                const pts = item.d ? `${item.d.points}pts` : '—';
+                return `<button class="modal-tab-btn${i===0?' active':''}" data-tab="${i}">
+                    ${item.cup.label}<br><span style="font-size:0.7rem;opacity:0.8;">${pts}</span>
+                </button>`;
+            }).join('');
+
+            // Painéis de conteúdo
+            document.getElementById('modal-historico').innerHTML = cupData.map((item, i) => {
+                const conteudo = item.d
+                    ? `<div style="margin-bottom:0.6rem; font-size:0.82rem; color:var(--text-muted);">
+                           ${item.pos}º lugar · ${item.d.points} pts · ${item.d.wins} vitória(s) · ${item.d.poles} pole(s)
+                       </div>
+                       <table class="modal-cup-table">
+                           <thead><tr>
+                               <td style="color:var(--text-muted);font-size:0.75rem;text-transform:uppercase;">Etapa</td>
+                               <td style="color:var(--text-muted);font-size:0.75rem;text-align:center;">Pos</td>
+                               <td style="color:var(--text-muted);font-size:0.75rem;text-align:right;">Pts</td>
+                           </tr></thead>
+                           <tbody>${item.rows || '<tr><td colspan="3" style="opacity:.4;padding:0.5rem 0;">Sem resultados ainda</td></tr>'}</tbody>
+                       </table>`
+                    : `<p style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;">Piloto não inscrito neste campeonato.</p>`;
+
+                return `<div class="modal-tab-panel${i===0?' active':''}" data-panel="${i}">${conteudo}</div>`;
+            }).join('');
+
+            // Listener das tabs
+            document.getElementById('modal-tabs').addEventListener('click', e => {
+                const btn = e.target.closest('.modal-tab-btn[data-tab]');
+                if (!btn) return;
+                const idx = btn.dataset.tab;
+                document.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.modal-tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelector(`.modal-tab-panel[data-panel="${idx}"]`).classList.add('active');
+                renderModalStats(parseInt(idx));
+            });
+
+            // Cor da borda da foto pela equipe
+            document.getElementById('modal-foto').style.borderColor = equipe?.cor ?? 'var(--neon-cyan)';
+
+            document.getElementById('modal-perfil').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharPerfil() {
+            document.getElementById('modal-perfil').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function initModal() {
+            document.getElementById('modal-close').addEventListener('click', fecharPerfil);
+            document.getElementById('modal-perfil').addEventListener('click', e => {
+                if (e.target === e.currentTarget) fecharPerfil();
+            });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharPerfil(); });
+        }
+
         // ── NAVEGAÇÃO ────────────────────────────────────────────
         function buildNav() {
             const nav = document.getElementById('nav-container');
@@ -381,7 +631,7 @@
             CUPS.forEach(cup => {
                 document.getElementById(`section-${cup.id}`).innerHTML =
                     `<div class="panel-grid">
-                        ${cardTable(`🏆 ${cup.label}: Pilotos`, ['Equipe','Pts'], `tbody-${cup.id}-pilotos`)}
+                        ${cardTable(`🏆 ${cup.label}: Pilotos`, ['Equipe','V/P','Pts','Gap'], `tbody-${cup.id}-pilotos`)}
                         ${cardTable(`🏁 ${cup.label}: Equipes`, ['Pts'],          `tbody-${cup.id}-equipes`)}
                     </div>`;
             });
@@ -408,15 +658,26 @@
         function renderStandings(cup) {
             const pilots = BRS.drivers[cup]();
             const teams  = BRS.teams[cup]();
+            const liderPts = pilots[0]?.points ?? 0;
 
             document.getElementById(`tbody-${cup}-pilotos`).innerHTML =
-                pilots.map((d, i) => `
+                pilots.map((d, i) => {
+                    const prevPts = pilots[i - 1]?.points ?? 0;
+                    const gap = i === 0
+                        ? `<span class="gap-leader">LÍDER</span>`
+                        : `<span>−${prevPts - d.points}</span>`;
+                    const vit  = d.wins  > 0 ? `<span title="Vitórias" style="color:var(--gold);">🏆${d.wins}</span>`  : '';
+                    const pole = d.poles > 0 ? `<span title="Poles"    style="color:var(--neon-cyan);">⏱${d.poles}</span>` : '';
+                    return `
                     <tr>
                         <td class="pos-col ${getRankClass(i)}">${i+1}</td>
                         <td class="name-col">${d.nome}</td>
-                        <td class="team-col">${d.equipe}</td>
+                        <td class="team-col" style="font-size:0.8rem;">${d.equipe}</td>
+                        <td style="text-align:center; font-size:0.8rem; white-space:nowrap; gap:4px; display:flex; align-items:center; justify-content:center; border:none; padding:0.8rem 0.4rem;">${vit}${pole}</td>
                         <td class="pts-col">${d.points}</td>
-                    </tr>`).join('');
+                        <td class="gap-col">${gap}</td>
+                    </tr>`;
+                }).join('');
 
             document.getElementById(`tbody-${cup}-equipes`).innerHTML =
                 teams.map((t, i) => `
@@ -431,8 +692,15 @@
         function renderCalendar(tbodyId, cup) {
             const tbody = document.getElementById(tbodyId);
             if (!tbody) return;
-            tbody.innerHTML = BRS.calendario(cup).map(e => `
-                <tr>
+            const etapas = BRS.calendario(cup);
+            // Última etapa realizada
+            let lastRealizadoIdx = -1;
+            etapas.forEach((e, i) => { if (e.realizado) lastRealizadoIdx = i; });
+
+            tbody.innerHTML = etapas.map((e, i) => {
+                const isLast = i === lastRealizadoIdx;
+                return `
+                <tr class="${isLast ? 'cal-last' : ''}">
                     <td class="cal-round">${e.r}</td>
                     <td class="cal-track">
                         ${e.track}
@@ -442,7 +710,8 @@
                     </td>
                     <td class="cal-date">${e.date}</td>
                     <td><span class="cal-type ${e.type==='Extra' ? 'type-extra' : 'type-oficial'}">${e.type}</span></td>
-                </tr>`).join('');
+                </tr>`;
+            }).join('');
         }
 
         // ── ESTATÍSTICAS ─────────────────────────────────────────
@@ -473,13 +742,13 @@
                 const dImg   = piloto?.foto  ?? '';
                 const cImg   = equipe?.carro ?? '';
                 return `
-                <div class="driver-box">
+                <div class="driver-box" onclick="abrirPerfil('${d.nome}')" title="Ver perfil de ${d.nome}">
                     <div class="driver-header">
                         <div class="driver-rank ${getRankClass(i)}">${i+1}º</div>
                         <div class="driver-points">${d.points} PTS</div>
                     </div>
                     <div class="driver-content">
-                        <div class="driver-photo-container">
+                        <div class="driver-photo-container" style="border-color:${d.cor}; box-shadow: 0 0 8px ${d.cor}66;">
                             <img src="${dImg}" class="driver-photo-img" onerror="this.style.display='none'">
                         </div>
                         <div class="driver-info">
@@ -942,6 +1211,8 @@
         // ── INICIALIZAÇÃO ─────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
             buildNav();
+            buildNextRaceBanner();
+            initModal();
             buildCupSections();
             buildCalendario();
             buildEstatisticas();
