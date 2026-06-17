@@ -24,8 +24,8 @@ const BRS = (() => {
       const p = _pilotoMap[nome] || {};
       acc[nome] = {
         nome,
-        equipe: "—",   // preenchida abaixo pelo último resultado deste cup
-        foto:   p.foto || "",
+        equipe: "—",
+        foto:   fotoPiloto(nome, cup),
         cor:    "#888",
         points: 0,
         wins:   0,
@@ -150,6 +150,16 @@ const BRS = (() => {
     });
   }
 
+  // ── FOTO POR CAMPEONATO ──────────────────────────────────────
+  // Resolve a foto correta do piloto para o campeonato informado.
+  // Prioridade: foto específica do cup → foto genérica do cadastro → ""
+  function fotoPiloto(nome, cup) {
+    const p = _pilotoMap[nome];
+    if (!p) return "";
+    const chave = `foto${cup.charAt(0).toUpperCase()}${cup.slice(1)}`; // ex: "fotoIgnition"
+    return p[chave] || p.foto || "";
+  }
+
   // ── API PÚBLICA ──────────────────────────────────────────────
   return {
     drivers: {
@@ -170,7 +180,8 @@ const BRS = (() => {
     equipes:  () => CONFIG.equipes,
     piloto:   nome => _pilotoMap[nome],
     equipe:   nome => _equipeMap[nome],
-    calendario: cup => calendarioComStatus(cup)
+    calendario: cup => calendarioComStatus(cup),
+    fotoPiloto
   };
 
 })();

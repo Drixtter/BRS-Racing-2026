@@ -28,26 +28,28 @@ const CONFIG = {
   // ── PILOTOS ────────────────────────────────────────────────────
   // Cadastre uma vez. Nome é a chave usada em todos os outros lugares.
   pilotos: [
-    { nome: "Gustavo Guga",              equipe: "Red Bull Racing",  foto: "img/drivers/gustavo.png"    },
-    { nome: "João Ferrigno",             equipe: "Red Bull Racing",  foto: "img/drivers/joao.png"       },
-    { nome: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", foto: "img/drivers/nathan.png"     },
-    { nome: "Cristian Cris",             equipe: "Red Bull Racing",  foto: "img/drivers/cristian.png"},
-    { nome: "Julian JuScata",            equipe: "Williams",         foto: "img/drivers/julian.png"     },
-    { nome: "Fernando procopiodearruda", equipe: "Williams",         foto: "img/drivers/fernando.png"   },
-    { nome: "Adriano Drixtter",          equipe: "McLaren",          foto: "img/drivers/adriano.png"    },
-    { nome: "Renato Renato.R2Oliveira",  equipe: "McLaren",          foto: "img/drivers/renato.png"     },
-    { nome: "Lucas LucasCarnevali",      equipe: "Williams",         foto: "img/drivers/lucas.png"      },
-    { nome: "Diego Dominguesdc13",       equipe: "Williams",         foto: "img/drivers/diego.png"      },
-    { nome: "Gabriel Cruz",              equipe: "Haas",             foto: "img/drivers/gabriel.png"    },
-    { nome: "Vitor Hugo",                equipe: "Haas",             foto: "img/drivers/vitor.png"      },
-    { nome: "Leal Flushh",               equipe: "Mercedes-AMG",     foto: "img/drivers/leal.png"       },
-    { nome: "Frank Violets",             equipe: "Mercedes-AMG",     foto: "img/drivers/frank.png"      },
-    { nome: "Luis Syaazz1",              equipe: "Scuderia Ferrari", foto: "img/drivers/luis.png"       },
-    { nome: "João Victor",               equipe: "RB",               foto: "img/drivers/joaovictor.png" },
-    { nome: "Rafael Rafael94_Sam",       equipe: "Aston Martin",     foto: "img/drivers/rafael.png"     },
-    { nome: "Filipi filipialves",        equipe: "Aston Martin",     foto: "img/drivers/filipi.png"     },
-    { nome: "Rodrigo Pio197",            equipe: "Alpine",           foto: "img/drivers/pio.png"        },
-    { nome: "Fabio",                     equipe: "Alpine",           foto: "img/drivers/fabio.png"      }
+    { nome: "Gustavo Guga",              equipe: "Red Bull Racing",  foto: "img/drivers/gustavo.png",    fotoIgnition: "img/drivers/ignition/gustavo.png",    fotoEvolution: "img/drivers/evolution/gustavo.png",    fotoLegacy: "img/drivers/legacy/gustavo.png"    },
+    { nome: "João Ferrigno",             equipe: "Red Bull Racing",  foto: "img/drivers/joao.png",       fotoIgnition: "img/drivers/ignition/joao.png",       fotoEvolution: "img/drivers/evolution/joao.png",       fotoLegacy: "img/drivers/legacy/joao.png"       },
+    { nome: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", foto: "img/drivers/nathan.png",     fotoIgnition: "img/drivers/ignition/nathan.png",     fotoEvolution: "img/drivers/evolution/nathan.png",     fotoLegacy: "img/drivers/legacy/nathan.png"     },
+    { nome: "Cristian Cris",             equipe: "Red Bull Racing",  foto: "img/drivers/cristian.png",   fotoIgnition: "img/drivers/ignition/cristian.png",   fotoEvolution: "img/drivers/evolution/cristian.png",   fotoLegacy: "img/drivers/legacy/cristian.png"   },
+    { nome: "Julian JuScata",            equipe: "Williams",         foto: "img/drivers/julian.png",     fotoIgnition: "img/drivers/ignition/julian.png",     fotoEvolution: "img/drivers/evolution/julian.png",     fotoLegacy: "img/drivers/legacy/julian.png"     },
+    { nome: "Fernando procopiodearruda", equipe: "Williams",         foto: "img/drivers/fernando.png",   fotoIgnition: "img/drivers/ignition/fernando.png",   fotoEvolution: "img/drivers/evolution/fernando.png",   fotoLegacy: "img/drivers/legacy/fernando.png"   },
+    { nome: "Adriano Drixtter",          equipe: "McLaren",          foto: "img/drivers/adriano.png",    fotoIgnition: "img/drivers/ignition/adriano.png",    fotoEvolution: "img/drivers/evolution/adriano.png",    fotoLegacy: "img/drivers/legacy/adriano.png"    },
+    { nome: "Renato Renato.R2Oliveira",  equipe: "McLaren",          foto: "img/drivers/renato.png",     fotoIgnition: "img/drivers/ignition/renato.png",     fotoEvolution: "img/drivers/evolution/renato.png",     fotoLegacy: "img/drivers/legacy/renato.png"     },
+    { nome: "Lucas LucasCarnevali",      equipe: "Williams",         foto: "img/drivers/lucas.png",      fotoIgnition: "img/drivers/ignition/lucas.png",      fotoEvolution: "img/drivers/evolution/lucas.png",      fotoLegacy: "img/drivers/legacy/lucas.png"      },
+    { nome: "Diego Dominguesdc13",       equipe: "Williams",         foto: "img/drivers/diego.png",      fotoIgnition: "img/drivers/ignition/diego.png",      fotoEvolution: "img/drivers/evolution/diego.png",      fotoLegacy: "img/drivers/legacy/diego.png"      },
+    { nome: "Gabriel Cruz",              equipe: "Haas",             foto: "img/drivers/gabriel.png",    fotoIgnition: "img/drivers/ignition/gabriel.png",    fotoEvolution: "img/drivers/evolution/gabriel.png",    fotoLegacy: "img/drivers/legacy/gabriel.png"    },
+    { nome: "Vitor Hugo",                equipe: "Haas",             foto: "img/drivers/vitor.png",      fotoIgnition: "img/drivers/ignition/vitor.png",      fotoEvolution: "img/drivers/evolution/vitor.png",      fotoLegacy: "img/drivers/legacy/vitor.png"      },
+    { nome: "Leal Flushh",               equipe: "Mercedes-AMG",     foto: "img/drivers/leal.png",       fotoIgnition: "img/drivers/ignition/leal.png",       fotoEvolution: "img/drivers/evolution/leal.png",       fotoLegacy: "img/drivers/legacy/leal.png"       },
+    { nome: "Frank Violets",             equipe: "Mercedes-AMG",     foto: "img/drivers/frank.png",      fotoIgnition: "img/drivers/ignition/frank.png",      fotoEvolution: "img/drivers/evolution/frank.png",      fotoLegacy: "img/drivers/legacy/frank.png"      },
+    { nome: "Luis Syaazz1",              equipe: "Scuderia Ferrari", foto: "img/drivers/luis.png",       fotoIgnition: "img/drivers/ignition/luis.png",       fotoEvolution: "img/drivers/evolution/luis.png",       fotoLegacy: "img/drivers/legacy/luis.png"       },
+    { nome: "João Victor",               equipe: "RB",               foto: "img/drivers/joaovictor.png", fotoIgnition: "img/drivers/ignition/joaovictor.png", fotoEvolution: "img/drivers/evolution/joaovictor.png", fotoLegacy: "img/drivers/legacy/joaovictor.png" },
+    { nome: "Rafael Rafael94_Sam",       equipe: "Aston Martin",     foto: "img/drivers/rafael.png",     fotoIgnition: "img/drivers/ignition/rafael.png",     fotoEvolution: "img/drivers/evolution/rafael.png",     fotoLegacy: "img/drivers/legacy/rafael.png"     },
+    { nome: "Filipi filipialves",        equipe: "Aston Martin",     foto: "img/drivers/filipi.png",     fotoIgnition: "img/drivers/ignition/filipi.png",     fotoEvolution: "img/drivers/evolution/filipi.png",     fotoLegacy: "img/drivers/legacy/filipi.png"     },
+    { nome: "Rodrigo Pio197",            equipe: "Alpine",           foto: "img/drivers/pio.png",        fotoIgnition: "img/drivers/ignition/pio.png",        fotoEvolution: "img/drivers/evolution/pio.png",        fotoLegacy: "img/drivers/legacy/pio.png"        },
+    { nome: "Fabio",                     equipe: "Alpine",           foto: "img/drivers/fabio.png",      fotoIgnition: "img/drivers/ignition/fabio.png",      fotoEvolution: "img/drivers/evolution/fabio.png",      fotoLegacy: "img/drivers/legacy/fabio.png"      },
+    { nome: "Calixto MDR-CALIXTO84",     equipe: "Aston Martin",     foto: "img/drivers/calixto.png",    fotoIgnition: "img/drivers/ignition/calixto.png",    fotoEvolution: "img/drivers/evolution/calixto.png",    fotoLegacy: "img/drivers/legacy/calixto.png"    },
+    { nome: "Deivid galudao1",           equipe: "RB",               foto: "img/drivers/deivid.png",     fotoIgnition: "img/drivers/ignition/deivid.png",     fotoEvolution: "img/drivers/evolution/deivid.png",     fotoLegacy: "img/drivers/legacy/deivid.png"     }
   ],
 
   // ── CAMPEONATOS ────────────────────────────────────────────────
@@ -81,16 +83,20 @@ const CONFIG = {
     evolution: {
       nome: "Evolution CUP",
       pilotos: [
-        "Frank Violets",
-        "Leal Flushh",
-        "Renato Renato.R2Oliveira",
-        "Adriano Drixtter",
-        "Nathan Nadadanad03",
         "Luis Syaazz1",
-        "Julian JuScata", 
-        "Fernando procopiodearruda",
+        "Nathan Nadadanad03",
+        "Renato Renato.R2Oliveira",
+        "Calixto MDR-CALIXTO84",
         "Cristian Cris",
-        "Rafael Rafael94_Sam"               
+        "Frank Violets",
+        "Gustavo Guga",
+        "Leal Flushh",
+        "Deivid galudao1",
+        "Rafael Rafael94_Sam",
+        "Julian JuScata",
+        "Adriano Drixtter",
+        "Fernando procopiodearruda",
+        "João Ferrigno"
       ]
     },
     legacy: {
@@ -437,7 +443,22 @@ const CONFIG = {
       pais: "Espanha",
       imagem: "img/tracks/2026trackcatalunyadetailed.avif",
       comprimento: "4.657 km", curvas: 16, drs: 2,
-      resultados: []
+      resultados: [
+        { pos:  1, piloto: "Luis Syaazz1",              equipe: "Scuderia Ferrari", pontos: 30 },
+        { pos:  2, piloto: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", pontos: 25 },
+        { pos:  3, piloto: "Renato Renato.R2Oliveira",  equipe: "McLaren",          pontos: 21 },
+        { pos:  4, piloto: "Calixto MDR-CALIXTO84",     equipe: "Aston Martin",     pontos: 18 },
+        { pos:  5, piloto: "Cristian Cris",             equipe: "RB",               pontos:  0 },
+        { pos:  6, piloto: "Frank Violets",             equipe: "Mercedes-AMG",     pontos:  0 },
+        { pos:  7, piloto: "Gustavo Guga",              equipe: "Red Bull Racing",  pontos:  0 },
+        { pos:  8, piloto: "Leal Flushh",               equipe: "Mercedes-AMG",     pontos:  0 },
+        { pos:  9, piloto: "Deivid galudao1",           equipe: "RB",               pontos:  0 },
+        { pos: 10, piloto: "Rafael Rafael94_Sam",       equipe: "Aston Martin",     pontos:  0 },
+        { pos: 11, piloto: "Julian JuScata",            equipe: "Williams",         pontos:  0 },
+        { pos: 12, piloto: "Adriano Drixtter",          equipe: "McLaren",          pontos:  0 },
+        { pos: 13, piloto: "Fernando procopiodearruda", equipe: "Williams",         pontos:  0 },
+        { pos: 14, piloto: "João Ferrigno",             equipe: "Red Bull Racing",  pontos:  0 }
+      ]
     },
 
     // [13] Evolution R2

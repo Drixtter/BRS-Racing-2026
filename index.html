@@ -511,9 +511,12 @@
             const piloto = BRS.piloto(nome);
             const equipe = piloto ? BRS.equipe(piloto.equipe) : null;
 
-            document.getElementById('modal-foto').src           = piloto?.foto ?? '';
             document.getElementById('modal-nome').textContent   = nome;
             document.getElementById('modal-equipe').textContent = piloto?.equipe ?? '—';
+
+            function atualizarFotoModal(cupId) {
+                document.getElementById('modal-foto').src = BRS.fotoPiloto(nome, cupId);
+            }
 
             // Totais por cup + dados
             let totalEtapas = 0;
@@ -556,6 +559,7 @@
             }
 
             renderModalStats(0);
+            atualizarFotoModal(cupData[0].cup.id);
 
             // Tabs
             document.getElementById('modal-tabs').innerHTML = cupData.map((item, i) => {
@@ -594,6 +598,10 @@
                 btn.classList.add('active');
                 document.querySelector(`.modal-tab-panel[data-panel="${idx}"]`).classList.add('active');
                 renderModalStats(parseInt(idx));
+                atualizarFotoModal(cupData[parseInt(idx)].cup.id);
+                // Atualiza cor da borda pela equipe do cup selecionado
+                const corCup = cupData[parseInt(idx)].d?.cor ?? equipe?.cor ?? 'var(--neon-cyan)';
+                document.getElementById('modal-foto').style.borderColor = corCup;
             });
 
             // Cor da borda da foto pela equipe
@@ -748,7 +756,7 @@
             grid.innerHTML = BRS.drivers.evolution().map((d, i) => {
                 const piloto = BRS.piloto(d.nome);
                 const equipe = BRS.equipe(d.equipe);
-                const dImg   = piloto?.foto  ?? '';
+                const dImg   = BRS.fotoPiloto(d.nome, 'evolution');
                 const cImg   = equipe?.carro ?? '';
                 return `
                 <div class="driver-box" onclick="abrirPerfil('${d.nome}')" title="Ver perfil de ${d.nome}">
@@ -1195,7 +1203,7 @@
                         const res = pista.resultados.find(r => r.pos === pos);
                         if (!res) return emptyCell;
                         const cor    = BRS.equipe(res.equipe)?.cor ?? '#555';
-                        const foto   = BRS.piloto(res.piloto)?.foto ?? '';
+                        const foto   = BRS.fotoPiloto(res.piloto, cup);
                         const pontos = res.pontos > 0 ? `<span class="grade-pts">${res.pontos}</span>` : '';
                         return `<td><div class="grade-cell">
                             <div class="grade-cell-inner"
