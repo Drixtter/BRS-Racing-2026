@@ -159,32 +159,32 @@ const CONFIG = {
       { r: 12, track: "Mônaco",         date: "Realizado em 31/05",              type: "Oficial", pistasIdx: 11 }
     ],
     evolution: [
-      { r:  1, track: "Espanha",        date: "14/06", type: "Oficial", pistasIdx: 12 },
-      //{ r:  2, track: "Japão",          date: "21/06", type: "Extra",  pistasIdx: 13 },
-      { r:  2, track: "Áustria",        date: "28/06", type: "Oficial", pistasIdx: 14 },
-      { r:  3, track: "Grã-Bretanha",   date: "05/07", type: "Oficial", pistasIdx: 15 },
-      //{ r:  5, track: "Itália - Imola", date: "12/07", type: "Extra",  pistasIdx: 16 },
-      { r:  4, track: "Bélgica",        date: "19/07", type: "Oficial", pistasIdx: 17 },
-      { r:  5, track: "Hungria",        date: "26/07", type: "Oficial", pistasIdx: 18 },
-      //{ r:  8, track: "Bahrein",        date: "09/08", type: "Extra",  pistasIdx: 19 },
-      { r:  6, track: "Países Baixos",  date: "23/08", type: "Oficial", pistasIdx: 20 },
-      //{ r: 10, track: "Canadá",         date: "30/08", type: "Extra",  pistasIdx: 21 },
-      { r: 7, track: "Itália - Monza", date: "06/09", type: "Oficial", pistasIdx: 22 },
-      { r: 8, track: "Brasil",         date: "13/09", type: "Oficial", pistasIdx: 23 }
+      { r:  1, track: "Espanha",         date: "14/06", type: "Oficial", pistasIdx: 12 },
+      //{ r:  2, track: "Japão",           date: "21/06", type: "Extra",  pistasIdx: — },
+      { r:  2, track: "Áustria",         date: "28/06", type: "Oficial", pistasIdx: 13 },
+      { r:  3, track: "Grã-Bretanha",    date: "05/07", type: "Oficial", pistasIdx: 14 },
+      //{ r:  5, track: "Itália - Imola",  date: "12/07", type: "Extra",  pistasIdx: — },
+      { r:  4, track: "Bélgica",         date: "19/07", type: "Oficial", pistasIdx: 15 },
+      { r:  5, track: "Hungria",         date: "26/07", type: "Oficial", pistasIdx: 16 },
+      //{ r:  8, track: "Bahrein",         date: "09/08", type: "Extra",  pistasIdx: — },
+      { r:  6, track: "Países Baixos",   date: "23/08", type: "Oficial", pistasIdx: 17 },
+      //{ r: 10, track: "Canadá",          date: "30/08", type: "Extra",  pistasIdx: — },
+      { r:  7, track: "Itália - Monza",  date: "06/09", type: "Oficial", pistasIdx: 18 },
+      { r:  8, track: "Brasil",          date: "13/09", type: "Oficial", pistasIdx: 19 }
     ],
     legacy: [
-      { r:  1, track: "Azerbaijão",     date: "27/09", type: "Oficial", pistasIdx: 24 },
-      //{ r:  2, track: "Bélgica",        date: "04/10", type: "Extra",  pistasIdx: 25 },
-      { r:  2, track: "Singapura",      date: "11/10", type: "Oficial", pistasIdx: 26 },
-      //{ r:  4, track: "Áustria",        date: "18/10", type: "Extra",  pistasIdx: 27 },
-      { r:  3, track: "EUA - Austin",   date: "25/10", type: "Oficial", pistasIdx: 28 },
-      { r:  4, track: "México",         date: "01/11", type: "Oficial", pistasIdx: 29 },
-      { r:  5, track: "Brasil",         date: "08/11", type: "Oficial", pistasIdx: 30 },
-      //{ r:  8, track: "Arábia Saudita", date: "15/11", type: "Extra",  pistasIdx: 31 },
-      { r:  6, track: "Las Vegas",      date: "22/11", type: "Oficial", pistasIdx: 32 },
-      { r: 7, track: "Qatar",          date: "29/11", type: "Oficial", pistasIdx: 33 },
-      //{ r: 11, track: "Grã-Bretanha",   date: "06/12", type: "Extra",  pistasIdx: 34 },
-      { r: 8, track: "Abu Dhabi",      date: "13/12", type: "Oficial", pistasIdx: 35 }
+      { r:  1, track: "Azerbaijão",      date: "27/09", type: "Oficial", pistasIdx: 20 },
+      //{ r:  2, track: "Bélgica",         date: "04/10", type: "Extra",  pistasIdx: — },
+      { r:  2, track: "Singapura",       date: "11/10", type: "Oficial", pistasIdx: 21 },
+      //{ r:  4, track: "Áustria",         date: "18/10", type: "Extra",  pistasIdx: — },
+      { r:  3, track: "EUA - Austin",    date: "25/10", type: "Oficial", pistasIdx: 22 },
+      { r:  4, track: "México",          date: "01/11", type: "Oficial", pistasIdx: 23 },
+      { r:  5, track: "Brasil",          date: "08/11", type: "Oficial", pistasIdx: 24 },
+      //{ r:  8, track: "Arábia Saudita",  date: "15/11", type: "Extra",  pistasIdx: — },
+      { r:  6, track: "Las Vegas",       date: "22/11", type: "Oficial", pistasIdx: 25 },
+      { r:  7, track: "Qatar",           date: "29/11", type: "Oficial", pistasIdx: 26 },
+      //{ r: 11, track: "Grã-Bretanha",    date: "06/12", type: "Extra",  pistasIdx: — },
+      { r:  8, track: "Abu Dhabi",       date: "13/12", type: "Oficial", pistasIdx: 27 }
     ]
   },
 
@@ -680,6 +680,104 @@ const CONFIG = {
     { titulo: "Pré-temporada 2026 - Drixtter X Guga", data: "09/02/2026", youtubeId: "s5EN-WnPhIg"        },
     { titulo: "GP de Interlagos - Melhores Momentos", data: "20/01/2026", youtubeId: "L2Wg9yx7lsk"        }
   ],
+
+  // ── REGULAMENTO ───────────────────────────────────────────────
+  // Edite o conteúdo de cada capítulo aqui. O campo "html" aceita HTML completo.
+  regulamento: {
+    ultimaAtualizacao: "21/01/2026",
+    capitulos: [
+      {
+        titulo: "Capítulo 1: Disposições Gerais",
+        html: `
+          <p><strong>1.1. Objetivo:</strong> Este campeonato visa promover o automobilismo virtual de alto nível, unindo competição acirrada, integridade técnica e entretenimento.</p>
+          <p><strong>1.2. Plataforma:</strong> Simulador F1 2025, com Crossplay ativo.</p>
+          <p><strong>1.3. Comunicação:</strong> Presença obrigatória no grupo do Whatsapp. Avisos oficiais via grupo.</p>
+          <p><strong>1.4. Direito de Imagem:</strong> Ao se inscrever, o piloto cede o uso de imagem, voz e gamertag para transmissões e marketing.</p>
+        `
+      },
+      {
+        titulo: "Capítulo 2: Inscrições e Equipes",
+        html: `
+          <ul><li><strong>Vagas:</strong> Limitadas a 20 pilotos titulares por categoria.</li></ul>
+        `
+      },
+      {
+        titulo: "Capítulo 3: Formato Desportivo e Sistema de Pontuação",
+        html: `
+          <p>A BRS Racing adota um sistema de pontuação próprio, desenvolvido especificamente para campeonatos virtuais, com o objetivo de valorizar o desempenho esportivo, incentivar a competitividade em todas as posições do grid e garantir um campeonato equilibrado do início ao fim da temporada.</p>
+          <h4>Princípios do Sistema de Pontuação</h4>
+          <ul>
+            <li><strong>Valorização do pódio:</strong> vitórias e posições de destaque têm impacto real na disputa pelo título.</li>
+            <li><strong>Mérito esportivo:</strong> pilotos com maior número de vitórias e pódios são claramente beneficiados.</li>
+            <li><strong>Competitividade contínua:</strong> todos os pilotos do grid permanecem pontuando, mantendo o engajamento ao longo de toda a temporada.</li>
+            <li><strong>Equilíbrio do campeonato:</strong> evita disparadas excessivas e, ao mesmo tempo, impede a "compressão artificial" de pontos.</li>
+          </ul>
+          <h4>Tabela de Pontuação – BRS Racing</h4>
+          <table class="rules-table">
+            <thead><tr><th>Posição</th><th>Pontos</th></tr></thead>
+            <tbody>
+              <tr><td>1º</td><td>30</td></tr><tr><td>2º</td><td>25</td></tr>
+              <tr><td>3º</td><td>21</td></tr><tr><td>4º</td><td>18</td></tr>
+              <tr><td>5º</td><td>16</td></tr><tr><td>6º</td><td>14</td></tr>
+              <tr><td>7º</td><td>12</td></tr><tr><td>8º</td><td>10</td></tr>
+              <tr><td>9º</td><td>8</td></tr><tr><td>10º</td><td>7</td></tr>
+              <tr><td>11º</td><td>6</td></tr><tr><td>12º</td><td>5</td></tr>
+              <tr><td>13º</td><td>4</td></tr><tr><td>14º</td><td>3</td></tr>
+              <tr><td>15º</td><td>2</td></tr>
+            </tbody>
+          </table>
+        `
+      },
+      {
+        titulo: "Capítulo 4: O Evento (Dia de Corrida)",
+        html: `
+          <table class="rules-table">
+            <tr><td>21:30</td><td>Abertura do Lobby para treino e briefing</td></tr>
+            <tr><td>22:30</td><td>Qualificação (18 min)</td></tr>
+            <tr><td>22:45</td><td>Corrida (50%)</td></tr>
+          </table>
+          <p><strong>Restrições:</strong> Proibido teclado.</p>
+        `
+      },
+      {
+        titulo: "Capítulo 5: Regras de Pista",
+        html: `
+          <ul>
+            <li>Apenas uma mudança de direção na defesa. Proibido "Moving under braking".</li>
+            <li><strong>Unsafe Rejoin:</strong> Retorno perigoso à pista é infração gravíssima.</li>
+            <li><strong>Reset:</strong> Proibido usar "Resetar para a Pista". Deve-se voltar dirigindo.</li>
+          </ul>
+        `
+      },
+      {
+        titulo: "Capítulo 6: Procedimentos Técnicos",
+        html: `
+          <p><strong>Bandeira Vermelha:</strong> Se houver queda massiva abaixo de 15% da prova, o lobby é reiniciado. Acima de 50%, a corrida é encerrada com pontuação total.</p>
+        `
+      },
+      {
+        titulo: "Capítulo 7: Punições e Superlicença",
+        html: `
+          <table class="rules-table">
+            <thead><tr><th>Infração</th><th>Punição</th><th>Pontos</th></tr></thead>
+            <tbody>
+              <tr><td>Leve (Toque/Corte)</td><td>+5s</td><td>-2 pts</td></tr>
+              <tr><td>Média (Danos/Rejoin)</td><td>+10s</td><td>-4 pts</td></tr>
+              <tr><td>Grave (Colisão Proposital)</td><td>+20s/DSQ</td><td>-7 pts</td></tr>
+              <tr><td>Gravíssima (Ofensa/Racismo)</td><td>Exclusão</td><td>Banimento</td></tr>
+            </tbody>
+          </table>
+          <p><strong>Denúncias:</strong> Até 24h após a prova via formulário com vídeo Onboard obrigatório.</p>
+        `
+      },
+      {
+        titulo: "Capítulo 8: Premiação",
+        html: `
+          <p>Elegível apenas para pilotos que participarem de no mínimo 80% das etapas.</p>
+        `
+      }
+    ]
+  },
 
   // ── GALERIA ────────────────────────────────────────────────────
   galeria: [

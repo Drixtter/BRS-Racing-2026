@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "BRS-Racing-2026",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "3001", "."],
+      "port": 3001
+    }
+  ]
+}

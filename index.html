@@ -135,14 +135,16 @@
         .grade-pts { position: absolute; bottom: 1px; right: 2px; font-size: 0.58rem; font-weight: 700; color: #fff; text-shadow: 0 0 3px #000, 0 0 6px #000; line-height: 1; }
 
         /* ── PRÓXIMA CORRIDA (BANNER) ────────────────────────── */
-        .next-race-banner { background: linear-gradient(135deg, rgba(0,243,255,0.06) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(0,243,255,0.3); border-radius: 10px; padding: 0.8rem 1.4rem; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.2rem; margin: 0 auto; max-width: 860px; width: calc(100% - 2rem); text-align: center; }
+        .next-race-banner { background: linear-gradient(135deg, rgba(0,243,255,0.06) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(0,243,255,0.3); border-radius: 10px; padding: 0.8rem 1.4rem; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.2rem; margin: 0 auto; max-width: 960px; width: calc(100% - 2rem); text-align: center; }
         .next-race-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-cyan); font-weight: 700; margin-bottom: 2px; }
         .next-race-track { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.1; }
         .next-race-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
         .next-race-right { text-align: center; }
         .next-race-cup { font-size: 0.75rem; text-transform: uppercase; color: var(--neon-cyan); letter-spacing: 1px; }
         .next-race-countdown { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
-        @media (max-width: 600px) { .next-race-banner { flex-direction: column; } }
+        .next-race-map { height: 180px; width: auto; filter: drop-shadow(0 0 10px rgba(0,243,255,0.5)) brightness(1.1); opacity: 0.9; transition: opacity 0.3s; }
+        .next-race-map:hover { opacity: 1; }
+        @media (max-width: 600px) { .next-race-banner { flex-direction: column; } .next-race-map { height: 130px; } }
 
         /* ── ANIMAÇÃO ESCALONADA NAS LINHAS DE TABELA ────────── */
         @keyframes rowIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
@@ -264,74 +266,9 @@
             </div>
         </div>
 
-        <!-- REGRAS -->
+        <!-- REGRAS: gerado via JS a partir de CONFIG.regulamento -->
         <div id="regras" class="section">
-            <div class="card"><div class="card-inner">
-                <div class="card-header">
-                    <h2>📜 Regulamento Oficial 2026</h2>
-                    <div class="header-labels">Última Atualização: 21/01/2026</div>
-                </div>
-                <div class="rules-content">
-                    <h3>Capítulo 1: Disposições Gerais</h3>
-                    <p><strong>1.1. Objetivo:</strong> Este campeonato visa promover o automobilismo virtual de alto nível, unindo competição acirrada, integridade técnica e entretenimento.</p>
-                    <p><strong>1.2. Plataforma:</strong> Simulador F1 2025, com Crossplay ativo.</p>
-                    <p><strong>1.3. Comunicação:</strong> Presença obrigatória no grupo do Whatsapp. Avisos oficiais via grupo.</p>
-                    <p><strong>1.4. Direito de Imagem:</strong> Ao se inscrever, o piloto cede o uso de imagem, voz e gamertag para transmissões e marketing.</p>
-                    <h3>Capítulo 2: Inscrições e Equipes</h3>
-                    <ul><li><strong>Vagas:</strong> Limitadas a 20 pilotos titulares por categoria.</li></ul>
-                    <h3>Capítulo 3: Formato Desportivo e Sistema de Pontuação</h3>
-                    <p>A BRS Racing adota um sistema de pontuação próprio, desenvolvido especificamente para campeonatos virtuais, com o objetivo de valorizar o desempenho esportivo, incentivar a competitividade em todas as posições do grid e garantir um campeonato equilibrado do início ao fim da temporada.</p>
-                    <h4>Princípios do Sistema de Pontuação</h4>
-                    <ul>
-                        <li><strong>Valorização do pódio:</strong> vitórias e posições de destaque têm impacto real na disputa pelo título.</li>
-                        <li><strong>Mérito esportivo:</strong> pilotos com maior número de vitórias e pódios são claramente beneficiados.</li>
-                        <li><strong>Competitividade contínua:</strong> todos os pilotos do grid permanecem pontuando, mantendo o engajamento ao longo de toda a temporada.</li>
-                        <li><strong>Equilíbrio do campeonato:</strong> evita disparadas excessivas e, ao mesmo tempo, impede a "compressão artificial" de pontos.</li>
-                    </ul>
-                    <h4>Tabela de Pontuação – BRS Racing</h4>
-                    <table class="rules-table">
-                        <thead><tr><th>Posição</th><th>Pontos</th></tr></thead>
-                        <tbody>
-                            <tr><td>1º</td><td>30</td></tr><tr><td>2º</td><td>25</td></tr>
-                            <tr><td>3º</td><td>21</td></tr><tr><td>4º</td><td>18</td></tr>
-                            <tr><td>5º</td><td>16</td></tr><tr><td>6º</td><td>14</td></tr>
-                            <tr><td>7º</td><td>12</td></tr><tr><td>8º</td><td>10</td></tr>
-                            <tr><td>9º</td><td>8</td></tr><tr><td>10º</td><td>7</td></tr>
-                            <tr><td>11º</td><td>6</td></tr><tr><td>12º</td><td>5</td></tr>
-                            <tr><td>13º</td><td>4</td></tr><tr><td>14º</td><td>3</td></tr>
-                            <tr><td>15º</td><td>2</td></tr>
-                        </tbody>
-                    </table>
-                    <h3>Capítulo 4: O Evento (Dia de Corrida)</h3>
-                    <table class="rules-table">
-                        <tr><td>21:30</td><td>Abertura do Lobby para treino e briefing</td></tr>
-                        <tr><td>22:30</td><td>Qualificação (18 min)</td></tr>
-                        <tr><td>22:45</td><td>Corrida (50%)</td></tr>
-                    </table>
-                    <p><strong>Restrições:</strong> Proibido teclado.</p>
-                    <h3>Capítulo 5: Regras de Pista</h3>
-                    <ul>
-                        <li>Apenas uma mudança de direção na defesa. Proibido "Moving under braking".</li>
-                        <li><strong>Unsafe Rejoin:</strong> Retorno perigoso à pista é infração gravíssima.</li>
-                        <li><strong>Reset:</strong> Proibido usar "Resetar para a Pista". Deve-se voltar dirigindo.</li>
-                    </ul>
-                    <h3>Capítulo 6: Procedimentos Técnicos</h3>
-                    <p><strong>Bandeira Vermelha:</strong> Se houver queda massiva abaixo de 15% da prova, o lobby é reiniciado. Acima de 50%, a corrida é encerrada com pontuação total.</p>
-                    <h3>Capítulo 7: Punições e Superlicença</h3>
-                    <table class="rules-table">
-                        <thead><tr><th>Infração</th><th>Punição</th><th>Pontos</th></tr></thead>
-                        <tbody>
-                            <tr><td>Leve (Toque/Corte)</td><td>+5s</td><td>-2 pts</td></tr>
-                            <tr><td>Média (Danos/Rejoin)</td><td>+10s</td><td>-4 pts</td></tr>
-                            <tr><td>Grave (Colisão Proposital)</td><td>+20s/DSQ</td><td>-7 pts</td></tr>
-                            <tr><td>Gravíssima (Ofensa/Racismo)</td><td>Exclusão</td><td>Banimento</td></tr>
-                        </tbody>
-                    </table>
-                    <p><strong>Denúncias:</strong> Até 24h após a prova via formulário com vídeo Onboard obrigatório.</p>
-                    <h3>Capítulo 8: Premiação</h3>
-                    <p>Elegível apenas para pilotos que participarem de no mínimo 80% das etapas.</p>
-                </div>
-            </div></div>
+            <div id="regras-container"></div>
         </div>
 
         <!-- PISTAS -->
@@ -508,12 +445,15 @@
 
             const cupLabel = { ignition: 'Ignition CUP', evolution: 'Evolution CUP', legacy: 'Legacy CUP' }[proxima.cup];
 
+            const pistaImg = BRS.pistas()[proxima.pistasIdx]?.imagem ?? '';
+
             banner.innerHTML = `
                 <div>
                     <div class="next-race-label">⏳ Próxima Corrida</div>
                     <div class="next-race-track">R${proxima.r} — ${proxima.track}</div>
                     <div class="next-race-meta">${proxima.date} · Tipo: ${proxima.type}</div>
                 </div>
+                ${pistaImg ? `<img src="${pistaImg}" class="next-race-map" alt="Mapa ${proxima.track}">` : ''}
                 <div class="next-race-right">
                     <div class="next-race-cup">${cupLabel}</div>
                     <div class="next-race-countdown" id="nr-countdown"></div>
@@ -841,6 +781,26 @@
                     </div>
                 </div></div>`
             ).join('');
+        }
+
+        // ── REGULAMENTO ──────────────────────────────────────────
+        function renderRegulamento() {
+            const reg = CONFIG.regulamento;
+            const container = document.getElementById('regras-container');
+            if (!container || !reg) return;
+            container.innerHTML = `
+                <div class="card"><div class="card-inner">
+                    <div class="card-header">
+                        <h2>📜 Regulamento Oficial 2026</h2>
+                        <div class="header-labels">Última Atualização: ${reg.ultimaAtualizacao}</div>
+                    </div>
+                    <div class="rules-content">
+                        ${reg.capitulos.map(cap => `
+                            <h3>${cap.titulo}</h3>
+                            ${cap.html}
+                        `).join('')}
+                    </div>
+                </div></div>`;
         }
 
         // ── VÍDEOS ───────────────────────────────────────────────
@@ -1267,6 +1227,7 @@
             });
 
             renderStats();
+            renderRegulamento();
             renderDriversGrid();
             renderPistas();
             renderVideos();
