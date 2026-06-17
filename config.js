@@ -4,8 +4,7 @@
 // ║  ✅ COMO ATUALIZAR APÓS CADA ETAPA:                          ║
 // ║  1. Encontre a pista pelo nome no array CONFIG.pistas        ║
 // ║  2. Preencha o array "resultados" com pos, piloto, pontos    ║
-// ║  3. Se houve pole, adicione em CONFIG.poles                  ║
-// ║  4. Pronto. Pontos e classificações são calculados sozinhos  ║
+// ║  3. Pronto. Pontos e classificações são calculados sozinhos  ║
 // ╚══════════════════════════════════════════════════════════════╝
 
 const CONFIG = {
@@ -125,20 +124,6 @@ const CONFIG = {
       ]
     }
   },
-
-  // ── POLES ──────────────────────────────────────────────────────
-  // Adicione uma entrada aqui após cada qualifying.
-  // "camp" deve ser "ignition", "evolution" ou "legacy"
-  poles: [
-    { piloto: "Frank Violets",      etapa: "Albert Park",  camp: "ignition" },
-    { piloto: "Frank Violets",      etapa: "Shanghai",     camp: "ignition" },
-    { piloto: "Frank Violets",      etapa: "Austin",       camp: "ignition" },
-    { piloto: "Frank Violets",      etapa: "Suzuka",       camp: "ignition" },
-    { piloto: "Frank Violets",      etapa: "Sakhir",       camp: "ignition" },
-    { piloto: "Nathan Nadadanad03", etapa: "Jeddah",       camp: "ignition" },
-    { piloto: "Gustavo Guga",       etapa: "Las Vegas",    camp: "ignition" },
-    { piloto: "João Victor",        etapa: "Miami",        camp: "ignition" }
-  ],
 
   // ── CALENDÁRIO ─────────────────────────────────────────────────
   // "pistasIdx" aponta para o índice correspondente em CONFIG.pistas abaixo.

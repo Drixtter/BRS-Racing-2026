@@ -28,8 +28,7 @@ const BRS = (() => {
         foto:   fotoPiloto(nome, cup),
         cor:    "#888",
         points: 0,
-        wins:   0,
-        poles:  0
+        wins:   0
       };
     });
 
@@ -58,13 +57,6 @@ const BRS = (() => {
         acc[nome].cor    = _equipeMap[p.equipe]?.cor || "#888";
       }
     });
-
-    // Soma poles deste cup
-    CONFIG.poles
-      .filter(p => p.camp === cup)
-      .forEach(p => {
-        if (acc[p.piloto]) acc[p.piloto].poles += 1;
-      });
 
     // Ordena: pontos desc → vitórias desc → ordem do array de pilotos do campeonato
     // (quando todos têm 0 pontos, mantém a ordem definida em CONFIG.campeonatos[cup].pilotos)
@@ -104,21 +96,12 @@ const BRS = (() => {
 
   // ── ESTATÍSTICAS GLOBAIS ─────────────────────────────────────
   function calcStats() {
-    const wins  = {};
-    const poles = {};
+    const wins = {};
 
-    // Vitórias em todas as pistas
     CONFIG.pistas.forEach(pista => {
       pista.resultados.forEach(r => {
-        if (r.pos === 1) {
-          wins[r.piloto] = (wins[r.piloto] || 0) + 1;
-        }
+        if (r.pos === 1) wins[r.piloto] = (wins[r.piloto] || 0) + 1;
       });
-    });
-
-    // Poles em todos os campeonatos
-    CONFIG.poles.forEach(p => {
-      poles[p.piloto] = (poles[p.piloto] || 0) + 1;
     });
 
     const toArr = obj =>
@@ -132,7 +115,7 @@ const BRS = (() => {
         }))
         .sort((a, b) => b.count - a.count || a.nome.localeCompare(b.nome));
 
-    return { wins: toArr(wins), poles: toArr(poles) };
+    return { wins: toArr(wins) };
   }
 
   // ── CALENDÁRIO COM STATUS ────────────────────────────────────

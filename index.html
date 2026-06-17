@@ -478,7 +478,7 @@
             CUPS.forEach(cup => {
                 const drivers = BRS.drivers[cup.id]();
                 const d = drivers.find(x => x.nome === nome);
-                if (!d) { cupData.push({ cup, d: null, rows: '', pts: 0, wins: 0, poles: 0, etapas: 0 }); return; }
+                if (!d) { cupData.push({ cup, d: null, rows: '', pts: 0, wins: 0, etapas: 0 }); return; }
 
                 const etapas = BRS.calendario(cup.id).filter(e => e.realizado);
                 totalEtapas += etapas.length;
@@ -495,19 +495,17 @@
                     </tr>`;
                 }).join('');
 
-                cupData.push({ cup, d, pos, rows, pts: d.points, wins: d.wins, poles: d.poles, etapas: etapas.length });
+                cupData.push({ cup, d, pos, rows, pts: d.points, wins: d.wins, etapas: etapas.length });
             });
 
             function renderModalStats(idx) {
                 const item = cupData[idx];
-                const pts   = item?.d ? item.pts   : 0;
-                const wins  = item?.d ? item.wins  : 0;
-                const poles = item?.d ? item.poles : 0;
-                const et    = item?.d ? item.etapas : 0;
+                const pts  = item?.d ? item.pts    : 0;
+                const wins = item?.d ? item.wins   : 0;
+                const et   = item?.d ? item.etapas : 0;
                 document.getElementById('modal-stats').innerHTML = `
                     <div class="modal-stat"><div class="modal-stat-val">${pts}</div><div class="modal-stat-lbl">Pontos</div></div>
                     <div class="modal-stat"><div class="modal-stat-val">${wins}</div><div class="modal-stat-lbl">Vitórias</div></div>
-                    <div class="modal-stat"><div class="modal-stat-val">${poles}</div><div class="modal-stat-lbl">Poles</div></div>
                     <div class="modal-stat"><div class="modal-stat-val">${et}</div><div class="modal-stat-lbl">Corridas</div></div>`;
             }
 
@@ -526,7 +524,7 @@
             document.getElementById('modal-historico').innerHTML = cupData.map((item, i) => {
                 const conteudo = item.d
                     ? `<div style="margin-bottom:0.6rem; font-size:0.82rem; color:var(--text-muted);">
-                           ${item.pos}º lugar · ${item.d.points} pts · ${item.d.wins} vitória(s) · ${item.d.poles} pole(s)
+                           ${item.pos}º lugar · ${item.d.points} pts · ${item.d.wins} vitória(s)
                        </div>
                        <table class="modal-cup-table">
                            <thead><tr>
@@ -620,7 +618,6 @@
             document.getElementById('estatisticas').innerHTML =
                 `<div class="panel-grid">
                     ${cardTable('🏆 Maiores Vencedores', ['Vitórias'], 'tbody-stats-vitorias')}
-                    ${cardTable('⏱️ Pole Positions',     ['Poles'],    'tbody-stats-poles')}
                 </div>`;
         }
 
@@ -636,14 +633,13 @@
                     const gap = i === 0
                         ? `<span class="gap-leader">LÍDER</span>`
                         : `<span>−${prevPts - d.points}</span>`;
-                    const vit  = d.wins  > 0 ? `<span title="Vitórias" style="color:var(--gold);">🏆${d.wins}</span>`  : '';
-                    const pole = d.poles > 0 ? `<span title="Poles"    style="color:var(--neon-cyan);">⏱${d.poles}</span>` : '';
+                    const vit = d.wins > 0 ? `<span title="Vitórias" style="color:var(--gold);">🏆${d.wins}</span>` : '';
                     return `
                     <tr>
                         <td class="pos-col ${getRankClass(i)}">${i+1}</td>
                         <td class="name-col">${d.nome}</td>
                         <td class="team-col" style="font-size:0.8rem;">${d.equipe}</td>
-                        <td class="col-vp" style="text-align:center; font-size:0.8rem; white-space:nowrap; padding:0.8rem 0.4rem;">${vit}${pole}</td>
+                        <td class="col-vp" style="text-align:center; font-size:0.8rem; white-space:nowrap; padding:0.8rem 0.4rem;">${vit}</td>
                         <td class="pts-col">${d.points}</td>
                         <td class="gap-col col-gap">${gap}</td>
                     </tr>`;
@@ -697,9 +693,7 @@
                 </tr>`;
 
             document.getElementById('tbody-stats-vitorias').innerHTML =
-                stats.wins.length  ? stats.wins.map(row).join('')  : empty('Nenhuma vitória registrada');
-            document.getElementById('tbody-stats-poles').innerHTML =
-                stats.poles.length ? stats.poles.map(row).join('') : empty('Nenhuma pole registrada');
+                stats.wins.length ? stats.wins.map(row).join('') : empty('Nenhuma vitória registrada');
         }
 
         // ── GRID DE PILOTOS ──────────────────────────────────────
