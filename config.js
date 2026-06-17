@@ -660,8 +660,9 @@ const CONFIG = {
   // ── VÍDEOS ─────────────────────────────────────────────────────
   // Adicione o youtubeId (parte final da URL do YouTube).
   videos: [
-    { titulo: "Ignition - Brasil 2026",               data: "10/05/2026", youtubeId: "IGTqHoMJuRE"       },
-    { titulo: "Ignition - Arábia Saudita 2026",       data: "19/04/2026", youtubeId: "R25Ag7FW7BE?t=5614s" },
+    { titulo: "Evolution Race 1 - Espanha 2026",      data: "14/06/2026", youtubeId: "xlGPoxvWgLc"        },
+    { titulo: "Ignition - Brasil 2026",               data: "10/05/2026", youtubeId: "IGTqHoMJuRE"        },
+    { titulo: "Ignition - Arábia Saudita 2026",       data: "19/04/2026", youtubeId: "R25Ag7FW7BE?t=5614s"},
     { titulo: "Pré-temporada 2026 - Drixtter X Guga", data: "09/02/2026", youtubeId: "s5EN-WnPhIg"        },
     { titulo: "GP de Interlagos - Melhores Momentos", data: "20/01/2026", youtubeId: "L2Wg9yx7lsk"        }
   ],
