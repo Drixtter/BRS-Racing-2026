@@ -462,13 +462,13 @@ const CONFIG = {
     },
 
     // [13] Evolution R2
-    {
+    /*{
       nome: "Etapa Suzuka - 21/06/2026 21:30h",
       pais: "Japão",
       imagem: "img/tracks/2026tracksuzukadetailed.avif",
       comprimento: "5.807 km", curvas: 18, drs: 1,
       resultados: []
-    },
+    },*/
 
     // [14] Evolution R3
     {
@@ -489,13 +489,13 @@ const CONFIG = {
     },
 
     // [16] Evolution R5
-    {
+    /*{
       nome: "Etapa Imola - 12/07/2026 21:30h",
       pais: "Itália",
       imagem: "img/tracks/Emilia_Romagna_Circuit.avif",
       comprimento: "4.909 km", curvas: 19, drs: 1,
       resultados: []
-    },
+    },*/
 
     // [17] Evolution R6
     {
@@ -516,13 +516,13 @@ const CONFIG = {
     },
 
     // [19] Evolution R8
-    {
+    /*{
       nome: "Etapa Sakhir - 09/08/2026 21:30h",
       pais: "Bahrein",
       imagem: "img/tracks/Bahrain_Circuit.avif",
       comprimento: "5.412 km", curvas: 15, drs: 2,
       resultados: []
-    },
+    },*/
 
     // [20] Evolution R9
     {
@@ -534,13 +534,13 @@ const CONFIG = {
     },
 
     // [21] Evolution R10
-    {
+    /*{
       nome: "Etapa Montreal - 30/08/2026 21:30h",
       pais: "Canadá",
       imagem: "img/tracks/2026trackmontrealdetailed.avif",
       comprimento: "4.361 km", curvas: 13, drs: 3,
       resultados: []
-    },
+    },*/
 
     // [22] Evolution R11
     {
@@ -572,13 +572,13 @@ const CONFIG = {
     },
 
     // [25] Legacy R2
-    {
+    /*{
       nome: "Etapa Spa - 04/10/2026 21:30h",
       pais: "Bélgica",
       imagem: "img/tracks/2026trackspafrancorchampsdetailed.avif",
       comprimento: "7.004 km", curvas: 19, drs: 2,
       resultados: []
-    },
+    },*/
 
     // [26] Legacy R3
     {
@@ -590,13 +590,13 @@ const CONFIG = {
     },
 
     // [27] Legacy R4
-    {
+    /*{
       nome: "Etapa Red Bull Ring - 18/10/2026 21:30h",
       pais: "Áustria",
       imagem: "img/tracks/2026trackspielbergdetailed.avif",
       comprimento: "4.318 km", curvas: 10, drs: 3,
       resultados: []
-    },
+    },*/
 
     // [28] Legacy R5
     {
@@ -626,13 +626,13 @@ const CONFIG = {
     },
 
     // [31] Legacy R8
-    {
+    /*{
       nome: "Etapa Jeddah - 15/11/2026 21:30h",
       pais: "Arábia Saudita",
       imagem: "img/tracks/2026trackjeddahdetailed.avif",
       comprimento: "6.174 km", curvas: 27, drs: 3,
       resultados: []
-    },
+    },*/
 
     // [32] Legacy R9
     {
@@ -653,13 +653,13 @@ const CONFIG = {
     },
 
     // [34] Legacy R11
-    {
+    /*{
       nome: "Etapa Silverstone - 06/12/2026 21:30h",
       pais: "Grã-Bretanha",
       imagem: "img/tracks/2026tracksilverstonedetailed.avif",
       comprimento: "5.891 km", curvas: 18, drs: 2,
       resultados: []
-    },
+    },*/
 
     // [35] Legacy R12
     {

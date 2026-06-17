@@ -444,6 +444,9 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
+            // Re-renderiza o canvas quando a seção evolução se torna visível
+            // (canvas em display:none tem clientWidth=0 e distorce o gráfico)
+            if (id === 'evolucao-pontos') renderEvolucao();
         }
 
         function updateFooterDate() {
@@ -463,6 +466,17 @@
                 </div>
                 <table><tbody id="${tbodyId}"></tbody></table>
             </div></div>`;
+        }
+
+        // ── CAMPEONATO CORRENTE ───────────────────────────────────
+        // Retorna o id do cup com etapas ainda não realizadas (o ativo).
+        // Se todos encerrados, retorna o último.
+        function getCupCorrente() {
+            for (const cup of CUPS) {
+                const temPendente = BRS.calendario(cup.id).some(e => !e.realizado);
+                if (temPendente) return cup.id;
+            }
+            return CUPS[CUPS.length - 1].id;
         }
 
         // ── BANNER: PRÓXIMA CORRIDA ───────────────────────────────
@@ -878,13 +892,14 @@
             return equipe ? equipe.cor : '#8b9bb4';
         }
 
-        let evolucaoEstado = { cup: 'evolution', ocultos: new Set() };
+        let evolucaoEstado = { cup: 'ignition', ocultos: new Set() }; // valor provisório, sobrescrito no DOMContentLoaded
 
         function buildEvolucaoTabs() {
             const el = document.getElementById('evolucao-tabs');
             if (!el) return;
-            el.innerHTML = CUPS.map((cup, i) => `
-                <button class="grade-tab${i===0?' active':''}" data-ecup="${cup.id}">🏆 ${cup.label} CUP</button>
+            const corrente = getCupCorrente();
+            el.innerHTML = CUPS.map(cup => `
+                <button class="grade-tab${cup.id === corrente ? ' active' : ''}" data-ecup="${cup.id}">🏆 ${cup.label} CUP</button>
             `).join('');
             el.addEventListener('click', e => {
                 const btn = e.target.closest('.grade-tab[data-ecup]');
@@ -925,7 +940,13 @@
             return { labels, series, ordenados, totais: acc };
         }
 
-        function renderEvolucao() {
+        function renderEvolucao(cupParam) {
+            if (cupParam) {
+                evolucaoEstado.cup = cupParam;
+                document.querySelectorAll('#evolucao-tabs .grade-tab').forEach(b => {
+                    b.classList.toggle('active', b.dataset.ecup === cupParam);
+                });
+            }
             const canvas  = document.getElementById('evolucao-canvas');
             const tooltip = document.getElementById('evolucao-tooltip');
             const legenda = document.getElementById('evolucao-legenda');
@@ -1160,8 +1181,9 @@
 
         // ── GRADE DE RESULTADOS ──────────────────────────────────
         function buildGradeTabs() {
-            document.getElementById('grade-tabs').innerHTML = CUPS.map((cup, i) => `
-                <button class="grade-tab${i===0 ? ' active' : ''}"
+            const corrente = getCupCorrente();
+            document.getElementById('grade-tabs').innerHTML = CUPS.map(cup => `
+                <button class="grade-tab${cup.id === corrente ? ' active' : ''}"
                         data-cup="${cup.id}">🏆 ${cup.label} CUP</button>
             `).join('');
             document.getElementById('grade-tabs').addEventListener('click', e => {
@@ -1227,6 +1249,9 @@
 
         // ── INICIALIZAÇÃO ─────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
+            // Define o cup corrente como estado inicial da evolução
+            evolucaoEstado.cup = getCupCorrente();
+
             buildNav();
             buildNextRaceBanner();
             initModal();
@@ -1246,8 +1271,8 @@
             renderPistas();
             renderVideos();
             renderGaleria();
-            renderGrade('evolution', document.querySelector('.grade-tab'));
-            renderEvolucao();
+            renderGrade(getCupCorrente(), document.querySelector('.grade-tab.active'));
+            renderEvolucao(getCupCorrente());
             updateFooterDate();
 
             let resizeTimer;
