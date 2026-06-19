@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRS Admin 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Titillium+Web:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan:  #00f3ff;
+            --red:   #ff4444;
+            --green: #00ff88;
+            --gold:  #ffd700;
+            --bg:    #111316;
+            --panel: #1a1d21;
+            --border: rgba(255,255,255,0.08);
+            --muted: #8b9bb4;
+        }
+        body { font-family: 'Titillium Web', sans-serif; background: var(--bg); color: #fff; min-height: 100vh; }
+
+        /* ── LOGIN ─────────────────────────────────────── */
+        #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .login-box { background: var(--panel); border: 1px solid rgba(0,243,255,0.3); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 380px; box-shadow: 0 0 50px rgba(0,243,255,0.08); }
+        .login-logo { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--cyan); text-align: center; letter-spacing: 4px; text-transform: uppercase; }
+        .login-sub  { color: var(--muted); text-align: center; font-size: 0.85rem; margin-bottom: 2rem; margin-top: 0.3rem; }
+
+        /* ── FORMULÁRIOS ───────────────────────────────── */
+        label { display: block; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; margin-top: 1.2rem; }
+        input, select, textarea {
+            width: 100%; background: #0d0f12; border: 1px solid rgba(255,255,255,0.12);
+            color: #fff; padding: 0.65rem 0.9rem; border-radius: 6px;
+            font-family: 'Titillium Web', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--cyan); }
+        select option { background: #1a1d21; }
+        input[type=number] { -moz-appearance: textfield; }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+        /* ── BOTÕES ────────────────────────────────────── */
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.4rem; border: 1px solid transparent; border-radius: 6px; font-family: 'Titillium Web', sans-serif; font-weight: 600; text-transform: uppercase; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; background: transparent; }
+        .btn-cyan  { border-color: var(--cyan);  color: var(--cyan);  background: rgba(0,243,255,0.07); }
+        .btn-cyan:hover  { background: rgba(0,243,255,0.15); box-shadow: 0 0 12px rgba(0,243,255,0.25); }
+        .btn-green { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.07); }
+        .btn-green:hover { background: rgba(0,255,136,0.15); }
+        .btn-red   { border-color: var(--red);   color: var(--red);   background: rgba(255,68,68,0.07); }
+        .btn-red:hover   { background: rgba(255,68,68,0.15); }
+        .btn-full  { width: 100%; justify-content: center; margin-top: 1.5rem; padding: 0.8rem; font-size: 0.95rem; }
+
+        /* ── LAYOUT ─────────────────────────────────────── */
+        #app { display: none; }
+        .app-header { background: var(--panel); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .app-title  { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--cyan); letter-spacing: 3px; text-transform: uppercase; }
+        .app-nav    { display: flex; gap: 0.4rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .nav-tab    { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); color: var(--muted); padding: 0.45rem 1.1rem; border-radius: 6px; cursor: pointer; font-family: 'Titillium Web', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 0.82rem; transition: all 0.2s; }
+        .nav-tab.active, .nav-tab:hover { background: rgba(0,243,255,0.07); border-color: rgba(0,243,255,0.4); color: var(--cyan); }
+        .content    { padding: 1.5rem; max-width: 960px; }
+        .section    { display: none; }
+        .section.active { display: block; }
+
+        /* ── CARD ───────────────────────────────────────── */
+        .card { background: var(--panel); border: 1px solid rgba(0,243,255,0.15); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        /* ── TABELA DE RESULTADO ────────────────────────── */
+        .res-table { width: 100%; border-collapse: collapse; margin-top: 1.2rem; }
+        .res-table th { padding: 0.5rem 0.5rem; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; text-align: left; border-bottom: 1px solid var(--border); }
+        .res-table td { padding: 0.3rem 0.4rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .res-table tr:hover td { background: rgba(255,255,255,0.02); }
+        .pos-badge { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; text-align: center; padding: 0 0.2rem; }
+        .th-pos   { width: 40px; }
+        .th-pts   { width: 65px; }
+        .th-sr    { width: 75px; }
+        .th-equipe { width: 180px; font-size: 0.72rem; }
+        .res-table select { padding: 0.35rem 0.5rem; font-size: 0.82rem; }
+        .res-table input[type=number] { padding: 0.35rem 0.5rem; font-size: 0.85rem; width: 100%; text-align: right; }
+        .equipe-badge { font-size: 0.75rem; color: var(--muted); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.05); border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; display: block; }
+
+        /* ── ALERTA ─────────────────────────────────────── */
+        .alert { padding: 0.75rem 1.1rem; border-radius: 8px; font-size: 0.88rem; margin-bottom: 1rem; }
+        .alert-ok  { background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.4); color: var(--green); }
+        .alert-err { background: rgba(255,68,68,0.08);  border: 1px solid rgba(255,68,68,0.4);  color: var(--red); }
+        .alert-hidden { display: none; }
+
+        /* ── PUBLICAR ───────────────────────────────────── */
+        .pub-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .pub-status { font-size: 0.9rem; margin-top: 1rem; min-height: 1.4rem; }
+
+        /* ── SPINNER ────────────────────────────────────── */
+        .spin { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── RESUMO ETAPA ───────────────────────────────── */
+        .etapa-info { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .etapa-chip { font-size: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; color: var(--muted); }
+        .etapa-chip.realizada { border-color: rgba(0,255,136,0.3); color: var(--green); background: rgba(0,255,136,0.06); }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ LOGIN ═══════════════ -->
+<div id="login-screen">
+    <div class="login-box">
+        <div class="login-logo">🏎 BRS Admin</div>
+        <div class="login-sub">Campeonato F1 Virtual 2026</div>
+        <label>Senha de administrador</label>
+        <input type="password" id="login-pwd" placeholder="••••••••" autocomplete="current-password"
+               onkeydown="if(event.key==='Enter') doLogin()">
+        <div id="login-err" class="alert alert-err alert-hidden" style="margin-top:1rem;"></div>
+        <button class="btn btn-cyan btn-full" onclick="doLogin()">ENTRAR</button>
+    </div>
+</div>
+
+<!-- ═══════════════ APP ═══════════════ -->
+<div id="app">
+    <div class="app-header">
+        <div class="app-title">🏎 BRS Admin 2026</div>
+        <button class="btn btn-red" onclick="doLogout()">Sair</button>
+    </div>
+    <div class="app-nav">
+        <div class="nav-tab active" data-tab="resultado">🏁 Resultado</div>
+        <div class="nav-tab" data-tab="video">🎬 Vídeo</div>
+        <div class="nav-tab" data-tab="galeria">📸 Galeria</div>
+        <div class="nav-tab" data-tab="pilotos">👤 Pilotos</div>
+        <div class="nav-tab" data-tab="etapas">🗓 Etapas</div>
+        <div class="nav-tab" data-tab="publicar">🚀 Publicar</div>
+    </div>
+    <div class="content">
+        <div id="alert-global" class="alert alert-hidden"></div>
+
+        <!-- ── RESULTADO ──────────────────────────────── -->
+        <div class="section active" id="tab-resultado">
+            <div class="card">
+                <div class="card-title">🏁 Lançar Resultado de Corrida</div>
+                <div class="form-row">
+                    <div>
+                        <label>Campeonato</label>
+                        <select id="sel-cup" onchange="onCupChange()">
+                            <option value="ignition">Ignition CUP</option>
+                            <option value="evolution">Evolution CUP</option>
+                            <option value="legacy">Legacy CUP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Corrida</label>
+                        <select id="sel-race" onchange="onRaceChange()"></select>
+                    </div>
+                </div>
+
+                <div id="etapa-info-bar" class="etapa-info" style="margin-top:1rem;display:none;"></div>
+
+                <div id="resultado-form" style="display:none; margin-top:1.5rem;">
+                    <table class="res-table">
+                        <thead>
+                            <tr>
+                                <th class="th-pos">Pos</th>
+                                <th>Piloto</th>
+                                <th class="th-equipe">Equipe (nesta corrida)</th>
+                                <th class="th-pts" style="text-align:right;">Pts</th>
+                                <th class="th-sr" style="text-align:right; color:var(--red);">SR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultado-tbody"></tbody>
+                    </table>
+                    <div style="display:flex; gap:0.8rem; margin-top:1.5rem; flex-wrap:wrap;">
+                        <button class="btn btn-cyan" onclick="salvarResultado()">💾 Salvar Resultado</button>
+                        <button class="btn btn-red"  onclick="limparResultado()">🗑 Limpar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── VÍDEO ──────────────────────────────────── -->
+        <div class="section" id="tab-video">
+            <div class="card">
+                <div class="card-title">🎬 Adicionar Vídeo</div>
+                <label>Título</label>
+                <input type="text" id="vid-titulo" placeholder="Ex: Ignition — Brasil 2026">
+                <label>Data</label>
+                <input type="text" id="vid-data" placeholder="Ex: 10/05/2026">
+                <label>YouTube ID <span style="color:var(--muted);text-transform:none;font-size:0.8rem;">(parte final da URL: youtube.com/watch?v=<strong>IGTqHoMJuRE</strong>)</span></label>
+                <input type="text" id="vid-yt" placeholder="IGTqHoMJuRE">
+                <button class="btn btn-cyan btn-full" onclick="salvarVideo()">💾 Adicionar Vídeo</button>
+            </div>
+        </div>
+
+        <!-- ── GALERIA ────────────────────────────────── -->
+        <div class="section" id="tab-galeria">
+            <div class="card">
+                <div class="card-title">📸 Adicionar Foto à Galeria</div>
+                <label>Título</label>
+                <input type="text" id="gal-titulo" placeholder="Ex: McLaren Team">
+                <label>Data</label>
+                <input type="text" id="gal-data" placeholder="Ex: Jun/2026">
+                <label>Caminho da imagem <span style="color:var(--muted);text-transform:none;font-size:0.8rem;">(relativo à raiz do projeto)</span></label>
+                <input type="text" id="gal-url" placeholder="img/galeria/McLaren_Team.png">
+                <button class="btn btn-cyan btn-full" onclick="salvarGaleria()">💾 Adicionar Foto</button>
+            </div>
+        </div>
+
+        <!-- ── PILOTOS ───────────────────────────────── -->
+        <div class="section" id="tab-pilotos">
+            <div class="card">
+                <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+                    <span>👤 Pilotos Cadastrados</span>
+                    <button class="btn btn-cyan" onclick="abrirFormPiloto(null)">+ Novo Piloto</button>
+                </div>
+                <table class="res-table" id="pilotos-table">
+                    <thead>
+                        <tr>
+                            <th style="width:32px;">#</th>
+                            <th>Nome</th>
+                            <th>Equipe</th>
+                            <th style="text-align:center;">I</th>
+                            <th style="text-align:center;">E</th>
+                            <th style="text-align:center;">L</th>
+                            <th style="width:60px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pilotos-tbody"></tbody>
+                </table>
+            </div>
+
+            <!-- Formulário add/edit piloto -->
+            <div class="card" id="form-piloto" style="display:none; border-color:rgba(0,243,255,0.4);">
+                <div class="card-title" id="form-piloto-titulo">Novo Piloto</div>
+                <input type="hidden" id="pil-nome-original">
+                <div class="form-row">
+                    <div>
+                        <label>Nome</label>
+                        <input type="text" id="pil-nome" placeholder="Ex: Gustavo Guga">
+                    </div>
+                    <div>
+                        <label>Equipe Principal</label>
+                        <select id="pil-equipe"></select>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top:0;">
+                    <div>
+                        <label>Foto Padrão <span style="color:var(--muted);text-transform:none;font-size:0.8rem;">(caminho relativo)</span></label>
+                        <input type="text" id="pil-foto" placeholder="img/drivers/nome.png">
+                    </div>
+                    <div>
+                        <label>Foto Ignition</label>
+                        <input type="text" id="pil-foto-i" placeholder="img/drivers/ignition/nome.png">
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top:0;">
+                    <div>
+                        <label>Foto Evolution</label>
+                        <input type="text" id="pil-foto-e" placeholder="img/drivers/evolution/nome.png">
+                    </div>
+                    <div>
+                        <label>Foto Legacy</label>
+                        <input type="text" id="pil-foto-l" placeholder="img/drivers/legacy/nome.png">
+                    </div>
+                </div>
+                <label style="margin-top:1.2rem;">Participa dos campeonatos</label>
+                <div style="display:flex;gap:1.5rem;margin-top:0.5rem;">
+                    <label style="display:flex;align-items:center;gap:6px;margin-top:0;text-transform:none;font-size:0.9rem;color:#fff;cursor:pointer;">
+                        <input type="checkbox" id="pil-cup-i" style="width:auto;"> Ignition CUP
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;margin-top:0;text-transform:none;font-size:0.9rem;color:#fff;cursor:pointer;">
+                        <input type="checkbox" id="pil-cup-e" style="width:auto;"> Evolution CUP
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;margin-top:0;text-transform:none;font-size:0.9rem;color:#fff;cursor:pointer;">
+                        <input type="checkbox" id="pil-cup-l" style="width:auto;"> Legacy CUP
+                    </label>
+                </div>
+                <div style="display:flex;gap:0.8rem;margin-top:1.5rem;">
+                    <button class="btn btn-cyan" onclick="salvarPiloto()">💾 Salvar</button>
+                    <button class="btn btn-red"  onclick="fecharFormPiloto()">✕ Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ETAPAS ──────────────────────────────────── -->
+        <div class="section" id="tab-etapas">
+            <div class="card">
+                <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+                    <span>🗓 Calendário de Etapas</span>
+                    <button class="btn btn-cyan" onclick="abrirFormEtapa(null, null, null)">+ Nova Etapa</button>
+                </div>
+                <div id="etapas-lista"></div>
+            </div>
+
+            <!-- Formulário add/edit etapa -->
+            <div class="card" id="form-etapa" style="display:none; border-color:rgba(0,243,255,0.4);">
+                <div class="card-title" id="form-etapa-titulo">Nova Etapa</div>
+                <input type="hidden" id="eta-pistas-idx">
+                <input type="hidden" id="eta-cal-idx">
+
+                <div class="form-row">
+                    <div>
+                        <label>Campeonato</label>
+                        <select id="eta-cup">
+                            <option value="ignition">Ignition CUP</option>
+                            <option value="evolution">Evolution CUP</option>
+                            <option value="legacy">Legacy CUP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Tipo</label>
+                        <select id="eta-type">
+                            <option value="Oficial">Oficial</option>
+                            <option value="Extra">Extra</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>Nº da Corrida (R)</label>
+                        <input type="number" id="eta-r" min="1">
+                    </div>
+                    <div>
+                        <label>Data</label>
+                        <input type="text" id="eta-date" placeholder="Ex: 28/06 ou Realizado em 28/06">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>Nome da Pista (curto)</label>
+                        <input type="text" id="eta-track" placeholder="Ex: Áustria">
+                    </div>
+                    <div>
+                        <label>País</label>
+                        <input type="text" id="eta-pais" placeholder="Ex: Áustria">
+                    </div>
+                </div>
+                <div>
+                    <label>Nome completo da Etapa</label>
+                    <input type="text" id="eta-nome" placeholder="Ex: Etapa Red Bull Ring - 28/06/2026 21:30h">
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>Imagem do Mapa</label>
+                        <input type="text" id="eta-imagem" placeholder="img/tracks/2026trackaustria.avif">
+                    </div>
+                    <div>
+                        <label>Comprimento</label>
+                        <input type="text" id="eta-comprimento" placeholder="4.318 km">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>Curvas</label>
+                        <input type="number" id="eta-curvas" min="0">
+                    </div>
+                    <div>
+                        <label>Zonas DRS</label>
+                        <input type="number" id="eta-drs" min="0">
+                    </div>
+                </div>
+                <div style="display:flex;gap:0.8rem;margin-top:1.5rem;">
+                    <button class="btn btn-cyan" onclick="salvarEtapa()">💾 Salvar</button>
+                    <button class="btn btn-red"  onclick="fecharFormEtapa()">✕ Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PUBLICAR ───────────────────────────────── -->
+        <div class="section" id="tab-publicar">
+            <div class="card">
+                <div class="card-title">🚀 Publicar no Site</div>
+                <p class="pub-desc">Executa <code>git add config.js → git commit → git push</code>.<br>
+                Se o repositório estiver conectado ao Neocities via GitHub Actions, o site será atualizado automaticamente em instantes.</p>
+                <label>Mensagem do commit <span style="text-transform:none;">(opcional)</span></label>
+                <input type="text" id="pub-msg" placeholder="Ex: Resultado Evolution R3 — Áustria">
+                <button class="btn btn-green btn-full" style="padding:1rem; font-size:1rem;" onclick="publicar()">🚀 PUBLICAR AGORA</button>
+                <div class="pub-status" id="pub-status"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── CONSTANTES ─────────────────────────────────────────────────
+const PONTOS = [0, 30, 25, 21, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 0, 0, 0, 0, 0];
+let CONFIG = null;
+
+// ── AUTH ────────────────────────────────────────────────────────
+async function doLogin() {
+    const pwd = document.getElementById('login-pwd').value;
+    const r = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd })
+    });
+    if (r.ok) {
+        await carregarConfig();
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        initApp();
+    } else {
+        const el = document.getElementById('login-err');
+        el.textContent = 'Senha incorreta. Tente novamente.';
+        el.classList.remove('alert-hidden');
+    }
+}
+
+async function doLogout() {
+    await fetch('/api/logout', { method: 'POST' });
+    location.reload();
+}
+
+// ── CONFIG ──────────────────────────────────────────────────────
+async function carregarConfig() {
+    const r = await fetch('/api/config');
+    if (!r.ok) throw new Error('Falha ao carregar config');
+    CONFIG = await r.json();
+}
+
+// ── NAVEGAÇÃO ───────────────────────────────────────────────────
+function initApp() {
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            if (tab.dataset.tab === 'pilotos') renderPilotosTabela();
+            if (tab.dataset.tab === 'etapas')  renderEtapasLista();
+        });
+    });
+    onCupChange();
+}
+
+// ── RESULTADO ───────────────────────────────────────────────────
+function getEquipeNaCup(piloto, cup) {
+    // Busca a equipe do piloto nos resultados anteriores deste cup (mais recente primeiro)
+    const cal = CONFIG.calendario[cup];
+    for (let i = cal.length - 1; i >= 0; i--) {
+        const pista = CONFIG.pistas[cal[i].pistasIdx];
+        if (!pista?.resultados?.length) continue;
+        const r = pista.resultados.find(x => x.piloto === piloto);
+        if (r?.equipe) return r.equipe;
+    }
+    // Fallback: equipe padrão do cadastro
+    return CONFIG.pilotos.find(p => p.nome === piloto)?.equipe || '';
+}
+
+function onCupChange() {
+    if (!CONFIG) return;
+    const cup = document.getElementById('sel-cup').value;
+    const cal = CONFIG.calendario[cup];
+    const sel = document.getElementById('sel-race');
+    sel.innerHTML = cal.map((e, i) => {
+        const pista = CONFIG.pistas[e.pistasIdx];
+        const feita = pista?.resultados?.length > 0;
+        return `<option value="${i}">${feita ? '✅' : '⏳'} R${e.r} — ${e.track} · ${e.date}</option>`;
+    }).join('');
+    onRaceChange();
+}
+
+function onRaceChange() {
+    if (!CONFIG) return;
+    const cup     = document.getElementById('sel-cup').value;
+    const raceIdx = parseInt(document.getElementById('sel-race').value);
+    const etapa   = CONFIG.calendario[cup][raceIdx];
+    if (!etapa) return;
+
+    const pista     = CONFIG.pistas[etapa.pistasIdx];
+    const pilotos   = CONFIG.campeonatos[cup].pilotos;
+    const resAtuais = pista?.resultados || [];
+
+    // Info bar
+    const infoBar = document.getElementById('etapa-info-bar');
+    const feita   = resAtuais.length > 0;
+    infoBar.style.display = 'flex';
+    infoBar.innerHTML = `
+        <span class="etapa-chip">Pista índice ${etapa.pistasIdx}</span>
+        <span class="etapa-chip ${feita ? 'realizada' : ''}">${feita ? '✅ Resultado já lançado' : '⏳ Sem resultado ainda'}</span>
+        ${feita ? `<span class="etapa-chip realizada">Vencedor: ${resAtuais.find(r => r.pos === 1)?.piloto || '?'}</span>` : ''}
+    `;
+
+    // Monta linhas da tabela
+    const tbody = document.getElementById('resultado-tbody');
+    tbody.innerHTML = '';
+    const maxPos = pilotos.length;
+
+    for (let pos = 1; pos <= maxPos; pos++) {
+        const resEx = resAtuais.find(r => r.pos === pos);
+        const pts   = PONTOS[pos] ?? 0;
+        const posColor = pos === 1 ? '#ffd700' : pos === 2 ? '#c0c0c0' : pos === 3 ? '#cd7f32' : 'var(--muted)';
+
+        const equipes = [...new Set(CONFIG.equipes.map(e => e.nome))];
+
+        const tr = document.createElement('tr');
+        tr.dataset.pos = pos;
+        tr.innerHTML = `
+            <td><div class="pos-badge" style="color:${posColor}">${pos}º</div></td>
+            <td>
+                <select class="sel-piloto" onchange="onPilotoChange(this)">
+                    <option value="">—</option>
+                    ${pilotos.map(p => `<option value="${p}" ${resEx?.piloto === p ? 'selected' : ''}>${p}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <select class="sel-equipe">
+                    <option value="">— auto —</option>
+                    ${equipes.map(eq => `<option value="${eq}" ${resEx?.equipe === eq ? 'selected' : ''}>${eq}</option>`).join('')}
+                </select>
+            </td>
+            <td><input type="number" class="inp-pts" value="${resEx?.pontos ?? pts}" min="0" max="50"></td>
+            <td><input type="number" class="inp-sr"  value="${resEx?.sr || ''}" placeholder="0" max="0" min="-99"></td>
+        `;
+        tbody.appendChild(tr);
+
+        // Se já tinha piloto pré-carregado, preenche equipe
+        if (resEx?.piloto && !resEx?.equipe) {
+            tr.querySelector('.sel-equipe').value = getEquipeNaCup(resEx.piloto, cup);
+        }
+    }
+
+    document.getElementById('resultado-form').style.display = 'block';
+}
+
+function onPilotoChange(sel) {
+    const tr  = sel.closest('tr');
+    const pos = parseInt(tr.dataset.pos);
+    const cup = document.getElementById('sel-cup').value;
+
+    // Auto-preenche pontos
+    tr.querySelector('.inp-pts').value = sel.value ? (PONTOS[pos] ?? 0) : 0;
+
+    // Auto-preenche equipe com histórico ou cadastro
+    const selEq = tr.querySelector('.sel-equipe');
+    if (sel.value) {
+        const eq = getEquipeNaCup(sel.value, cup);
+        if (eq) selEq.value = eq;
+    } else {
+        selEq.value = '';
+    }
+}
+
+async function salvarResultado() {
+    const cup     = document.getElementById('sel-cup').value;
+    const raceIdx = parseInt(document.getElementById('sel-race').value);
+    const etapa   = CONFIG.calendario[cup][raceIdx];
+
+    const resultados = [];
+    document.querySelectorAll('#resultado-tbody tr').forEach(tr => {
+        const piloto = tr.querySelector('.sel-piloto').value;
+        if (!piloto) return;
+        const pos    = parseInt(tr.dataset.pos);
+        const pontos = parseInt(tr.querySelector('.inp-pts').value) || 0;
+        const srRaw  = parseInt(tr.querySelector('.inp-sr').value) || 0;
+        const equipe = tr.querySelector('.sel-equipe').value || getEquipeNaCup(piloto, cup);
+        const res    = { pos, piloto, equipe, pontos };
+        if (srRaw) res.sr = srRaw;
+        resultados.push(res);
+    });
+
+    if (!resultados.length) { showAlert('Nenhum piloto selecionado.', 'err'); return; }
+
+    const r = await fetch('/api/resultado', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pistasIdx: etapa.pistasIdx, resultados })
+    });
+
+    if (r.ok) {
+        showAlert(`✅ Resultado salvo! (${resultados.length} pilotos). Vá em "Publicar" para enviar ao site.`, 'ok');
+        await carregarConfig();
+        onCupChange();
+        // restaurar seleção
+        document.getElementById('sel-race').selectedIndex = raceIdx;
+        onRaceChange();
+    } else {
+        const e = await r.json();
+        showAlert('Erro ao salvar: ' + e.error, 'err');
+    }
+}
+
+function limparResultado() {
+    document.querySelectorAll('#resultado-tbody tr').forEach(tr => {
+        tr.querySelector('.sel-piloto').value = '';
+        tr.querySelector('.sel-equipe').value = '';
+        const pos = parseInt(tr.dataset.pos);
+        tr.querySelector('.inp-pts').value = PONTOS[pos] ?? 0;
+        tr.querySelector('.inp-sr').value = '';
+    });
+}
+
+// ── VÍDEO ───────────────────────────────────────────────────────
+async function salvarVideo() {
+    const titulo    = document.getElementById('vid-titulo').value.trim();
+    const data      = document.getElementById('vid-data').value.trim();
+    const youtubeId = document.getElementById('vid-yt').value.trim();
+    if (!titulo || !youtubeId) { showAlert('Preencha o título e o YouTube ID.', 'err'); return; }
+
+    const r = await fetch('/api/video', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, data, youtubeId })
+    });
+    if (r.ok) {
+        showAlert('✅ Vídeo adicionado com sucesso!', 'ok');
+        ['vid-titulo','vid-data','vid-yt'].forEach(id => document.getElementById(id).value = '');
+        await carregarConfig();
+    } else {
+        const e = await r.json(); showAlert('Erro: ' + e.error, 'err');
+    }
+}
+
+// ── GALERIA ─────────────────────────────────────────────────────
+async function salvarGaleria() {
+    const titulo = document.getElementById('gal-titulo').value.trim();
+    const data   = document.getElementById('gal-data').value.trim();
+    const url    = document.getElementById('gal-url').value.trim();
+    if (!titulo || !url) { showAlert('Preencha o título e o caminho da imagem.', 'err'); return; }
+
+    const r = await fetch('/api/galeria', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, data, url })
+    });
+    if (r.ok) {
+        showAlert('✅ Foto adicionada à galeria!', 'ok');
+        ['gal-titulo','gal-data','gal-url'].forEach(id => document.getElementById(id).value = '');
+        await carregarConfig();
+    } else {
+        const e = await r.json(); showAlert('Erro: ' + e.error, 'err');
+    }
+}
+
+// ── PUBLICAR ────────────────────────────────────────────────────
+async function publicar() {
+    const msg    = document.getElementById('pub-msg').value.trim();
+    const status = document.getElementById('pub-status');
+    status.innerHTML = '<span class="spin"></span> Publicando...';
+    status.style.color = 'var(--muted)';
+
+    const r = await fetch('/api/publicar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ msg })
+    });
+
+    if (r.ok) {
+        status.textContent = '✅ Publicado! O site será atualizado em instantes.';
+        status.style.color = 'var(--green)';
+        document.getElementById('pub-msg').value = '';
+    } else {
+        const e = await r.json();
+        status.textContent = '❌ Erro: ' + e.error;
+        status.style.color = 'var(--red)';
+    }
+}
+
+// ── PILOTOS ─────────────────────────────────────────────────────
+function renderPilotosTabela() {
+    const tbody = document.getElementById('pilotos-tbody');
+    const cups  = CONFIG.campeonatos;
+    tbody.innerHTML = CONFIG.pilotos.map((p, i) => {
+        const inI = cups.ignition.pilotos.includes(p.nome)  ? `<span style="color:var(--cyan);">✓</span>` : `<span style="color:var(--border);">—</span>`;
+        const inE = cups.evolution.pilotos.includes(p.nome) ? `<span style="color:var(--cyan);">✓</span>` : `<span style="color:var(--border);">—</span>`;
+        const inL = cups.legacy.pilotos.includes(p.nome)    ? `<span style="color:var(--cyan);">✓</span>` : `<span style="color:var(--border);">—</span>`;
+        const cor = CONFIG.equipes.find(e => e.nome === p.equipe)?.cor || '#888';
+        return `<tr>
+            <td style="color:var(--muted);font-size:0.8rem;">${i + 1}</td>
+            <td style="font-weight:600;">${p.nome}</td>
+            <td><span style="font-size:0.8rem;padding:2px 8px;border-radius:12px;background:${cor}22;border:1px solid ${cor}55;color:${cor};">${p.equipe}</span></td>
+            <td style="text-align:center;">${inI}</td>
+            <td style="text-align:center;">${inE}</td>
+            <td style="text-align:center;">${inL}</td>
+            <td><button class="btn btn-cyan" style="padding:0.25rem 0.7rem;font-size:0.75rem;" onclick="abrirFormPiloto('${p.nome.replace(/'/g,"\\'")}')">✏</button></td>
+        </tr>`;
+    }).join('');
+}
+
+function abrirFormPiloto(nome) {
+    // Popula dropdown de equipes
+    const selEq = document.getElementById('pil-equipe');
+    selEq.innerHTML = CONFIG.equipes.map(e => `<option value="${e.nome}">${e.nome}</option>`).join('');
+
+    const form = document.getElementById('form-piloto');
+    if (nome) {
+        const p = CONFIG.pilotos.find(x => x.nome === nome);
+        document.getElementById('form-piloto-titulo').textContent = '✏ Editar Piloto';
+        document.getElementById('pil-nome-original').value = p.nome;
+        document.getElementById('pil-nome').value   = p.nome;
+        selEq.value                                  = p.equipe;
+        document.getElementById('pil-foto').value   = p.foto   || '';
+        document.getElementById('pil-foto-i').value = p.fotoIgnition  || '';
+        document.getElementById('pil-foto-e').value = p.fotoEvolution || '';
+        document.getElementById('pil-foto-l').value = p.fotoLegacy    || '';
+        document.getElementById('pil-cup-i').checked = CONFIG.campeonatos.ignition.pilotos.includes(p.nome);
+        document.getElementById('pil-cup-e').checked = CONFIG.campeonatos.evolution.pilotos.includes(p.nome);
+        document.getElementById('pil-cup-l').checked = CONFIG.campeonatos.legacy.pilotos.includes(p.nome);
+    } else {
+        document.getElementById('form-piloto-titulo').textContent = '+ Novo Piloto';
+        document.getElementById('pil-nome-original').value = '';
+        ['pil-nome','pil-foto','pil-foto-i','pil-foto-e','pil-foto-l'].forEach(id => document.getElementById(id).value = '');
+        ['pil-cup-i','pil-cup-e','pil-cup-l'].forEach(id => document.getElementById(id).checked = false);
+    }
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Auto-preenche caminhos de foto ao digitar o nome
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('pil-nome')?.addEventListener('input', e => {
+        const slug = e.target.value.split(' ')[0].toLowerCase();
+        if (!slug) return;
+        if (!document.getElementById('pil-foto').value)
+            document.getElementById('pil-foto').value = `img/drivers/${slug}.png`;
+        if (!document.getElementById('pil-foto-i').value)
+            document.getElementById('pil-foto-i').value = `img/drivers/ignition/${slug}.png`;
+        if (!document.getElementById('pil-foto-e').value)
+            document.getElementById('pil-foto-e').value = `img/drivers/evolution/${slug}.png`;
+        if (!document.getElementById('pil-foto-l').value)
+            document.getElementById('pil-foto-l').value = `img/drivers/legacy/${slug}.png`;
+    });
+});
+
+function fecharFormPiloto() {
+    document.getElementById('form-piloto').style.display = 'none';
+}
+
+async function salvarPiloto() {
+    const nomeOriginal = document.getElementById('pil-nome-original').value;
+    const piloto = {
+        nome:          document.getElementById('pil-nome').value.trim(),
+        equipe:        document.getElementById('pil-equipe').value,
+        foto:          document.getElementById('pil-foto').value.trim(),
+        fotoIgnition:  document.getElementById('pil-foto-i').value.trim(),
+        fotoEvolution: document.getElementById('pil-foto-e').value.trim(),
+        fotoLegacy:    document.getElementById('pil-foto-l').value.trim(),
+    };
+    if (!piloto.nome) { showAlert('O nome do piloto é obrigatório.', 'err'); return; }
+
+    const cups = ['ignition','evolution','legacy'].filter((c,i) =>
+        document.getElementById(['pil-cup-i','pil-cup-e','pil-cup-l'][i]).checked
+    );
+
+    const isEdit = !!nomeOriginal;
+    const r = await fetch('/api/piloto', {
+        method:  isEdit ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(isEdit ? { nomeOriginal, piloto, cups } : { piloto, cups })
+    });
+
+    if (r.ok) {
+        showAlert(`✅ Piloto ${isEdit ? 'atualizado' : 'cadastrado'} com sucesso!`, 'ok');
+        await carregarConfig();
+        renderPilotosTabela();
+        fecharFormPiloto();
+    } else {
+        const e = await r.json(); showAlert('Erro: ' + e.error, 'err');
+    }
+}
+
+// ── ETAPAS ──────────────────────────────────────────────────────
+const CUP_LABELS = { ignition: 'Ignition CUP', evolution: 'Evolution CUP', legacy: 'Legacy CUP' };
+
+function renderEtapasLista() {
+    const container = document.getElementById('etapas-lista');
+    container.innerHTML = ['ignition', 'evolution', 'legacy'].map(cup => {
+        const cal = CONFIG.calendario[cup];
+        const rows = cal.map((e, calIdx) => {
+            const pista  = CONFIG.pistas[e.pistasIdx];
+            const feita  = pista?.resultados?.length > 0;
+            const winner = feita ? pista.resultados.find(r => r.pos === 1)?.piloto || '' : '';
+            return `<tr>
+                <td style="color:var(--muted);font-size:0.8rem;width:40px;">R${e.r}</td>
+                <td style="font-weight:600;">${e.track}</td>
+                <td style="color:var(--muted);font-size:0.85rem;">${e.date}</td>
+                <td><span style="font-size:0.75rem;padding:2px 7px;border-radius:10px;
+                    background:${e.type==='Extra'?'rgba(255,140,0,0.15)':'rgba(0,243,255,0.07)'};
+                    border:1px solid ${e.type==='Extra'?'rgba(255,140,0,0.4)':'rgba(0,243,255,0.25)'};
+                    color:${e.type==='Extra'?'#ff8c00':'var(--muted)'};">${e.type}</span></td>
+                <td>${feita
+                    ? `<span style="font-size:0.8rem;color:var(--green);">✅ ${winner}</span>`
+                    : `<span style="font-size:0.8rem;color:var(--muted);">⏳ Pendente</span>`}</td>
+                <td><button class="btn btn-cyan" style="padding:0.2rem 0.6rem;font-size:0.75rem;"
+                    onclick="abrirFormEtapa('${cup}', ${calIdx}, ${e.pistasIdx})">✏</button></td>
+            </tr>`;
+        }).join('');
+        return `<div style="margin-bottom:1.5rem;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:0.85rem;color:var(--muted);
+                text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;padding-bottom:0.4rem;
+                border-bottom:1px solid var(--border);">${CUP_LABELS[cup]}</div>
+            <table class="res-table"><tbody>${rows}</tbody></table>
+        </div>`;
+    }).join('');
+}
+
+function abrirFormEtapa(cup, calIdx, pistasIdx) {
+    const form = document.getElementById('form-etapa');
+    document.getElementById('eta-pistas-idx').value = pistasIdx ?? '';
+    document.getElementById('eta-cal-idx').value    = calIdx    ?? '';
+
+    if (cup !== null && calIdx !== null) {
+        // Edição
+        document.getElementById('form-etapa-titulo').textContent = '✏ Editar Etapa';
+        const cal   = CONFIG.calendario[cup][calIdx];
+        const pista = CONFIG.pistas[pistasIdx] || {};
+        document.getElementById('eta-cup').value         = cup;
+        document.getElementById('eta-r').value           = cal.r;
+        document.getElementById('eta-date').value        = cal.date;
+        document.getElementById('eta-track').value       = cal.track;
+        document.getElementById('eta-type').value        = cal.type || 'Oficial';
+        document.getElementById('eta-nome').value        = pista.nome        || '';
+        document.getElementById('eta-pais').value        = pista.pais        || '';
+        document.getElementById('eta-imagem').value      = pista.imagem      || '';
+        document.getElementById('eta-comprimento').value = pista.comprimento || '';
+        document.getElementById('eta-curvas').value      = pista.curvas      || '';
+        document.getElementById('eta-drs').value         = pista.drs         || '';
+    } else {
+        // Nova etapa
+        document.getElementById('form-etapa-titulo').textContent = '+ Nova Etapa';
+        ['eta-r','eta-date','eta-track','eta-pais','eta-nome','eta-imagem','eta-comprimento','eta-curvas','eta-drs']
+            .forEach(id => document.getElementById(id).value = '');
+        document.getElementById('eta-cup').value  = 'ignition';
+        document.getElementById('eta-type').value = 'Oficial';
+        // Sugere próximo número
+        const cup0 = 'ignition';
+        document.getElementById('eta-r').value = (CONFIG.calendario[cup0].length + 1);
+    }
+
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function fecharFormEtapa() {
+    document.getElementById('form-etapa').style.display = 'none';
+}
+
+async function salvarEtapa() {
+    const pistasIdxRaw = document.getElementById('eta-pistas-idx').value;
+    const calIdxRaw    = document.getElementById('eta-cal-idx').value;
+    const cup          = document.getElementById('eta-cup').value;
+    const isEdit       = pistasIdxRaw !== '';
+
+    const pista = {
+        nome:         document.getElementById('eta-nome').value.trim(),
+        pais:         document.getElementById('eta-pais').value.trim(),
+        imagem:       document.getElementById('eta-imagem').value.trim(),
+        comprimento:  document.getElementById('eta-comprimento').value.trim(),
+        curvas:       parseInt(document.getElementById('eta-curvas').value) || 0,
+        drs:          parseInt(document.getElementById('eta-drs').value)    || 0,
+    };
+    const calendario = {
+        r:     parseInt(document.getElementById('eta-r').value),
+        track: document.getElementById('eta-track').value.trim(),
+        date:  document.getElementById('eta-date').value.trim(),
+        type:  document.getElementById('eta-type').value,
+    };
+    if (!calendario.track || !calendario.date) {
+        showAlert('Nome da pista e data são obrigatórios.', 'err'); return;
+    }
+
+    const body = isEdit
+        ? { pistasIdx: parseInt(pistasIdxRaw), pista, cup, calIdx: parseInt(calIdxRaw), calendario }
+        : { cup, pista, calendario };
+
+    const r = await fetch('/api/etapa', {
+        method:  isEdit ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(body)
+    });
+
+    if (r.ok) {
+        showAlert(`✅ Etapa ${isEdit ? 'atualizada' : 'cadastrada'} com sucesso!`, 'ok');
+        await carregarConfig();
+        renderEtapasLista();
+        fecharFormEtapa();
+    } else {
+        const e = await r.json(); showAlert('Erro: ' + e.error, 'err');
+    }
+}
+
+// ── UTILITÁRIOS ─────────────────────────────────────────────────
+function showAlert(msg, type) {
+    const el = document.getElementById('alert-global');
+    el.className = `alert alert-${type}`;
+    el.textContent = msg;
+    el.style.display = 'block';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.display = 'none'; }, 6000);
+}
+
+// ── INIT ────────────────────────────────────────────────────────
+(async () => {
+    const r = await fetch('/api/check');
+    const { auth } = await r.json();
+    if (auth) {
+        await carregarConfig();
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        initApp();
+    }
+})();
+</script>
+</body>
+</html>
