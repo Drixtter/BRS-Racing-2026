@@ -1331,7 +1331,7 @@ const CONFIG = {
           "piloto": "Nathan Nadadanad03",
           "equipe": "Scuderia Ferrari",
           "pontos": 25,
-          "sr": -2
+          "sr": -1
         },
         {
           "pos": 3,
