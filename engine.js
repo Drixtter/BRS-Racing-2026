@@ -28,7 +28,8 @@ const BRS = (() => {
         foto:   fotoPiloto(nome, cup),
         cor:    "#888",
         points: 0,
-        wins:   0
+        wins:   0,
+        sr:     0
       };
     });
 
@@ -56,6 +57,14 @@ const BRS = (() => {
         acc[nome].equipe = p.equipe || "—";
         acc[nome].cor    = _equipeMap[p.equipe]?.cor || "#888";
       }
+    });
+
+    // SR: soma apenas das últimas 3 corridas com resultado (as mais antigas expiram)
+    const completedIdxs = indices.filter(idx => CONFIG.pistas[idx]?.resultados.length > 0);
+    completedIdxs.slice(-3).forEach(idx => {
+      CONFIG.pistas[idx].resultados.forEach(r => {
+        if (acc[r.piloto] !== undefined && r.sr) acc[r.piloto].sr += r.sr;
+      });
     });
 
     // Ordena: pontos desc → vitórias desc → ordem do array de pilotos do campeonato

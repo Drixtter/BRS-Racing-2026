@@ -180,7 +180,7 @@
         .modal-cup-title { font-family: 'Rajdhani', sans-serif; color: var(--neon-cyan); font-size: 1rem; text-transform: uppercase; margin: 1rem 0 0.5rem; border-left: 3px solid var(--neon-cyan); padding-left: 10px; }
         .modal-cup-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 0.5rem; }
         .modal-cup-table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .modal-cup-table td:last-child { text-align: right; color: var(--neon-cyan); font-weight: 700; }
+        .modal-cup-table td:nth-last-child(2) { text-align: right; color: var(--neon-cyan); font-weight: 700; }
         .modal-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
         .modal-tab-btn { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 0.5rem 0.4rem; font-family: 'Titillium Web', sans-serif; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
         .modal-tab-btn:hover { border-color: var(--neon-cyan); color: #fff; }
@@ -188,6 +188,15 @@
         .modal-tab-panel { display: none; }
         .modal-tab-panel.active { display: block; }
         .driver-box { cursor: pointer; }
+
+        /* ── CABEÇALHOS DE TABELA DE CLASSIFICAÇÃO ──────────── */
+        .cup-th { font-weight: 400; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 0.5rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+        /* ── SAFETY RATING ──────────────────────────────────── */
+        .sr-col      { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--neon-red); text-align: right; font-size: 1rem; white-space: nowrap; text-shadow: 0 0 6px rgba(255,68,68,0.5); }
+        .sr-col.vazio { color: var(--text-muted); text-shadow: none; }
+        .sr-header   { color: var(--neon-red) !important; }
+        .driver-sr   { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--neon-red); text-shadow: 0 0 6px rgba(255,68,68,0.5); letter-spacing: 0.5px; }
 
         /* ── DIFERENÇA PARA O LÍDER ──────────────────────────── */
         .gap-col { font-size: 0.78rem; color: var(--text-muted); text-align: right; white-space: nowrap; }
@@ -393,14 +402,18 @@
                 `Atualizado em ${d}/${m}/${t.getFullYear()}`;
         }
 
-        function cardTable(title, labels, tbodyId) {
-            const colClasses = { 'V/P': 'col-vp', 'Gap': 'col-gap' };
+        function cardTable(title, labels, tbodyId, theadRow) {
+            const colClasses = { 'V/P': 'col-vp', 'Gap': 'col-gap', 'SR': 'sr-header' };
+            const headerLabels = labels.length
+                ? `<div class="header-labels">${labels.map(l => `<span class="${colClasses[l] ?? ''}">${l}</span>`).join('')}</div>`
+                : '';
+            const thead = theadRow ? `<thead>${theadRow}</thead>` : '';
             return `<div class="card"><div class="card-inner">
                 <div class="card-header">
                     <h2>${title}</h2>
-                    <div class="header-labels">${labels.map(l => `<span class="${colClasses[l] ?? ''}">${l}</span>`).join('')}</div>
+                    ${headerLabels}
                 </div>
-                <table><tbody id="${tbodyId}"></tbody></table>
+                <table>${thead}<tbody id="${tbodyId}"></tbody></table>
             </div></div>`;
         }
 
@@ -483,15 +496,24 @@
                 const etapas = BRS.calendario(cup.id).filter(e => e.realizado);
                 totalEtapas += etapas.length;
 
+                // Índices das últimas 3 corridas com resultado (SR ativo)
+                const activeSet = new Set(etapas.slice(-3).map(e => e.pistasIdx));
+
                 const pos  = drivers.indexOf(d) + 1;
                 const rows = etapas.map(e => {
                     const pista = BRS.pistas()[e.pistasIdx];
                     const res   = pista?.resultados.find(r => r.piloto === nome);
                     if (!res) return '';
+                    const srVal  = res.sr || 0;
+                    const ativo  = activeSet.has(e.pistasIdx);
+                    const srStyle = srVal && ativo
+                        ? 'color:var(--neon-red);font-weight:700;text-shadow:0 0 6px rgba(255,68,68,0.5);'
+                        : 'color:var(--text-muted);font-weight:400;';
                     return `<tr>
                         <td style="color:var(--text-muted);">R${e.r} ${e.track}</td>
                         <td class="pos-col ${getRankClass(res.pos-1)}" style="text-align:center;">${res.pos}º</td>
                         <td>${res.pontos}</td>
+                        <td style="text-align:right;font-family:'Rajdhani',sans-serif;font-size:0.9rem;${srStyle}">${srVal || '—'}</td>
                     </tr>`;
                 }).join('');
 
@@ -531,8 +553,9 @@
                                <td style="color:var(--text-muted);font-size:0.75rem;text-transform:uppercase;">Etapa</td>
                                <td style="color:var(--text-muted);font-size:0.75rem;text-align:center;">Pos</td>
                                <td style="color:var(--text-muted);font-size:0.75rem;text-align:right;">Pts</td>
+                               <td style="color:var(--neon-red);font-size:0.75rem;text-align:right;text-transform:uppercase;opacity:0.8;">SR</td>
                            </tr></thead>
-                           <tbody>${item.rows || '<tr><td colspan="3" style="opacity:.4;padding:0.5rem 0;">Sem resultados ainda</td></tr>'}</tbody>
+                           <tbody>${item.rows || '<tr><td colspan="4" style="opacity:.4;padding:0.5rem 0;">Sem resultados ainda</td></tr>'}</tbody>
                        </table>`
                     : `<p style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;">Piloto não inscrito neste campeonato.</p>`;
 
@@ -595,12 +618,27 @@
             { id: 'legacy',    label: 'Legacy'    },
         ];
 
+        const theadPilotos = `<tr>
+            <th class="cup-th pos-col"></th>
+            <th class="cup-th">Piloto</th>
+            <th class="cup-th team-col">Equipe</th>
+            <th class="cup-th col-vp" style="text-align:center;">V</th>
+            <th class="cup-th" style="text-align:right;color:var(--neon-red);opacity:0.8;">SR</th>
+            <th class="cup-th pts-col">Pts</th>
+            <th class="cup-th col-gap" style="text-align:right;">Gap</th>
+        </tr>`;
+        const theadEquipes = `<tr>
+            <th class="cup-th pos-col"></th>
+            <th class="cup-th" style="width:75%;">Equipe</th>
+            <th class="cup-th pts-col">Pts</th>
+        </tr>`;
+
         function buildCupSections() {
             CUPS.forEach(cup => {
                 document.getElementById(`section-${cup.id}`).innerHTML =
                     `<div class="panel-grid">
-                        ${cardTable(`🏆 ${cup.label}: Pilotos`, ['Equipe','V/P','Pts','Gap'], `tbody-${cup.id}-pilotos`)}
-                        ${cardTable(`🏁 ${cup.label}: Equipes`, ['Pts'],          `tbody-${cup.id}-equipes`)}
+                        ${cardTable(`🏆 ${cup.label}: Pilotos`, [], `tbody-${cup.id}-pilotos`, theadPilotos)}
+                        ${cardTable(`🏁 ${cup.label}: Equipes`, [], `tbody-${cup.id}-equipes`, theadEquipes)}
                     </div>`;
             });
         }
@@ -640,6 +678,7 @@
                         <td class="name-col">${d.nome}</td>
                         <td class="team-col" style="font-size:0.8rem;">${d.equipe}</td>
                         <td class="col-vp" style="text-align:center; font-size:0.8rem; white-space:nowrap; padding:0.8rem 0.4rem;">${vit}</td>
+                        <td class="sr-col${d.sr ? '' : ' vazio'}">${d.sr ? d.sr : '—'}</td>
                         <td class="pts-col">${d.points}</td>
                         <td class="gap-col col-gap">${gap}</td>
                     </tr>`;
@@ -709,7 +748,10 @@
                 <div class="driver-box" onclick="abrirPerfil('${d.nome}')" title="Ver perfil de ${d.nome}">
                     <div class="driver-header">
                         <div class="driver-rank ${getRankClass(i)}">${i+1}º</div>
-                        <div class="driver-points">${d.points} PTS</div>
+                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                            ${d.sr ? `<div class="driver-sr">${d.sr} SR</div>` : ''}
+                            <div class="driver-points">${d.points} PTS</div>
+                        </div>
                     </div>
                     <div class="driver-content">
                         <div class="driver-photo-container" style="border-color:${d.cor}; box-shadow: 0 0 8px ${d.cor}66;">
@@ -754,11 +796,17 @@
                                     <th class="pos-col">Pos</th>
                                     <th>Piloto</th>
                                     <th class="pts-col" style="text-align:right;">Pts</th>
+                                    <th style="text-align:right;font-weight:400;font-size:0.8rem;color:var(--neon-red);opacity:0.8;text-transform:uppercase;">SR</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 ${pista.resultados.length > 0
-                                    ? pista.resultados.map(res => `
+                                    ? pista.resultados.map(res => {
+                                        const srVal = res.sr || 0;
+                                        const srStyle = srVal
+                                            ? 'color:var(--neon-red);font-weight:700;text-shadow:0 0 6px rgba(255,68,68,0.5);'
+                                            : 'color:var(--text-muted);font-weight:400;';
+                                        return `
                                         <tr>
                                             <td class="pos-col ${getRankClass(res.pos-1)}">${res.pos}</td>
                                             <td class="name-col" style="font-size:0.85rem;">
@@ -766,8 +814,10 @@
                                                 <span style="display:block; font-size:0.75rem; color:var(--text-muted); font-weight:400;">${res.equipe}</span>
                                             </td>
                                             <td class="pts-col">${res.pontos}</td>
-                                        </tr>`).join('')
-                                    : `<tr><td colspan="3" style="text-align:center;opacity:.5;padding:1rem;">Corrida ainda não realizada</td></tr>`
+                                            <td style="text-align:right;font-family:'Rajdhani',sans-serif;font-size:0.9rem;${srStyle}">${srVal || '—'}</td>
+                                        </tr>`;
+                                    }).join('')
+                                    : `<tr><td colspan="4" style="text-align:center;opacity:.5;padding:1rem;">Corrida ainda não realizada</td></tr>`
                                 }
                             </tbody>
                         </table>

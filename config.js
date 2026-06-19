@@ -4,7 +4,10 @@
 // ║  ✅ COMO ATUALIZAR APÓS CADA ETAPA:                          ║
 // ║  1. Encontre a pista pelo nome no array CONFIG.pistas        ║
 // ║  2. Preencha o array "resultados" com pos, piloto, pontos    ║
-// ║  3. Pronto. Pontos e classificações são calculados sozinhos  ║
+// ║  3. Se houve SR, adicione o campo sr: -2 no resultado        ║
+// ║     Ex: { pos:3, piloto:"X", pontos:21, sr:-2 }             ║
+// ║     SR expira automaticamente após 3 corridas                ║
+// ║  4. Pronto. Pontos e classificações são calculados sozinhos  ║
 // ╚══════════════════════════════════════════════════════════════╝
 
 const CONFIG = {
@@ -430,13 +433,13 @@ const CONFIG = {
       comprimento: "4.657 km", curvas: 16, drs: 2,
       resultados: [
         { pos:  1, piloto: "Luis Syaazz1",              equipe: "Scuderia Ferrari", pontos: 30 },
-        { pos:  2, piloto: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", pontos: 25 },
-        { pos:  3, piloto: "Renato Renato.R2Oliveira",  equipe: "McLaren",          pontos: 21 },
+        { pos:  2, piloto: "Nathan Nadadanad03",        equipe: "Scuderia Ferrari", pontos: 25, sr: -1 },
+        { pos:  3, piloto: "Renato Renato.R2Oliveira",  equipe: "McLaren",          pontos: 21, sr: -2},
         { pos:  4, piloto: "Calixto MDR-CALIXTO84",     equipe: "Aston Martin",     pontos: 18 },
-        { pos:  5, piloto: "Cristian Cris",             equipe: "RB",               pontos:  0 },
+        { pos:  5, piloto: "Cristian Cris",             equipe: "RB",               pontos:  0, sr: -1 },
         { pos:  6, piloto: "Frank Violets",             equipe: "Mercedes-AMG",     pontos:  0 },
         { pos:  7, piloto: "Gustavo Guga",              equipe: "Red Bull Racing",  pontos:  0 },
-        { pos:  8, piloto: "Leal Flushh",               equipe: "Mercedes-AMG",     pontos:  0 },
+        { pos:  8, piloto: "Leal Flushh",               equipe: "Mercedes-AMG",     pontos:  0, sr: -4 },
         { pos:  9, piloto: "Deivid galudao1",           equipe: "RB",               pontos:  0 },
         { pos: 10, piloto: "Rafael Rafael94_Sam",       equipe: "Aston Martin",     pontos:  0 },
         { pos: 11, piloto: "Julian JuScata",            equipe: "Williams",         pontos:  0 },
