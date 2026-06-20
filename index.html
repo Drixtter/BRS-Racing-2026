@@ -165,7 +165,8 @@
         /* cabeçalho e rodapé ficam em largura normal; só o carrossel vai full-bleed */
         .gal-header      { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 1rem 1rem; max-width: 1400px; margin: 0 auto; }
         .gal-header h2   { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: #fff; text-transform: uppercase; }
-        .galeria-outer   { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
+        .galeria-outer   { position: relative; }
+        @media (max-width: 1400px) { .galeria-outer { width: 100vw; margin-left: calc(-50vw + 50%); } }
         .galeria-clip    { overflow: hidden; }
         .galeria-track   { display: flex; transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94); will-change: transform; }
         .galeria-slide   { flex: 0 0 100%; cursor: zoom-in; user-select: none; background: #08090b; display: flex; align-items: center; justify-content: center; }
