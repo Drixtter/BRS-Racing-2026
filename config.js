@@ -286,26 +286,9 @@ const CONFIG = {
     "legacy": {
       "nome": "Legacy CUP",
       "pilotos": [
-        "Nathan Nadadanad03",
-        "Cristian Cris",
-        "Renato Renato.R2Oliveira",
         "Adriano Drixtter",
-        "Gustavo Guga",
-        "João Ferrigno",
-        "Julian JuScata",
-        "Fernando procopiodearruda",
-        "Rafael Rafael94_Sam",
-        "Filipi filipialves",
-        "Leal Flushh",
-        "Frank Violets",
-        "Lucas LucasCarnevali",
-        "Diego Dominguesdc13",
-        "Gabriel Cruz",
-        "Vitor Hugo",
-        "Fabio",
-        "Rodrigo Pio197",
-        "Luis Syaazz1",
-        "João Victor"
+        "Renato Renato.R2Oliveira",
+        "Nathan Nadadanad03"
       ]
     }
   },
@@ -314,84 +297,84 @@ const CONFIG = {
       {
         "r": 1,
         "track": "Austrália",
-        "date": "Realizado em 08/03",
+        "date": "08/03",
         "type": "Oficial",
         "pistasIdx": 0
       },
       {
         "r": 2,
         "track": "China",
-        "date": "Realizado em 15/03",
+        "date": "15/03",
         "type": "Oficial",
         "pistasIdx": 1
       },
       {
         "r": 3,
         "track": "EUA - Austin",
-        "date": "Realizado em 22/03",
+        "date": "22/03",
         "type": "Extra",
         "pistasIdx": 2
       },
       {
         "r": 4,
         "track": "Japão",
-        "date": "Realizado em 29/03",
+        "date": "29/03",
         "type": "Oficial",
         "pistasIdx": 3
       },
       {
         "r": 5,
         "track": "Bahrein",
-        "date": "Realizado em 12/04",
+        "date": "12/04",
         "type": "Oficial",
         "pistasIdx": 4
       },
       {
         "r": 6,
         "track": "Arábia Saudita",
-        "date": "Realizado em 19/04",
+        "date": "19/04",
         "type": "Oficial",
         "pistasIdx": 5
       },
       {
         "r": 7,
         "track": "Las Vegas",
-        "date": "Realizado em 26/04",
+        "date": "26/04",
         "type": "Extra",
         "pistasIdx": 6
       },
       {
         "r": 8,
         "track": "Miami",
-        "date": "Realizado em 03/05",
+        "date": "03/05",
         "type": "Oficial",
         "pistasIdx": 7
       },
       {
         "r": 9,
         "track": "Brasil",
-        "date": "Realizado em 10/05",
+        "date": "10/05",
         "type": "Extra",
         "pistasIdx": 8
       },
       {
         "r": 10,
         "track": "Itália - Monza",
-        "date": "Realizado em 17/05",
+        "date": "17/05",
         "type": "Extra",
         "pistasIdx": 9
       },
       {
         "r": 11,
         "track": "Canadá",
-        "date": "Realizado em 24/05",
+        "date": "24/05",
         "type": "Oficial",
         "pistasIdx": 10
       },
       {
         "r": 12,
         "track": "Mônaco",
-        "date": "Realizado em 31/05",
+        "date": "31/05",
         "type": "Oficial",
         "pistasIdx": 11
       }
