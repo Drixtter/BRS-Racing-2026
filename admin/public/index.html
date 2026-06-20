@@ -189,14 +189,22 @@
         <!-- ── GALERIA ────────────────────────────────── -->
         <div class="section" id="tab-galeria">
             <div class="card">
-                <div class="card-title">📸 Adicionar Foto à Galeria</div>
-                <label>Título</label>
-                <input type="text" id="gal-titulo" placeholder="Ex: McLaren Team">
-                <label>Data</label>
-                <input type="text" id="gal-data" placeholder="Ex: Jun/2026">
-                <label>Caminho da imagem <span style="color:var(--muted);text-transform:none;font-size:0.8rem;">(relativo à raiz do projeto)</span></label>
-                <input type="text" id="gal-url" placeholder="img/galeria/McLaren_Team.png">
-                <button class="btn btn-cyan btn-full" onclick="salvarGaleria()">💾 Adicionar Foto</button>
+                <div class="card-title">📸 Galeria — Sincronização Automática</div>
+                <p style="color:var(--muted);font-size:0.88rem;line-height:1.6;margin-bottom:1.5rem;">
+                    Coloque as imagens na pasta <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px;">img/galeria/</code> do projeto
+                    e clique em <strong style="color:var(--cyan);">Sincronizar</strong>. O site exibirá automaticamente todas as imagens encontradas, sem cadastro manual.
+                    <br><span style="font-size:0.8rem;color:rgba(139,155,180,0.7);">Formatos aceitos: .jpg .jpeg .png .avif .webp .gif</span>
+                </p>
+                <button class="btn btn-cyan" onclick="escanearGaleria()" id="btn-scan">🔍 Escanear Pasta</button>
+
+                <div id="gal-scan-result" style="display:none;margin-top:1.5rem;">
+                    <div style="font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.8rem;">
+                        Imagens encontradas: <span id="gal-scan-count" style="color:var(--cyan);font-weight:700;"></span>
+                    </div>
+                    <div id="gal-thumbs" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.5rem;"></div>
+                    <button class="btn btn-green" onclick="sincronizarGaleria()" id="btn-sync">✅ Sincronizar — Publicar manifest.json</button>
+                    <div id="gal-sync-status" style="font-size:0.88rem;margin-top:0.8rem;min-height:1.2rem;"></div>
+                </div>
             </div>
         </div>
 
@@ -606,23 +614,52 @@ async function salvarVideo() {
 }
 
 // ── GALERIA ─────────────────────────────────────────────────────
-async function salvarGaleria() {
-    const titulo = document.getElementById('gal-titulo').value.trim();
-    const data   = document.getElementById('gal-data').value.trim();
-    const url    = document.getElementById('gal-url').value.trim();
-    if (!titulo || !url) { showAlert('Preencha o título e o caminho da imagem.', 'err'); return; }
+async function escanearGaleria() {
+    const btn = document.getElementById('btn-scan');
+    btn.disabled = true;
+    btn.textContent = '⏳ Escaneando...';
 
-    const r = await fetch('/api/galeria', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titulo, data, url })
-    });
+    const r = await fetch('/api/galeria/scan');
+    btn.disabled = false;
+    btn.textContent = '🔍 Escanear Pasta';
+
+    if (!r.ok) { showAlert('Erro ao escanear pasta.', 'err'); return; }
+    const { files, aviso } = await r.json();
+
+    if (aviso) { showAlert(aviso, 'err'); return; }
+
+    document.getElementById('gal-scan-count').textContent = files.length;
+    document.getElementById('gal-thumbs').innerHTML = files.length
+        ? files.map(f => `
+            <div style="position:relative;width:90px;height:70px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,243,255,0.2);">
+                <img src="/${f}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+                <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);font-size:0.6rem;color:#aaa;padding:2px 4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${f.split('/').pop()}</div>
+            </div>`).join('')
+        : '<span style="color:var(--muted);font-size:0.88rem;">Nenhuma imagem encontrada na pasta.</span>';
+
+    document.getElementById('gal-scan-result').style.display = 'block';
+    document.getElementById('btn-sync').style.display = files.length ? 'inline-flex' : 'none';
+    document.getElementById('gal-sync-status').textContent = '';
+}
+
+async function sincronizarGaleria() {
+    const btn = document.getElementById('btn-sync');
+    btn.disabled = true;
+    btn.textContent = '⏳ Sincronizando...';
+
+    const r = await fetch('/api/galeria/sync', { method: 'POST' });
+    btn.disabled = false;
+    btn.textContent = '✅ Sincronizar — Publicar manifest.json';
+
+    const status = document.getElementById('gal-sync-status');
     if (r.ok) {
-        showAlert('✅ Foto adicionada à galeria!', 'ok');
-        ['gal-titulo','gal-data','gal-url'].forEach(id => document.getElementById(id).value = '');
-        await carregarConfig();
+        const { total } = await r.json();
+        status.style.color = 'var(--green)';
+        status.textContent = `✅ manifest.json gerado com ${total} imagem(ns). Vá em "Publicar" para enviar ao site.`;
     } else {
-        const e = await r.json(); showAlert('Erro: ' + e.error, 'err');
+        const e = await r.json();
+        status.style.color = 'var(--red)';
+        status.textContent = '❌ Erro: ' + e.error;
     }
 }
 

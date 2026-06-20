@@ -161,6 +161,37 @@
         tbody tr:nth-child(10) { animation-delay: 0.30s; }
         tbody tr:nth-child(n+11) { animation-delay: 0.33s; }
 
+        /* ── GALERIA CARROSSEL ───────────────────────────────── */
+        .galeria-outer   { position: relative; }
+        .galeria-clip    { overflow: hidden; border-radius: 10px; }
+        .galeria-track   { display: flex; transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94); will-change: transform; }
+        .galeria-slide   { flex: 0 0 100%; cursor: zoom-in; user-select: none; }
+        .galeria-slide img { width: 100%; height: 500px; object-fit: cover; object-position: center; display: block; }
+        .galeria-arrow   { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.18); color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 1.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 2; line-height: 1; }
+        .galeria-arrow:hover { background: rgba(0,243,255,0.18); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0,243,255,0.3); }
+        .galeria-prev    { left: 10px; }
+        .galeria-next    { right: 10px; }
+        .galeria-footer  { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-top: 0.9rem; min-height: 20px; }
+        .galeria-counter { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; color: var(--text-muted); min-width: 48px; text-align: center; }
+        .galeria-dots    { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; }
+        .gal-dot         { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.18); border: none; cursor: pointer; padding: 0; transition: all 0.2s; flex-shrink: 0; }
+        .gal-dot.active  { background: var(--neon-cyan); box-shadow: 0 0 6px rgba(0,243,255,0.6); transform: scale(1.3); }
+        .gal-progress    { width: 180px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+        .gal-progress-fill { height: 100%; background: var(--neon-cyan); border-radius: 2px; transition: width 0.45s cubic-bezier(0.25,0.46,0.45,0.94); }
+        /* Lightbox */
+        .gal-lightbox    { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 9999; display: none; align-items: center; justify-content: center; animation: galLbIn 0.2s; }
+        .gal-lightbox.open { display: flex; }
+        .gal-lightbox img { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: 6px; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
+        .gal-lb-close    { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; color: rgba(255,255,255,0.55); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
+        .gal-lb-close:hover { color: #fff; }
+        .gal-lb-nav      { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: 2.2rem; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .gal-lb-nav:hover { background: rgba(255,255,255,0.18); }
+        .gal-lb-prev     { left: 1rem; }
+        .gal-lb-next     { right: 1rem; }
+        .gal-lb-info     { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; color: rgba(255,255,255,0.4); white-space: nowrap; }
+        @keyframes galLbIn { from { opacity:0; } to { opacity:1; } }
+        @media (max-width: 600px) { .galeria-slide img { height: 240px; } .galeria-arrow { width: 36px; height: 36px; font-size: 1.2rem; } .gal-lb-nav { width: 40px; height: 40px; font-size: 1.6rem; } }
+
         /* ── MODAL DE PERFIL DO PILOTO ───────────────────────── */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 0.4rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
         .modal-overlay.open { opacity: 1; pointer-events: auto; }
@@ -874,22 +905,151 @@
             ).join('');
         }
 
-        // ── GALERIA ──────────────────────────────────────────────
-        function renderGaleria() {
+        // ── GALERIA CARROSSEL ─────────────────────────────────────
+        let GAL = null;
+
+        async function renderGaleria() {
             const container = document.getElementById('galeria-container');
             if (!container) return;
-            container.innerHTML = BRS.galeria().map(item => `
+
+            // Tenta manifest.json gerado pelo admin (sem cadastro manual)
+            let srcs = [];
+            try {
+                const r = await fetch('img/galeria/manifest.json?v=' + Date.now());
+                if (r.ok) srcs = await r.json();
+            } catch {}
+
+            // Fallback: CONFIG.galeria (compatibilidade com dados antigos)
+            if (!srcs.length) srcs = BRS.galeria().map(g => g.url).filter(Boolean);
+
+            if (!srcs.length) {
+                container.innerHTML = `<div class="card"><div class="card-inner" style="text-align:center;padding:3rem 1rem;">
+                    <div style="font-size:2.5rem;margin-bottom:0.8rem;">📸</div>
+                    <div style="color:var(--text-muted);">Nenhuma imagem na galeria ainda.</div>
+                </div></div>`;
+                return;
+            }
+
+            const total   = srcs.length;
+            const useDots = total <= 16;
+
+            container.innerHTML = `
                 <div class="card"><div class="card-inner">
                     <div class="card-header">
-                        <h2>${item.titulo || 'Foto'}</h2>
-                        <div class="header-labels">${item.data || ''}</div>
+                        <h2>📸 Galeria</h2>
+                        <div class="header-labels" id="gal-counter">1 / ${total}</div>
                     </div>
-                    <div style="text-align:center; padding:1rem;">
-                        <img src="${item.url}" alt="${item.titulo || 'Imagem'}"
-                             style="max-width:100%; border-radius:8px; box-shadow:0 0 10px rgba(0,243,255,0.2);">
+                    <div class="galeria-outer">
+                        <div class="galeria-clip" id="gal-clip">
+                            <div class="galeria-track" id="gal-track">
+                                ${srcs.map((src, i) => `
+                                    <div class="galeria-slide" onclick="galeriaAbrirLb(${i})">
+                                        <img src="${src}" alt="Foto ${i + 1}" loading="${i < 2 ? 'eager' : 'lazy'}">
+                                    </div>`).join('')}
+                            </div>
+                        </div>
+                        ${total > 1 ? `
+                            <button class="galeria-arrow galeria-prev" onclick="GAL.nav(-1)" aria-label="Anterior">&#8249;</button>
+                            <button class="galeria-arrow galeria-next" onclick="GAL.nav(1)"  aria-label="Próxima">&#8250;</button>
+                        ` : ''}
                     </div>
-                </div></div>`
-            ).join('');
+                    ${total > 1 ? `
+                    <div class="galeria-footer">
+                        ${useDots
+                            ? `<div class="galeria-dots" id="gal-dots">
+                                ${srcs.map((_, i) => `<button class="gal-dot${i === 0 ? ' active' : ''}" onclick="GAL.goTo(${i})" aria-label="Foto ${i + 1}"></button>`).join('')}
+                               </div>`
+                            : `<div class="gal-progress"><div class="gal-progress-fill" id="gal-fill" style="width:${(1/total*100).toFixed(1)}%"></div></div>`
+                        }
+                        <div class="galeria-counter" id="gal-counter-foot">1 / ${total}</div>
+                    </div>` : ''}
+                </div></div>`;
+
+            // Lightbox — cria apenas uma vez no body
+            if (!document.getElementById('gal-lightbox')) {
+                const lb = document.createElement('div');
+                lb.id        = 'gal-lightbox';
+                lb.className = 'gal-lightbox';
+                lb.innerHTML = `
+                    <button class="gal-lb-close" onclick="galeriaFecharLb()" aria-label="Fechar">✕</button>
+                    <button class="gal-lb-nav gal-lb-prev" onclick="event.stopPropagation();GAL.lbNav(-1)" aria-label="Anterior">&#8249;</button>
+                    <img id="gal-lb-img" src="" alt="Foto">
+                    <button class="gal-lb-nav gal-lb-next" onclick="event.stopPropagation();GAL.lbNav(1)"  aria-label="Próxima">&#8250;</button>
+                    <div class="gal-lb-info" id="gal-lb-info"></div>`;
+                lb.addEventListener('click', galeriaFecharLb);
+                lb.querySelector('img').addEventListener('click', e => e.stopPropagation());
+                document.body.appendChild(lb);
+            }
+
+            // Swipe touch
+            const clip = document.getElementById('gal-clip');
+            let tx = 0;
+            clip.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+            clip.addEventListener('touchend',   e => {
+                const dx = e.changedTouches[0].clientX - tx;
+                if (Math.abs(dx) > 40) GAL.nav(dx < 0 ? 1 : -1);
+            }, { passive: true });
+
+            // Teclado
+            document.addEventListener('keydown', e => {
+                if (!document.getElementById('gal-lightbox')?.classList.contains('open')) return;
+                if (e.key === 'ArrowLeft')  GAL.lbNav(-1);
+                if (e.key === 'ArrowRight') GAL.lbNav(1);
+                if (e.key === 'Escape')     galeriaFecharLb();
+            });
+
+            // Objeto de estado do carrossel
+            GAL = {
+                idx: 0, total, srcs, timer: null,
+                goTo(n) {
+                    this.idx = ((n % this.total) + this.total) % this.total;
+                    document.getElementById('gal-track').style.transform = `translateX(-${this.idx * 100}%)`;
+                    const c1 = document.getElementById('gal-counter');
+                    const c2 = document.getElementById('gal-counter-foot');
+                    const label = `${this.idx + 1} / ${this.total}`;
+                    if (c1) c1.textContent = label;
+                    if (c2) c2.textContent = label;
+                    document.querySelectorAll('.gal-dot').forEach((d, i) => d.classList.toggle('active', i === this.idx));
+                    const fill = document.getElementById('gal-fill');
+                    if (fill) fill.style.width = `${((this.idx + 1) / this.total * 100).toFixed(1)}%`;
+                },
+                nav(dir) { this.goTo(this.idx + dir); this.resetAuto(); },
+                lbNav(dir) {
+                    this.goTo(this.idx + dir);
+                    const img  = document.getElementById('gal-lb-img');
+                    const info = document.getElementById('gal-lb-info');
+                    if (img)  img.src         = this.srcs[this.idx];
+                    if (info) info.textContent = `${this.idx + 1} / ${this.total}`;
+                },
+                startAuto() {
+                    this.stopAuto();
+                    if (this.total > 1) this.timer = setInterval(() => this.goTo(this.idx + 1), 5000);
+                },
+                stopAuto()  { clearInterval(this.timer); },
+                resetAuto() { this.stopAuto(); this.startAuto(); }
+            };
+
+            GAL.startAuto();
+            clip.addEventListener('mouseenter', () => GAL.stopAuto());
+            clip.addEventListener('mouseleave', () => GAL.startAuto());
+        }
+
+        function galeriaAbrirLb(idx) {
+            GAL.goTo(idx);
+            const lb   = document.getElementById('gal-lightbox');
+            const img  = document.getElementById('gal-lb-img');
+            const info = document.getElementById('gal-lb-info');
+            img.src          = GAL.srcs[idx];
+            info.textContent = `${idx + 1} / ${GAL.total}`;
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            GAL.stopAuto();
+        }
+
+        function galeriaFecharLb() {
+            document.getElementById('gal-lightbox')?.classList.remove('open');
+            document.body.style.overflow = '';
+            GAL?.startAuto();
         }
 
         // ── EVOLUÇÃO DE PONTOS ────────────────────────────────────

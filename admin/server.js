@@ -98,13 +98,33 @@ app.post('/api/video', auth, (req, res) => {
     } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
-// Adicionar foto à galeria
-app.post('/api/galeria', auth, (req, res) => {
+// Escanear pasta img/galeria/ e retornar arquivos encontrados
+const GALERIA_DIR  = path.join(ROOT, 'img', 'galeria');
+const MANIFEST     = path.join(GALERIA_DIR, 'manifest.json');
+const IMG_EXTS     = new Set(['.jpg','.jpeg','.png','.avif','.webp','.gif']);
+
+app.get('/api/galeria/scan', auth, (req, res) => {
     try {
-        const cfg = readConfig();
-        cfg.galeria.unshift(req.body);
-        writeConfig(cfg);
-        res.json({ ok: true });
+        if (!fs.existsSync(GALERIA_DIR))
+            return res.json({ files: [], aviso: 'Pasta img/galeria/ não encontrada.' });
+        const files = fs.readdirSync(GALERIA_DIR)
+            .filter(f => IMG_EXTS.has(path.extname(f).toLowerCase()))
+            .sort()
+            .map(f => `img/galeria/${f}`);
+        res.json({ files });
+    } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Escrever manifest.json com os arquivos da pasta
+app.post('/api/galeria/sync', auth, (req, res) => {
+    try {
+        if (!fs.existsSync(GALERIA_DIR)) fs.mkdirSync(GALERIA_DIR, { recursive: true });
+        const files = fs.readdirSync(GALERIA_DIR)
+            .filter(f => IMG_EXTS.has(path.extname(f).toLowerCase()))
+            .sort()
+            .map(f => `img/galeria/${f}`);
+        fs.writeFileSync(MANIFEST, JSON.stringify(files, null, 2), 'utf8');
+        res.json({ ok: true, total: files.length });
     } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
