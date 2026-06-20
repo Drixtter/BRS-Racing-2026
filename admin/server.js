@@ -205,19 +205,23 @@ app.put('/api/etapa', auth, (req, res) => {
 // Git push → deploy automático no Neocities
 app.post('/api/publicar', auth, (req, res) => {
     try {
-        const msg = (req.body.msg || `Atualização ${new Date().toLocaleDateString('pt-BR')}`).replace(/"/g, "'");
+        const msg = (req.body.msg || `Atualização ${new Date().toLocaleDateString('pt-BR')}`).replace(/["`\\]/g, "'");
+
+        // Adiciona os arquivos relevantes (ignora se manifest não existir)
         execSync('git add config.js', { cwd: ROOT });
-        try {
+        if (fs.existsSync(MANIFEST)) execSync('git add img/galeria/manifest.json', { cwd: ROOT });
+
+        // Verifica se há algo a commitar (funciona em qualquer idioma do git)
+        const status = execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf8' });
+        if (status.trim()) {
             execSync(`git commit -m "${msg}"`, { cwd: ROOT });
-        } catch (e) {
-            // "nothing to commit" não é erro real
-            const out = (e.stdout?.toString() || '') + (e.stderr?.toString() || '');
-            if (!out.includes('nothing to commit')) throw e;
         }
+
         execSync('git push', { cwd: ROOT });
         res.json({ ok: true });
     } catch (e) {
-        res.status(500).json({ error: e.stderr?.toString() || e.message });
+        const detail = e.stderr?.toString('utf8') || e.stdout?.toString('utf8') || e.message;
+        res.status(500).json({ error: detail.trim() });
     }
 });
 
