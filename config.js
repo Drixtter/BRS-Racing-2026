@@ -1531,6 +1531,11 @@ const CONFIG = {
   ],
   "videos": [
     {
+      "titulo": "Evolution Race 2 - Áustria 2026",
+      "data": "28/06/2026",
+      "youtubeId": "nRWh_Ift9tM"
+    },
+    {
       "titulo": "Evolution Race 1 - Espanha 2026",
       "data": "14/06/2026",
       "youtubeId": "xlGPoxvWgLc"
