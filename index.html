@@ -163,6 +163,12 @@
 
         /* ── GALERIA CARROSSEL ───────────────────────────────── */
         #galeria-container { grid-template-columns: 1fr !important; }
+        /* ── VÍDEOS — facade (thumbnail HD, iframe só ao clicar) ─ */
+        .yt-facade  { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000; cursor: pointer; }
+        .yt-thumb   { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; display: block; }
+        .yt-facade:hover .yt-thumb { opacity: 0.75; }
+        .yt-play    { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.7)); transition: transform 0.2s; }
+        .yt-facade:hover .yt-play  { transform: translate(-50%, -50%) scale(1.12); }
         .gal-titulo      { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 3px; text-align: center; padding: 1.5rem 0 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 1.2rem; }
         .galeria-outer   { position: relative; border-radius: 10px; overflow: hidden; background: #08090b; }
         .galeria-clip    { overflow: hidden; }
@@ -895,16 +901,27 @@
                         <h2>${video.titulo}</h2>
                         <div class="header-labels">${video.data}</div>
                     </div>
-                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; background:#000;">
-                        <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-                            src="https://www.youtube.com/embed/${video.youtubeId}"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                        </iframe>
+                    <div class="yt-facade" onclick="carregarVideo(this,'${video.youtubeId}')">
+                        <img class="yt-thumb"
+                             src="https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg"
+                             onerror="this.src='https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg'"
+                             alt="${video.titulo}" loading="lazy">
+                        <div class="yt-play">
+                            <svg viewBox="0 0 68 48" width="72" height="51" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M66.5 7.7c-.8-2.9-2.9-5.1-5.8-5.9C55.8 0 34 0 34 0S12.2 0 7.3 1.8C4.4 2.6 2.3 4.9 1.5 7.7 0 12.7 0 24 0 24s0 11.3 1.5 16.3c.8 2.9 2.9 5.1 5.8 5.9C12.2 48 34 48 34 48s21.8 0 26.7-1.8c2.9-.8 5-3 5.8-5.9C68 35.3 68 24 68 24s0-11.3-1.5-16.3z" fill="#ff0000"/>
+                                <path d="M45 24 27 14v20z" fill="#fff"/>
+                            </svg>
+                        </div>
                     </div>
                 </div></div>`
             ).join('');
+        }
+
+        function carregarVideo(el, id) {
+            el.innerHTML = `<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+                src="https://www.youtube.com/embed/${id}?autoplay=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
         }
 
         // ── GALERIA CARROSSEL ─────────────────────────────────────
