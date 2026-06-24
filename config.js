@@ -1531,7 +1531,7 @@ const CONFIG = {
   ],
   "videos": [
     {
-      "titulo": "Evolution Race 2 - Áustria 2026",
+      "titulo": "Evolution Race 2 - Áustria 2026 ",
       "data": "28/06/2026",
       "youtubeId": "nRWh_Ift9tM"
     },
