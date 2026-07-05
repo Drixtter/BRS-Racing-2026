@@ -1,10 +1,10 @@
 // ╔══════════════════════════════════════════════════════════════╗
 // ║         BRS RACING 2026 — ARQUIVO DE CONFIGURAÇÃO            ║
 // ║                                                              ║
-// ║  ✅ COMO ATUALIZAR APÓS CADA ETAPA:                          ║
+// ║  COMO ATUALIZAR APÓS CADA ETAPA:                             ║
 // ║  1. Acesse o painel admin: http://localhost:4000             ║
-// ║  2. Vá em "Lançar Resultado" e preencha os dados            ║
-// ║  3. Clique em "Salvar" e depois em "Publicar"               ║
+// ║  2. Vá em "Lançar Resultado" e preencha os dados             ║
+// ║  3. Clique em "Salvar" e depois em "Publicar"                ║
 // ╚══════════════════════════════════════════════════════════════╝
 
 const CONFIG = {
@@ -1400,7 +1400,75 @@ const CONFIG = {
       "comprimento": "4.318 km",
       "curvas": 10,
       "drs": 3,
-      "resultados": []
+      "resultados": 
+      [
+        {
+          "pos": 1,
+          "piloto": "Luis Syaazz1",
+          "equipe": "Scuderia Ferrari",
+          "pontos": 30
+        },
+        {
+          "pos": 2,
+          "piloto": "Nathan Nadadanad03",
+          "equipe": "Scuderia Ferrari",
+          "pontos": 25
+        },
+        {
+          "pos": 3,
+          "piloto": "Renato Renato.R2Oliveira",
+          "equipe": "McLaren",
+          "pontos": 21
+        },
+        {
+          "pos": 4,
+          "piloto": "Frank Violets",
+          "equipe": "Mercedes-AMG",
+          "pontos": 18
+        },
+        {
+          "pos": 5,
+          "piloto": "Calixto MDR-CALIXTO84",
+          "equipe": "Aston Martin",
+          "pontos": 16
+        },
+        {
+          "pos": 6,
+          "piloto": "Leal Flushh",
+          "equipe": "Mercedes-AMG",
+          "pontos": 14
+        },
+        {
+          "pos": 7,
+          "piloto": "Cristian Cris",
+          "equipe": "RB",
+          "pontos": 12
+        },
+        {
+          "pos": 8,
+          "piloto": "Gustavo Guga",
+          "equipe": "Red Bull Racing",
+          "pontos": 10
+        },
+        {
+          "pos": 9,
+          "piloto": "Deivid galudao1",
+          "equipe": "RB",
+          "pontos": 8
+        },
+        {
+          "pos": 10,
+          "piloto": "Fernando procopiodearruda",
+          "equipe": "Williams",
+          "pontos": 7
+        },
+        {
+          "pos": 11,
+          "piloto": "João Ferrigno",
+          "equipe": "Red Bull Racing",
+          "pontos": 0
+        }        
+      ]
     },
     {
       "nome": "Etapa Silverstone - 05/07/2026 21:30h",
