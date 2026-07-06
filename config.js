@@ -397,7 +397,7 @@ const CONFIG = {
       {
         "r": 3,
         "track": "Grã-Bretanha",
-        "date": "05/07",
+        "date": "12/07",
         "type": "Oficial",
         "pistasIdx": 14
       },
