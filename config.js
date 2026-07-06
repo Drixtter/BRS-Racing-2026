@@ -1460,7 +1460,7 @@ const CONFIG = {
           "pos": 10,
           "piloto": "Fernando procopiodearruda",
           "equipe": "Williams",
-          "pontos": 8
+          "pontos": 7
         },
         {
           "pos": 11,
