@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRS Admin Online 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Titillium+Web:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan:  #00f3ff; --red: #ff4444; --green: #00ff88; --gold: #ffd700;
+            --bg: #111316; --panel: #1a1d21; --border: rgba(255,255,255,0.08); --muted: #8b9bb4;
+        }
+        body { font-family: 'Titillium Web', sans-serif; background: var(--bg); color: #fff; min-height: 100vh; }
+
+        /* ── SETUP / LOGIN ─────────────────────────────────── */
+        #setup-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; }
+        .setup-box { background: var(--panel); border: 1px solid rgba(0,243,255,0.3); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 440px; box-shadow: 0 0 50px rgba(0,243,255,0.08); }
+        .setup-logo { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--cyan); text-align: center; letter-spacing: 4px; text-transform: uppercase; }
+        .setup-sub  { color: var(--muted); text-align: center; font-size: 0.85rem; margin-bottom: 2rem; margin-top: 0.3rem; }
+        .setup-help { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 0.4rem; }
+        .setup-help a { color: var(--cyan); }
+
+        /* ── FORMULÁRIOS ───────────────────────────────────── */
+        label { display: block; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; margin-top: 1.2rem; }
+        input, select, textarea {
+            width: 100%; background: #0d0f12; border: 1px solid rgba(255,255,255,0.12);
+            color: #fff; padding: 0.65rem 0.9rem; border-radius: 6px;
+            font-family: 'Titillium Web', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--cyan); }
+        select option { background: #1a1d21; }
+        input[type=number] { -moz-appearance: textfield; }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+        input[type=checkbox] { width: auto; margin-right: 4px; accent-color: var(--cyan); }
+
+        /* ── BOTÕES ────────────────────────────────────────── */
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.4rem; border: 1px solid transparent; border-radius: 6px; font-family: 'Titillium Web', sans-serif; font-weight: 600; text-transform: uppercase; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; background: transparent; }
+        .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-cyan  { border-color: var(--cyan);  color: var(--cyan);  background: rgba(0,243,255,0.07); }
+        .btn-cyan:hover:not(:disabled)  { background: rgba(0,243,255,0.15); box-shadow: 0 0 12px rgba(0,243,255,0.25); }
+        .btn-green { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.07); }
+        .btn-green:hover:not(:disabled) { background: rgba(0,255,136,0.15); }
+        .btn-red   { border-color: var(--red);   color: var(--red);   background: rgba(255,68,68,0.07); }
+        .btn-red:hover:not(:disabled)   { background: rgba(255,68,68,0.15); }
+        .btn-full  { width: 100%; justify-content: center; margin-top: 1.5rem; padding: 0.8rem; font-size: 0.95rem; }
+
+        /* ── LAYOUT ─────────────────────────────────────────── */
+        #app { display: none; }
+        .app-header { background: var(--panel); border-bottom: 1px solid var(--border); padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+        .app-title  { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--cyan); letter-spacing: 3px; text-transform: uppercase; }
+        .app-repo   { font-size: 0.75rem; color: var(--muted); }
+        .app-nav    { display: flex; gap: 0.4rem; padding: 0.9rem 1.5rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .nav-tab    { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); color: var(--muted); padding: 0.45rem 1rem; border-radius: 6px; cursor: pointer; font-family: 'Titillium Web', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 0.82rem; transition: all 0.2s; }
+        .nav-tab.active, .nav-tab:hover { background: rgba(0,243,255,0.07); border-color: rgba(0,243,255,0.4); color: var(--cyan); }
+        .content { padding: 1.5rem; max-width: 960px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* ── CARD ───────────────────────────────────────────── */
+        .card { background: var(--panel); border: 1px solid rgba(0,243,255,0.15); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+
+        /* ── TABELA DE RESULTADO ────────────────────────────── */
+        .res-table { width: 100%; border-collapse: collapse; margin-top: 1.2rem; }
+        .res-table th { padding: 0.5rem; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; text-align: left; border-bottom: 1px solid var(--border); }
+        .res-table td { padding: 0.3rem 0.4rem; border-bottom: 1px solid rgba(255,255,255,0.03); vertical-align: middle; }
+        .res-table tr:hover td { background: rgba(255,255,255,0.02); }
+        .pos-badge { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; text-align: center; }
+        .res-table select, .res-table input[type=number] { padding: 0.35rem 0.5rem; font-size: 0.82rem; }
+
+        /* ── ALERTAS ────────────────────────────────────────── */
+        .alert { padding: 0.75rem 1.1rem; border-radius: 8px; font-size: 0.88rem; margin-bottom: 1rem; }
+        .alert-ok  { background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.4); color: var(--green); }
+        .alert-err { background: rgba(255,68,68,0.08);  border: 1px solid rgba(255,68,68,0.4);  color: var(--red); }
+        .alert-hidden { display: none; }
+
+        /* ── SPINNER ────────────────────────────────────────── */
+        .spin { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: _spin 0.6s linear infinite; vertical-align: middle; margin-right: 6px; }
+        @keyframes _spin { to { transform: rotate(360deg); } }
+
+        /* ── ETAPA CHIP ─────────────────────────────────────── */
+        .etapa-chip { font-size: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; color: var(--muted); }
+        .etapa-chip.realizada { border-color: rgba(0,255,136,0.3); color: var(--green); background: rgba(0,255,136,0.06); }
+
+        /* ── COMMIT BAR ─────────────────────────────────────── */
+        .commit-bar { background: rgba(0,243,255,0.04); border: 1px solid rgba(0,243,255,0.15); border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 1.5rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+        .commit-bar input { flex: 1; min-width: 200px; background: #0d0f12; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 0.5rem 0.8rem; border-radius: 6px; font-family: 'Titillium Web', sans-serif; font-size: 0.85rem; }
+        .commit-bar label { margin: 0; font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+
+        /* ── CONFIG SCREEN ──────────────────────────────────── */
+        .cfg-section { margin-bottom: 1.5rem; }
+        .cfg-section h3 { font-family: 'Rajdhani', sans-serif; font-size: 1rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        code { background: rgba(255,255,255,0.07); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ SETUP ═══════════════ -->
+<div id="setup-screen">
+    <div class="setup-box">
+        <div class="setup-logo">🏎 BRS Admin</div>
+        <div class="setup-sub">Painel Online · GitHub API</div>
+
+        <label>Usuário / Organização GitHub</label>
+        <input type="text" id="gh-owner" placeholder="Ex: drixtter" autocomplete="off">
+
+        <label>Nome do Repositório</label>
+        <input type="text" id="gh-repo" placeholder="Ex: BRS-Racing-2026" autocomplete="off">
+
+        <label>
+            Personal Access Token (PAT)
+            <span style="text-transform:none;font-size:0.78rem;"> — <a href="https://github.com/settings/tokens/new?scopes=repo&description=BRS+Admin" target="_blank" style="color:var(--cyan);">Gerar token aqui</a></span>
+        </label>
+        <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off"
+               onkeydown="if(event.key==='Enter') doSetup()">
+        <div class="setup-help">
+            O token precisa da permissão <strong>repo</strong> (leitura e escrita). Ele é salvo
+            apenas no seu navegador (localStorage) e nunca enviado para nenhum servidor terceiro.
+        </div>
+
+        <div id="setup-err" class="alert alert-err alert-hidden" style="margin-top:1rem;"></div>
+        <button class="btn btn-cyan btn-full" onclick="doSetup()">CONECTAR AO REPOSITÓRIO</button>
+    </div>
+</div>
+
+<!-- ═══════════════ APP ═══════════════ -->
+<div id="app">
+    <div class="app-header">
+        <div>
+            <div class="app-title">🏎 BRS Admin Online</div>
+            <div class="app-repo" id="app-repo-label"></div>
+        </div>
+        <div style="display:flex;gap:0.5rem;">
+            <button class="btn btn-cyan" onclick="recarregarConfig()" title="Recarregar config do GitHub">↻ Recarregar</button>
+            <button class="btn btn-red"  onclick="doLogout()">Sair</button>
+        </div>
+    </div>
+
+    <div class="app-nav">
+        <div class="nav-tab active" data-tab="resultado">🏁 Resultado</div>
+        <div class="nav-tab" data-tab="video">🎬 Vídeo</div>
+        <div class="nav-tab" data-tab="galeria">📸 Galeria</div>
+        <div class="nav-tab" data-tab="pilotos">👤 Pilotos</div>
+        <div class="nav-tab" data-tab="etapas">🗓 Etapas</div>
+        <div class="nav-tab" data-tab="configuracoes">⚙ Config</div>
+    </div>
+
+    <div class="content">
+        <div id="alert-global" class="alert alert-hidden"></div>
+
+        <!-- ── RESULTADO ─────────────────────────────────── -->
+        <div class="section active" id="tab-resultado">
+            <div class="commit-bar">
+                <label>Mensagem do commit:</label>
+                <input type="text" id="pub-msg-resultado" placeholder="Ex: Resultado Evolution R3 — Áustria">
+            </div>
+            <div class="card">
+                <div class="card-title">🏁 Lançar Resultado de Corrida</div>
+                <div class="form-row">
+                    <div>
+                        <label>Campeonato</label>
+                        <select id="sel-cup" onchange="onCupChange()">
+                            <option value="ignition">Ignition CUP</option>
+                            <option value="evolution">Evolution CUP</option>
+                            <option value="legacy">Legacy CUP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Corrida</label>
+                        <select id="sel-race" onchange="onRaceChange()"></select>
+                    </div>
+                </div>
+                <div id="etapa-info-bar" style="display:none;display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem;"></div>
+                <div id="resultado-form" style="display:none;margin-top:1.5rem;">
+                    <table class="res-table">
+                        <thead>
+                            <tr>
+                                <th style="width:40px;">Pos</th>
+                                <th>Piloto</th>
+                                <th style="width:190px;">Equipe (nesta corrida)</th>
+                                <th style="width:65px;text-align:right;">Pts</th>
+                                <th style="width:70px;text-align:right;color:var(--red);">SR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultado-tbody"></tbody>
+                    </table>
+                    <div style="display:flex;gap:0.8rem;margin-top:1.5rem;flex-wrap:wrap;">
+                        <button class="btn btn-cyan" onclick="salvarResultado()">💾 Salvar e Publicar</button>
+                        <button class="btn btn-red"  onclick="limparResultado()">🗑 Limpar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── VÍDEO ─────────────────────────────────────── -->
+        <div class="section" id="tab-video">
+            <div class="commit-bar">
+                <label>Mensagem do commit:</label>
+                <input type="text" id="pub-msg-video" placeholder="Adiciona vídeo ao site">
+            </div>
+            <div class="card">
+                <div class="card-title">🎬 Adicionar Vídeo</div>
+                <label>Título</label>
+                <input type="text" id="vid-titulo" placeholder="Ex: Evolution R3 — Áustria 2026">
+                <label>Data</label>
+                <input type="text" id="vid-data" placeholder="Ex: 10/05/2026">
+                <label>YouTube ID <span style="color:var(--muted);text-transform:none;font-size:0.8rem;">(parte final da URL: youtube.com/watch?v=<strong>IGTqHoMJuRE</strong>)</span></label>
+                <input type="text" id="vid-yt" placeholder="IGTqHoMJuRE">
+                <button class="btn btn-cyan btn-full" onclick="salvarVideo()">💾 Adicionar e Publicar</button>
+            </div>
+        </div>
+
+        <!-- ── GALERIA ───────────────────────────────────── -->
+        <div class="section" id="tab-galeria">
+            <div class="card">
+                <div class="card-title">📸 Galeria</div>
+                <p style="color:var(--muted);font-size:0.88rem;line-height:1.6;margin-bottom:1.5rem;">
+                    Lista as imagens na pasta <code>img/galeria/</code> do repositório GitHub.
+                    Clique em <strong style="color:var(--cyan);">Sincronizar</strong> para gerar o <code>manifest.json</code>
+                    que o site usa para exibir as fotos automaticamente.
+                    <br><span style="font-size:0.8rem;opacity:0.7;">Para adicionar fotos, envie-as diretamente para a pasta no GitHub.</span>
+                </p>
+                <button class="btn btn-cyan" onclick="escanearGaleria()" id="btn-scan">🔍 Listar Imagens do GitHub</button>
+                <div id="gal-scan-result" style="display:none;margin-top:1.5rem;">
+                    <div style="font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.8rem;">
+                        Imagens encontradas: <span id="gal-scan-count" style="color:var(--cyan);font-weight:700;"></span>
+                    </div>
+                    <div id="gal-thumbs" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.5rem;"></div>
+                    <button class="btn btn-green" onclick="sincronizarGaleria()" id="btn-sync">✅ Sincronizar manifest.json</button>
+                    <div id="gal-sync-status" style="font-size:0.88rem;margin-top:0.8rem;min-height:1.2rem;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PILOTOS ──────────────────────────────────── -->
+        <div class="section" id="tab-pilotos">
+            <div class="commit-bar">
+                <label>Mensagem do commit:</label>
+                <input type="text" id="pub-msg-pilotos" placeholder="Atualiza cadastro de pilotos">
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <span>👤 Pilotos Cadastrados</span>
+                    <button class="btn btn-cyan" style="font-size:0.78rem;padding:0.35rem 0.9rem;" onclick="abrirFormPiloto(null)">+ Novo Piloto</button>
+                </div>
+                <table class="res-table" id="pilotos-table">
+                    <thead>
+                        <tr>
+                            <th style="width:30px;">#</th>
+                            <th>Nome</th>
+                            <th>Equipe</th>
+                            <th style="text-align:center;width:28px;">I</th>
+                            <th style="text-align:center;width:28px;">E</th>
+                            <th style="text-align:center;width:28px;">L</th>
+                            <th style="width:52px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pilotos-tbody"></tbody>
+                </table>
+            </div>
+            <div class="card" id="form-piloto" style="display:none;border-color:rgba(0,243,255,0.4);">
+                <div class="card-title" id="form-piloto-titulo">Novo Piloto</div>
+                <input type="hidden" id="pil-nome-original">
+                <div class="form-row">
+                    <div><label>Nome</label><input type="text" id="pil-nome" placeholder="Ex: Gustavo Guga"></div>
+                    <div><label>Equipe Principal</label><select id="pil-equipe"></select></div>
+                </div>
+                <div class="form-row" style="margin-top:0;">
+                    <div><label>Foto Padrão</label><input type="text" id="pil-foto" placeholder="img/drivers/nome.png"></div>
+                    <div><label>Foto Ignition</label><input type="text" id="pil-foto-i" placeholder="img/drivers/ignition/nome.png"></div>
+                </div>
+                <div class="form-row" style="margin-top:0;">
+                    <div><label>Foto Evolution</label><input type="text" id="pil-foto-e" placeholder="img/drivers/evolution/nome.png"></div>
+                    <div><label>Foto Legacy</label><input type="text" id="pil-foto-l" placeholder="img/drivers/legacy/nome.png"></div>
+                </div>
+                <label style="margin-top:1.2rem;">Participa dos campeonatos</label>
+                <div style="display:flex;gap:1.5rem;margin-top:0.5rem;flex-wrap:wrap;">
+                    <label style="display:flex;align-items:center;margin-top:0;text-transform:none;font-size:0.9rem;color:#fff;cursor:pointer;"><input type="checkbox" id="pil-cup-i"> Ignition CUP</label>
+                    <label style="display:flex;align-items:center;margin-top:0;text-transform:none;font-size:0.9rem;color:#fff;cursor:pointer;"><input type="checkbox" id="pil-cup-e"> Evolution CUP</label>
+                    <label style="display:flex;align-items:center;margin-top:0;text-transform:none;font-size:0.9rem;color:#fff;cursor:pointer;"><input type="checkbox" id="pil-cup-l"> Legacy CUP</label>
+                </div>
+                <div style="display:flex;gap:0.8rem;margin-top:1.5rem;">
+                    <button class="btn btn-cyan" onclick="salvarPiloto()">💾 Salvar e Publicar</button>
+                    <button class="btn btn-red"  onclick="fecharFormPiloto()">✕ Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ETAPAS ──────────────────────────────────── -->
+        <div class="section" id="tab-etapas">
+            <div class="commit-bar">
+                <label>Mensagem do commit:</label>
+                <input type="text" id="pub-msg-etapas" placeholder="Adiciona/edita etapa do calendário">
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <span>🗓 Calendário de Etapas</span>
+                    <button class="btn btn-cyan" style="font-size:0.78rem;padding:0.35rem 0.9rem;" onclick="abrirFormEtapa(null,null,null)">+ Nova Etapa</button>
+                </div>
+                <div id="etapas-lista"></div>
+            </div>
+            <div class="card" id="form-etapa" style="display:none;border-color:rgba(0,243,255,0.4);">
+                <div class="card-title" id="form-etapa-titulo">Nova Etapa</div>
+                <input type="hidden" id="eta-pistas-idx">
+                <input type="hidden" id="eta-cal-idx">
+                <div class="form-row">
+                    <div>
+                        <label>Campeonato</label>
+                        <select id="eta-cup">
+                            <option value="ignition">Ignition CUP</option>
+                            <option value="evolution">Evolution CUP</option>
+                            <option value="legacy">Legacy CUP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Tipo</label>
+                        <select id="eta-type">
+                            <option value="Oficial">Oficial</option>
+                            <option value="Extra">Extra</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div><label>Nº da Corrida (R)</label><input type="number" id="eta-r" min="1"></div>
+                    <div><label>Data</label><input type="text" id="eta-date" placeholder="Ex: 28/06/2026 21:30h"></div>
+                </div>
+                <div class="form-row">
+                    <div><label>Nome curto da Pista</label><input type="text" id="eta-track" placeholder="Ex: Áustria"></div>
+                    <div><label>País</label><input type="text" id="eta-pais" placeholder="Ex: Áustria"></div>
+                </div>
+                <div><label>Nome completo da Etapa</label><input type="text" id="eta-nome" placeholder="Ex: Etapa Red Bull Ring — 28/06/2026 21:30h"></div>
+                <div class="form-row">
+                    <div><label>Imagem do Mapa</label><input type="text" id="eta-imagem" placeholder="img/tracks/2026trackaustria.avif"></div>
+                    <div><label>Comprimento</label><input type="text" id="eta-comprimento" placeholder="4.318 km"></div>
+                </div>
+                <div class="form-row">
+                    <div><label>Curvas</label><input type="number" id="eta-curvas" min="0"></div>
+                    <div><label>Zonas DRS</label><input type="number" id="eta-drs" min="0"></div>
+                </div>
+                <div style="display:flex;gap:0.8rem;margin-top:1.5rem;">
+                    <button class="btn btn-cyan" onclick="salvarEtapa()">💾 Salvar e Publicar</button>
+                    <button class="btn btn-red"  onclick="fecharFormEtapa()">✕ Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── CONFIGURAÇÕES ─────────────────────────────── -->
+        <div class="section" id="tab-configuracoes">
+            <div class="card">
+                <div class="card-title">⚙ Configurações da Conexão</div>
+                <div class="cfg-section">
+                    <div class="form-row">
+                        <div><label>Usuário / Organização GitHub</label><input type="text" id="cfg-owner" placeholder="drixtter"></div>
+                        <div><label>Nome do Repositório</label><input type="text" id="cfg-repo" placeholder="BRS-Racing-2026"></div>
+                    </div>
+                    <div><label>Personal Access Token</label><input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"></div>
+                    <div style="display:flex;gap:0.8rem;margin-top:1.5rem;flex-wrap:wrap;">
+                        <button class="btn btn-cyan" onclick="salvarConfig()">💾 Salvar e Reconectar</button>
+                        <button class="btn btn-red"  onclick="doLogout()">🗑 Limpar e Sair</button>
+                    </div>
+                </div>
+                <div class="cfg-section" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+                    <h3>Como gerar o Personal Access Token</h3>
+                    <ol style="color:var(--muted);font-size:0.88rem;line-height:2;padding-left:1.2rem;">
+                        <li>Acesse <a href="https://github.com/settings/tokens/new?scopes=repo&description=BRS+Admin" target="_blank" style="color:var(--cyan);">github.com/settings/tokens/new</a></li>
+                        <li>Dê um nome ao token, ex: <code>BRS Admin</code></li>
+                        <li>Marque a permissão <strong style="color:#fff;">repo</strong> (acesso completo)</li>
+                        <li>Defina a expiração (sugestão: 90 dias)</li>
+                        <li>Clique em <strong style="color:#fff;">Generate token</strong> e copie o valor</li>
+                    </ol>
+                    <div style="background:rgba(255,68,68,0.07);border:1px solid rgba(255,68,68,0.3);border-radius:8px;padding:0.8rem 1rem;margin-top:0.8rem;font-size:0.83rem;color:var(--muted);">
+                        ⚠️ O token é exibido apenas uma vez pelo GitHub. Se perder, gere um novo.
+                        Quando expirar, gere um novo e atualize aqui nesta tela.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /content -->
+</div><!-- /app -->
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  BRS ADMIN ONLINE — GitHub API Backend
+//  Todas as operações de leitura/escrita vão direto para o GitHub.
+//  Nenhum servidor local necessário.
+// ════════════════════════════════════════════════════════════════
+
+const PONTOS = [0, 30, 25, 21, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 0, 0, 0, 0, 0];
+const GH_API  = 'https://api.github.com';
+const IMG_EXTS = ['.jpg','.jpeg','.png','.avif','.webp','.gif'];
+
+let CONFIG      = null;
+let configSHA   = '';
+let manifestSHA = '';
+let ghToken = '', ghOwner = '', ghRepo = '';
+
+// ── ENCODING ─────────────────────────────────────────────────────
+function toB64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+}
+function fromB64(b64) {
+    return decodeURIComponent(escape(atob(b64.replace(/\n/g, ''))));
+}
+
+// ── GITHUB API ───────────────────────────────────────────────────
+async function ghGet(path) {
+    const r = await fetch(GH_API + path, {
+        headers: { 'Authorization': 'Bearer ' + ghToken, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }
+    });
+    if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.message || 'HTTP ' + r.status); }
+    return r.json();
+}
+
+async function ghPut(path, body) {
+    const r = await fetch(GH_API + path, {
+        method: 'PUT',
+        headers: { 'Authorization': 'Bearer ' + ghToken, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
+        body: JSON.stringify(body)
+    });
+    if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.message || 'HTTP ' + r.status); }
+    return r.json();
+}
+
+// ── SETUP / LOGIN ─────────────────────────────────────────────────
+async function doSetup() {
+    const owner = document.getElementById('gh-owner').value.trim();
+    const repo  = document.getElementById('gh-repo').value.trim();
+    const token = document.getElementById('gh-token').value.trim();
+
+    if (!owner || !repo || !token) { showSetupErr('Preencha todos os campos.'); return; }
+
+    ghOwner = owner; ghRepo = repo; ghToken = token;
+
+    const btn = document.querySelector('#setup-screen .btn-cyan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Conectando...';
+
+    try {
+        await carregarConfig();
+        localStorage.setItem('brs_gh_owner', owner);
+        localStorage.setItem('brs_gh_repo',  repo);
+        localStorage.setItem('brs_gh_token', token);
+        mostrarApp();
+    } catch (e) {
+        showSetupErr('Erro ao conectar: ' + e.message + '. Verifique o token e o repositório.');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'CONECTAR AO REPOSITÓRIO';
+    }
+}
+
+function showSetupErr(msg) {
+    const el = document.getElementById('setup-err');
+    el.textContent = msg;
+    el.classList.remove('alert-hidden');
+}
+
+function doLogout() {
+    localStorage.removeItem('brs_gh_owner');
+    localStorage.removeItem('brs_gh_repo');
+    localStorage.removeItem('brs_gh_token');
+    location.reload();
+}
+
+function mostrarApp() {
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('app-repo-label').textContent = ghOwner + '/' + ghRepo;
+    document.getElementById('cfg-owner').value = ghOwner;
+    document.getElementById('cfg-repo').value  = ghRepo;
+    document.getElementById('cfg-token').value = ghToken;
+    initApp();
+}
+
+function salvarConfig() {
+    ghOwner = document.getElementById('cfg-owner').value.trim();
+    ghRepo  = document.getElementById('cfg-repo').value.trim();
+    ghToken = document.getElementById('cfg-token').value.trim();
+    localStorage.setItem('brs_gh_owner', ghOwner);
+    localStorage.setItem('brs_gh_repo',  ghRepo);
+    localStorage.setItem('brs_gh_token', ghToken);
+    location.reload();
+}
+
+// ── CONFIG ────────────────────────────────────────────────────────
+async function carregarConfig() {
+    const data = await ghGet(`/repos/${ghOwner}/${ghRepo}/contents/config.js`);
+    configSHA = data.sha;
+    const src = fromB64(data.content);
+    const fn = new Function(src.replace(/const\s+CONFIG\s*=/, 'var __C =') + '; return __C;');
+    CONFIG = fn();
+}
+
+async function recarregarConfig() {
+    const btn = document.querySelector('.app-header .btn-cyan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span>';
+    try {
+        await carregarConfig();
+        onCupChange();
+        renderPilotosTabela();
+        renderEtapasLista();
+        showAlert('✅ Config recarregada do GitHub.', 'ok');
+    } catch (e) {
+        showAlert('Erro ao recarregar: ' + e.message, 'err');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '↻ Recarregar';
+    }
+}
+
+async function escreverConfig(mensagem) {
+    const header =
+`// ╔══════════════════════════════════════════════════════════════╗
+// ║         BRS RACING 2026 — ARQUIVO DE CONFIGURAÇÃO            ║
+// ║  Gerenciado pelo painel admin online (GitHub API)            ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+const CONFIG = `;
+    const conteudo = header + JSON.stringify(CONFIG, null, 2) + ';\n';
+    const result = await ghPut(`/repos/${ghOwner}/${ghRepo}/contents/config.js`, {
+        message: mensagem || `Admin: atualização ${new Date().toLocaleDateString('pt-BR')}`,
+        content: toB64(conteudo),
+        sha: configSHA
+    });
+    configSHA = result.content.sha;
+}
+
+// ── NAVEGAÇÃO ─────────────────────────────────────────────────────
+function initApp() {
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            if (tab.dataset.tab === 'pilotos') renderPilotosTabela();
+            if (tab.dataset.tab === 'etapas')  renderEtapasLista();
+        });
+    });
+    onCupChange();
+}
+
+// ── UTILITÁRIOS ──────────────────────────────────────────────────
+function showAlert(msg, tipo) {
+    const el = document.getElementById('alert-global');
+    el.textContent = msg;
+    el.className = 'alert alert-' + tipo;
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.add('alert-hidden'), 6000);
+}
+
+function msgCommit(tabId) {
+    return document.getElementById('pub-msg-' + tabId)?.value.trim() || null;
+}
+
+function getEquipeNaCup(piloto, cup) {
+    const cal = CONFIG.calendario[cup];
+    for (let i = cal.length - 1; i >= 0; i--) {
+        const pista = CONFIG.pistas[cal[i].pistasIdx];
+        if (!pista?.resultados?.length) continue;
+        const r = pista.resultados.find(x => x.piloto === piloto);
+        if (r?.equipe) return r.equipe;
+    }
+    return CONFIG.pilotos.find(p => p.nome === piloto)?.equipe || '';
+}
+
+// ── RESULTADO ────────────────────────────────────────────────────
+function onCupChange() {
+    if (!CONFIG) return;
+    const cup = document.getElementById('sel-cup').value;
+    const cal = CONFIG.calendario[cup];
+    const sel = document.getElementById('sel-race');
+    sel.innerHTML = cal.map((e, i) => {
+        const pista = CONFIG.pistas[e.pistasIdx];
+        const feita = pista?.resultados?.length > 0;
+        return `<option value="${i}">${feita ? '✅' : '⏳'} R${e.r} — ${e.track} · ${e.date}</option>`;
+    }).join('');
+    onRaceChange();
+}
+
+function onRaceChange() {
+    if (!CONFIG) return;
+    const cup     = document.getElementById('sel-cup').value;
+    const raceIdx = parseInt(document.getElementById('sel-race').value);
+    const etapa   = CONFIG.calendario[cup][raceIdx];
+    if (!etapa) return;
+
+    const pista     = CONFIG.pistas[etapa.pistasIdx];
+    const pilotos   = CONFIG.campeonatos[cup].pilotos;
+    const resAtuais = pista?.resultados || [];
+    const feita     = resAtuais.length > 0;
+
+    const infoBar = document.getElementById('etapa-info-bar');
+    infoBar.style.display = 'flex';
+    infoBar.innerHTML = `
+        <span class="etapa-chip">Índice ${etapa.pistasIdx}</span>
+        <span class="etapa-chip ${feita ? 'realizada' : ''}">${feita ? '✅ Resultado lançado' : '⏳ Sem resultado'}</span>
+        ${feita ? `<span class="etapa-chip realizada">🏆 ${resAtuais.find(r => r.pos === 1)?.piloto || '?'}</span>` : ''}`;
+
+    const tbody = document.getElementById('resultado-tbody');
+    tbody.innerHTML = '';
+    const maxPos = pilotos.length;
+
+    for (let pos = 1; pos <= maxPos; pos++) {
+        const resEx   = resAtuais.find(r => r.pos === pos);
+        const posColor = pos === 1 ? '#ffd700' : pos === 2 ? '#c0c0c0' : pos === 3 ? '#cd7f32' : 'var(--muted)';
+        const equipes  = CONFIG.equipes.map(e => e.nome);
+        const tr = document.createElement('tr');
+        tr.dataset.pos = pos;
+        tr.innerHTML = `
+            <td><div class="pos-badge" style="color:${posColor}">${pos}º</div></td>
+            <td>
+                <select class="sel-piloto" onchange="onPilotoChange(this)">
+                    <option value="">—</option>
+                    ${pilotos.map(p => `<option value="${p}" ${resEx?.piloto === p ? 'selected' : ''}>${p}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <select class="sel-equipe">
+                    <option value="">— auto —</option>
+                    ${equipes.map(eq => `<option value="${eq}" ${resEx?.equipe === eq ? 'selected' : ''}>${eq}</option>`).join('')}
+                </select>
+            </td>
+            <td><input type="number" class="inp-pts" value="${resEx?.pontos ?? (PONTOS[pos] ?? 0)}" min="0" max="50" style="text-align:right;"></td>
+            <td><input type="number" class="inp-sr"  value="${resEx?.sr || ''}" placeholder="0" min="-99" max="0" style="text-align:right;"></td>`;
+        tbody.appendChild(tr);
+        if (resEx?.piloto && !resEx?.equipe) tr.querySelector('.sel-equipe').value = getEquipeNaCup(resEx.piloto, cup);
+    }
+    document.getElementById('resultado-form').style.display = 'block';
+}
+
+function onPilotoChange(sel) {
+    const tr  = sel.closest('tr');
+    const pos = parseInt(tr.dataset.pos);
+    const cup = document.getElementById('sel-cup').value;
+    tr.querySelector('.inp-pts').value = sel.value ? (PONTOS[pos] ?? 0) : 0;
+    const selEq = tr.querySelector('.sel-equipe');
+    if (sel.value) { const eq = getEquipeNaCup(sel.value, cup); if (eq) selEq.value = eq; }
+    else selEq.value = '';
+}
+
+async function salvarResultado() {
+    const cup     = document.getElementById('sel-cup').value;
+    const raceIdx = parseInt(document.getElementById('sel-race').value);
+    const etapa   = CONFIG.calendario[cup][raceIdx];
+    const resultados = [];
+
+    document.querySelectorAll('#resultado-tbody tr').forEach(tr => {
+        const piloto = tr.querySelector('.sel-piloto').value;
+        if (!piloto) return;
+        const pos    = parseInt(tr.dataset.pos);
+        const pontos = parseInt(tr.querySelector('.inp-pts').value) || 0;
+        const srRaw  = parseInt(tr.querySelector('.inp-sr').value)  || 0;
+        const equipe = tr.querySelector('.sel-equipe').value || getEquipeNaCup(piloto, cup);
+        const res    = { pos, piloto, equipe, pontos };
+        if (srRaw) res.sr = srRaw;
+        resultados.push(res);
+    });
+
+    if (!resultados.length) { showAlert('Nenhum piloto selecionado.', 'err'); return; }
+
+    const btn = document.querySelector('#tab-resultado .btn-cyan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Salvando...';
+
+    try {
+        CONFIG.pistas[etapa.pistasIdx].resultados = resultados;
+        const msg = msgCommit('resultado') || `Resultado ${cup} R${etapa.r} — ${etapa.track}`;
+        await escreverConfig(msg);
+        showAlert(`✅ Resultado salvo e publicado! (${resultados.length} pilotos)`, 'ok');
+        onCupChange();
+        document.getElementById('sel-race').selectedIndex = raceIdx;
+        onRaceChange();
+        document.getElementById('pub-msg-resultado').value = '';
+    } catch (e) {
+        // Reverte a alteração em memória se falhou
+        CONFIG.pistas[etapa.pistasIdx].resultados = [];
+        showAlert('❌ Erro ao salvar: ' + e.message, 'err');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '💾 Salvar e Publicar';
+    }
+}
+
+function limparResultado() {
+    document.querySelectorAll('#resultado-tbody tr').forEach(tr => {
+        tr.querySelector('.sel-piloto').value = '';
+        tr.querySelector('.sel-equipe').value = '';
+        tr.querySelector('.inp-pts').value = PONTOS[parseInt(tr.dataset.pos)] ?? 0;
+        tr.querySelector('.inp-sr').value = '';
+    });
+}
+
+// ── VÍDEO ─────────────────────────────────────────────────────────
+async function salvarVideo() {
+    const titulo    = document.getElementById('vid-titulo').value.trim();
+    const data      = document.getElementById('vid-data').value.trim();
+    const youtubeId = document.getElementById('vid-yt').value.trim();
+    if (!titulo || !youtubeId) { showAlert('Preencha o título e o YouTube ID.', 'err'); return; }
+
+    const btn = document.querySelector('#tab-video .btn-cyan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Salvando...';
+
+    try {
+        CONFIG.videos.unshift({ titulo, data, youtubeId });
+        await escreverConfig(msgCommit('video') || `Adiciona vídeo: ${titulo}`);
+        showAlert('✅ Vídeo adicionado e publicado!', 'ok');
+        ['vid-titulo','vid-data','vid-yt'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('pub-msg-video').value = '';
+    } catch (e) {
+        CONFIG.videos.shift();
+        showAlert('❌ Erro: ' + e.message, 'err');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '💾 Adicionar e Publicar';
+    }
+}
+
+// ── GALERIA ───────────────────────────────────────────────────────
+let galeriaFiles = [];
+
+async function escanearGaleria() {
+    const btn = document.getElementById('btn-scan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Listando...';
+
+    try {
+        const items = await ghGet(`/repos/${ghOwner}/${ghRepo}/contents/img/galeria`);
+        galeriaFiles = items
+            .filter(f => f.type === 'file' && IMG_EXTS.some(ext => f.name.toLowerCase().endsWith(ext)))
+            .map(f => ({ path: `img/galeria/${f.name}`, raw: `https://raw.githubusercontent.com/${ghOwner}/${ghRepo}/main/img/galeria/${f.name}` }))
+            .sort((a, b) => a.path.localeCompare(b.path));
+
+        document.getElementById('gal-scan-count').textContent = galeriaFiles.length;
+        document.getElementById('gal-thumbs').innerHTML = galeriaFiles.length
+            ? galeriaFiles.map(f => `
+                <div style="position:relative;width:90px;height:70px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,243,255,0.2);">
+                    <img src="${f.raw}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+                    <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);font-size:0.6rem;color:#aaa;padding:2px 4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${f.path.split('/').pop()}</div>
+                </div>`).join('')
+            : '<span style="color:var(--muted);font-size:0.88rem;">Nenhuma imagem encontrada na pasta img/galeria/.</span>';
+
+        document.getElementById('gal-scan-result').style.display = 'block';
+        document.getElementById('btn-sync').style.display = galeriaFiles.length ? 'inline-flex' : 'none';
+        document.getElementById('gal-sync-status').textContent = '';
+
+        // Captura SHA do manifest existente (necessário para sobrescrevê-lo)
+        try {
+            const mdata = await ghGet(`/repos/${ghOwner}/${ghRepo}/contents/img/galeria/manifest.json`);
+            manifestSHA = mdata.sha;
+        } catch { manifestSHA = ''; }
+
+    } catch (e) {
+        showAlert('❌ Erro ao listar galeria: ' + e.message, 'err');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '🔍 Listar Imagens do GitHub';
+    }
+}
+
+async function sincronizarGaleria() {
+    if (!galeriaFiles.length) { showAlert('Liste as imagens primeiro.', 'err'); return; }
+
+    const btn    = document.getElementById('btn-sync');
+    const status = document.getElementById('gal-sync-status');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Sincronizando...';
+
+    try {
+        const paths   = galeriaFiles.map(f => f.path);
+        const conteudo = JSON.stringify(paths, null, 2);
+        const body    = { message: 'Admin: atualiza manifest da galeria', content: toB64(conteudo) };
+        if (manifestSHA) body.sha = manifestSHA;
+        const result  = await ghPut(`/repos/${ghOwner}/${ghRepo}/contents/img/galeria/manifest.json`, body);
+        manifestSHA   = result.content.sha;
+        status.style.color = 'var(--green)';
+        status.textContent = `✅ manifest.json publicado com ${paths.length} imagem(ns). O site já está atualizado!`;
+    } catch (e) {
+        status.style.color = 'var(--red)';
+        status.textContent = '❌ Erro: ' + e.message;
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '✅ Sincronizar manifest.json';
+    }
+}
+
+// ── PILOTOS ───────────────────────────────────────────────────────
+function renderPilotosTabela() {
+    if (!CONFIG) return;
+    const cups  = CONFIG.campeonatos;
+    document.getElementById('pilotos-tbody').innerHTML = CONFIG.pilotos.map((p, i) => {
+        const cor = CONFIG.equipes.find(e => e.nome === p.equipe)?.cor || '#888';
+        const ck  = (cup) => cups[cup].pilotos.includes(p.nome)
+            ? `<span style="color:var(--cyan);">✓</span>` : `<span style="color:rgba(255,255,255,0.1);">—</span>`;
+        return `<tr>
+            <td style="color:var(--muted);font-size:0.8rem;">${i + 1}</td>
+            <td style="font-weight:600;">${p.nome}</td>
+            <td><span style="font-size:0.78rem;padding:2px 8px;border-radius:12px;background:${cor}22;border:1px solid ${cor}55;color:${cor};">${p.equipe}</span></td>
+            <td style="text-align:center;">${ck('ignition')}</td>
+            <td style="text-align:center;">${ck('evolution')}</td>
+            <td style="text-align:center;">${ck('legacy')}</td>
+            <td><button class="btn btn-cyan" style="padding:0.25rem 0.7rem;font-size:0.75rem;" onclick="abrirFormPiloto('${p.nome.replace(/'/g,"\\'")}')">✏</button></td>
+        </tr>`;
+    }).join('');
+}
+
+function abrirFormPiloto(nome) {
+    document.getElementById('pil-equipe').innerHTML = CONFIG.equipes.map(e => `<option value="${e.nome}">${e.nome}</option>`).join('');
+    const form = document.getElementById('form-piloto');
+
+    if (nome) {
+        const p = CONFIG.pilotos.find(x => x.nome === nome);
+        document.getElementById('form-piloto-titulo').textContent = '✏ Editar Piloto';
+        document.getElementById('pil-nome-original').value = nome;
+        document.getElementById('pil-nome').value   = p.nome;
+        document.getElementById('pil-equipe').value = p.equipe;
+        document.getElementById('pil-foto').value   = p.foto   || '';
+        document.getElementById('pil-foto-i').value = p.fotoIgnition  || '';
+        document.getElementById('pil-foto-e').value = p.fotoEvolution || '';
+        document.getElementById('pil-foto-l').value = p.fotoLegacy    || '';
+        document.getElementById('pil-cup-i').checked = CONFIG.campeonatos.ignition.pilotos.includes(nome);
+        document.getElementById('pil-cup-e').checked = CONFIG.campeonatos.evolution.pilotos.includes(nome);
+        document.getElementById('pil-cup-l').checked = CONFIG.campeonatos.legacy.pilotos.includes(nome);
+    } else {
+        document.getElementById('form-piloto-titulo').textContent = '+ Novo Piloto';
+        document.getElementById('pil-nome-original').value = '';
+        ['pil-nome','pil-foto','pil-foto-i','pil-foto-e','pil-foto-l'].forEach(id => document.getElementById(id).value = '');
+        ['pil-cup-i','pil-cup-e','pil-cup-l'].forEach(id => document.getElementById(id).checked = false);
+    }
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function fecharFormPiloto() { document.getElementById('form-piloto').style.display = 'none'; }
+
+async function salvarPiloto() {
+    const nomeOriginal = document.getElementById('pil-nome-original').value;
+    const piloto = {
+        nome:         document.getElementById('pil-nome').value.trim(),
+        equipe:       document.getElementById('pil-equipe').value,
+        foto:         document.getElementById('pil-foto').value.trim(),
+        fotoIgnition: document.getElementById('pil-foto-i').value.trim(),
+        fotoEvolution:document.getElementById('pil-foto-e').value.trim(),
+        fotoLegacy:   document.getElementById('pil-foto-l').value.trim(),
+    };
+    const cups = ['ignition','evolution','legacy'].filter((_, i) =>
+        document.getElementById(['pil-cup-i','pil-cup-e','pil-cup-l'][i]).checked);
+
+    if (!piloto.nome) { showAlert('O nome do piloto é obrigatório.', 'err'); return; }
+
+    const btn = document.querySelector('#form-piloto .btn-cyan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Salvando...';
+
+    // Captura estado anterior para rollback
+    const configAntes = JSON.parse(JSON.stringify(CONFIG));
+
+    try {
+        if (nomeOriginal) {
+            // Edição
+            const idx = CONFIG.pilotos.findIndex(p => p.nome === nomeOriginal);
+            if (idx === -1) throw new Error('Piloto não encontrado.');
+            CONFIG.pilotos[idx] = piloto;
+            if (nomeOriginal !== piloto.nome) {
+                ['ignition','evolution','legacy'].forEach(cup => {
+                    const i = CONFIG.campeonatos[cup].pilotos.indexOf(nomeOriginal);
+                    if (i !== -1) CONFIG.campeonatos[cup].pilotos[i] = piloto.nome;
+                });
+                CONFIG.pistas.forEach(p => p.resultados.forEach(r => {
+                    if (r.piloto === nomeOriginal) r.piloto = piloto.nome;
+                }));
+            }
+        } else {
+            // Novo
+            if (CONFIG.pilotos.find(p => p.nome === piloto.nome)) throw new Error('Já existe um piloto com esse nome.');
+            CONFIG.pilotos.push(piloto);
+        }
+        // Participação nos campeonatos
+        ['ignition','evolution','legacy'].forEach(cup => {
+            const inCup = cups.includes(cup);
+            const pos   = CONFIG.campeonatos[cup].pilotos.indexOf(piloto.nome);
+            if (inCup && pos === -1) CONFIG.campeonatos[cup].pilotos.push(piloto.nome);
+            if (!inCup && pos !== -1) CONFIG.campeonatos[cup].pilotos.splice(pos, 1);
+        });
+
+        const msg = msgCommit('pilotos') || (nomeOriginal ? `Edita piloto: ${piloto.nome}` : `Adiciona piloto: ${piloto.nome}`);
+        await escreverConfig(msg);
+        showAlert(`✅ Piloto "${piloto.nome}" salvo e publicado!`, 'ok');
+        fecharFormPiloto();
+        renderPilotosTabela();
+        document.getElementById('pub-msg-pilotos').value = '';
+    } catch (e) {
+        CONFIG = configAntes; // rollback
+        showAlert('❌ Erro: ' + e.message, 'err');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '💾 Salvar e Publicar';
+    }
+}
+
+// ── ETAPAS ───────────────────────────────────────────────────────
+function renderEtapasLista() {
+    if (!CONFIG) return;
+    const cups = [
+        { id: 'ignition', label: 'Ignition CUP' },
+        { id: 'evolution', label: 'Evolution CUP' },
+        { id: 'legacy', label: 'Legacy CUP' },
+    ];
+    document.getElementById('etapas-lista').innerHTML = cups.map(cup => {
+        const etapas = CONFIG.calendario[cup.id];
+        if (!etapas?.length) return '';
+        const rows = etapas.map((e, calIdx) => {
+            const pista   = CONFIG.pistas[e.pistasIdx];
+            const feita   = pista?.resultados?.length > 0;
+            return `<tr>
+                <td style="color:var(--cyan);font-weight:700;width:36px;">R${e.r}</td>
+                <td style="font-weight:600;">${e.track}</td>
+                <td style="color:var(--muted);font-size:0.85rem;">${e.date}</td>
+                <td><span style="font-size:0.75rem;padding:2px 7px;border-radius:12px;${feita ? 'background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.3);color:var(--green);' : 'background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);'}">${feita ? '✅ Realizada' : '⏳ Pendente'}</span></td>
+                <td><button class="btn btn-cyan" style="padding:0.2rem 0.6rem;font-size:0.72rem;" onclick="abrirFormEtapa('${cup.id}', ${calIdx}, ${e.pistasIdx})">✏</button></td>
+            </tr>`;
+        }).join('');
+        return `
+            <div style="margin-bottom:1.5rem;">
+                <div style="font-family:'Rajdhani',sans-serif;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;font-size:0.9rem;margin-bottom:0.5rem;">${cup.label}</div>
+                <table class="res-table"><thead><tr>
+                    <th style="width:36px;">R</th><th>Pista</th><th>Data</th><th>Status</th><th style="width:44px;"></th>
+                </tr></thead><tbody>${rows}</tbody></table>
+            </div>`;
+    }).join('');
+}
+
+function abrirFormEtapa(cup, calIdx, pistasIdx) {
+    const form = document.getElementById('form-etapa');
+    if (cup !== null && calIdx !== null && pistasIdx !== null) {
+        document.getElementById('form-etapa-titulo').textContent = '✏ Editar Etapa';
+        document.getElementById('eta-pistas-idx').value = pistasIdx;
+        document.getElementById('eta-cal-idx').value   = calIdx;
+        const etapa = CONFIG.calendario[cup][calIdx];
+        const pista = CONFIG.pistas[pistasIdx];
+        document.getElementById('eta-cup').value         = cup;
+        document.getElementById('eta-type').value        = etapa.type || 'Oficial';
+        document.getElementById('eta-r').value           = etapa.r;
+        document.getElementById('eta-date').value        = etapa.date;
+        document.getElementById('eta-track').value       = etapa.track;
+        document.getElementById('eta-pais').value        = pista?.pais || '';
+        document.getElementById('eta-nome').value        = pista?.nome || '';
+        document.getElementById('eta-imagem').value      = pista?.imagem || '';
+        document.getElementById('eta-comprimento').value = pista?.comprimento || '';
+        document.getElementById('eta-curvas').value      = pista?.curvas || '';
+        document.getElementById('eta-drs').value         = pista?.drs || '';
+    } else {
+        document.getElementById('form-etapa-titulo').textContent = '+ Nova Etapa';
+        document.getElementById('eta-pistas-idx').value = '';
+        document.getElementById('eta-cal-idx').value   = '';
+        ['eta-r','eta-date','eta-track','eta-pais','eta-nome','eta-imagem','eta-comprimento','eta-curvas','eta-drs'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('eta-cup').value  = 'ignition';
+        document.getElementById('eta-type').value = 'Oficial';
+    }
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function fecharFormEtapa() { document.getElementById('form-etapa').style.display = 'none'; }
+
+async function salvarEtapa() {
+    const pistasIdxStr = document.getElementById('eta-pistas-idx').value;
+    const calIdxStr    = document.getElementById('eta-cal-idx').value;
+    const cup          = document.getElementById('eta-cup').value;
+
+    const pista = {
+        nome:         document.getElementById('eta-nome').value.trim(),
+        pais:         document.getElementById('eta-pais').value.trim(),
+        imagem:       document.getElementById('eta-imagem').value.trim(),
+        comprimento:  document.getElementById('eta-comprimento').value.trim(),
+        curvas:       parseInt(document.getElementById('eta-curvas').value) || 0,
+        drs:          parseInt(document.getElementById('eta-drs').value)    || 0,
+    };
+    const calendario = {
+        r:     parseInt(document.getElementById('eta-r').value)  || 1,
+        track: document.getElementById('eta-track').value.trim(),
+        date:  document.getElementById('eta-date').value.trim(),
+        type:  document.getElementById('eta-type').value,
+    };
+
+    if (!calendario.track) { showAlert('O nome da pista é obrigatório.', 'err'); return; }
+
+    const btn = document.querySelector('#form-etapa .btn-cyan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Salvando...';
+
+    const configAntes = JSON.parse(JSON.stringify(CONFIG));
+
+    try {
+        if (pistasIdxStr !== '') {
+            // Edição
+            const pistasIdx = parseInt(pistasIdxStr);
+            const calIdx    = parseInt(calIdxStr);
+            const resultados = CONFIG.pistas[pistasIdx]?.resultados || [];
+            CONFIG.pistas[pistasIdx] = { ...pista, resultados };
+            CONFIG.calendario[cup][calIdx] = { ...CONFIG.calendario[cup][calIdx], ...calendario };
+        } else {
+            // Nova etapa
+            const pistasIdx = CONFIG.pistas.length;
+            CONFIG.pistas.push({ ...pista, resultados: [] });
+            CONFIG.calendario[cup].push({ ...calendario, pistasIdx });
+        }
+
+        const msg = msgCommit('etapas') || `${pistasIdxStr !== '' ? 'Edita' : 'Adiciona'} etapa: ${calendario.track}`;
+        await escreverConfig(msg);
+        showAlert(`✅ Etapa "${calendario.track}" salva e publicada!`, 'ok');
+        fecharFormEtapa();
+        renderEtapasLista();
+        document.getElementById('pub-msg-etapas').value = '';
+    } catch (e) {
+        CONFIG = configAntes;
+        showAlert('❌ Erro: ' + e.message, 'err');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '💾 Salvar e Publicar';
+    }
+}
+
+// ── INICIALIZAÇÃO ─────────────────────────────────────────────────
+(function init() {
+    const owner = localStorage.getItem('brs_gh_owner');
+    const repo  = localStorage.getItem('brs_gh_repo');
+    const token = localStorage.getItem('brs_gh_token');
+
+    if (owner && repo && token) {
+        ghOwner = owner; ghRepo = repo; ghToken = token;
+        document.getElementById('gh-owner').value = owner;
+        document.getElementById('gh-repo').value  = repo;
+        document.getElementById('gh-token').value = token;
+        // Tenta auto-conectar
+        const btn = document.querySelector('#setup-screen .btn-cyan');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spin"></span> Conectando...';
+        carregarConfig()
+            .then(mostrarApp)
+            .catch(e => {
+                btn.disabled = false;
+                btn.textContent = 'CONECTAR AO REPOSITÓRIO';
+                showSetupErr('Erro ao reconectar: ' + e.message + '. Verifique se o token ainda é válido.');
+            });
+    }
+})();
+</script>
+</body>
+</html>
