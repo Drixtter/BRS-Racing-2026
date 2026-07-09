@@ -1,10 +1,6 @@
 // ╔══════════════════════════════════════════════════════════════╗
 // ║         BRS RACING 2026 — ARQUIVO DE CONFIGURAÇÃO            ║
-// ║                                                              ║
-// ║  COMO ATUALIZAR APÓS CADA ETAPA:                             ║
-// ║  1. Acesse o painel admin: http://localhost:4000             ║
-// ║  2. Vá em "Lançar Resultado" e preencha os dados             ║
-// ║  3. Clique em "Salvar" e depois em "Publicar"                ║
+// ║  Gerenciado pelo painel admin online (GitHub API)            ║
 // ╚══════════════════════════════════════════════════════════════╝
 
 const CONFIG = {
@@ -1377,7 +1373,7 @@ const CONFIG = {
           "pos": 12,
           "piloto": "Adriano Drixtter",
           "equipe": "McLaren",
-          "pontos": 0
+          "pontos": 10
         },
         {
           "pos": 13,
@@ -1400,8 +1396,7 @@ const CONFIG = {
       "comprimento": "4.318 km",
       "curvas": 10,
       "drs": 3,
-      "resultados": 
-      [
+      "resultados": [
         {
           "pos": 1,
           "piloto": "Frank Violets",
@@ -1467,7 +1462,7 @@ const CONFIG = {
           "piloto": "João Ferrigno",
           "equipe": "Red Bull Racing",
           "pontos": 0
-        }        
+        }
       ]
     },
     {
