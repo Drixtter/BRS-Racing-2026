@@ -1373,7 +1373,7 @@ const CONFIG = {
           "pos": 12,
           "piloto": "Adriano Drixtter",
           "equipe": "McLaren",
-          "pontos": 10
+          "pontos": 0
         },
         {
           "pos": 13,
