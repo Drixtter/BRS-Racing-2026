@@ -13,7 +13,7 @@
     <meta property="og:type"        content="website">
     <meta property="og:title"       content="BRS Racing — F1 Virtual 2026">
     <meta property="og:description" content="Acompanhe o campeonato de F1 virtual: classificações ao vivo, grade de resultados, evolução de pontos e calendário completo.">
-    <meta property="og:image"       content="https://drixtter.github.io/BRS-Racing-2026/logo-brs.png">
+    <meta property="og:image"       content="https://brsracingvirtual.neocities.org/logo-brs.png">
     <meta property="og:url"         content="https://brsracingvirtual.neocities.org/">
     <meta name="twitter:card"       content="summary_large_image">
 
@@ -101,6 +101,14 @@
         .rules-table td { padding: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
         @media (max-width: 600px) { .nav-btn { flex: 1 1 45%; font-size: 0.75rem; min-width: 120px; } .hero-info h1 { font-size: 1.4rem; } }
+
+        /* ── DROPDOWN "MAIS" ─────────────────────────────────── */
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 6px); right: 0; min-width: 180px; background: #1a1d21; border: 1px solid var(--neon-cyan); border-radius: 8px; padding: 0.4rem 0; z-index: 100; box-shadow: 0 8px 24px rgba(0,0,0,0.7); }
+        .nav-dropdown.open .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu button { display: block; width: 100%; text-align: left; background: none; border: none; color: var(--text-muted); padding: 0.55rem 1rem; font-family: 'Titillium Web', sans-serif; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; transition: background 0.15s, color 0.15s; }
+        .nav-dropdown-menu button:hover, .nav-dropdown-menu button.active { background: rgba(0,243,255,0.08); color: var(--neon-cyan); }
+        @media (max-width: 600px) { .nav-dropdown { flex: 1 1 45%; } .nav-dropdown > .nav-btn { width: 100%; } .nav-dropdown-menu { right: auto; left: 0; min-width: 160px; } }
 
         /* ── CABEÇALHO DE SEÇÃO ──────────────────────────────── */
         .section-title { margin-bottom: 1.5rem; border-left: 4px solid var(--neon-cyan); padding-left: 15px; }
@@ -287,6 +295,9 @@
         <!-- ESTATÍSTICAS: gerada via JS -->
         <div id="estatisticas" class="section"></div>
 
+        <!-- PENALIDADES: gerada via JS -->
+        <div id="penalidades" class="section"></div>
+
         <!-- INSCRIÇÕES -->
         <div id="inscricoes" class="section">
             <div class="panel-grid" style="grid-template-columns:1fr;">
@@ -367,7 +378,7 @@
         <!-- PILOTOS -->
         <div id="pilotos" class="section active">
             <div class="section-title" style="margin-bottom:2rem;">
-                <h2>🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)">EVOLUTION CUP</span></h2>
+                <h2>🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)" id="pilotos-cup-label">—</span></h2>
             </div>
             <div class="drivers-grid" id="drivers-grid"></div>
         </div>
@@ -378,7 +389,7 @@
     <div class="modal-overlay" id="modal-perfil">
         <div class="modal-box">
             <div class="modal-header">
-                <img class="modal-foto" id="modal-foto" src="" alt="">
+                <img class="modal-foto" id="modal-foto" src="" alt="" onerror="this.src=PLACEHOLDER_FOTO;this.onerror=null;">
                 <div class="modal-titulo">
                     <h2 id="modal-nome"></h2>
                     <span id="modal-equipe"></span>
@@ -394,12 +405,18 @@
     </div>
 
     <footer>
-        © 2026 BRS Racing League. All rights reserved.<br>
+        © 2026 BRS Racing League. Todos os direitos reservados.<br>
         <span id="last-update" style="color:var(--neon-cyan); font-size:0.75rem; margin-top:5px; display:block;"></span>
     </footer>
 
-    <script src="config.js"></script>
-    <script src="engine.js"></script>
+    <script>
+        /* Cache-busting diário: document.write é síncrono e bloqueia o parser
+           igual a um <script src> normal, então CONFIG e BRS ficam prontos
+           antes que o bloco inline abaixo execute. */
+        var _brsV = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        document.write('<scr\ipt src="config.js?v=' + _brsV + '"><\/scr\ipt>');
+        document.write('<scr\ipt src="engine.js?v=' + _brsV + '"><\/scr\ipt>');
+    </script>
     <script>
 
         // ── CONFIGURAÇÃO DA NAVEGAÇÃO ────────────────────────────
@@ -409,15 +426,21 @@
             { label: '🏆 Evolution CUP', target: 'section-evolution' },
             { label: '📅 Calendário',    target: 'calendario'        },
             { label: '🏆 Legacy CUP',    target: 'section-legacy'    },
-            // { label: '📊 Estatísticas',  target: 'estatisticas'      },
+        ];
+        const NAV_MORE = [
             { label: '📅 Etapas',        target: 'pistas'            },
             { label: '📋 Grade',         target: 'grade-resultados'  },
             { label: '📈 Evolução',      target: 'evolucao-pontos'   },
-            { label: '🎬 Videos',        target: 'videos'            },
+            { label: '🎬 Vídeos',        target: 'videos'            },
             { label: '📸 Galeria',       target: 'galeria'           },
+            { label: '📊 Estatísticas',  target: 'estatisticas'      },
+            { label: '🚨 Penalidades',   target: 'penalidades'       },
             { label: '📜 Regras',        target: 'regras'            },
-            { label: '📜 Inscrições',    target: 'inscricoes'        },
+            { label: '📝 Inscrições',    target: 'inscricoes'        },
         ];
+
+        // Placeholder SVG usado em imagens ausentes (silhueta de piloto)
+        const PLACEHOLDER_FOTO = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23222'/%3E%3Ccircle cx='40' cy='28' r='14' fill='%23555'/%3E%3Cellipse cx='40' cy='68' rx='24' ry='20' fill='%23555'/%3E%3C/svg%3E";
 
         // ── UTILITÁRIOS ──────────────────────────────────────────
         function getRankClass(i) {
@@ -429,9 +452,9 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
-            // Re-renderiza o canvas quando a seção evolução se torna visível
-            // (canvas em display:none tem clientWidth=0 e distorce o gráfico)
             if (id === 'evolucao-pontos') renderEvolucao();
+            // Deep link: atualiza o hash da URL sem rolar a página
+            history.replaceState(null, '', '#' + id);
         }
 
         function updateFooterDate() {
@@ -641,13 +664,58 @@
         // ── NAVEGAÇÃO ────────────────────────────────────────────
         function buildNav() {
             const nav = document.getElementById('nav-container');
-            nav.innerHTML = NAV_ITEMS.map(item => `
+
+            // Botões primários
+            const primaryHTML = NAV_ITEMS.map(item => `
                 <button class="nav-btn${item.active ? ' active' : ''}"
                         data-target="${item.target}">${item.label}</button>
             `).join('');
+
+            // Dropdown "Mais"
+            const moreHTML = `
+                <div class="nav-dropdown" id="nav-more-wrap">
+                    <button class="nav-btn" id="nav-more-btn" aria-haspopup="true" aria-expanded="false">☰ Mais ▾</button>
+                    <div class="nav-dropdown-menu" id="nav-more-menu">
+                        ${NAV_MORE.map(item => `
+                            <button data-target="${item.target}">${item.label}</button>
+                        `).join('')}
+                    </div>
+                </div>`;
+
+            nav.innerHTML = primaryHTML + moreHTML;
+
+            // Clique nos botões primários
             nav.addEventListener('click', e => {
                 const btn = e.target.closest('.nav-btn[data-target]');
-                if (btn) showSection(btn.dataset.target, btn);
+                if (btn) {
+                    showSection(btn.dataset.target, btn);
+                    // Marca item do dropdown como ativo quando clicado
+                    nav.querySelectorAll('.nav-dropdown-menu button').forEach(b => b.classList.remove('active'));
+                    return;
+                }
+                // Toggle dropdown
+                if (e.target.closest('#nav-more-btn')) {
+                    const wrap = document.getElementById('nav-more-wrap');
+                    const open = wrap.classList.toggle('open');
+                    document.getElementById('nav-more-btn').setAttribute('aria-expanded', open);
+                    return;
+                }
+                // Clique em item do dropdown
+                const moreBtn = e.target.closest('#nav-more-menu button[data-target]');
+                if (moreBtn) {
+                    showSection(moreBtn.dataset.target, null);
+                    nav.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    nav.querySelectorAll('#nav-more-menu button').forEach(b => b.classList.remove('active'));
+                    moreBtn.classList.add('active');
+                    document.getElementById('nav-more-wrap').classList.remove('open');
+                }
+            });
+
+            // Fecha dropdown ao clicar fora
+            document.addEventListener('click', e => {
+                if (!e.target.closest('#nav-more-wrap')) {
+                    document.getElementById('nav-more-wrap')?.classList.remove('open');
+                }
             });
         }
 
@@ -693,9 +761,26 @@
         }
 
         function buildEstatisticas() {
+            const theadVit = `<tr>
+                <th class="cup-th pos-col"></th>
+                <th class="cup-th">Piloto</th>
+                <th class="cup-th team-col">Equipe</th>
+                <th class="cup-th pts-col" style="text-align:right;">Vitórias</th>
+                <th class="cup-th pts-col" style="text-align:right;">Pódios</th>
+            </tr>`;
+            const theadRate = `<tr>
+                <th class="cup-th pos-col"></th>
+                <th class="cup-th">Piloto</th>
+                <th class="cup-th team-col">Equipe</th>
+                <th class="cup-th pts-col" style="text-align:right;">Corridas</th>
+                <th class="cup-th pts-col" style="text-align:right;">Pts/Corrida</th>
+            </tr>`;
             document.getElementById('estatisticas').innerHTML =
-                `<div class="panel-grid">
-                    ${cardTable('🏆 Maiores Vencedores', ['Vitórias'], 'tbody-stats-vitorias')}
+                `<div class="section-title"><h2>📊 Estatísticas Gerais</h2><p>Acumulado de todos os campeonatos</p></div>
+                <div class="panel-grid">
+                    ${cardTable('🏆 Maiores Vencedores', [], 'tbody-stats-vitorias', theadVit)}
+                    ${cardTable('🏅 Mais Pódios', [], 'tbody-stats-podiums', theadVit)}
+                    ${cardTable('📈 Melhor Taxa de Pontos', [], 'tbody-stats-rate', theadRate)}
                 </div>`;
         }
 
@@ -762,28 +847,96 @@
         // ── ESTATÍSTICAS ─────────────────────────────────────────
         function renderStats() {
             const stats = BRS.stats();
-            const empty = msg => `<tr><td colspan="4" style="text-align:center;opacity:.5;">${msg}</td></tr>`;
-            const row   = (d, i) => `
+            const empty = cols => `<tr><td colspan="${cols}" style="text-align:center;opacity:.5;padding:1rem;">Sem dados ainda</td></tr>`;
+
+            const rowVit = (d, i) => `
                 <tr>
                     <td class="pos-col ${getRankClass(i)}">${i+1}</td>
                     <td class="name-col">${d.nome}</td>
                     <td class="team-col">${d.equipe}</td>
-                    <td class="pts-col">${d.count}</td>
+                    <td class="pts-col">${d.wins}</td>
+                    <td class="pts-col" style="color:var(--text-muted);">${d.podiums}</td>
+                </tr>`;
+
+            const rowRate = (d, i) => `
+                <tr>
+                    <td class="pos-col ${getRankClass(i)}">${i+1}</td>
+                    <td class="name-col">${d.nome}</td>
+                    <td class="team-col">${d.equipe}</td>
+                    <td class="pts-col" style="color:var(--text-muted);">${d.races}</td>
+                    <td class="pts-col">${d.rate}</td>
                 </tr>`;
 
             document.getElementById('tbody-stats-vitorias').innerHTML =
-                stats.wins.length ? stats.wins.map(row).join('') : empty('Nenhuma vitória registrada');
+                stats.wins.length    ? stats.wins.map(rowVit).join('')    : empty(5);
+            document.getElementById('tbody-stats-podiums').innerHTML =
+                stats.podiums.length ? stats.podiums.map(rowVit).join('') : empty(5);
+            document.getElementById('tbody-stats-rate').innerHTML =
+                stats.rate.length    ? stats.rate.map(rowRate).join('')   : empty(5);
+        }
+
+        // ── PENALIDADES (SR) ─────────────────────────────────────
+        function renderPenalidades() {
+            const el = document.getElementById('penalidades');
+            if (!el) return;
+
+            // Coleta SR ativo por piloto em cada cup
+            const rows = [];
+            CUPS.forEach(cup => {
+                BRS.drivers[cup.id]().forEach(d => {
+                    if (d.sr) rows.push({ nome: d.nome, equipe: d.equipe, cor: d.cor, cup: cup.label, sr: d.sr });
+                });
+            });
+
+            // Ordena: mais penalizado primeiro (sr é positivo nos dados; quanto maior, pior)
+            rows.sort((a, b) => b.sr - a.sr || a.nome.localeCompare(b.nome));
+
+            const corpo = rows.length
+                ? rows.map((d, i) => `
+                    <tr>
+                        <td class="pos-col ${getRankClass(i)}">${i + 1}</td>
+                        <td class="name-col">
+                            ${d.nome}
+                            <span style="display:block;font-size:0.75rem;color:var(--text-muted);font-weight:400;">${d.equipe}</span>
+                        </td>
+                        <td style="font-size:0.8rem;color:var(--text-muted);">${d.cup} CUP</td>
+                        <td class="pts-col" style="color:var(--neon-red);text-shadow:0 0 6px rgba(255,68,68,0.4);font-family:'Rajdhani',sans-serif;">${d.sr}</td>
+                    </tr>`).join('')
+                : `<tr><td colspan="4" style="text-align:center;opacity:.5;padding:1.5rem;">Nenhuma penalidade registrada. ✅</td></tr>`;
+
+            const thead = `<tr>
+                <th class="cup-th pos-col"></th>
+                <th class="cup-th">Piloto</th>
+                <th class="cup-th">Campeonato</th>
+                <th class="cup-th" style="text-align:right;color:var(--neon-red);opacity:0.85;">SR</th>
+            </tr>`;
+
+            el.innerHTML = `
+                <div class="section-title">
+                    <h2>🚨 Painel de Penalidades</h2>
+                    <p>Safety Rating ativo (últimas 3 corridas de cada campeonato)</p>
+                </div>
+                <div class="panel-grid" style="grid-template-columns:1fr;">
+                    ${cardTable('SR Atual por Piloto', [], 'tbody-sr', thead)}
+                </div>`;
+
+            // tbody já existe agora
+            document.getElementById('tbody-sr').innerHTML = corpo;
         }
 
         // ── GRID DE PILOTOS ──────────────────────────────────────
         function renderDriversGrid() {
             const grid = document.getElementById('drivers-grid');
             if (!grid) return;
-            const drivers  = BRS.drivers.evolution();
+            const cup      = getCupCorrente();
+            const cupLabel = { ignition: 'IGNITION CUP', evolution: 'EVOLUTION CUP', legacy: 'LEGACY CUP' }[cup] ?? cup.toUpperCase();
+            const labelEl  = document.getElementById('pilotos-cup-label');
+            if (labelEl) labelEl.textContent = cupLabel;
+            const drivers  = BRS.drivers[cup]();
             const liderPts = drivers[0]?.points ?? 0;
             grid.innerHTML = drivers.map((d, i) => {
                 const equipe = BRS.equipe(d.equipe);
-                const dImg   = BRS.fotoPiloto(d.nome, 'evolution');
+                const dImg   = BRS.fotoPiloto(d.nome, cup);
                 const cImg   = equipe?.carro ?? '';
                 const gapHtml = i === 0
                     ? `<div class="driver-gap gap-leader">LÍDER</div>`
@@ -800,7 +953,7 @@
                     </div>
                     <div class="driver-content">
                         <div class="driver-photo-container" style="border-color:${d.cor}; box-shadow: 0 0 8px ${d.cor}66;">
-                            <img src="${dImg}" class="driver-photo-img" onerror="this.style.display='none'">
+                            <img src="${dImg}" class="driver-photo-img" onerror="this.src=PLACEHOLDER_FOTO;this.onerror=null;">
                         </div>
                         <div class="driver-info">
                             <h3>${d.nome}</h3>
@@ -1416,7 +1569,7 @@
                             <div class="grade-cell-inner"
                                  style="border-color:${cor}; box-shadow:0 0 6px ${cor}55;"
                                  data-nome="${res.piloto}">
-                                <img src="${foto}" alt="${res.piloto}" onerror="this.style.display='none'">
+                                <img src="${foto}" alt="${res.piloto}" onerror="this.src=PLACEHOLDER_FOTO;this.onerror=null;">
                                 ${pontos}
                             </div></div></td>`;
                     }).join('')}
@@ -1452,6 +1605,7 @@
             });
 
             renderStats();
+            renderPenalidades();
             renderRegulamento();
             renderDriversGrid();
             renderPistas();
@@ -1467,7 +1621,22 @@
                 resizeTimer = setTimeout(renderEvolucao, 120);
             });
 
-            showSection('pilotos', document.querySelector('[data-target="pilotos"]'));
+            // Deep link: restaura seção a partir do hash da URL (ex: #calendario)
+            const hashTarget = location.hash.slice(1);
+            const hashEl     = hashTarget && document.getElementById(hashTarget);
+            const hashBtn    = hashTarget && (
+                document.querySelector(`[data-target="${hashTarget}"]`) ||
+                document.querySelector(`#nav-more-menu [data-target="${hashTarget}"]`)
+            );
+            if (hashEl) {
+                showSection(hashTarget, hashBtn || null);
+                if (hashBtn && document.getElementById('nav-more-menu')?.contains(hashBtn)) {
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    hashBtn.classList.add('active');
+                }
+            } else {
+                showSection('pilotos', document.querySelector('[data-target="pilotos"]'));
+            }
         });
 
     </script>

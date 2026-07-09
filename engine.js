@@ -105,26 +105,34 @@ const BRS = (() => {
 
   // ── ESTATÍSTICAS GLOBAIS ─────────────────────────────────────
   function calcStats() {
-    const wins = {};
+    const acc = {};
+    CONFIG.pilotos.forEach(p => {
+      acc[p.nome] = { nome: p.nome, foto: p.foto || '', equipe: p.equipe || '',
+                      cor: _equipeMap[p.equipe]?.cor || '#888',
+                      wins: 0, podiums: 0, races: 0, points: 0 };
+    });
 
     CONFIG.pistas.forEach(pista => {
       pista.resultados.forEach(r => {
-        if (r.pos === 1) wins[r.piloto] = (wins[r.piloto] || 0) + 1;
+        if (!acc[r.piloto]) return;
+        acc[r.piloto].races++;
+        acc[r.piloto].points += r.pontos;
+        if (r.pos === 1) acc[r.piloto].wins++;
+        if (r.pos <= 3)  acc[r.piloto].podiums++;
       });
     });
 
-    const toArr = obj =>
-      Object.entries(obj)
-        .map(([nome, count]) => ({
-          nome,
-          count,
-          foto:   _pilotoMap[nome]?.foto   || "",
-          equipe: _pilotoMap[nome]?.equipe || "",
-          cor:    _equipeMap[_pilotoMap[nome]?.equipe]?.cor || "#888"
-        }))
-        .sort((a, b) => b.count - a.count || a.nome.localeCompare(b.nome));
+    const ativos = Object.values(acc)
+      .filter(d => d.races > 0)
+      .map(d => ({ ...d, rate: (d.points / d.races).toFixed(1) }));
 
-    return { wins: toArr(wins) };
+    return {
+      wins:    [...ativos].filter(d => d.wins > 0)
+                          .sort((a, b) => b.wins - a.wins || b.podiums - a.podiums),
+      podiums: [...ativos].filter(d => d.podiums > 0)
+                          .sort((a, b) => b.podiums - a.podiums || b.wins - a.wins),
+      rate:    [...ativos].sort((a, b) => parseFloat(b.rate) - parseFloat(a.rate))
+    };
   }
 
   // ── CALENDÁRIO COM STATUS ────────────────────────────────────
