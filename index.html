@@ -340,6 +340,7 @@
         /* ── EVOLUÇÃO DE PONTOS ──────────────────────────────── */
         .evolucao-wrap { background: var(--panel-bg); border: 1px solid rgba(0,243,255,0.2); border-radius: 12px; padding: 1.5rem 1rem 1rem; position: relative; }
         #evolucao-canvas { width: 100%; display: block; cursor: crosshair; }
+        #evolucao-pos-canvas { width: 100%; display: block; cursor: crosshair; }
         .evolucao-legenda { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.07); }
         .evolucao-leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; cursor: pointer; opacity: 1; transition: opacity 0.2s; user-select: none; padding: 3px 8px; border-radius: 4px; }
         .evolucao-leg-item:hover { background: rgba(255,255,255,0.05); }
@@ -447,6 +448,15 @@
                 <div class="evolucao-tooltip" id="evolucao-tooltip"></div>
                 <canvas id="evolucao-canvas"></canvas>
                 <div class="evolucao-legenda" id="evolucao-legenda"></div>
+            </div>
+            <div class="section-title" style="margin-top:2rem; margin-bottom:1rem;">
+                <h2>🏁 Posições de Chegada por Etapa</h2>
+                <p>Eixo Y invertido: 1º lugar no topo. Clique na legenda para mostrar/ocultar.</p>
+            </div>
+            <div class="evolucao-wrap">
+                <div class="evolucao-tooltip" id="evolucao-pos-tooltip"></div>
+                <canvas id="evolucao-pos-canvas"></canvas>
+                <div class="evolucao-legenda" id="evolucao-pos-legenda"></div>
             </div>
         </div>
 
@@ -2122,6 +2132,272 @@
                 tooltip.style.display = 'block';
             }
 
+            canvas.removeEventListener('mousemove', canvas._mmHandler);
+            canvas.removeEventListener('mouseleave', canvas._mlHandler);
+            canvas._mmHandler = onMouseMove;
+            canvas._mlHandler = () => { tooltip.style.display = 'none'; };
+            canvas.addEventListener('mousemove', canvas._mmHandler);
+            canvas.addEventListener('mouseleave', canvas._mlHandler);
+
+            renderEvolucaoPos();
+        }
+
+        function calcEvolucaoPos(cup) {
+            const etapas  = CONFIG.calendario[cup];
+            const pistas  = BRS.pistas();
+            const pilotos = CONFIG.campeonatos[cup].pilotos;
+
+            const labels = [];
+            const series = {};
+            const dnf    = {};
+            pilotos.forEach(n => { series[n] = []; dnf[n] = []; });
+
+            let maxPos = 0;
+            etapas.forEach(e => {
+                const pista = pistas[e.pistasIdx];
+                if (!pista || !pista.resultados.length) return;
+                labels.push(e.track);
+                maxPos = Math.max(maxPos, pista.resultados.length);
+                const lastPos = pista.resultados.length;
+                pilotos.forEach(n => {
+                    const res = pista.resultados.find(r => r.piloto === n);
+                    const isDnf = !res || res.pontos === 0;
+                    series[n].push(isDnf ? lastPos : res.pos);
+                    dnf[n].push(isDnf);
+                });
+            });
+
+            // Mesma ordenação do gráfico de pontos (total acumulado desc)
+            const acc = {};
+            pilotos.forEach(n => { acc[n] = 0; });
+            etapas.forEach(e => {
+                const pista = pistas[e.pistasIdx];
+                if (!pista?.resultados.length) return;
+                pista.resultados.forEach(r => { if (acc[r.piloto] !== undefined) acc[r.piloto] += r.pontos; });
+            });
+            const ordenados = [...pilotos].sort((a,b) => (acc[b]||0) - (acc[a]||0));
+
+            const ordenadosFiltrados = ordenados;
+
+            // maxPos real: maior posição registrada (incluindo fallback na última)
+            const maxPosFiltrado = Math.max(maxPos, 1);
+
+            // Melhor posição por piloto (para a legenda)
+            const melhores = {};
+            pilotos.forEach(n => {
+                const ps = series[n].filter(p => p != null);
+                melhores[n] = ps.length ? Math.min(...ps) : null;
+            });
+
+            return { labels, series, dnf, ordenados: ordenadosFiltrados, maxPos: maxPosFiltrado, melhores };
+        }
+
+        function renderEvolucaoPos() {
+            const canvas  = document.getElementById('evolucao-pos-canvas');
+            const tooltip = document.getElementById('evolucao-pos-tooltip');
+            const legenda = document.getElementById('evolucao-pos-legenda');
+            if (!canvas) return;
+
+            const { cup, ocultos } = evolucaoEstado;
+            const { labels, series, dnf, ordenados, maxPos, melhores } = calcEvolucaoPos(cup);
+
+            if (!labels.length) {
+                canvas.style.display = 'none';
+                legenda.innerHTML = '';
+                return;
+            }
+            canvas.style.display = 'block';
+
+            const cores = {};
+            ordenados.forEach(n => { cores[n] = corDoPiloto(n); });
+
+            // ── LEGENDA ──
+            legenda.innerHTML = ordenados.map(nome => `
+                <div class="evolucao-leg-item${ocultos.has(nome)?' oculto':''}" data-piloto="${nome}">
+                    <div class="evolucao-leg-cor" style="background:${cores[nome]};"></div>
+                    <span style="color:${ocultos.has(nome)?'var(--text-muted)':cores[nome]}; font-weight:600;">
+                        ${melhores[nome] != null ? melhores[nome]+'º' : '—'} ${nome}
+                    </span>
+                </div>`).join('');
+
+            legenda.querySelectorAll('.evolucao-leg-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const n = item.dataset.piloto;
+                    if (ocultos.has(n)) ocultos.delete(n); else ocultos.add(n);
+                    renderEvolucao();
+                });
+            });
+
+            // ── CANVAS ──
+            const DPR   = window.devicePixelRatio || 1;
+            const W_CSS = canvas.parentElement.clientWidth - 32;
+            if (W_CSS <= 0) return;
+
+            const PAD   = { top: 20, right: 130, bottom: 100, left: 52 };
+            const plotW = W_CSS - PAD.left - PAD.right;
+            const H_CSS = Math.max(500, maxPos * 40 + PAD.top + PAD.bottom);
+            const plotH = H_CSS - PAD.top - PAD.bottom;
+
+            canvas.width  = W_CSS * DPR;
+            canvas.height = H_CSS * DPR;
+            canvas.style.width  = W_CSS + 'px';
+            canvas.style.height = H_CSS + 'px';
+
+            const ctx = canvas.getContext('2d');
+            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+            ctx.clearRect(0, 0, W_CSS, H_CSS);
+
+            const xStep = labels.length > 1 ? plotW / (labels.length - 1) : plotW;
+            const xOf   = i   => PAD.left + i * xStep;
+            const yOf   = pos => PAD.top + (pos - 1) / Math.max(maxPos - 1, 1) * plotH;
+
+            // Grade horizontal — uma linha por posição
+            const step = 1;
+            ctx.font = '11px Titillium Web, sans-serif';
+            for (let pos = 1; pos <= maxPos; pos += step) {
+                const y = yOf(pos);
+                ctx.beginPath();
+                ctx.strokeStyle = pos === 1 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)';
+                ctx.lineWidth   = pos === 1 ? 1 : 0.5;
+                ctx.moveTo(PAD.left, y);
+                ctx.lineTo(PAD.left + plotW, y);
+                ctx.stroke();
+                ctx.fillStyle  = 'rgba(139,155,180,0.8)';
+                ctx.textAlign  = 'right';
+                ctx.fillText(pos + 'º', PAD.left - 6, y + 4);
+            }
+
+            // Rótulos eixo X (inclinados)
+            ctx.save();
+            ctx.fillStyle = 'rgba(139,155,180,0.9)';
+            ctx.font = '10px Titillium Web, sans-serif';
+            labels.forEach((lbl, i) => {
+                const x = xOf(i);
+                ctx.save();
+                ctx.translate(x, PAD.top + plotH + 8);
+                ctx.rotate(-Math.PI / 4);
+                ctx.textAlign = 'right';
+                ctx.fillText(lbl, 0, 0);
+                ctx.restore();
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(x, PAD.top);
+                ctx.lineTo(x, PAD.top + plotH);
+                ctx.stroke();
+            });
+            ctx.restore();
+
+            // Linhas dos pilotos (ordem inversa para líderes ficarem na frente)
+            const endLabels = [];
+            [...ordenados].reverse().forEach(nome => {
+                if (ocultos.has(nome)) return;
+                const posData = series[nome];
+                const cor = cores[nome];
+                if (!posData.length) return;
+
+                ctx.strokeStyle = cor;
+                ctx.lineWidth   = 3;
+                ctx.lineJoin    = 'round';
+                ctx.lineCap     = 'round';
+
+                // Linha contínua (todos os pontos, incluindo DNF)
+                ctx.beginPath();
+                posData.forEach((pos, i) => {
+                    if (i === 0) ctx.moveTo(xOf(i), yOf(pos));
+                    else ctx.lineTo(xOf(i), yOf(pos));
+                });
+                ctx.stroke();
+
+                // Marcadores: círculo = posição real, X = DNF
+                const dnfData = dnf[nome];
+                posData.forEach((pos, i) => {
+                    const isDnf = dnfData[i];
+                    const x = xOf(i), y = yOf(pos);
+                    if (isDnf) {
+                        // X para DNF
+                        const s = 5;
+                        ctx.strokeStyle = cor;
+                        ctx.lineWidth = 2;
+                        ctx.beginPath(); ctx.moveTo(x-s, y-s); ctx.lineTo(x+s, y+s); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(x+s, y-s); ctx.lineTo(x-s, y+s); ctx.stroke();
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(x, y, 5.5, 0, Math.PI * 2);
+                        ctx.fillStyle = cor;
+                        ctx.fill();
+                        ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                    }
+                });
+
+                // Label final (última corrida)
+                const lastIdx = posData.length - 1;
+                endLabels.push({ nome: nome.split(' ')[0], cor, x: xOf(lastIdx), yIdeal: yOf(posData[lastIdx]) });
+            });
+
+            // Anti-colisão labels finais
+            const LINE_H = 14, MARGIN = 4;
+            endLabels.sort((a,b) => a.yIdeal - b.yIdeal);
+            endLabels.forEach(lbl => { lbl.yAnchor = lbl.yIdeal; lbl.yFinal = lbl.yIdeal; });
+            for (let i = 1; i < endLabels.length; i++) {
+                if (endLabels[i].yFinal < endLabels[i-1].yFinal + LINE_H + MARGIN)
+                    endLabels[i].yFinal = endLabels[i-1].yFinal + LINE_H + MARGIN;
+            }
+            const yMax = PAD.top + plotH;
+            for (let i = endLabels.length-1; i >= 0; i--) {
+                if (endLabels[i].yFinal > yMax) endLabels[i].yFinal = yMax;
+                if (i < endLabels.length-1 && endLabels[i].yFinal > endLabels[i+1].yFinal - LINE_H - MARGIN)
+                    endLabels[i].yFinal = endLabels[i+1].yFinal - LINE_H - MARGIN;
+            }
+            ctx.font = 'bold 11px Titillium Web, sans-serif';
+            endLabels.forEach(lbl => {
+                if (Math.abs(lbl.yFinal - lbl.yAnchor) > 3) {
+                    ctx.beginPath();
+                    ctx.setLineDash([3,3]);
+                    ctx.strokeStyle = 'rgba(139,155,180,0.35)';
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(lbl.x+7, lbl.yAnchor);
+                    ctx.lineTo(lbl.x+18, lbl.yFinal+1);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+                ctx.fillStyle  = lbl.cor;
+                ctx.textAlign  = 'left';
+                ctx.fillText(lbl.nome, lbl.x+10, lbl.yFinal+4);
+            });
+
+            // ── TOOLTIP ──
+            function onMouseMove(e) {
+                const rect = canvas.getBoundingClientRect();
+                const mx   = e.clientX - rect.left;
+                const my   = e.clientY - rect.top;
+                if (mx < PAD.left || mx > PAD.left+plotW || my < PAD.top || my > PAD.top+plotH) {
+                    tooltip.style.display = 'none'; return;
+                }
+                const idx = Math.round((mx - PAD.left) / xStep);
+                if (idx < 0 || idx >= labels.length) { tooltip.style.display = 'none'; return; }
+
+                const visíveis = ordenados.filter(n => !ocultos.has(n));
+                visíveis.sort((a,b) => (series[a][idx]||99) - (series[b][idx]||99));
+
+                tooltip.innerHTML = `
+                    <div class="evolucao-tt-titulo">${labels[idx]}</div>
+                    ${visíveis.map(n => `
+                        <div class="evolucao-tt-linha">
+                            <div class="evolucao-tt-cor" style="background:${cores[n]};"></div>
+                            <span>${n}</span>
+                            <span class="evolucao-tt-pts">${dnf[n][idx] ? 'DNF' : series[n][idx]+'º'}</span>
+                        </div>`).join('')}`;
+
+                const ttW = 240, ttH = tooltip.offsetHeight || 40;
+                let tx = e.clientX+14, ty = e.clientY-ttH/2;
+                if (tx+ttW > window.innerWidth-8) tx = e.clientX-ttW-14;
+                if (ty < 8) ty = 8;
+                if (ty+ttH > window.innerHeight-8) ty = window.innerHeight-ttH-8;
+                tooltip.style.left = tx+'px'; tooltip.style.top = ty+'px'; tooltip.style.display = 'block';
+            }
             canvas.removeEventListener('mousemove', canvas._mmHandler);
             canvas.removeEventListener('mouseleave', canvas._mlHandler);
             canvas._mmHandler = onMouseMove;
