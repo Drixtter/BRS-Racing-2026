@@ -29,6 +29,15 @@
             --text-main: #ffffff; --text-muted: #8b9bb4;
             --gold: #ffd700; --silver: #c0c0c0; --bronze: #cd7f32;
         }
+
+        /* ── Scrollbars ─────────────────────────────────────────── */
+        ::-webkit-scrollbar              { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track        { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb        { background: rgba(0,243,255,0.25); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover  { background: rgba(0,243,255,0.55); }
+        ::-webkit-scrollbar-corner       { background: var(--dark-bg); }
+        * { scrollbar-width: thin; scrollbar-color: rgba(0,243,255,0.25) transparent; }
+
         body { font-family: 'Titillium Web', sans-serif; background-color: var(--dark-bg); background-image: radial-gradient(circle at 10% 20%, rgba(0,243,255,0.03) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(0,243,255,0.03) 0%, transparent 20%); color: var(--text-main); min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
         .header-container { text-align: center; padding: 2rem 1rem 1rem; display: flex; flex-direction: column; align-items: center; }
         .logo-img { max-width: 350px; width: 100%; height: auto; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(0,243,255,0.3)); transition: transform 0.3s ease; }
@@ -250,6 +259,65 @@
         .modal-tab-panel.active { display: block; }
         .driver-box { cursor: pointer; }
 
+        /* ── TELEMETRIA ────────────────────────────────────────── */
+        .modal-box.tele-mode { max-width: 980px; }
+        #modal-tele-btn { position: absolute; top: 1rem; right: 3.6rem; background: rgba(26,29,33,0.8); border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.32rem 0.7rem; font-family: 'Titillium Web', sans-serif; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all 0.2s; letter-spacing: 0.5px; }
+        #modal-tele-btn:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+        #modal-tele-btn.ativo { border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0,243,255,0.08); }
+        .modal-tele-panel { display: none; padding: 1.2rem 1.5rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+        .modal-tele-panel.active { display: block; }
+        .modal-tele {
+            --bg:#111316; --panel:#1a1d21; --ink:#f4f3ef; --ink-2:#b9b6ac; --muted:#8b9bb4;
+            --grid:rgba(255,255,255,0.06); --axis:rgba(255,255,255,0.14); --border:rgba(255,255,255,0.09);
+            --accent:#00f3ff; --accent-text:#00f3ff; --accent-soft:rgba(0,243,255,0.08);
+            --c-soft:#e8564a; --c-med:#b8890f; --c-hard:#6688dd;
+            --w-fl:#3987e5; --w-fr:#199e70; --w-rl:#c98500; --w-rr:#008300;
+            --tooltip-bg:#f4f3ef; --tooltip-ink:#14120f;
+            font-family: 'Titillium Web', sans-serif; font-size: 14px;
+        }
+        .modal-tele .tele-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; font-family: 'Rajdhani', sans-serif; }
+        .modal-tele .tele-stitle { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 600; margin: 2px 0; color: var(--ink); }
+        .modal-tele .tele-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .modal-tele .tele-tab { border: 1px solid var(--border); background: var(--panel); color: var(--ink-2); padding: 6px 14px; font-size: 13px; letter-spacing: 0.04em; cursor: pointer; border-radius: 3px; text-transform: uppercase; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+        .modal-tele .tele-tab:hover { border-color: var(--accent); color: var(--ink); }
+        .modal-tele .tele-tab.on { background: var(--accent); border-color: var(--accent); color: #0a0d10; font-weight: 700; }
+        .modal-tele .tele-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin-bottom: 18px; }
+        .modal-tele .tele-kpi { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 11px 13px 9px; border-top: 3px solid var(--accent); }
+        .modal-tele .tele-kpi-lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+        .modal-tele .tele-kpi-val { font-size: 22px; font-weight: 700; line-height: 1.15; margin-top: 2px; font-family: 'Rajdhani', sans-serif; color: var(--ink); }
+        .modal-tele .tele-kpi-note { font-size: 11.5px; color: var(--ink-2); margin-top: 2px; }
+        .modal-tele .tele-panel { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 16px 18px 14px; margin-bottom: 14px; }
+        .modal-tele .tele-ph { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+        .modal-tele .tele-caption { font-size: 12px; color: var(--muted); margin: 2px 0 12px; line-height: 1.5; }
+        .modal-tele .tele-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--ink-2); }
+        .modal-tele .tele-legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: baseline; }
+        .modal-tele .tele-cbox { position: relative; }
+        .modal-tele .tele-cbox svg { display: block; width: 100%; height: auto; }
+        .modal-tele .tele-r2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .modal-tele .tele-r3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+        @media (max-width: 720px) { .modal-tele .tele-r2, .modal-tele .tele-r3 { grid-template-columns: 1fr; } }
+        .modal-tele .tele-mini { font-size: 12px; font-weight: 600; color: var(--ink-2); margin: 0 0 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .modal-tele .tooltip { position: absolute; pointer-events: none; background: var(--tooltip-bg); color: var(--tooltip-ink); padding: 7px 10px; border-radius: 4px; font-size: 12px; line-height: 1.45; white-space: nowrap; opacity: 0; transform: translate(-50%,-110%); z-index: 10; font-variant-numeric: tabular-nums; }
+        .modal-tele svg text { font-family: 'Titillium Web', system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+        .modal-tele .tick { font-size: 10px; fill: var(--muted); }
+        .modal-tele .dlabel { font-size: 11px; font-weight: 600; }
+        .modal-tele .anno { font-size: 10px; fill: var(--muted); font-style: italic; }
+        .modal-tele .tele-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+        .modal-tele .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 12px; color: var(--ink-2); background: var(--bg); }
+        .modal-tele .chip b { color: var(--ink); font-variant-numeric: tabular-nums; }
+        .modal-tele .tbl-wrap { overflow-x: auto; }
+        .modal-tele table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+        .modal-tele th { text-align: right; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 5px 8px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+        .modal-tele td { text-align: right; padding: 4px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; color: var(--ink-2); }
+        .modal-tele th:first-child, .modal-tele td:first-child { text-align: left; }
+        .modal-tele td.best { color: var(--accent-text); font-weight: 700; }
+        .modal-tele tr:hover td { background: var(--accent-soft); }
+        .modal-tele .comp { display: inline-block; min-width: 18px; text-align: center; border-radius: 999px; font-weight: 700; font-size: 11px; padding: 1px 6px; color: #fff; }
+        .modal-tele .comp.S { background: var(--c-soft); }
+        .modal-tele .comp.M { background: var(--c-med); }
+        .modal-tele .comp.H { background: var(--c-hard); }
+        .modal-tele .tele-empty { color: var(--muted); font-size: 0.9rem; padding: 2.5rem 0; text-align: center; letter-spacing: 0.5px; }
+
         /* ── CABEÇALHOS DE TABELA DE CLASSIFICAÇÃO ──────────── */
         .cup-th { font-weight: 400; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 0.5rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
 
@@ -412,12 +480,16 @@
                     <h2 id="modal-nome"></h2>
                     <span id="modal-equipe"></span>
                 </div>
+                <button id="modal-tele-btn" title="Ver telemetria de sessões">📊 Telemetria</button>
                 <button class="modal-close" id="modal-close">✕</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="modal-body-content">
                 <div class="modal-stats" id="modal-stats"></div>
                 <div class="modal-tabs" id="modal-tabs"></div>
                 <div id="modal-historico"></div>
+            </div>
+            <div class="modal-tele-panel" id="modal-tele-panel">
+                <div class="modal-tele" id="modal-tele-body"></div>
             </div>
         </div>
     </div>
@@ -555,6 +627,7 @@
 
         // ── MODAL: PERFIL DO PILOTO ───────────────────────────────
         function abrirPerfil(nome) {
+            _modalCurrentPiloto = nome;
             const piloto = BRS.piloto(nome);
             const equipe = piloto ? BRS.equipe(piloto.equipe) : null;
 
@@ -669,6 +742,499 @@
         function fecharPerfil() {
             document.getElementById('modal-perfil').classList.remove('open');
             document.body.style.overflow = '';
+            document.getElementById('modal-tele-panel').classList.remove('active');
+            document.getElementById('modal-body-content').style.display = '';
+            document.querySelector('.modal-box').classList.remove('tele-mode');
+            const tb = document.getElementById('modal-tele-btn');
+            tb.textContent = '📊 Telemetria'; tb.classList.remove('ativo');
+        }
+
+        // ── TELEMETRIA ────────────────────────────────────────────
+
+        let _modalCurrentPiloto = '';
+        let _curTeleSession = null;
+
+        const TELE_COMP = {
+            S: { name: "Soft",   color: "#e8564a" },
+            M: { name: "Medium", color: "#b8890f" },
+            H: { name: "Hard",   color: "#6688dd" }
+        };
+        const TELE_WHEELS = [
+            { key: "FL", label: "Diant. esq.", color: "#3987e5", idx: 7 },
+            { key: "FR", label: "Diant. dir.", color: "#199e70", idx: 8 },
+            { key: "RL", label: "Tras. esq.", color: "#c98500", idx: 9 },
+            { key: "RR", label: "Tras. dir.", color: "#008300", idx: 10 }
+        ];
+
+        const PILOTOS_TELEMETRIA = {
+            "Adriano Drixtter": {
+                gb: {
+                    name: "Silverstone — Corrida", date: "07/07/2026", track: "Silverstone",
+                    quali: 101.118, overallBest: 94.221, overallDriver: "NORRIS",
+                    trackTemp: 35, airTemp: 24,
+                    laps: [
+                        [1,109.094,38.583,41.245,29.266,"S",0,3,2,3,1,36.828,1.759,321,"out"],
+                        [2,100.449,30.907,41.228,28.314,"S",1,5,4,7,3,35.024,1.803,307,""],
+                        [3,101.691,32.051,40.923,28.717,"S",2,8,6,14,6,33.214,1.810,306,""],
+                        [4,103.558,31.618,41.179,30.761,"S",3,11,9,20,8,31.380,1.833,317,""],
+                        [5,104.666,33.445,42.838,28.383,"S",4,14,11,25,11,29.509,1.871,304,""],
+                        [6,103.834,33.106,42.527,28.201,"S",5,16,13,30,13,27.646,1.863,306,""],
+                        [7,100.947,32.997,41.479,26.471,"S",6,19,15,37,16,25.828,1.817,307,""],
+                        [8,113.055,33.001,44.112,35.942,"S",7,22,18,43,20,24.151,1.677,312,"in"],
+                        [9,134.698,null,null,null,"M",0,1,1,2,1,22.415,null,307,"pit"],
+                        [10,101.201,32.796,41.085,27.320,"M",1,3,3,6,3,20.543,1.872,311,""],
+                        [11,101.397,30.961,41.270,29.166,"M",2,6,4,11,5,18.754,1.788,302,""],
+                        [12,105.100,34.099,43.687,27.314,"M",3,8,6,15,7,16.923,1.831,307,""],
+                        [13,102.428,31.740,40.806,29.882,"M",4,10,8,20,9,15.045,1.877,308,""],
+                        [14,104.667,30.415,45.327,28.925,"M",5,13,10,25,11,13.334,1.711,322,""],
+                        [15,104.227,32.005,43.393,28.829,"M",6,14,12,28,12,11.592,1.741,321,""],
+                        [16,103.767,32.663,43.202,27.902,"M",7,17,14,34,15,9.788,1.803,316,""],
+                        [17,103.442,32.173,41.935,29.334,"M",8,19,16,38,18,7.955,1.833,301,""]
+                    ],
+                    weather: { offsets:[0,5,10,15,30], rain:[4,4,4,4,4], trackT:[36,36,36,36,36], airT:[24,24,24,24,24] },
+                    paceNote: "17 voltas. Stint 1 em Soft (1–8), pit stop na volta 9, stint 2 em Medium (10–17). Volta 9 (2:14.698) excluída do gráfico.",
+                    degNote: "Voltas de saída/entrada nos boxes excluídas do ajuste. Linha tracejada = tendência linear por composto.",
+                    fuelNote: "Partida com ≈38,6 kg; chegada com ≈6,1 kg. Volta 9 (pit stop) sem consumo registrado."
+                },
+                at: {
+                    name: "Áustria — Corrida", date: "22/06/2026", track: "Áustria",
+                    quali: null, overallBest: 68.762, overallDriver: "VERSTAPPEN",
+                    trackTemp: 33, airTemp: 22,
+                    laps: [
+                        [1,79.997,24.548,33.455,21.994,"H",0,3,3,2,4,54.307,1.488,316,"out"],
+                        [1,80.030,24.548,33.455,22.027,"H",0,3,3,2,4,54.307,1.488,317,"out"],
+                        [1,80.031,24.548,33.455,22.028,"H",0,3,3,2,4,54.307,1.488,311,"out"],
+                        [2,72.934,17.131,32.755,23.048,"H",1,6,6,4,9,52.888,1.417,329,""],
+                        [3,72.197,17.475,32.816,21.906,"H",2,9,10,8,12,51.422,1.464,307,""],
+                        [4,73.268,17.554,33.082,22.632,"H",3,12,12,12,18,49.964,1.457,317,""]
+                    ],
+                    weather: { offsets:[0,5,10,15,30,45,60], rain:[3,2,2,2,2,1,1], trackT:[34,34,34,34,34,34,33], airT:[23,23,23,23,23,23,23] },
+                    paceNote: "Sessão curta: 4 voltas em Hard. A volta 1 aparece três vezes no banco (flashbacks).",
+                    degNote: "Apenas 3 voltas lançadas em Hard — ajuste indicativo. Duplicatas da volta 1 (flashback) excluídas.",
+                    fuelNote: "Sessão iniciada com ≈55,8 kg; consumo médio de ≈1,45 kg por volta."
+                }
+            }
+        };
+
+        /* ── motor de gráficos ── */
+        function teleFmtTime(s) {
+            if (s == null) return "—";
+            const m = Math.floor(s / 60), r = s - m * 60;
+            return m > 0 ? m + ":" + r.toFixed(3).padStart(6,"0") : r.toFixed(3);
+        }
+        const teleFmtBR = (n, d=2) => n.toLocaleString("pt-BR", { minimumFractionDigits:d, maximumFractionDigits:d });
+
+        function teleEl(tag, attrs, parent) {
+            const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+            for (const k in attrs) e.setAttribute(k, attrs[k]);
+            if (parent) parent.appendChild(e);
+            return e;
+        }
+        function teleNiceTicks(min, max, n) {
+            const span = max - min || 1, step0 = span / Math.max(1,n);
+            const mag = Math.pow(10, Math.floor(Math.log10(step0)));
+            let step = mag;
+            for (const m of [1,2,2.5,5,10]) if (m*mag >= step0) { step = m*mag; break; }
+            const t0 = Math.ceil(min/step)*step, out = [];
+            for (let t = t0; t <= max+1e-9; t += step) out.push(+t.toFixed(6));
+            return out;
+        }
+        function teleChart(container, opt) {
+            container.innerHTML = "";
+            const W = opt.w||900, H = opt.h||300;
+            const m = Object.assign({t:18,r:16,b:34,l:52}, opt.margin);
+            const svg = teleEl("svg", { viewBox:`0 0 ${W} ${H}`, role:"img" });
+            container.appendChild(svg);
+            const iw = W-m.l-m.r, ih = H-m.t-m.b;
+            const x = v => m.l + (v-opt.x0)/(opt.x1-opt.x0||1)*iw;
+            const y = v => m.t + ih - (v-opt.y0)/(opt.y1-opt.y0||1)*ih;
+            const yt = opt.yTicks || teleNiceTicks(opt.y0, opt.y1, 5);
+            for (const t of yt) {
+                teleEl("line",{x1:m.l,x2:W-m.r,y1:y(t),y2:y(t),stroke:"rgba(255,255,255,0.06)","stroke-width":1},svg);
+                const lb = teleEl("text",{x:m.l-8,y:y(t)+4,"text-anchor":"end",class:"tick"},svg);
+                lb.textContent = opt.yFmt ? opt.yFmt(t) : t;
+            }
+            teleEl("line",{x1:m.l,x2:W-m.r,y1:m.t+ih,y2:m.t+ih,stroke:"rgba(255,255,255,0.14)","stroke-width":1},svg);
+            for (const t of (opt.xTicks||[])) {
+                const lb = teleEl("text",{x:x(t.v),y:H-m.b+18,"text-anchor":"middle",class:"tick"},svg);
+                lb.textContent = t.label;
+            }
+            if (opt.xLabel) {
+                const lb = teleEl("text",{x:m.l+iw/2,y:H-2,"text-anchor":"middle",class:"tick"},svg);
+                lb.textContent = opt.xLabel;
+            }
+            const tip = document.createElement("div"); tip.className = "tooltip";
+            container.appendChild(tip);
+            const cross = teleEl("line",{y1:m.t,y2:m.t+ih,stroke:"rgba(255,255,255,0.14)","stroke-width":1,"stroke-dasharray":"3 3",opacity:0},svg);
+            function bindHover(points) {
+                const ov = teleEl("rect",{x:m.l,y:m.t,width:iw,height:ih,fill:"transparent"},svg);
+                ov.addEventListener("mousemove", ev => {
+                    const r = svg.getBoundingClientRect();
+                    const mx = (ev.clientX-r.left)*W/r.width;
+                    let best=null, bd=1e9;
+                    for (const p of points) { const d=Math.abs(p.px-mx); if(d<bd){bd=d;best=p;} }
+                    if(!best) return;
+                    cross.setAttribute("x1",best.px); cross.setAttribute("x2",best.px); cross.setAttribute("opacity",1);
+                    tip.innerHTML=best.html;
+                    tip.style.left=(best.px*r.width/W)+"px"; tip.style.top=(best.py*r.height/H)+"px"; tip.style.opacity=1;
+                });
+                ov.addEventListener("mouseleave",()=>{ tip.style.opacity=0; cross.setAttribute("opacity",0); });
+            }
+            return { svg, x, y, m, W, H, iw, ih, bindHover };
+        }
+        const teleLinPath = pts => pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+        function teleLinReg(pts) {
+            const n=pts.length; if(n<2) return null;
+            let sx=0,sy=0,sxy=0,sxx=0;
+            for(const [px,py] of pts){sx+=px;sy+=py;sxy+=px*py;sxx+=px*px;}
+            const b=(n*sxy-sx*sy)/(n*sxx-sx*sx||1);
+            return {a:(sy-b*sx)/n,b};
+        }
+
+        /* ── renders ── */
+        function teleRenderKpis(S) {
+            const clean = S.laps.filter(l=>l[14]!=="pit");
+            const best = Math.min(...clean.map(l=>l[1]));
+            const bestL = clean.find(l=>l[1]===best);
+            const ws = S.laps.filter(l=>l[2]!=null&&l[14]!=="pit");
+            const ideal = Math.min(...ws.map(l=>l[2]))+Math.min(...ws.map(l=>l[3]))+Math.min(...ws.map(l=>l[4]));
+            const cons = S.laps.filter(l=>l[12]!=null).map(l=>l[12]);
+            const avgC = cons.reduce((a,b)=>a+b,0)/cons.length;
+            const maxW = Math.max(...S.laps.flatMap(l=>[l[7],l[8],l[9],l[10]]));
+            const wW = TELE_WHEELS[[7,8,9,10].findIndex(i=>S.laps.some(l=>l[i]===maxW))];
+            document.getElementById('tele-kpis').innerHTML = [
+                {lbl:"Melhor volta",   val:teleFmtTime(best),            note:`volta ${bestL[0]} · ${TELE_COMP[bestL[5]].name}`},
+                {lbl:"Volta ideal",    val:teleFmtTime(ideal),           note:`${teleFmtBR(best-ideal,3)} s na mesa`},
+                {lbl:"Gap p/ melhor",  val:"+"+teleFmtBR(best-S.overallBest,3)+" s", note:`${teleFmtTime(S.overallBest)} · ${S.overallDriver}`},
+                {lbl:"Consumo médio",  val:teleFmtBR(avgC)+" kg/v",     note:`${S.laps.length} voltas`},
+                {lbl:"Desg. máx.",     val:maxW+"%",                     note:wW?.label.toLowerCase()||""}
+            ].map(i=>`<div class="tele-kpi"><div class="tele-kpi-lbl">${i.lbl}</div><div class="tele-kpi-val">${i.val}</div><div class="tele-kpi-note">${i.note}</div></div>`).join('');
+        }
+
+        function teleRenderPace(S) {
+            const laps = S.laps.map((l,i)=>({i,l}));
+            const shown = laps.filter(o=>o.l[14]!=="pit");
+            const ys = shown.map(o=>o.l[1]);
+            const c = teleChart(document.getElementById('tele-paceChart'),{
+                x0:-0.5,x1:laps.length-0.5,y0:Math.min(...ys)-0.8,y1:Math.max(...ys)+0.8,h:280,
+                yFmt:teleFmtTime,
+                xTicks:laps.map(o=>({v:o.i,label:o.l[0]})),xLabel:"volta"
+            });
+            const stints=[]; let cs=null;
+            for(const o of laps){
+                if(o.l[14]==="pit"){cs=null;continue;}
+                if(!cs||cs.comp!==o.l[5]){cs={comp:o.l[5],pts:[]};stints.push(cs);}
+                cs.pts.push(o);
+            }
+            const pit=laps.find(o=>o.l[14]==="pit");
+            if(pit){
+                teleEl("line",{x1:c.x(pit.i),x2:c.x(pit.i),y1:c.m.t,y2:c.m.t+c.ih,stroke:"rgba(255,255,255,0.14)","stroke-dasharray":"4 4"},c.svg);
+                const a=teleEl("text",{x:c.x(pit.i),y:c.m.t+12,"text-anchor":"middle",class:"anno"},c.svg);
+                a.textContent="pit stop";
+            }
+            const best=Math.min(...ys), hover=[];
+            for(const st of stints){
+                const col=TELE_COMP[st.comp].color;
+                const pts=st.pts.map(o=>[c.x(o.i),c.y(o.l[1])]);
+                if(pts.length>1) teleEl("path",{d:teleLinPath(pts),fill:"none",stroke:col,"stroke-width":2,"stroke-linejoin":"round"},c.svg);
+                st.pts.forEach((o,k)=>{
+                    const iB=o.l[1]===best;
+                    teleEl("circle",{cx:pts[k][0],cy:pts[k][1],r:iB?5.5:4,fill:col,stroke:iB?"#00f3ff":"#1a1d21","stroke-width":iB?2.5:1.5},c.svg);
+                    const fl=o.l[14]==="out"?" · saída":o.l[14]==="in"?" · p/ box":"";
+                    hover.push({px:pts[k][0],py:pts[k][1],html:`<b>V${o.l[0]}</b> · ${TELE_COMP[o.l[5]].name}${fl}<br>${teleFmtTime(o.l[1])}`});
+                });
+                const mid=st.pts[Math.floor(st.pts.length/2)];
+                if(st.pts.length>1){
+                    const t=teleEl("text",{x:c.x(mid.i),y:c.y(Math.max(...st.pts.map(o=>o.l[1])))+22,"text-anchor":"middle",class:"dlabel",fill:col},c.svg);
+                    t.textContent=TELE_COMP[st.comp].name.toUpperCase();
+                }
+            }
+            const bo=shown.find(o=>o.l[1]===best);
+            const bl=teleEl("text",{x:c.x(bo.i),y:c.y(best)-10,"text-anchor":"middle",class:"dlabel",fill:"#00f3ff"},c.svg);
+            bl.textContent=teleFmtTime(best);
+            c.bindHover(hover);
+            document.getElementById('tele-paceCaption').textContent=S.paceNote;
+            const comps=[...new Set(S.laps.map(l=>l[5]))];
+            document.getElementById('tele-paceLegend').innerHTML=comps.map(k=>`<span><span class="sw" style="background:${TELE_COMP[k].color}"></span>${TELE_COMP[k].name}</span>`).join('');
+        }
+
+        function teleRenderSectors(S) {
+            const box=document.getElementById('tele-sectorCharts'); box.innerHTML='';
+            const secs=[{n:"Setor 1",idx:2},{n:"Setor 2",idx:3},{n:"Setor 3",idx:4}];
+            const laps=S.laps.map((l,i)=>({i,l})).filter(o=>o.l[2]!=null&&o.l[14]!=="pit");
+            for(const s of secs){
+                const wrap=document.createElement("div");
+                wrap.innerHTML=`<p class="tele-mini">${s.n}</p>`;
+                const cb=document.createElement("div"); cb.className="tele-cbox";
+                wrap.appendChild(cb); box.appendChild(wrap);
+                const vals=laps.map(o=>o.l[s.idx]), mn=Math.min(...vals), mx=Math.max(...vals);
+                const pad=(mx-mn)*0.15+0.05;
+                const c=teleChart(cb,{w:300,h:180,margin:{t:12,r:10,b:26,l:40},
+                    x0:laps[0].i-0.5,x1:laps[laps.length-1].i+0.5,
+                    y0:mn-pad,y1:mx+pad,
+                    yTicks:teleNiceTicks(mn-pad,mx+pad,3),yFmt:v=>teleFmtBR(v,1),
+                    xTicks:laps.filter((_,k)=>k%Math.ceil(laps.length/5)===0).map(o=>({v:o.i,label:o.l[0]}))
+                });
+                const pts=laps.map(o=>[c.x(o.i),c.y(o.l[s.idx])]);
+                teleEl("path",{d:teleLinPath(pts),fill:"none",stroke:"#00f3ff","stroke-width":2,"stroke-linejoin":"round"},c.svg);
+                const bi=vals.indexOf(mn);
+                laps.forEach((_,k)=>{ if(k!==bi) teleEl("circle",{cx:pts[k][0],cy:pts[k][1],r:3,fill:"#00f3ff",stroke:"#1a1d21","stroke-width":1.2},c.svg); });
+                teleEl("circle",{cx:pts[bi][0],cy:pts[bi][1],r:5,fill:"#00f3ff",stroke:"#1a1d21","stroke-width":2},c.svg);
+                const t=teleEl("text",{x:pts[bi][0],y:pts[bi][1]-9,"text-anchor":"middle",class:"dlabel",fill:"#00f3ff"},c.svg);
+                t.textContent=teleFmtBR(mn,3);
+                c.bindHover(laps.map((o,k)=>({px:pts[k][0],py:pts[k][1],html:`<b>V${o.l[0]}</b><br>${s.n}: ${teleFmtBR(o.l[s.idx],3)} s`})));
+            }
+        }
+
+        function teleRenderTyres(S) {
+            const seen=new Set(), pts=[];
+            for(const l of S.laps){
+                if(l[14]!=="") continue;
+                const key=l[5]+":"+l[6]; if(seen.has(key)) continue;
+                seen.add(key); pts.push(l);
+            }
+            const comps=[...new Set(pts.map(l=>l[5]))];
+            const xs=pts.map(l=>l[6]), ys=pts.map(l=>l[1]);
+            const c=teleChart(document.getElementById('tele-degChart'),{
+                w:440,h:240,margin:{t:14,r:14,b:34,l:52},
+                x0:Math.min(...xs)-0.5,x1:Math.max(...xs)+0.5,
+                y0:Math.min(...ys)-0.6,y1:Math.max(...ys)+0.9,
+                yFmt:teleFmtTime,
+                xTicks:teleNiceTicks(Math.min(...xs),Math.max(...xs),6).filter(Number.isInteger).map(v=>({v,label:v})),
+                xLabel:"voltas de uso do pneu"
+            });
+            const hover=[];
+            for(const k of comps){
+                const col=TELE_COMP[k].color;
+                const sp=pts.filter(l=>l[5]===k).sort((a,b)=>a[6]-b[6]);
+                const xy=sp.map(l=>[l[6],l[1]]);
+                const reg=teleLinReg(xy);
+                sp.forEach(l=>{
+                    teleEl("circle",{cx:c.x(l[6]),cy:c.y(l[1]),r:4.5,fill:col,stroke:"#1a1d21","stroke-width":1.5},c.svg);
+                    hover.push({px:c.x(l[6]),py:c.y(l[1]),html:`<b>${TELE_COMP[k].name}</b> · ${l[6]}ª v. do pneu<br>${teleFmtTime(l[1])} (V${l[0]})`});
+                });
+                if(reg&&xy.length>=3){
+                    const xa=xy[0][0],xb=xy[xy.length-1][0];
+                    teleEl("path",{d:teleLinPath([[c.x(xa),c.y(reg.a+reg.b*xa)],[c.x(xb),c.y(reg.a+reg.b*xb)]]),stroke:col,"stroke-width":1.5,"stroke-dasharray":"5 4",fill:"none"},c.svg);
+                    const t=teleEl("text",{x:c.x(xb)-4,y:c.y(reg.a+reg.b*xb)-8,"text-anchor":"end",class:"dlabel",fill:col},c.svg);
+                    t.textContent=`${TELE_COMP[k].name} ${reg.b>=0?"+":"−"}${teleFmtBR(Math.abs(reg.b),2)} s/v`;
+                }
+            }
+            c.bindHover(hover);
+            document.getElementById('tele-degLegend').innerHTML=comps.map(k=>`<span><span class="sw" style="background:${TELE_COMP[k].color}"></span>${TELE_COMP[k].name}</span>`).join('');
+            document.getElementById('tele-degCaption').textContent=S.degNote;
+
+            const all=S.laps.map((l,i)=>({i,l}));
+            const wmax=Math.max(...S.laps.flatMap(l=>[l[7],l[8],l[9],l[10]]));
+            const cw=teleChart(document.getElementById('tele-wearChart'),{
+                w:440,h:240,margin:{t:14,r:60,b:34,l:40},
+                x0:-0.5,x1:all.length-0.5,y0:0,y1:wmax+5,
+                yFmt:v=>v+"%",
+                xTicks:all.filter((_,k)=>k%Math.ceil(all.length/8)===0).map(o=>({v:o.i,label:o.l[0]})),
+                xLabel:"volta"
+            });
+            const hover2=[];
+            for(const w of TELE_WHEELS){
+                let seg=[];
+                const flush=()=>{ if(seg.length>1) teleEl("path",{d:teleLinPath(seg),fill:"none",stroke:w.color,"stroke-width":2,"stroke-linejoin":"round"},cw.svg); seg=[]; };
+                let prev=-1;
+                for(const o of all){ const v=o.l[w.idx]; if(v<prev) flush(); seg.push([cw.x(o.i),cw.y(v)]); prev=v; }
+                flush();
+            }
+            const last=all[all.length-1];
+            const lbls=TELE_WHEELS.map(w=>({w,v:last.l[w.idx],y:cw.y(last.l[w.idx])+4})).sort((a,b)=>a.y-b.y);
+            for(let i=1;i<lbls.length;i++) if(lbls[i].y-lbls[i-1].y<13) lbls[i].y=lbls[i-1].y+13;
+            for(const o of lbls){
+                const t=teleEl("text",{x:cw.W-cw.m.r+6,y:o.y,class:"dlabel",fill:o.w.color},cw.svg);
+                t.textContent=o.w.key+" "+o.v+"%";
+            }
+            for(const o of all) hover2.push({px:cw.x(o.i),py:cw.y(Math.max(o.l[7],o.l[8],o.l[9],o.l[10])),
+                html:`<b>V${o.l[0]}</b> · ${TELE_COMP[o.l[5]].name}<br>`+TELE_WHEELS.map(w=>`${w.key} ${o.l[w.idx]}%`).join(" · ")});
+            cw.bindHover(hover2);
+        }
+
+        function teleRenderFuel(S) {
+            const all=S.laps.map((l,i)=>({i,l}));
+            const fu=all.map(o=>o.l[11]);
+            const c=teleChart(document.getElementById('tele-fuelChart'),{
+                w:440,h:220,margin:{t:14,r:14,b:34,l:44},
+                x0:-0.5,x1:all.length-0.5,y0:0,y1:Math.max(...fu)*1.08,
+                yFmt:v=>teleFmtBR(v,0),
+                xTicks:all.filter((_,k)=>k%Math.ceil(all.length/8)===0).map(o=>({v:o.i,label:o.l[0]})),
+                xLabel:"volta"
+            });
+            const pts=all.map(o=>[c.x(o.i),c.y(o.l[11])]);
+            const area=teleLinPath(pts)+` L ${pts[pts.length-1][0]} ${c.y(0)} L ${pts[0][0]} ${c.y(0)} Z`;
+            teleEl("path",{d:area,fill:"rgba(0,243,255,0.08)",stroke:"none"},c.svg);
+            teleEl("path",{d:teleLinPath(pts),fill:"none",stroke:"#00f3ff","stroke-width":2},c.svg);
+            teleEl("circle",{cx:pts[pts.length-1][0],cy:pts[pts.length-1][1],r:4.5,fill:"#00f3ff",stroke:"#1a1d21","stroke-width":1.5},c.svg);
+            const t=teleEl("text",{x:pts[pts.length-1][0]-6,y:pts[pts.length-1][1]-10,"text-anchor":"end",class:"dlabel",fill:"#00f3ff"},c.svg);
+            t.textContent=teleFmtBR(fu[fu.length-1],1)+" kg";
+            c.bindHover(all.map((o,k)=>({px:pts[k][0],py:pts[k][1],html:`<b>V${o.l[0]}</b><br>${teleFmtBR(o.l[11],2)} kg restantes`})));
+
+            const cons=all.filter(o=>o.l[12]!=null);
+            const mx2=Math.max(...cons.map(o=>o.l[12]));
+            const avg=cons.reduce((a,o)=>a+o.l[12],0)/cons.length;
+            const c2=teleChart(document.getElementById('tele-consChart'),{
+                w:440,h:220,margin:{t:14,r:14,b:34,l:44},
+                x0:-0.5,x1:all.length-0.5,y0:0,y1:mx2*1.18,
+                yFmt:v=>teleFmtBR(v,1),
+                xTicks:all.filter((_,k)=>k%Math.ceil(all.length/8)===0).map(o=>({v:o.i,label:o.l[0]})),
+                xLabel:"volta"
+            });
+            const bw=Math.min(22,c2.iw/all.length-2); const hov=[];
+            for(const o of cons){
+                const bx=c2.x(o.i)-bw/2, by=c2.y(o.l[12]);
+                teleEl("path",{d:`M ${bx} ${c2.y(0)} L ${bx} ${by+3} Q ${bx} ${by} ${bx+3} ${by} L ${bx+bw-3} ${by} Q ${bx+bw} ${by} ${bx+bw} ${by+3} L ${bx+bw} ${c2.y(0)} Z`,fill:"#00f3ff"},c2.svg);
+                hov.push({px:c2.x(o.i),py:by,html:`<b>V${o.l[0]}</b><br>${teleFmtBR(o.l[12],3)} kg`});
+            }
+            teleEl("line",{x1:c2.m.l,x2:c2.W-c2.m.r,y1:c2.y(avg),y2:c2.y(avg),stroke:"#b9b6ac","stroke-width":1.2,"stroke-dasharray":"5 4"},c2.svg);
+            const ta=teleEl("text",{x:c2.W-c2.m.r-4,y:c2.y(avg)-6,"text-anchor":"end",class:"dlabel",fill:"#b9b6ac"},c2.svg);
+            ta.textContent="média "+teleFmtBR(avg,2)+" kg";
+            c2.bindHover(hov);
+            document.getElementById('tele-fuelCaption').textContent=S.fuelNote;
+        }
+
+        function teleRenderWeather(S) {
+            const w=S.weather;
+            document.getElementById('tele-weatherTitle').textContent="Condições — "+S.track;
+            const dry=Math.max(...w.rain)<20;
+            document.getElementById('tele-weatherChips').innerHTML=[
+                `<span class="chip">Cond.: <b>${dry?"Seco":"Risco de chuva"}</b></span>`,
+                `<span class="chip">Chuva máx.: <b>${Math.max(...w.rain)}%</b></span>`,
+                `<span class="chip">Pista: <b>${Math.min(...w.trackT)}–${Math.max(...w.trackT)} °C</b></span>`,
+                `<span class="chip">Ar: <b>${Math.min(...w.airT)}–${Math.max(...w.airT)} °C</b></span>`
+            ].join('');
+            const x1=Math.max(...w.offsets), allT=[...w.trackT,...w.airT];
+            const c=teleChart(document.getElementById('tele-tempChart'),{
+                w:440,h:200,margin:{t:16,r:50,b:34,l:40},
+                x0:0,x1,y0:Math.min(...allT)-4,y1:Math.max(...allT)+4,
+                yFmt:v=>v+"°",xTicks:w.offsets.map(v=>({v,label:v+"'"})),xLabel:"minutos de corrida"
+            });
+            for(const s of [{n:"Pista",vals:w.trackT,color:"#e8564a"},{n:"Ar",vals:w.airT,color:"#6688dd"}]){
+                const pts=w.offsets.map((o,k)=>[c.x(o),c.y(s.vals[k])]);
+                teleEl("path",{d:teleLinPath(pts),fill:"none",stroke:s.color,"stroke-width":2},c.svg);
+                pts.forEach((p,k)=>teleEl("circle",{cx:p[0],cy:p[1],r:3.5,fill:s.color,stroke:"#1a1d21","stroke-width":1.5},c.svg));
+                const t=teleEl("text",{x:c.W-c.m.r+5,y:c.y(s.vals[s.vals.length-1])+4,class:"dlabel",fill:s.color},c.svg);
+                t.textContent=s.n;
+            }
+            const c2=teleChart(document.getElementById('tele-rainChart'),{
+                w:440,h:200,margin:{t:16,r:16,b:34,l:40},
+                x0:0,x1,y0:0,y1:Math.max(10,Math.max(...w.rain)*1.4),
+                yFmt:v=>v+"%",xTicks:w.offsets.map(v=>({v,label:v+"'"})),xLabel:"minutos de corrida"
+            });
+            const pts2=w.offsets.map((o,k)=>[c2.x(o),c2.y(w.rain[k])]);
+            teleEl("path",{d:teleLinPath(pts2)+` L ${pts2[pts2.length-1][0]} ${c2.y(0)} L ${pts2[0][0]} ${c2.y(0)} Z`,fill:"rgba(0,243,255,0.08)"},c2.svg);
+            teleEl("path",{d:teleLinPath(pts2),fill:"none",stroke:"#00f3ff","stroke-width":2},c2.svg);
+            pts2.forEach((p,k)=>teleEl("circle",{cx:p[0],cy:p[1],r:3.5,fill:"#00f3ff",stroke:"#1a1d21","stroke-width":1.5},c2.svg));
+            c2.bindHover(w.offsets.map((o,k)=>({px:pts2[k][0],py:pts2[k][1],html:`<b>${o} min</b><br>chuva: ${w.rain[k]}%`})));
+        }
+
+        function teleRenderTable(S) {
+            const clean=S.laps.filter(l=>l[14]!=="pit");
+            const best=Math.min(...clean.map(l=>l[1]));
+            const ws=clean.filter(l=>l[2]!=null);
+            const bs=[2,3,4].map(i=>Math.min(...ws.map(l=>l[i])));
+            const rows=S.laps.map(l=>{
+                const fl={out:" ↳ saída",in:" ↳ p/ box",pit:" ↳ pit"}[l[14]]||"";
+                return `<tr>
+                    <td>${l[0]}${fl}</td>
+                    <td class="${l[1]===best?"best":""}">${teleFmtTime(l[1])}</td>
+                    <td class="${l[2]===bs[0]?"best":""}">${l[2]==null?"—":teleFmtBR(l[2],3)}</td>
+                    <td class="${l[3]===bs[1]?"best":""}">${l[3]==null?"—":teleFmtBR(l[3],3)}</td>
+                    <td class="${l[4]===bs[2]?"best":""}">${l[4]==null?"—":teleFmtBR(l[4],3)}</td>
+                    <td><span class="comp ${l[5]}">${l[5]}</span></td>
+                    <td>${l[6]}</td><td>${l[7]}/${l[8]}/${l[9]}/${l[10]}</td>
+                    <td>${teleFmtBR(l[11],1)}</td>
+                    <td>${l[12]==null?"—":teleFmtBR(l[12],2)}</td>
+                    <td>${l[13]}</td></tr>`;
+            }).join('');
+            document.getElementById('tele-lapTable').innerHTML=`<table>
+                <thead><tr><th>Volta</th><th>Tempo</th><th>S1</th><th>S2</th><th>S3</th>
+                <th>Pneu</th><th>Idade</th><th>Desg. FL/FR/RL/RR</th>
+                <th>Comb.</th><th>Cons.</th><th>V.máx</th></tr></thead>
+                <tbody>${rows}</tbody></table>`;
+        }
+
+        function teleRenderAll(S) {
+            teleRenderKpis(S);
+            teleRenderPace(S);
+            teleRenderSectors(S);
+            teleRenderTyres(S);
+            teleRenderFuel(S);
+            teleRenderWeather(S);
+            teleRenderTable(S);
+        }
+
+        function renderTelemetria(nome) {
+            const sessions = PILOTOS_TELEMETRIA[nome];
+            const body = document.getElementById('modal-tele-body');
+            if (!sessions) {
+                body.innerHTML = '<div class="tele-empty">Nenhuma sessão incorporada.</div>';
+                return;
+            }
+            const keys = Object.keys(sessions);
+            _curTeleSession = keys[0];
+            body.innerHTML = `
+                <div class="tele-tabs" id="tele-tabs"></div>
+                <div class="tele-kpis" id="tele-kpis"></div>
+                <div class="tele-panel">
+                    <div class="tele-ph">
+                        <div><div class="tele-eyebrow">Ritmo</div><div class="tele-stitle">Evolução dos tempos de volta</div></div>
+                        <div class="tele-legend" id="tele-paceLegend"></div>
+                    </div>
+                    <p class="tele-caption" id="tele-paceCaption"></p>
+                    <div class="tele-cbox" id="tele-paceChart"></div>
+                </div>
+                <div class="tele-panel">
+                    <div class="tele-ph"><div><div class="tele-eyebrow">Setores</div><div class="tele-stitle">Tempo por setor, volta a volta</div></div></div>
+                    <p class="tele-caption">Ponto destacado = melhor setor da sessão.</p>
+                    <div class="tele-r3" id="tele-sectorCharts"></div>
+                </div>
+                <div class="tele-panel">
+                    <div class="tele-ph">
+                        <div><div class="tele-eyebrow">Pneus</div><div class="tele-stitle">Degradação por composto</div></div>
+                        <div class="tele-legend" id="tele-degLegend"></div>
+                    </div>
+                    <p class="tele-caption" id="tele-degCaption"></p>
+                    <div class="tele-r2">
+                        <div><p class="tele-mini">Ritmo × idade do pneu</p><div class="tele-cbox" id="tele-degChart"></div></div>
+                        <div><p class="tele-mini">Desgaste por roda (%)</p><div class="tele-cbox" id="tele-wearChart"></div></div>
+                    </div>
+                </div>
+                <div class="tele-panel">
+                    <div class="tele-ph"><div><div class="tele-eyebrow">Combustível</div><div class="tele-stitle">Carga e consumo</div></div></div>
+                    <p class="tele-caption" id="tele-fuelCaption"></p>
+                    <div class="tele-r2">
+                        <div><p class="tele-mini">Combustível restante (kg)</p><div class="tele-cbox" id="tele-fuelChart"></div></div>
+                        <div><p class="tele-mini">Consumo por volta (kg)</p><div class="tele-cbox" id="tele-consChart"></div></div>
+                    </div>
+                </div>
+                <div class="tele-panel">
+                    <div class="tele-ph"><div><div class="tele-eyebrow">Clima</div><div class="tele-stitle" id="tele-weatherTitle">Condições da corrida</div></div></div>
+                    <div class="tele-chips" id="tele-weatherChips"></div>
+                    <div class="tele-r2">
+                        <div><p class="tele-mini">Temperatura (°C)</p><div class="tele-cbox" id="tele-tempChart"></div></div>
+                        <div><p class="tele-mini">Probabilidade de chuva (%)</p><div class="tele-cbox" id="tele-rainChart"></div></div>
+                    </div>
+                </div>
+                <div class="tele-panel">
+                    <div class="tele-ph"><div><div class="tele-eyebrow">Dados</div><div class="tele-stitle">Tabela de voltas</div></div></div>
+                    <div class="tbl-wrap" id="tele-lapTable"></div>
+                </div>`;
+
+            // tabs de sessão
+            const tabsEl = document.getElementById('tele-tabs');
+            tabsEl.innerHTML = keys.map(k =>
+                `<button class="tele-tab ${k===_curTeleSession?'on':''}" data-s="${k}">${sessions[k].name} · ${sessions[k].date.slice(0,5)}</button>`
+            ).join('');
+            tabsEl.querySelectorAll('.tele-tab').forEach(b => b.addEventListener('click', () => {
+                _curTeleSession = b.dataset.s;
+                tabsEl.querySelectorAll('.tele-tab').forEach(t => t.classList.toggle('on', t===b));
+                teleRenderAll(sessions[_curTeleSession]);
+            }));
+
+            teleRenderAll(sessions[_curTeleSession]);
         }
 
         function initModal() {
@@ -677,6 +1243,19 @@
                 if (e.target === e.currentTarget) fecharPerfil();
             });
             document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharPerfil(); });
+
+            document.getElementById('modal-tele-btn').addEventListener('click', () => {
+                const panel  = document.getElementById('modal-tele-panel');
+                const body   = document.getElementById('modal-body-content');
+                const box    = document.querySelector('.modal-box');
+                const btn    = document.getElementById('modal-tele-btn');
+                const isOpen = panel.classList.toggle('active');
+                body.style.display  = isOpen ? 'none' : '';
+                box.classList.toggle('tele-mode', isOpen);
+                btn.textContent = isOpen ? '📋 Perfil' : '📊 Telemetria';
+                btn.classList.toggle('ativo', isOpen);
+                if (isOpen) renderTelemetria(_modalCurrentPiloto);
+            });
         }
 
         // ── NAVEGAÇÃO ────────────────────────────────────────────
