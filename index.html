@@ -139,7 +139,16 @@
         .grade-table tbody tr:nth-child(2) .col-pos { color: var(--silver); }
         .grade-table tbody tr:nth-child(3) .col-pos { color: var(--bronze); }
         .grade-cell { padding: 4px; display: flex; align-items: center; justify-content: center; height: 52px; }
-        .grade-cell-inner { position: relative; width: 44px; height: 44px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+        .grade-cell-inner { position: relative; width: 44px; height: 44px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; transition: transform 0.2s, box-shadow 0.2s; cursor: default; flex-shrink: 0; }
+        .grade-cell-label { display: none; flex-direction: column; justify-content: center; padding-left: 6px; overflow: hidden; max-width: 90px; }
+        .gcl-nome { font-size: 0.72rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+        .gcl-equipe { font-size: 0.62rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .grade-table.com-label .col-etapa { width: 150px; min-width: 150px; }
+        .grade-table.com-label .grade-cell { justify-content: flex-start; padding: 4px 6px; }
+        .grade-table.com-label .grade-cell-label { display: flex; }
+        #btn-toggle-label { background: rgba(26,29,33,0.8); border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.4rem 0.9rem; font-family: 'Titillium Web', sans-serif; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all 0.2s; letter-spacing: 0.5px; }
+        #btn-toggle-label:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+        #btn-toggle-label.ativo { border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0,243,255,0.08); }
         .grade-cell-inner:hover { transform: scale(1.15); box-shadow: 0 4px 16px rgba(0,0,0,0.6); z-index: 10; }
         .grade-cell-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .grade-cell-inner::after { content: attr(data-nome); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.92); color: #fff; font-size: 0.7rem; white-space: nowrap; padding: 3px 7px; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.2s; border: 1px solid rgba(255,255,255,0.15); z-index: 20; }
@@ -342,9 +351,12 @@
 
         <!-- GRADE DE RESULTADOS -->
         <div id="grade-resultados" class="section">
-            <div class="section-title">
-                <h2>📋 Grade de Resultados por Etapa</h2>
-                <p>Passe o mouse sobre a foto para ver o nome do piloto. A borda indica a equipe.</p>
+            <div class="section-title" style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
+                <div>
+                    <h2>📋 Grade de Resultados por Etapa</h2>
+                    <p>Passe o mouse sobre a foto para ver o nome do piloto. A borda indica a equipe.</p>
+                </div>
+                <button id="btn-toggle-label" onclick="toggleGradeLabel(this)" title="Exibir/ocultar nome e equipe nas células">👤 Exibir Nomes</button>
             </div>
             <div class="grade-controles" id="grade-tabs"></div>
             <div id="grade-legenda" style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:1.2rem;"></div>
@@ -973,6 +985,14 @@
             }).join('');
         }
 
+        // ── TOGGLE GRADE LABELS ──────────────────────────────────
+        function toggleGradeLabel(btn) {
+            const table = document.querySelector('.grade-table');
+            const ativo = table.classList.toggle('com-label');
+            btn.textContent = ativo ? '👤 Ocultar Nomes' : '👤 Exibir Nomes';
+            btn.classList.toggle('ativo', ativo);
+        }
+
         // ── TOGGLE CARROS ────────────────────────────────────────
         function toggleCarros(btn) {
             const grid = document.getElementById('drivers-grid');
@@ -1585,6 +1605,10 @@
                                  data-nome="${res.piloto}">
                                 <img src="${foto}" alt="${res.piloto}" onerror="this.src=PLACEHOLDER_FOTO;this.onerror=null;">
                                 ${pontos}
+                            </div>
+                            <div class="grade-cell-label">
+                                <span class="gcl-nome">${res.piloto}</span>
+                                <span class="gcl-equipe">${res.equipe}</span>
                             </div></div></td>`;
                     }).join('')}
                 </tr>`;
