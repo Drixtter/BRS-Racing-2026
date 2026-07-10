@@ -90,6 +90,11 @@
         .team-car-display { width: 100%; height: 100px; position: relative; margin-top: auto; overflow: hidden; background: linear-gradient(to right, transparent, rgba(255,255,255,0.02)); display: flex; align-items: center; justify-content: center; }
         .team-car-img { width: 90%; height: auto; max-height: 90px; object-fit: contain; opacity: 0.9; transition: 0.3s; }
         .driver-box:hover .team-car-img { opacity: 1; transform: scale(1.05); }
+        .drivers-grid.sem-carro .team-car-display { display: none; }
+        .drivers-grid.sem-carro .driver-box { min-height: unset; }
+        #btn-toggle-carro { background: rgba(26,29,33,0.8); border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.4rem 0.9rem; font-family: 'Titillium Web', sans-serif; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all 0.2s; letter-spacing: 0.5px; }
+        #btn-toggle-carro:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+        #btn-toggle-carro.ativo { border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0,243,255,0.08); }
         .rules-content { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
         .rules-content h3 { color: var(--neon-cyan); font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; border-left: 3px solid var(--neon-cyan); padding-left: 15px; text-transform: uppercase; }
         .rules-content h4 { color: #fff; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem; }
@@ -377,8 +382,9 @@
 
         <!-- PILOTOS -->
         <div id="pilotos" class="section active">
-            <div class="section-title" style="margin-bottom:2rem;">
+            <div class="section-title" style="margin-bottom:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
                 <h2>🏆 CAMPEONATO ATUAL: <span style="color:var(--neon-cyan)" id="pilotos-cup-label">—</span></h2>
+                <button id="btn-toggle-carro" onclick="toggleCarros(this)" title="Ocultar/exibir foto dos carros">🚗 Ocultar Carros</button>
             </div>
             <div class="drivers-grid" id="drivers-grid"></div>
         </div>
@@ -965,6 +971,14 @@
                     </div>
                 </div>`;
             }).join('');
+        }
+
+        // ── TOGGLE CARROS ────────────────────────────────────────
+        function toggleCarros(btn) {
+            const grid = document.getElementById('drivers-grid');
+            const oculto = grid.classList.toggle('sem-carro');
+            btn.textContent = oculto ? '🚗 Exibir Carros' : '🚗 Ocultar Carros';
+            btn.classList.toggle('ativo', oculto);
         }
 
         // ── PISTAS ───────────────────────────────────────────────
