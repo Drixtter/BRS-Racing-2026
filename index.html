@@ -1896,9 +1896,17 @@
                 pilotos.forEach(n => { series[n].push(acc[n]); });
             });
 
+            // Equipe de cada piloto neste campeonato (primeira aparição nos resultados)
+            const equipes = {};
+            etapas.forEach(e => {
+                const pista = pistas[e.pistasIdx];
+                if (!pista?.resultados.length) return;
+                pista.resultados.forEach(r => { if (!equipes[r.piloto]) equipes[r.piloto] = r.equipe; });
+            });
+
             // Ordena pelo total final desc
             const ordenados = [...pilotos].sort((a,b) => (acc[b]||0) - (acc[a]||0));
-            return { labels, series, ordenados, totais: acc };
+            return { labels, series, ordenados, totais: acc, equipes };
         }
 
         function renderEvolucao(cupParam) {
@@ -1914,7 +1922,7 @@
             if (!canvas) return;
 
             const { cup, ocultos } = evolucaoEstado;
-            const { labels, series, ordenados, totais } = calcEvolucao(cup);
+            const { labels, series, ordenados, totais, equipes } = calcEvolucao(cup);
 
             if (!labels.length) {
                 canvas.style.display = 'none';
@@ -1923,9 +1931,12 @@
             }
             canvas.style.display = 'block';
 
-            // Cor por piloto (ordem final)
+            // Cor por piloto usando a equipe do campeonato atual
             const cores = {};
-            ordenados.forEach(n => { cores[n] = corDoPiloto(n); });
+            ordenados.forEach(n => {
+                const eq = BRS.equipe(equipes[n]);
+                cores[n] = eq ? eq.cor : corDoPiloto(n);
+            });
 
             // ── LEGENDA ──────────────────────────────────────────
             legenda.innerHTML = ordenados.map(nome => `
@@ -2189,7 +2200,15 @@
                 melhores[n] = ps.length ? Math.min(...ps) : null;
             });
 
-            return { labels, series, dnf, ordenados: ordenadosFiltrados, maxPos: maxPosFiltrado, melhores };
+            // Equipe de cada piloto neste campeonato (primeira aparição nos resultados)
+            const equipes = {};
+            etapas.forEach(e => {
+                const pista = pistas[e.pistasIdx];
+                if (!pista?.resultados.length) return;
+                pista.resultados.forEach(r => { if (!equipes[r.piloto]) equipes[r.piloto] = r.equipe; });
+            });
+
+            return { labels, series, dnf, ordenados: ordenadosFiltrados, maxPos: maxPosFiltrado, melhores, equipes };
         }
 
         function renderEvolucaoPos() {
@@ -2199,7 +2218,7 @@
             if (!canvas) return;
 
             const { cup, ocultos } = evolucaoEstado;
-            const { labels, series, dnf, ordenados, maxPos, melhores } = calcEvolucaoPos(cup);
+            const { labels, series, dnf, ordenados, maxPos, melhores, equipes } = calcEvolucaoPos(cup);
 
             if (!labels.length) {
                 canvas.style.display = 'none';
@@ -2209,7 +2228,10 @@
             canvas.style.display = 'block';
 
             const cores = {};
-            ordenados.forEach(n => { cores[n] = corDoPiloto(n); });
+            ordenados.forEach(n => {
+                const eq = BRS.equipe(equipes[n]);
+                cores[n] = eq ? eq.cor : corDoPiloto(n);
+            });
 
             // ── LEGENDA ──
             legenda.innerHTML = ordenados.map(nome => `
