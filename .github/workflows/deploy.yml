@@ -12,7 +12,38 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Deploy to Neocities
-      uses: bcomnes/neocities-action@v2
-      with:
-        api_key: ${{ secrets.NEOCITIES_API_KEY }}
-        cleanup: false
+      env:
+        NEOCITIES_API_KEY: ${{ secrets.NEOCITIES_API_KEY }}
+      run: |
+        if [[ -z "$NEOCITIES_API_KEY" ]]; then
+          echo "::error::Configure NEOCITIES_API_KEY in the repository Actions secrets."
+          exit 1
+        fi
+
+        files=()
+        total_bytes=0
+        while IFS= read -r -d '' file; do
+          case "$file" in
+            .github/*|.claude/*|admin/*|*.md) continue ;;
+          esac
+
+          size=$(stat -c '%s' -- "$file")
+          total_bytes=$((total_bytes + size))
+          if (( total_bytes > 95 * 1024 * 1024 )); then
+            echo "::error::Deploy exceeds the safe 95 MiB upload limit."
+            exit 1
+          fi
+          files+=(--form "$file=@$file")
+        done < <(git ls-files -z)
+
+        if (( ${#files[@]} == 0 )); then
+          echo "::error::No website files found to deploy."
+          exit 1
+        fi
+
+        response=$(curl --fail-with-body --silent --show-error \
+          --header "Authorization: Bearer $NEOCITIES_API_KEY" \
+          "${files[@]}" \
+          https://neocities.org/api/upload)
+        echo "$response"
+        jq -e '.result == "success"' <<< "$response" > /dev/null
