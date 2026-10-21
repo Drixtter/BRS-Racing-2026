@@ -35,8 +35,7 @@ Instale os programas abaixo (apenas uma vez por máquina):
 Abra o **PowerShell** ou o **Terminal** e execute:
 
 ```powershell
-git clone https://github.com/SEU_USUARIO/BRS-Racing-2026.git
-cd BRS-Racing-2026
+git clone 
 ```
 
 > Substitua `SEU_USUARIO` pelo usuário correto do GitHub.
@@ -69,6 +68,14 @@ ADMIN_PASSWORD=minhasenha123
 ---
 
 ## 5. Iniciar o painel Admin
+
+Na pasta `admin` (a mesma em que você executou `npm install`), execute:
+
+```powershell
+npm start
+```
+
+Se estiver na raiz do projeto, entre na pasta antes:
 
 ```powershell
 cd admin
@@ -122,7 +129,7 @@ Após isso, o botão **🚀 Publicar** no painel admin funcionará normalmente.
 
 | O que fazer | Como fazer |
 |---|---|
-| Abrir o painel admin | `cd admin && npm start` → http://localhost:4000 |
+| Abrir o painel admin | Na raiz, execute `cd admin` e depois `npm start` → http://localhost:4000 |
 | Lançar resultado de corrida | Aba **🏁 Resultado** no painel |
 | Publicar no site | Aba **🚀 Publicar** no painel |
 | Ver o site localmente | `npx serve -p 3001 .` → http://localhost:3001 |
