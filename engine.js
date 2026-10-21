@@ -126,11 +126,25 @@ const BRS = (() => {
       .filter(d => d.races > 0)
       .map(d => ({ ...d, rate: (d.points / d.races).toFixed(1) }));
 
+    const poleRanking = [
+      { nome: 'Frank Violets', equipe: '—', poles: 18 },
+      { nome: 'Nathan Naddadanado03', equipe: '—', poles: 14 },
+      { nome: 'Luis Syaazz1', equipe: '—', poles: 4 },
+      { nome: 'Gustavo Guga', equipe: '—', poles: 3 },
+      { nome: 'Renato Renato.R20oliveira', equipe: '—', poles: 2 },
+      { nome: 'Diego Dominguesdc13', equipe: '—', poles: 2 },
+      { nome: 'Adriano Drixter', equipe: '—', poles: 1 },
+      { nome: 'Vinicios Vini_Pasquarelli', equipe: '—', poles: 1 },
+      { nome: 'João Victor', equipe: '—', poles: 1 },
+      { nome: 'Leal Flushh', equipe: '—', poles: 1 }
+    ].sort((a, b) => b.poles - a.poles || a.nome.localeCompare(b.nome));
+
     return {
       wins:    [...ativos].filter(d => d.wins > 0)
                           .sort((a, b) => b.wins - a.wins || b.podiums - a.podiums),
       podiums: [...ativos].filter(d => d.podiums > 0)
                           .sort((a, b) => b.podiums - a.podiums || b.wins - a.wins),
+      poles:   poleRanking,
       rate:    [...ativos].sort((a, b) => parseFloat(b.rate) - parseFloat(a.rate))
     };
   }

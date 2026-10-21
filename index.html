@@ -1375,6 +1375,12 @@
                 <th class="cup-th pts-col" style="text-align:right;">Vitórias</th>
                 <th class="cup-th pts-col" style="text-align:right;">Pódios</th>
             </tr>`;
+            const theadPole = `<tr>
+                <th class="cup-th pos-col"></th>
+                <th class="cup-th">Piloto</th>
+                <th class="cup-th team-col">Equipe</th>
+                <th class="cup-th pts-col" style="text-align:right;">Poles</th>
+            </tr>`;
             const theadRate = `<tr>
                 <th class="cup-th pos-col"></th>
                 <th class="cup-th">Piloto</th>
@@ -1387,6 +1393,7 @@
                 <div class="panel-grid">
                     ${cardTable('🏆 Maiores Vencedores', [], 'tbody-stats-vitorias', theadVit)}
                     ${cardTable('🏅 Mais Pódios', [], 'tbody-stats-podiums', theadVit)}
+                    ${cardTable('🏁 Mais Poles', [], 'tbody-stats-poles', theadPole)}
                     ${cardTable('📈 Melhor Taxa de Pontos', [], 'tbody-stats-rate', theadRate)}
                 </div>`;
         }
@@ -1465,6 +1472,14 @@
                     <td class="pts-col" style="color:var(--text-muted);">${d.podiums}</td>
                 </tr>`;
 
+            const rowPole = (d, i) => `
+                <tr>
+                    <td class="pos-col ${getRankClass(i)}">${i+1}</td>
+                    <td class="name-col">${d.nome}</td>
+                    <td class="team-col">${d.equipe}</td>
+                    <td class="pts-col">${d.poles}</td>
+                </tr>`;
+
             const rowRate = (d, i) => `
                 <tr>
                     <td class="pos-col ${getRankClass(i)}">${i+1}</td>
@@ -1478,6 +1493,8 @@
                 stats.wins.length    ? stats.wins.map(rowVit).join('')    : empty(5);
             document.getElementById('tbody-stats-podiums').innerHTML =
                 stats.podiums.length ? stats.podiums.map(rowVit).join('') : empty(5);
+            document.getElementById('tbody-stats-poles').innerHTML =
+                stats.poles.length   ? stats.poles.map(rowPole).join('')  : empty(4);
             document.getElementById('tbody-stats-rate').innerHTML =
                 stats.rate.length    ? stats.rate.map(rowRate).join('')   : empty(5);
         }
